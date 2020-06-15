@@ -1,9 +1,10 @@
-import Taro, { Component, Config } from '@tarojs/taro'
+import '@tarojs/async-await'
+import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
 
 import Index from './pages/index'
 
-import configStore from './store'
+import configStore from './store/index.js'
 
 import './app.scss'
 
@@ -16,26 +17,6 @@ import './app.scss'
 const store = configStore
 
 class App extends Component {
-
-  /**
-   * 指定config的类型声明为: Taro.Config
-   *
-   * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
-   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
-   * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
-   */
-  config: Config = {
-    pages: [
-      'pages/index/index'
-    ],
-    window: {
-      backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
-    }
-  }
-
   componentDidMount() {
     const updateManager = Taro.getUpdateManager()
     updateManager.onCheckForUpdate(function () {
@@ -61,12 +42,46 @@ class App extends Component {
     })
   }
 
-  componentDidShow () {}
+  componentDidShow() { }
 
-  componentDidHide () {}
+  componentDidHide() { }
 
-  componentDidCatchError () {}
+  componentDidCatchError() { }
 
+  config = {
+    pages: [
+      'pages/index/index',
+      'pages/mine/index'
+    ],
+    tabBar: {
+      color: "#999999",
+      selectedColor: "#2D7BAF",
+      borderStyle: "black",
+      backgroundColor: "#F7F7F7",
+      list: [
+        {
+          pagePath: "pages/index/index",
+          iconPath: "assets/img/tab_bar/home.png",
+          selectedIconPath: "assets/img/tab_bar/home_active.png",
+          text: "首页"
+        },
+        {
+          pagePath: "pages/mine/index",
+          iconPath: "assets/img/tab_bar/mine.png",
+          selectedIconPath: "assets/img/tab_bar/mine_active.png",
+          text: "我的"
+        }
+      ]
+    },
+    window: {
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#fff',
+      navigationBarTitleText: 'WeChat',
+      navigationBarTextStyle: 'black'
+    }
+  }
+
+  
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
   render () {

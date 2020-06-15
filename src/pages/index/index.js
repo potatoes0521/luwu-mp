@@ -1,8 +1,7 @@
-import { ComponentClass } from 'react'
-import Taro, { Component, Config } from '@tarojs/taro'
+import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import Actions from '@actions/index'
+import Actions from '@actions'
 
 // import { add, minus, asyncAdd } from '../../actions/counter'
 
@@ -10,19 +9,14 @@ import './index.scss'
 
 class Index extends Component {
 
-    config = {
-    navigationBarTitleText: '首页'
-  }
-
-  componentWillReceiveProps (nextProps) {
-    console.log(this.props, nextProps)
-  }
-
   componentWillUnmount () { }
 
   componentDidShow () { }
 
   componentDidHide () { }
+  config = {
+    navigationBarTitleText: '首页'
+  }
 
   render () {
     return (
@@ -34,7 +28,7 @@ class Index extends Component {
 }
 const mapStateToProps = state => {
   return {
-    userInfo: state.user_info.userInfo,
+    userInfo: state.user_msg.userInfo,
   };
 };
 const mapDispatchToProps = dispatch => {

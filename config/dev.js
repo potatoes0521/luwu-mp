@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line import/no-commonjs
 const path = require('path')
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
   },
   defineConstants: {
   },
-  mini: {},
+  weapp: {},
   h5: {},
   alias: {
     '@services': path.resolve(__dirname, '..', 'src/services'),
