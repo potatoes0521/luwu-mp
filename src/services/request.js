@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 10:13:50
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-15 11:31:33
+ * @LastEditTime: 2020-06-15 14:41:27
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -19,8 +19,8 @@ const contentType = 'application/json;charset=UTF-8'
 export const appVersion = '1.0.1'
 
 export default {
-  baseOptions(url: string, data: object, that: { props: { userInfo: {}}}, loadingTitle: string, method:any = 'GET') {
-    let loadingTimer: any = null
+  baseOptions(url, data, that, loadingTitle, method) {
+    let loadingTimer = null
     const { userInfo } = that.props;
     for (const i in data) {
       if (data[i] === '' && i !== 'locationId') {
@@ -130,10 +130,10 @@ export default {
       })
     })
   },
-  get(url: string, data: object, that: object, loadingTitle = '加载中...') {
+  get(url, data, that, loadingTitle = '加载中...') {
     return this.baseOptions(url, data, that, loadingTitle, 'GET')
   },
-  post(url: string, data: object, that: object, loadingTitle = '提交中...') {
+  post(url, data, that, loadingTitle = '提交中...') {
     return this.baseOptions(url, data, that, loadingTitle, 'POST')
   }
 }
