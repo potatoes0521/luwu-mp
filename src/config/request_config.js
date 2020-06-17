@@ -1,6 +1,6 @@
 
 // api地址
-export const defaultApiURL = '' // 测试环境  
+export const defaultApiURL = 'https://gateway.lw.4dtec.cn/'
 
 // 默认读取文件地址URL
 export const defaultFileUrl = ''
