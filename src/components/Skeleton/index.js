@@ -7,10 +7,9 @@
  *    skeleton-cylinder 骨架节点为长条形
  *    skeleton-light与.skeleton-dark为块元素背景骨架样式
  * @path: @components/Skeleton
- * @path: 引入路径
  * @Date: 2020-06-15 18:07:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-15 18:08:07
+ * @LastEditTime: 2020-06-17 17:31:57
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
