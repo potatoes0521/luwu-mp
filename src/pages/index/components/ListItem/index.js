@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 09:29:44
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-17 10:26:53
+ * @LastEditTime: 2020-06-17 17:26:14
  * @mustParam: 
  *  item 数据项
  *  tips 数据里的tips项  用于右上角展示
@@ -20,7 +20,7 @@ import {
 } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import {defaultResourceImgURL} from '@config/request_config'
-
+import { handleNavigator} from '@utils/navigator'
 import './index.scss'
 
 export default class ListItem extends Component { 
@@ -28,10 +28,14 @@ export default class ListItem extends Component {
     addGlobalClass: true
   }
   
-  handleClick() { 
-    this.props.onClick()
+  handleClickImage() {
+    let { item } = this.props
+    handleNavigator(item)
+    this.props.onClickImage()
   }
-
+  handleWarningIconClick() { 
+    this.props.onClickWaringIcon()
+  }
   render() {
     let { item, tips } = this.props
     const tipsRender = tips.map((ite, idx) => {
@@ -46,11 +50,16 @@ export default class ListItem extends Component {
       )
     })
     return (
-      <View className='item-wrapper' onClick={this.handleClick.bind(this)}>
+      <View
+        className='item-wrapper skeleton-square'
+      >
         <View className='title-wrapper'>
           <View className='title'>
             <Text>{item.title}</Text>
-            <Text className='iconfont iconshuoming icon-warning'></Text>
+            <Text
+              className='iconfont iconshuoming icon-warning'
+              onClick={this.handleWarningIconClick.bind(this)}
+            ></Text>
           </View>
           {
             tips && tips.length && (
@@ -62,7 +71,10 @@ export default class ListItem extends Component {
             )
           }
         </View>
-        <View className='item-image'>
+        <View
+          className='item-image'
+          onClick={this.handleClickImage.bind(this)}
+        >
           <Image lazyLoad className='image' src={defaultResourceImgURL + item.imgUrl}></Image>
         </View>
       </View>
@@ -74,11 +86,17 @@ export default class ListItem extends Component {
 ListItem.defaultProps = {
   item: {},
   tips: [],
-  onClick: () => {console.warn('onClick is not defined in ListItem.js')}
+  onClickImage: () => {
+    // console.error('onClickImage is not defined in ListItem.js')
+  },
+  onClickWaringIcon: () => {
+    console.error('onClickWaringIcon is not defined in ListItem.js')
+  }
 }
 
 ListItem.propTypes = {
   item: PropTypes.object.isRequired,
   tips: PropTypes.array.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClickImage: PropTypes.func,
+  onClickWaringIcon: PropTypes.func.isRequired
 }
