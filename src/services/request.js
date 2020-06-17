@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 10:13:50
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-17 17:34:48
+ * @LastEditTime: 2020-06-17 18:12:35
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -62,8 +62,11 @@ export default {
           // 'sign': sign || '',
         },
         success(res) {
-          Taro.hideLoading()
-          clearTimeout(loadingTimer)
+          if (loadingTitle) {
+            Taro.hideLoading()
+            clearTimeout(loadingTimer)
+            loadingTimer = null
+          }
           if (res.statusCode === HTTP_STATUS.NOT_FOUND) {
             Taro.showToast({
               title: '请求资源不存在',
