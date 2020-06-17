@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 10:13:50
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-17 10:18:47
+ * @LastEditTime: 2020-06-17 17:34:48
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,6 +16,7 @@ import {
   defaultApiURL
 } from '@config/request_config'
 // import createSignData from './secret'
+const isProd = process.env.NODE_ENV === "production";
 
 // const signId = 'wx90c791e28c3c7d4d'
 const contentType = 'application/json;charset=UTF-8'
@@ -31,7 +32,7 @@ export default {
       }
     }
     let requestURL = defaultApiURL + url
-    if (url.indexOf('oss') !== -1) {
+    if (url.indexOf('oss') !== -1 && url.indexOf('aliyuncs') !== -1) {
       requestURL = url
     }
     console.log(data, '接口是' + url)
@@ -57,10 +58,12 @@ export default {
         method,
         header: {
           'content-type': contentType,
+          "X-Ca-Stage": isProd ? "release" : "test",
           // 'sign': sign || '',
         },
         success(res) {
           Taro.hideLoading()
+          clearTimeout(loadingTimer)
           if (res.statusCode === HTTP_STATUS.NOT_FOUND) {
             Taro.showToast({
               title: '请求资源不存在',
