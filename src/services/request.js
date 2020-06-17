@@ -4,14 +4,17 @@
  * @path: 引入路径
  * @Date: 2020-06-15 10:13:50
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-15 14:41:27
+ * @LastEditTime: 2020-06-17 10:18:47
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
 import Taro from '@tarojs/taro'
 import Actions from '@store/actions'
-import { HTTP_STATUS, defaultApiURL } from '@config/request_config'
+import {
+  HTTP_STATUS,
+  defaultApiURL
+} from '@config/request_config'
 // import createSignData from './secret'
 
 // const signId = 'wx90c791e28c3c7d4d'
@@ -21,14 +24,14 @@ export const appVersion = '1.0.1'
 export default {
   baseOptions(url, data, that, loadingTitle, method) {
     let loadingTimer = null
-    const { userInfo } = that.props;
+    // const { userInfo } = that.props;
     for (const i in data) {
       if (data[i] === '' && i !== 'locationId') {
         delete data[i]
       }
     }
     let requestURL = defaultApiURL + url
-    if (url.indexOf('file/read') !== -1 || url.indexOf('file/delete') !== -1) {
+    if (url.indexOf('oss') !== -1) {
       requestURL = url
     }
     console.log(data, '接口是' + url)
@@ -91,12 +94,8 @@ export default {
               const resData = res.data
               // '200002' 是未注册
               console.log(resData, '接口是' + url)
-              if (!+resData.code ||
-                +resData.code === 200002 ||
-                +resData.code == 200 ||
-                +resData.code === 200004 ||
-                +resData.code === 500000) {
-                resolve(resData.data)
+              if (resData){
+                resolve(resData)
               } else {
                 if (+resData.code === 200003) {
                   console.log('token 无效')
