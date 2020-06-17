@@ -6,10 +6,10 @@ export const defaultApiURL = '' // 测试环境
 export const defaultFileUrl = ''
 
 // 图片资源服务器
-export const defaultResourceImgURL = ''
+export const defaultResourceImgURL = 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/'
 
 // 文件资源服务器
-export const defaultResourceConfigURL = ''
+export const defaultResourceConfigURL = 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/mock/'
 
 export const defaultFileURL = ''
 
