@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 10:25:25
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-15 11:24:12
+ * @LastEditTime: 2020-06-17 15:33:57
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -15,7 +15,7 @@ import {
 import store from '../index'
 import { changeUserInfo, loginOut } from './modules/user_msg'  // 用户信息
 
-const createAction = (actionType: any) => {
+const createAction = (actionType) => {
   return (payload) => ({
     type: actionType,
     payload
