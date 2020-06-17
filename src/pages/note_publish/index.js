@@ -4,39 +4,75 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-17 11:14:23
+ * @LastEditTime: 2020-06-17 18:21:45
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */
 import Taro, { Component } from '@tarojs/taro'
-import { View } from '@tarojs/components'
-import classNames from 'classnames'
+import {
+  View,
+  Text,
+  Image
+} from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import api from '@api/index.js'
-
+// import {} from '@services/modules/index'
+import Upload from '@components/upload'
 import './index.scss'
 
-class index extends Component { 
+class NotePublish extends Component { 
 
   constructor(props) {
     super(props)
-    this.state={}
+    this.state = {
+      goodsImageList: [],
+      idCardImageList: []
+    }
   }
 
   componentDidMount() {
+    // this.chooseImage()
   }
-
+  handleClickUpload() { 
+    
+  }
+  onGoodsImageUpload(imageList) { 
+    const {goodsImageList} = this.state
+    this.setState({
+      goodsImageList: [...goodsImageList, ...imageList]
+    })
+  }
+  onIdCardUpload(imageList) {
+    const {idCardImageList} = this.state
+    this.setState({
+      idCardImageList: [...idCardImageList, ...imageList]
+    })
+  }
   config = {
     navigationBarTitleText: '发布笔记' 
   }
 
   render() {
+    const {
+      goodsImageList,
+      idCardImageList
+    } = this.state
+    
     return (
-      <View></View>
+      <View className='page-wrapper'>
+        <View className='form-card-wrapper'>
+          <Upload
+            imageList={goodsImageList}
+            onUploadOK={this.onGoodsImageUpload.bind(this)}
+          ></Upload>
+          <Upload
+            imageList={idCardImageList}
+            onUploadOK={this.onIdCardUpload.bind(this)}
+          ></Upload>
+        </View>
+      </View>
     )
   }
-
 }
 
 const mapStateToProps = (state) => {
@@ -44,4 +80,5 @@ const mapStateToProps = (state) => {
     userInfo: state.user_msg.userInfo
   }
 }
-export default connect(mapStateToProps)(index)
+
+export default connect(mapStateToProps)(NotePublish);
