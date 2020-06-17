@@ -1,10 +1,10 @@
 /*
  * @Author: liuYang
- * @description: 请填写描述信息
- * @path: 引入路径
+ * @description: 数据控制跳转
+ * @path: @utils/navigator
  * @Date: 2020-06-17 11:30:28
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-17 13:22:51
+ * @LastEditTime: 2020-06-17 17:32:35
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
