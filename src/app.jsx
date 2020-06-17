@@ -51,8 +51,15 @@ class App extends Component {
 
   config = {
     pages: [
+      // 首页
       'pages/index/index',
-      'pages/mine/index'
+      // 我的
+      'pages/mine/index',
+      // 笔记模块
+      'pages/note_mine/index', // 我的笔记
+      'pages/note_publish/index', // 发布笔记
+      'pages/note_details/index', // 发布的笔记详情
+
     ],
     tabBar: {
       color: "#D8D8D8",
