@@ -6,6 +6,7 @@ import Index from './pages/index'
 
 import configStore from './store/index.js'
 
+import './assets/icon_font/icon.scss'
 import './app.scss'
 
 // 如果需要在 h5 环境中开启 React Devtools
@@ -54,10 +55,10 @@ class App extends Component {
       'pages/mine/index'
     ],
     tabBar: {
-      color: "#999999",
-      selectedColor: "#2D7BAF",
+      color: "#D8D8D8",
+      selectedColor: "#333333",
       borderStyle: "black",
-      backgroundColor: "#F7F7F7",
+      backgroundColor: "#ffffff",
       list: [
         {
           pagePath: "pages/index/index",
