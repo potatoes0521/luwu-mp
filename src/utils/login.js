@@ -1,10 +1,10 @@
 /*
  * @Author: liuYang
  * @description:登录信息
- * @path: 引入路径
+ * @path: "@utils/login"
  * @Date: 2020-06-17 16:04:08
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-17 16:13:37
+ * @LastEditTime: 2020-06-17 17:31:32
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
