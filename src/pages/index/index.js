@@ -1,3 +1,14 @@
+/*
+ * @Author: liuYang
+ * @description: 首页
+ * @path: 引入路径
+ * @Date: 2020-06-17 11:12:51
+ * @LastEditors: liuYang
+ * @LastEditTime: 2020-06-17 11:20:53
+ * @mustParam: 必传参数
+ * @optionalParam: 选传参数
+ * @emitFunction: 函数
+ */ 
 import Taro, { Component } from '@tarojs/taro'
 import {
   View,
@@ -23,10 +34,10 @@ class Index extends Component {
     }
   }
   componentDidMount() { 
-    this.getData()
+    this.getListData()
   }
 
-  getData() { 
+  getListData() { 
     getIndexListData().then(res => {
       this.setState({
         listData: res
