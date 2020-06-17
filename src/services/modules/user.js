@@ -1,10 +1,10 @@
 /*
  * @Author: liuYang
  * @description: 用户信息
- * @path: 引入路径
+ * @path: '@services/modules/user'
  * @Date: 2020-06-17 15:42:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-17 16:41:21
+ * @LastEditTime: 2020-06-17 17:33:58
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
