@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-17 17:29:36
+ * @LastEditTime: 2020-06-17 18:23:03
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -31,7 +31,7 @@ const bannerBigImg = `${defaultResourceImgURL}index/bannerBig.png`
 class Index extends Component {
   constructor() { 
     this.state = {
-      listData: [1, 2, 3, 4, 5], // 默认数据为了做骨架屏
+      listData: [{},{},{},{},{}], // 默认数据为了做骨架屏
       loading: true
     }
   }
