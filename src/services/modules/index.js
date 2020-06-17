@@ -1,10 +1,10 @@
 /*
  * @Author: liuYang
  * @description: 请填写描述信息
- * @path: 引入路径
+ * @path: '@services/modules/index'
  * @Date: 2020-06-17 10:07:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-17 10:22:53
+ * @LastEditTime: 2020-06-17 17:34:24
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -17,6 +17,6 @@ import request from "../request"
 * @return void
 */
 // eslint-disable-next-line import/prefer-default-export
-export const getIndexListData = () => { 
-  return request.get(`${defaultResourceConfigURL}index/indexList.json`, {}, this, false)
+export const getIndexListData = (that) => { 
+  return request.get(`${defaultResourceConfigURL}index/indexList.json`, {}, that, false)
 }
