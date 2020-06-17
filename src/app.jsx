@@ -59,7 +59,8 @@ class App extends Component {
       'pages/note_mine/index', // 我的笔记
       'pages/note_publish/index', // 发布笔记
       'pages/note_details/index', // 发布的笔记详情
-
+      // 权限鉴权
+      'pages/auth/index'
     ],
     tabBar: {
       color: "#D8D8D8",
