@@ -1,7 +1,7 @@
 @import "../../assets/css/theme.scss";
 $bannerHeight: 370px;
 page{
-  background-color: #F8F8F8;
+  background-color: $background-color;
 }
 .page-wrapper{
   width: 100%;
