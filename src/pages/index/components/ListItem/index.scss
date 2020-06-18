@@ -34,14 +34,14 @@
       align-items: center;
       justify-content: flex-end;
       font-size: 22px;
-      color: #1E54ED;
+      color: $link-color;
       padding-top: 10px;
     }
 
     .text-line {
       width: 2px;
       height: 16px;
-      background-color: #1E54ED;
+      background-color: $link-color;
       margin: 0 18px;
     }
   }
