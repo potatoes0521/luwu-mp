@@ -1,41 +1,55 @@
 @import '../../assets/css/theme.scss';
 
-.picture-list {
-  width: 100%;
-  padding: 20px 30px 60px;
+.scroll-view{
   box-sizing: border-box;
-  display: flex;
-  flex-wrap: wrap;
+  padding: 0 30px;
+}
+
+.picture-list {
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+.align-center {
+  align-items: center;
+}
+
+.flex-end{
+  align-items: flex-end;
 }
 
 .picture-item {
-  width: 210px;
-  height: 210px;
-  border-radius: 8px;
+  display: inline-block;
+  text-align: center;
+  margin-right: 20px;
+}
+
+.big-picture-item {
+  width: 180px;
+  height: 180px;
+}
+.small-picture-item {
+  width: 180px;
+  height: 180px;
+}
+.add-btn-public{
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px 10px;
-  position: relative;
+  border: 2px solid #EBEBEB;
+  font-size: 42px;
+  color: #D8D8D8;
+  display: inline-block;
 }
 
-.picture-not-upload {
-  background-color: #F3F7FC;
+.small-btn{
+  width: 85px;
+  height: 85px;
 }
 
-.picture-not-upload::after {
-  content: '';
-  width: 124px;
-  height: 124px;
-  border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.3);
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  margin: auto;
-  z-index: 1;
+.big-btn{
+  width: 130px;
+  height: 130px;
 }
 
 .image {
@@ -69,12 +83,4 @@
   border: 4px solid #ffffff;
   box-sizing: border-box;
   z-index: 2px;
-}
-
-.upload-btn {
-  width: 100%;
-  height: 140px;
-  box-sizing: border-box;
-  padding: 30px 40px;
-  border-top: 2px solid #f5f5f5;
 }
