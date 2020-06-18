@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn add classnames
+  /usr/local/bin/node /usr/local/bin/yarn dev:weapp --watch
 
 PATH: 
   /Library/Frameworks/Python.framework/Versions/3.8/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin
@@ -14,7 +14,17 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/Users/ziming/Desktop/code/fourtruth/luwu-mp/node_modules/.bin/acorn'
+  Error: write EIO
+      at afterWriteDispatched (internal/stream_base_commons.js:150:25)
+      at writeGeneric (internal/stream_base_commons.js:141:3)
+      at WriteStream.Socket._writeGeneric (net.js:770:11)
+      at WriteStream.Socket._write (net.js:782:8)
+      at doWrite (_stream_writable.js:431:12)
+      at writeOrBuffer (_stream_writable.js:415:5)
+      at WriteStream.Writable.write (_stream_writable.js:305:11)
+      at Object.clearLine (readline.js:1270:17)
+      at clearLine (/usr/local/share/.config/yarn/global/node_modules/yarn/lib/cli.js:49657:12)
+      at ConsoleReporter._log (/usr/local/share/.config/yarn/global/node_modules/yarn/lib/cli.js:96768:43)
 
 npm manifest: 
   {
@@ -59,39 +69,41 @@ npm manifest:
       "@tarojs/taro-h5": "1.3.13",
       "@tarojs/taro-qq": "1.3.13",
       "@tarojs/taro-quickapp": "1.3.13",
+      "@tarojs/taro-rn": "1.3.13",
       "@tarojs/taro-swan": "1.3.13",
       "@tarojs/taro-tt": "1.3.13",
       "@tarojs/taro-weapp": "1.3.13",
-      "@tarojs/taro-rn": "1.3.13",
-      "nervjs": "^1.5.5",
+      "classnames": "^2.2.6",
       "nerv-devtools": "^1.5.5",
+      "nervjs": "^1.5.5",
+      "prop-types": "^15.7.2",
       "redux": "^4.0.0",
       "redux-logger": "^3.0.6",
       "redux-thunk": "^2.3.0"
     },
     "devDependencies": {
-      "@types/react": "^16.4.8",
-      "@types/webpack-env": "^1.13.6",
       "@tarojs/plugin-babel": "1.3.13",
       "@tarojs/plugin-csso": "1.3.13",
       "@tarojs/plugin-sass": "1.3.13",
       "@tarojs/plugin-uglifyjs": "1.3.13",
       "@tarojs/webpack-runner": "1.3.13",
+      "@types/react": "^16.4.8",
+      "@types/webpack-env": "^1.13.6",
+      "babel-eslint": "^8.2.3",
       "babel-plugin-transform-class-properties": "^6.24.1",
       "babel-plugin-transform-decorators-legacy": "^1.3.4",
       "babel-plugin-transform-jsx-stylesheet": "^0.6.5",
       "babel-plugin-transform-object-rest-spread": "^6.26.0",
       "babel-preset-env": "^1.6.1",
-      "babel-eslint": "^8.2.3",
       "eslint": "^5.16.0",
       "eslint-config-taro": "1.3.13",
+      "eslint-plugin-import": "^2.12.0",
       "eslint-plugin-react": "^7.8.2",
       "eslint-plugin-react-hooks": "^1.6.1",
-      "eslint-plugin-import": "^2.12.0",
+      "eslint-plugin-taro": "1.3.13",
       "stylelint": "9.3.0",
       "stylelint-config-taro-rn": "1.3.13",
-      "stylelint-taro-rn": "1.3.13",
-      "eslint-plugin-taro": "1.3.13"
+      "stylelint-taro-rn": "1.3.13"
     }
   }
 
@@ -3173,7 +3185,7 @@ Lockfile:
       isobject "^3.0.0"
       static-extend "^0.1.1"
   
-  classnames@^2.2.5:
+  classnames@^2.2.5, classnames@^2.2.6:
     version "2.2.6"
     resolved "https://registry.npm.taobao.org/classnames/download/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
     integrity sha1-Q5Nb/90pHzJtrQogUwmzjQD2UM4=
