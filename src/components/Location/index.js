@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 18:29:25
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-18 13:27:25
+ * @LastEditTime: 2020-06-18 13:44:50
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -32,7 +32,10 @@ function Location(props) {
   useDidShow(() => {
     handleGetLocation()
   })
-
+  /**
+   * 处理获取缓存
+   * @return void
+   */
   const handleGetStorage = async () => {
     try {
       const storageData = await getStorage('user_location')
@@ -41,7 +44,11 @@ function Location(props) {
       console.error(error)
     }
   }
-
+  /**
+   * 获取地理位置
+   * @param {Boolean} openChoose 是否选择
+   * @return void
+   */
   const handleGetLocation = async (openChoose) => { 
     try {
       const locationData = await getUserLocation()
@@ -54,7 +61,7 @@ function Location(props) {
    
   }
   /**
-   * 获取位置信息
+   * 打开选择地图
    * @return void
    */
   const handleLocation = async (locationData) => {
@@ -83,6 +90,10 @@ function Location(props) {
     })
   }
   
+  /**
+   * 如果没有授权
+   * @return void
+   */
   const handleNoAuth = () => {
     Taro.showModal({
       title: '提示',

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 17:35:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-18 13:41:14
+ * @LastEditTime: 2020-06-18 13:43:37
  * @mustParam: 必传参数
  *  imageList 要展示的图片
  * @optionalParam: 选传参数
@@ -29,6 +29,10 @@ import { uploadImage } from './upload_request'
 import './index.scss'
 
 function Upload(props) { 
+  /**
+   * 选择image 上传
+   * @return void
+   */
   const chooseImage = () => {
     uploadImage({}).then(res => {
       console.log('res ============', res)
@@ -36,6 +40,11 @@ function Upload(props) {
     })
   }
   // const deleteImage = () => {}
+  /**
+   * 展示图片
+   * @param {String} item 要展示的图片
+   * @return void
+   */
   const showImage = (item) => {
     Taro.previewImage({
       current: item,
