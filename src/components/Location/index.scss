@@ -1,0 +1,27 @@
+@import "../../assets/css/theme.scss";
+
+.location-wrapper{
+  width: 100%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  .location-label{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    .location-icon{
+      font-size: 34px;
+      color: $link-color;
+      margin-right: 20px;
+    }
+  }
+  .address{
+    font-size: 28px;
+    color: $font-color;
+  }
+  .placeholder{
+    color: $placeholder-color;
+  }
+}
