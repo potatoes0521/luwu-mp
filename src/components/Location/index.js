@@ -4,15 +4,12 @@
  * @path: 引入路径
  * @Date: 2020-06-17 18:29:25
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-18 13:44:50
+ * @LastEditTime: 2020-06-18 14:24:17
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, {
-  useEffect,
-  useDidShow
-} from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import {
   View,
   Text
@@ -24,22 +21,30 @@ import { getStorage, setStorage } from '@utils/storage'
 import { getUserLocation, chooseLocation } from './location'
 import './index.scss'
 
-function Location(props) { 
-  useEffect(() => {
-    handleGetStorage()
-  })
-  
-  useDidShow(() => {
-    handleGetLocation()
-  })
+export default class Location extends Taro.Component {
+  constructor(props) {
+    super(props)
+    this.state={}
+  }
+
+  componentDidMount() {
+    this.handleGetStorage()
+  }
+  componentDidShow() { 
+    this.handleGetLocation()
+  }
+  static options = {
+    addGlobalClass: true // 允许外部样式修改组件样式
+  }
+
   /**
    * 处理获取缓存
    * @return void
    */
-  const handleGetStorage = async () => {
+  async handleGetStorage() {
     try {
       const storageData = await getStorage('user_location')
-      props.onGetLocationData(storageData)
+      this.props.onGetLocationData(storageData)
     } catch (error) { 
       console.error(error)
     }
@@ -49,13 +54,13 @@ function Location(props) {
    * @param {Boolean} openChoose 是否选择
    * @return void
    */
-  const handleGetLocation = async (openChoose) => { 
+  async handleGetLocation(openChoose) {
     try {
       const locationData = await getUserLocation()
-      openChoose && handleLocation(locationData)
+      openChoose && this.handleLocation(locationData)
     } catch (error) {
       if (error.errMsg === 'getLocation:fail auth deny') {
-        handleGetSetting()
+        this.handleGetSetting()
       }
     }
    
@@ -64,15 +69,15 @@ function Location(props) {
    * 打开选择地图
    * @return void
    */
-  const handleLocation = async (locationData) => {
+  async handleLocation(locationData) {
     try {
         const chooseLocationData = await chooseLocation(locationData)
         setStorage('user_location', chooseLocationData)
-        props.onGetLocationData(chooseLocationData)
+        this.props.onGetLocationData(chooseLocationData)
     } catch (error) {
       if (error.errMsg === 'getLocation:fail auth deny') {
         console.log('没有授权地理位置')
-        handleGetSetting()
+        this.handleGetSetting()
       }
     }
   }
@@ -80,12 +85,12 @@ function Location(props) {
    * 获取授权
    * @return void
    */
-  const handleGetSetting = (next) => {
+  handleGetSetting(next) {
     getSetting('userLocation').then(hasAuth => {
       if (!hasAuth) {
-        handleNoAuth()
+        this.handleNoAuth()
       } else if (hasAuth && next) {
-        handleLocation()
+        this.handleLocation()
       }
     })
   }
@@ -94,7 +99,7 @@ function Location(props) {
    * 如果没有授权
    * @return void
    */
-  const handleNoAuth = () => {
+  handleNoAuth() {
     Taro.showModal({
       title: '提示',
       content: '授权地址信息后才能获取到您所在位置',
@@ -108,22 +113,25 @@ function Location(props) {
     })
   }
   
-  const { address } = props
-  const addressClassName = classNames('address', {
-    'placeholder': !address.address
-  })
-  return (
-    <View
-      className='location-wrapper'
-      onClick={() => handleGetLocation(true)}
-    >
-      <View className='location-label'>
-        <View className='location-icon iconfont'>1</View>
-        <Text className={addressClassName}>{address.address || '选择商户地址'}</Text>
+  render() {
+    let { address } = this.props
+    const addressClassName = classNames('address', {
+      'placeholder': !address.address
+    })
+    return (
+      <View
+        className='location-wrapper'
+        onClick={() => this.handleGetLocation(true)}
+      >
+        <View className='location-label'>
+          <View className='location-icon iconfont'>1</View>
+          <Text className={addressClassName}>{address.address || '选择商户地址'}</Text>
+        </View>
+        <View className='location-right-icon iconfont'></View>
       </View>
-      <View className='location-right-icon iconfont'></View>
-    </View>
-  )
+    )
+  }
+
 }
 
 Location.defaultProps = {
