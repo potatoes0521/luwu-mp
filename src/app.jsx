@@ -87,6 +87,11 @@ class App extends Component {
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
+    },
+    "permission": {
+      "scope.userLocation": {
+        "desc": "您的位置将用于记录您最近去过的建材城效果展示" // 高速公路行驶持续后台定位
+      }
     }
   }
 
