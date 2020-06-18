@@ -4,12 +4,14 @@
  * @path: 引入路径
  * @Date: 2020-06-18 09:07:52
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-18 10:37:48
+ * @LastEditTime: 2020-06-18 16:59:28
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */
 import Taro from '@tarojs/taro'
+import Actions from '@store/actions/index.js'
+
  /**
   * 获取授权列表查看已授权
   * @return void
@@ -37,5 +39,13 @@ export const openSetting = () => {
     success: (res) => {
       console.log('res', res)
     }
+  })
+}
+
+export const getSystemInfo = () => {
+  Taro.getSystemInfo().then(res => {
+    console.log('res', res)
+    res.statusBarHeight *= 2
+    Actions.saveSystemInfo(res)
   })
 }
