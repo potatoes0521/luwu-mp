@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-18 10:20:20
+ * @LastEditTime: 2020-06-18 16:40:45
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -17,9 +17,9 @@ import {
   ScrollView
 } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
+import classNames from 'classnames'
 import Actions from '@store/actions/index.js'
 import { defaultResourceImgURL } from "@config/request_config"
-import classNames from 'classnames'
 // import bannerImg from "@img/index/banner.png"
 import { getIndexListData } from '@services/modules/index'
 import Skeleton from '@components/Skeleton'
@@ -41,6 +41,7 @@ class Index extends Component {
   }
   async login() { 
     const userInfo = await Login.getUserInfo()
+    console.log('userInfo', userInfo)
     userInfo && Login.useUserInfoLogin(userInfo)
   }
   /**
@@ -62,6 +63,7 @@ class Index extends Component {
   handleListItemIconClick() { 
     console.log('handleListItemIconClick')
   }
+  
   config = {
     navigationBarTitleText: '首页',
     navigationStyle: 'custom'
