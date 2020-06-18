@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 17:35:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-18 13:43:37
+ * @LastEditTime: 2020-06-18 14:19:48
  * @mustParam: 必传参数
  *  imageList 要展示的图片
  * @optionalParam: 选传参数
@@ -15,7 +15,7 @@
  * @emitFunction: 函数
  *  onUploadOK 图片上传完毕
  */ 
-import Taro from '@tarojs/taro'
+import Taro, {Component} from '@tarojs/taro'
 import {
   View,
   Text,
@@ -28,73 +28,87 @@ import { uploadImage } from './upload_request'
 
 import './index.scss'
 
-function Upload(props) { 
+export default class Upload extends Component { 
+
+  constructor(props) {
+    super(props)
+  }
+
+
+  componentDidMount() {
+    if (this.props.autoChoose) { 
+      this.chooseImage()
+    }
+  }
+
+  static options = {
+    addGlobalClass: true // 允许外部样式修改组件样式
+  }
+
   /**
    * 选择image 上传
    * @return void
    */
-  const chooseImage = () => {
+  chooseImage() {
     uploadImage({}).then(res => {
-      console.log('res ============', res)
-      props.onUploadOK(res)
+      this.props.onUploadOK(res)
     })
   }
-  // const deleteImage = () => {}
   /**
    * 展示图片
    * @param {String} item 要展示的图片
    * @return void
    */
-  const showImage = (item) => {
+  showImage(item) {
     Taro.previewImage({
       current: item,
-      urls: props.imageList
+      urls: this.props.imageList
     })
   }
-
-  const {
-    imageList,
-    addBtnSizeType,
-    imageSizeType,
-    alignType,
-    showAddBtn,
-    scrollViewWidth
-  } = props
-  // 图片展示列表
-  const imageListRender = imageList.map((item) => {
-    const imageItemClassName = classNames('picture-item', {
-      'big-picture-item': imageSizeType === 'big' || !imageSizeType,
-      'small-picture-item': imageSizeType === 'small'
+  render() {
+    const {
+      imageList,
+      addBtnSizeType,
+      imageSizeType,
+      alignType,
+      showAddBtn,
+      scrollViewWidth
+    } = this.props
+    // 图片展示列表
+    const imageListRender = imageList.map((item) => {
+      const imageItemClassName = classNames('picture-item', {
+        'big-picture-item': imageSizeType === 'big' || !imageSizeType,
+        'small-picture-item': imageSizeType === 'small'
+      })
+      return (
+        <View
+          className={imageItemClassName}
+          key={item}
+        >
+          {/* <Text
+            onClick={() => deleteImage('car', index)}
+            className='delete-btn iconfont iconguanbi2'
+          ></Text> */}
+          <Image 
+            mode='aspectFill'
+            className='image' 
+            src={item}
+            onClick={() => this.showImage(item)}
+          ></Image>
+        </View>
+      )
+    })
+    // 添加图片按钮
+    const addBtnClassName = classNames('add-btn-public', {
+      'small-btn': addBtnSizeType === 'small' || !addBtnSizeType,
+      'big-btn': addBtnSizeType === 'big'
+    })
+    // 列表垂直方式
+    const listClassName = classNames('picture-list', {
+      'align-center': alignType === 'center' || !alignType,
+      'flex-end': alignType === 'flex-end'
     })
     return (
-      <View
-        className={imageItemClassName}
-        key={item}
-      >
-        {/* <Text
-          onClick={() => deleteImage('car', index)}
-          className='delete-btn iconfont iconguanbi2'
-        ></Text> */}
-        <Image 
-          mode='aspectFill'
-          className='image' 
-          src={item}
-          onClick={() => showImage(item)}
-        ></Image>
-      </View>
-    )
-  })
-  // 添加图片按钮
-  const addBtnClassName = classNames('add-btn-public', {
-    'small-btn': addBtnSizeType === 'small' || !addBtnSizeType,
-    'big-btn': addBtnSizeType === 'big'
-  })
-  // 列表垂直方式
-  const listClassName = classNames('picture-list', {
-    'align-center': alignType === 'center' || !alignType,
-    'flex-end': alignType === 'flex-end'
-  })
-  return (
     <ScrollView
       scrollX
       style={{width: `calc(100vw - ${scrollViewWidth}rpx)`}}
@@ -108,7 +122,7 @@ function Upload(props) {
           showAddBtn && (
             <View
               className={addBtnClassName}
-              onClick={chooseImage}
+              onClick={this.chooseImage.bind(this)}
             >
               <Text className='iconfont icontuxiang icon-upload-img'></Text>
             </View>
@@ -117,10 +131,13 @@ function Upload(props) {
       </View>
     </ScrollView>
   )
+  }
+
 }
 
 Upload.defaultProps = {
   imageList: [],
+  autoChoose: false,
   addBtnSizeType: 'small',
   imageSizeType: 'small',
   alignType: 'center',
