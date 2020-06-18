@@ -23,7 +23,14 @@ class Nav extends Component {
       getSystemInfo()
     }
   }
-
+  navigatorBack() { 
+    Taro.navigateBack()
+  }
+  switchTab() {
+    Taro.switchTab({
+      url: '/pages/index/index'
+    })
+  }
   render() {
     const {
       system,
@@ -38,9 +45,9 @@ class Nav extends Component {
       >
         <View className='left'>
           {
-            back && <View className='iconfont iconRectangle nav-icon-back'></View>
+            back && <View onClick={this.navigatorBack.bind(this)} className='iconfont iconRectangle nav-icon-back'></View>
           }
-          <View className='iconfont iconhome nav-icon-home'></View>
+          <View onClick={this.switchTab.bind(this)} className='iconfont iconhome nav-icon-home'></View>
         </View>
         <View className='nav-title'>
           {
