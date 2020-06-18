@@ -1,6 +1,6 @@
 @import "../../../../assets/css/theme.scss";
 
-.item-wrapper{
+.item-wrapper {
   width: 100%;
   height: 342px;
   border-radius: 8px;
@@ -8,24 +8,28 @@
   padding: 0 20px 20px;
   box-sizing: border-box;
   margin-bottom: 20px;
-  .title-wrapper{
+
+  .title-wrapper {
     width: 100%;
     height: 62px;
     padding: 10px 0;
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
-    .title{
+
+    .title {
       font-size: 30px;
       color: $font-color;
       line-height: 42px;
     }
-    .icon-warning{
+
+    .icon-warning {
       font-size: 32px;
       color: #999999;
       margin-left: 10px;
     }
-    .right-tips{
+
+    .right-tips {
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -33,17 +37,19 @@
       color: #1E54ED;
       padding-top: 10px;
     }
-    .text-line{
+
+    .text-line {
       width: 2px;
       height: 16px;
       background-color: #1E54ED;
       margin: 0 18px;
     }
   }
-  .item-image{
+
+  .item-image {
     width: 100%;
     height: 260px;
-    box-shadow:0px 1px 10px 0px rgba(0, 0, 0, 0.09);
+    box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.09);
     border-radius: 10px;
     overflow: hidden;
   }

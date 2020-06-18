@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-18 09:14:56
+ * @LastEditTime: 2020-06-18 10:20:20
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -24,31 +24,14 @@ import classNames from 'classnames'
 import { getIndexListData } from '@services/modules/index'
 import Skeleton from '@components/Skeleton'
 import Login from '@utils/login'
-import List from './components/List'
+import ListItem from './components/ListItem/index'
 import './index.scss'
 
-const skeletonMock = [{
-  title: 1,
-  tips: []
-}, {
-  title: 2,
-  tips: []
-}, {
-  title: 3,
-  tips: []
-}, {
-  title: 4,
-  tips: []
-}, {
-  title: 5,
-  tips: []
-}] // 默认数据为了做骨架屏
 const bannerBigImg = `${defaultResourceImgURL}index/bannerBig.png`
 class Index extends Component {
-  constructor(props) { 
-    super(props)
+  constructor() { 
     this.state = {
-      listData: skeletonMock, 
+      listData: [{},{},{},{},{}], // 默认数据为了做骨架屏
       loading: true
     }
   }
@@ -57,12 +40,8 @@ class Index extends Component {
     this.login()
   }
   async login() { 
-    try {
-      const userInfo = await Login.getUserInfo()
-      userInfo && Login.useUserInfoLogin(userInfo)
-    } catch (err) { 
-      console.log('err', err)
-    }
+    const userInfo = await Login.getUserInfo()
+    userInfo && Login.useUserInfoLogin(userInfo)
   }
   /**
    * 获取首页列表JSON数据
@@ -93,6 +72,17 @@ class Index extends Component {
       listData,
       loading
     } = this.state
+    const listRender = listData.map(item => {
+      const key = item.title
+      return (
+        <ListItem
+          key={key}
+          item={item}
+          tips={item.tips}
+          onClickWaringIcon={this.handleListItemIconClick.bind(this)}
+        ></ListItem>
+      )
+    })
     const lineRender = listData.map((item, index) => {
       const key = item.title
       const lineClassName = classNames('bottom-line skeleton-cylinder', {
@@ -124,10 +114,9 @@ class Index extends Component {
               }
             </View>
             <View className='list'>
-                <List
-                  listData={listData}
-                  onClickWaringIcon={this.handleListItemIconClick.bind(this)}
-                ></List>
+              {
+                listRender
+              }
             </View>
           </View>
         </ScrollView>
