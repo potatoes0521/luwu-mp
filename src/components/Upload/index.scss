@@ -2,54 +2,55 @@
 
 .scroll-view{
   box-sizing: border-box;
-  padding: 0 30px;
-}
-
-.picture-list {
-  box-sizing: border-box;
   white-space: nowrap;
-}
-.align-center {
-  align-items: center;
-}
-
-.flex-end{
-  align-items: flex-end;
 }
 
 .picture-item {
   display: inline-block;
   text-align: center;
   margin-right: 20px;
+  vertical-align: bottom;
 }
 
 .big-picture-item {
   width: 180px;
   height: 180px;
 }
+
 .small-picture-item {
-  width: 180px;
-  height: 180px;
+  width: 130px;
+  height: 130px;
 }
+
 .add-btn-public{
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border: 2px solid #EBEBEB;
   font-size: 42px;
   color: #D8D8D8;
   display: inline-block;
+  text-align: center;
+  vertical-align: bottom;
 }
 
 .small-btn{
-  width: 85px;
-  height: 85px;
+  width: 86px;
+  height: 86px;
+  .icon-upload-img {
+    line-height: 86px;
+  }
+}
+
+.big-add-btn-wrapper {
+  width: 130px;
+  height: 100%;
 }
 
 .big-btn{
   width: 130px;
   height: 130px;
+  .icon-upload-img {
+    line-height: 130px;
+  }
 }
 
 .image {
@@ -58,14 +59,8 @@
   border-radius: 8px;
 }
 
-.icon-style {
-  color: #ffffff;
-  font-size: 74px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
+.icon-upload-img{
+  font-size: 42px;
 }
 
 .delete-btn {
