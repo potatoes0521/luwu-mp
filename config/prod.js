@@ -23,11 +23,11 @@ module.exports = {
     '@components': path.resolve(__dirname, '..', 'src/components'),
     '@containers': path.resolve(__dirname, '..', 'src/containers'),
     '@utils': path.resolve(__dirname, '..', 'src/utils'),
-    '@assets': path.resolve(__dirname, '..', 'src/assets'),
-    '@lib': path.resolve(__dirname, '..', 'src/lib'),
-    '@constant': path.resolve(__dirname, '..', 'src/constant'),
+    '@css': path.resolve(__dirname, '..', 'src/assets/css'),
+    '@js': path.resolve(__dirname, '..', 'src/assets/js'),
+    '@img': path.resolve(__dirname, '..', 'src/assets/img'),
     '@store': path.resolve(__dirname, '..', 'src/store'),
-    '@shared': path.resolve(__dirname, '..', 'src/shared'),
-    '@@cdn': path.resolve(__dirname, '..', 'src/constant/cdn_assets.js')
+    '@actions': path.resolve(__dirname, '..', 'src/store/actions'),
+    '@config': path.resolve(__dirname, '..', 'src/config'),
   },
 }
