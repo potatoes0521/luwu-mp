@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-18 17:33:54
+ * @LastEditTime: 2020-06-18 18:27:19
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -37,7 +37,7 @@ class NotePublish extends Component {
   }
 
   componentDidMount() {
-    // this.chooseImage()
+
   }
   /**
    * 上传图片完成
@@ -114,10 +114,10 @@ class NotePublish extends Component {
       remark
     } = this.state
     const {system} = this.props
-    const statusBarHeight = (system && system.statusBarHeight || 44) + 90
+    const navHeight = system && system.navHeight || 120
     return (
       <View
-        style={{ paddingTop: statusBarHeight + 'rpx' }}
+        style={{ paddingTop: navHeight + 'rpx' }}
         className='page-wrapper'
       >
         <Nav

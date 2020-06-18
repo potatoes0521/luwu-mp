@@ -60,7 +60,9 @@ class App extends Component {
       'pages/note_publish/index', // 发布笔记
       'pages/note_details/index', // 发布的笔记详情
       // 权限鉴权
-      'pages/auth/index'
+      'pages/auth/index',
+      // 选择品类
+      'pages/choose_item/index'
     ],
     tabBar: {
       color: "#D8D8D8",

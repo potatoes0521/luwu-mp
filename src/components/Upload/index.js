@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 17:35:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-18 18:12:22
+ * @LastEditTime: 2020-06-18 18:22:17
  * @mustParam: 必传参数
  *  imageList 要展示的图片
  * @optionalParam: 选传参数
@@ -31,7 +31,7 @@ export default class Upload extends Component {
 
   componentDidMount() {
     if (this.props.autoChoose) { 
-      // this.chooseImage()s
+      this.chooseImage()
     }
   }
 

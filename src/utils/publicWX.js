@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 09:07:52
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-18 16:59:28
+ * @LastEditTime: 2020-06-18 18:26:44
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -44,8 +44,8 @@ export const openSetting = () => {
 
 export const getSystemInfo = () => {
   Taro.getSystemInfo().then(res => {
-    console.log('res', res)
     res.statusBarHeight *= 2
+    res.navHeight = res.statusBarHeight + 90
     Actions.saveSystemInfo(res)
   })
 }
