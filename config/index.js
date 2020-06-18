@@ -1,6 +1,6 @@
 const config = {
-  projectName: 'luwu-mp',
-  date: '2020-6-15',
+  projectName: 'myApp',
+  date: '2020-6-18',
   designWidth: 750,
   deviceRatio: {
     '640': 2.34 / 2,
@@ -9,54 +9,59 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
-  plugins: {
-    babel: {
-      sourceMap: true,
-      presets: [
-        ['env', {
-          modules: false
-        }]
-      ],
-      plugins: [
-        'transform-decorators-legacy',
-        'transform-class-properties',
-        'transform-object-rest-spread'
-      ]
-    }
+  babel: {
+    sourceMap: true,
+    presets: [
+      ['env', {
+        modules: false
+      }]
+    ],
+    plugins: [
+      'transform-decorators-legacy',
+      'transform-class-properties',
+      'transform-object-rest-spread',
+      ['transform-runtime', {
+        helpers: false,
+        polyfill: false,
+        regenerator: true,
+        moduleName: 'babel-runtime'
+      }]
+    ]
   },
-  defineConstants: {
-  },
-  weapp: {
-    module: {
-      postcss: {
-        autoprefixer: {
-          enable: true,
-          config: {
-            browsers: [
-              'last 3 versions',
-              'Android >= 4.1',
-              'ios >= 8'
-            ]
-          }
-        },
-        pxtransform: {
-          enable: true,
-          config: {
+  plugins: [
+    '@tarojs/plugin-sass',
+    '@tarojs/plugin-terser'
+  ],
+  defineConstants: {},
+  mini: {
+    postcss: {
+      autoprefixer: {
+        enable: true,
+        config: {
+          browsers: [
+            'last 3 versions',
+            'Android >= 4.1',
+            'ios >= 8'
+          ]
+        }
+      },
+      pxtransform: {
+        enable: true,
+        config: {
 
-          }
-        },
-        url: {
-          enable: true,
-          config: {
-            limit: 10240 // 设定转换尺寸上限
-          }
-        },
-        cssModules: {
-          enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
-          config: {
-            namingPattern: 'module', // 转换模式，取值为 global/module
-            generateScopedName: '[name]__[local]___[hash:base64:5]'
-          }
+        }
+      },
+      url: {
+        enable: true,
+        config: {
+          limit: 10240 // 设定转换尺寸上限
+        }
+      },
+      cssModules: {
+        enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
+        config: {
+          namingPattern: 'module', // 转换模式，取值为 global/module
+          generateScopedName: '[name]__[local]___[hash:base64:5]'
         }
       }
     }
@@ -64,24 +69,22 @@ const config = {
   h5: {
     publicPath: '/',
     staticDirectory: 'static',
-    module: {
-      postcss: {
-        autoprefixer: {
-          enable: true,
-          config: {
-            browsers: [
-              'last 3 versions',
-              'Android >= 4.1',
-              'ios >= 8'
-            ]
-          }
-        },
-        cssModules: {
-          enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
-          config: {
-            namingPattern: 'module', // 转换模式，取值为 global/module
-            generateScopedName: '[name]__[local]___[hash:base64:5]'
-          }
+    postcss: {
+      autoprefixer: {
+        enable: true,
+        config: {
+          browsers: [
+            'last 3 versions',
+            'Android >= 4.1',
+            'ios >= 8'
+          ]
+        }
+      },
+      cssModules: {
+        enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
+        config: {
+          namingPattern: 'module', // 转换模式，取值为 global/module
+          generateScopedName: '[name]__[local]___[hash:base64:5]'
         }
       }
     }
