@@ -34,10 +34,12 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      .unit-text{
+
+      .unit-text {
         font-size: 28px;
         color: $font-color;
       }
+
       .icon-next {
         font-size: 24px;
         color: $placeholder-color;
@@ -49,6 +51,7 @@
     }
   }
 }
-.bottom-line{
+
+.bottom-line {
   border-bottom: 2px solid $line-color;
 }
