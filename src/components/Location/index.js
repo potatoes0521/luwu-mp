@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 18:29:25
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-18 17:20:02
+ * @LastEditTime: 2020-06-19 09:09:28
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -28,9 +28,11 @@ export default class Location extends Taro.Component {
   }
 
   componentDidMount() {
+    if (this.props.onlyShow) return
     this.handleGetStorage()
   }
   componentDidShow() { 
+    if (this.props.onlyShow) return
     this.handleGetLocation()
   }
   static options = {
@@ -55,6 +57,7 @@ export default class Location extends Taro.Component {
    * @return void
    */
   async handleGetLocation(openChoose) {
+    if (this.props.onlyShow) return
     try {
       const locationData = await getUserLocation()
       openChoose && this.handleLocation(locationData)
@@ -136,12 +139,13 @@ export default class Location extends Taro.Component {
 
 Location.defaultProps = {
   address: {},
-  onNoAuth: () => {
-    console.error('onNoAuth is not defined in @components/Location')
+  onlyShow:false,
+  onGetLocationData: () => {
+    console.log('onNoAuth is not defined in @components/Location')
   }
 }
 
 Location.propTypes = {
   address: PropTypes.object.isRequired,
-  onNoAuth: PropTypes.func.isRequired
+  onGetLocationData: PropTypes.func.isRequired
 } 
