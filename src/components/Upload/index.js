@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 17:35:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-19 09:41:26
+ * @LastEditTime: 2020-06-19 13:16:00
  * @mustParam: 必传参数
  *  imageList 要展示的图片
  * @optionalParam: 选传参数
@@ -30,7 +30,7 @@ export default class Upload extends Component {
 
   componentDidMount() {
     if (this.props.autoChoose) { 
-      this.chooseImage()
+      // this.chooseImage()
     }
   }
 
@@ -76,7 +76,7 @@ export default class Upload extends Component {
           height: imageWidth,
           lineHeight: imageWidth,
         }}
-        className='picture-item'
+        className='picture-item skeleton-square'
         key={item}
       >
         <Image 
