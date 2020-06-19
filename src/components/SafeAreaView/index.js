@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-19 09:12:46
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-19 09:28:16
+ * @LastEditTime: 2020-06-19 09:47:23
  * @mustParam: 必传参数
  *  title 标题用作导航标题
  * @optionalParam: 选传参数
@@ -18,8 +18,6 @@ import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import PropTypes from 'prop-types'
 import Nav from '@components/Nav'
-
-import './index.scss'
 
 class SaveAreaView extends Component {
 
