@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 18:29:25
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-19 10:13:32
+ * @LastEditTime: 2020-06-19 13:14:45
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -129,15 +129,15 @@ export default class Location extends Taro.Component {
         className='location-wrapper'
         onClick={() => this.handleGetLocation(true)}
       >
-        <View className='location-label'>
+        <View className='location-label skeleton-square' >
           <View className='location-icon iconditu iconfont'></View>
           <Text className={addressClassName}>{address.address || '选择商户地址'}</Text>
         </View>
         {
-          onlyShow && <View className='location-right-icon iconRectangle rotated iconfont'></View>
+          !onlyShow && <View className='location-right-icon iconRectangle rotated iconfont'></View>
         }
         {
-          !onlyShow  && this.props.children
+          this.props.children
         }
       </View>
     )
