@@ -1,7 +1,7 @@
 /*
  * @Author: liuYang
  * @description: 骨架屏
- *    skeleton样式类为骨架屏查找绘制节点的根节点
+ *    skeleton 样式类为骨架屏查找绘制节点的根节点
  *    skeleton-square 骨架节点样式为方形
  *    skeleton-circular 骨架节点为圆形
  *    skeleton-cylinder 骨架节点为长条形
@@ -9,7 +9,7 @@
  * @path: @components/Skeleton
  * @Date: 2020-06-15 18:07:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-17 17:31:57
+ * @LastEditTime: 2020-06-19 13:17:09
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
