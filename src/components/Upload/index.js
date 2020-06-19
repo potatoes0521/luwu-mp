@@ -4,12 +4,12 @@
  * @path: 引入路径
  * @Date: 2020-06-17 17:35:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-18 18:22:17
+ * @LastEditTime: 2020-06-19 09:41:26
  * @mustParam: 必传参数
  *  imageList 要展示的图片
  * @optionalParam: 选传参数
- *  addBtnSizeType 添加图片大小
- *  imageSizeType 图片大小
+ *  addBtnSize 添加图片大小
+ *  imageSize 图片大小
  *  showAddBtn 是否展示上传图片
  * @emitFunction: 函数
  *  onUploadOK 图片上传完毕
@@ -21,7 +21,6 @@ import {
   Image,
   ScrollView
 } from '@tarojs/components'
-import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { uploadImage } from './upload_request'
 
@@ -62,24 +61,22 @@ export default class Upload extends Component {
   render() {
     const {
       imageList,
-      addBtnSizeType,
-      imageSizeType,
+      addBtnSize,
+      imageSize,
       showAddBtn,
       computedWidth
     } = this.props
-    // 图片展示列表
-    const imageItemClassName = classNames('picture-item', {
-      'big-picture-item': imageSizeType === 'big' || !imageSizeType,
-      'small-picture-item': imageSizeType === 'small'
-    })
     // 添加图片按钮
-    const addBtnClassName = classNames('add-btn-public', {
-      'small-btn': addBtnSizeType === 'small' || !addBtnSizeType,
-      'big-btn': addBtnSizeType === 'big'
-    })
+    const imageWidth = imageSize + 'rpx'
+    const addBtnWidth = addBtnSize + 'rpx'
     const imageListRender = imageList.map((item) => (
       <View
-        className={imageItemClassName}
+        style={{
+          width: imageWidth,
+          height: imageWidth,
+          lineHeight: imageWidth,
+        }}
+        className='picture-item'
         key={item}
       >
         <Image 
@@ -90,13 +87,12 @@ export default class Upload extends Component {
         ></Image>
       </View>
     ))
-    const height = imageSizeType === 'small' ? 130 : 180
     return (
     <ScrollView
       scrollX
       style={{
           width: `calc(100vw - ${computedWidth}rpx)`,
-          height: `${height}rpx`
+          height: imageWidth
         }}
       className='scroll-view'
     >
@@ -106,14 +102,28 @@ export default class Upload extends Component {
       {
         showAddBtn && (
           <View
-            className={addBtnClassName}
+            style={{
+              width: addBtnWidth,
+              height: addBtnWidth,
+              lineHeight: addBtnWidth,
+            }}
+            className='add-btn-public'
             onClick={this.chooseImage.bind(this)}
           >
             <Text className='iconfont iconbianzu icon-upload-img'></Text>
           </View>
         )
       }
-      {imageList && imageList.length < 1 && <View className={imageItemClassName}></View>}
+      { imageList && imageList.length < 1 && (
+          <View
+            style={{
+              width: imageWidth,
+              height: imageWidth,
+              lineHeight: imageWidth,
+            }}
+            className='picture-item'
+          ></View>)
+        }
     </ScrollView>
   )
   }
@@ -123,8 +133,8 @@ export default class Upload extends Component {
 Upload.defaultProps = {
   imageList: [],
   autoChoose: false,
-  addBtnSizeType: 'small',
-  imageSizeType: 'small',
+  addBtnSize: 86,
+  imageSize: 180,
   showAddBtn: false,
   scrollViewWidth: 0,
   onUploadOK: () => {
@@ -135,7 +145,7 @@ Upload.defaultProps = {
 Upload.propTypes = {
   imageList: PropTypes.array.isRequired,
   showAddBtn: PropTypes.bool,
-  addBtnSizeType: PropTypes.string,
-  imageSizeType: PropTypes.string,
+  addBtnSize: PropTypes.string,
+  imageSize: PropTypes.number.isRequired,
   onUploadOK: PropTypes.func.isRequired
 }

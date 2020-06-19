@@ -12,16 +12,6 @@
   vertical-align: bottom;
 }
 
-.big-picture-item {
-  width: 180px;
-  height: 180px;
-}
-
-.small-picture-item {
-  width: 130px;
-  height: 130px;
-}
-
 .add-btn-public{
   box-sizing: border-box;
   border: 2px solid #EBEBEB;
@@ -30,27 +20,6 @@
   display: inline-block;
   text-align: center;
   vertical-align: bottom;
-}
-
-.small-btn{
-  width: 86px;
-  height: 86px;
-  .icon-upload-img {
-    line-height: 86px;
-  }
-}
-
-.big-add-btn-wrapper {
-  width: 130px;
-  height: 100%;
-}
-
-.big-btn{
-  width: 130px;
-  height: 130px;
-  .icon-upload-img {
-    line-height: 130px;
-  }
 }
 
 .image {
