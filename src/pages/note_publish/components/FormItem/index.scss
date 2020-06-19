@@ -39,7 +39,12 @@
         color: $font-color;
       }
       .icon-next {
-        font-size: 30px;
+        font-size: 24px;
+        color: $placeholder-color;
+      }
+
+      .rotated {
+        transform: rotate(180deg);
       }
     }
   }
