@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 18:29:25
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-19 09:09:28
+ * @LastEditTime: 2020-06-19 10:13:32
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -117,7 +117,10 @@ export default class Location extends Taro.Component {
   }
   
   render() {
-    let { address } = this.props
+    const {
+      address,
+      onlyShow
+    } = this.props
     const addressClassName = classNames('address', {
       'placeholder': !address.address
     })
@@ -130,7 +133,12 @@ export default class Location extends Taro.Component {
           <View className='location-icon iconditu iconfont'></View>
           <Text className={addressClassName}>{address.address || '选择商户地址'}</Text>
         </View>
-        <View className='location-right-icon iconfont'></View>
+        {
+          onlyShow && <View className='location-right-icon iconRectangle rotated iconfont'></View>
+        }
+        {
+          !onlyShow  && this.props.children
+        }
       </View>
     )
   }
