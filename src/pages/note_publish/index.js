@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-19 09:29:47
+ * @LastEditTime: 2020-06-19 09:39:24
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -120,8 +120,8 @@ class NotePublish extends Component {
               <Upload
                 imageList={goodsImageList}
                 autoChoose
-                imageSizeType='big'
-                addBtnSizeType='small'
+                imageSize={180}
+                addBtnSizeType={86}
                 showAddBtn
                 alignType='flex_end'
                 onUploadOK={this.onGoodsImageUpload.bind(this)}
@@ -168,8 +168,8 @@ class NotePublish extends Component {
                 <Upload
                   showAddBtn
                   alignType='center'
-                  imageSizeType='small'
-                  addBtnSizeType='big'
+                  imageSize={130}
+                  addBtnSize={130}
                   computedWidth='148'
                   imageList={priceTagImageList}
                   onUploadOK={this.onPriceTagUpload.bind(this)}
@@ -183,8 +183,8 @@ class NotePublish extends Component {
                 <Upload
                   showAddBtn
                   alignType='center'
-                  imageSizeType='small'
-                  addBtnSizeType='big'
+                  imageSize={130}
+                  addBtnSize={130}
                   computedWidth='148'
                   imageList={idCardImageList}
                   onUploadOK={this.onIdCardImageUpload.bind(this)}
