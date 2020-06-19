@@ -1,3 +1,16 @@
+/*
+ * @Author: liuYang
+ * @description: 公共导航
+ * @path: 引入路径
+ * @Date: 2020-06-18 16:25:43
+ * @LastEditors: liuYang
+ * @LastEditTime: 2020-06-19 09:30:15
+ *  title 标题用作导航标题
+ * @optionalParam: 选传参数
+ *  back 导航是否显示返回
+ *  home 导航是否显示home
+ * @emitFunction: 函数
+ */ 
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import PropTypes from 'prop-types'
@@ -35,7 +48,8 @@ class Nav extends Component {
     const {
       system,
       title,
-      back
+      back,
+      home
     } = this.props
     const statusBarHeight = system && system.statusBarHeight || 88
     return (
@@ -47,7 +61,9 @@ class Nav extends Component {
           {
             back && <View onClick={this.navigatorBack.bind(this)} className='iconfont iconRectangle nav-icon-back'></View>
           }
-          <View onClick={this.switchTab.bind(this)} className='iconfont iconhome nav-icon-home'></View>
+          {
+            home && <View onClick={this.switchTab.bind(this)} className='iconfont iconhome nav-icon-home'></View>
+          }
         </View>
         <View className='nav-title'>
           {
@@ -62,11 +78,16 @@ class Nav extends Component {
 
 Nav.defaultProps = {
   system: {},
-  back: true,
+  title: '录屋',
+  back: false,
+  home: false,
   onClick: () => {console.error('onClick is not defined')}
 }
 
 Nav.propTypes = {
+  title: PropTypes.string.isRequired,
+  back: PropTypes.bool,
+  home: PropTypes.bool,
   onClick: PropTypes.func.isRequired
 }
 const mapStateToProps = (state) => {
