@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 15:42:08
+ * @LastEditTime: 2020-06-20 15:49:20
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -89,13 +89,13 @@ class ChooseItem extends Component {
     let childCategoriesList = this.AllChildCategoriesList.filter(child => child.parentId === item.categoryId)
     let data = {
       childCategoriesList,
-      selectMainCategoriesData: item,
       brandList: [],
     }
     // autoSelectNext 为true是编辑数据  自动选择下一项  故而不清除选中项
-    if (autoSelectNext && selectChildCategoriesData) {
+    if (autoSelectNext) {
       this.chooseChildCategories(selectChildCategoriesData, autoSelectNext)
     } else {
+      data.selectMainCategoriesData = item
       data.selectChildCategoriesData = {}
       data.selectBrandData = {}
     }

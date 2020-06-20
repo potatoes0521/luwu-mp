@@ -29,6 +29,11 @@
   &-title-icon {
     font-size: 10px;
     margin-left: 12px;
+    color: $font-color;
+  }
+
+  &-title-icon-active {
+    color: $link-color;
   }
 
   &-modal-wrapper{
@@ -68,6 +73,9 @@
       border-right: 2px solid $background-color;
     }
   }
+}
+.rotate180 {
+  transform: rotate(180deg);
 }
 @keyframes fadeIn {
   from {

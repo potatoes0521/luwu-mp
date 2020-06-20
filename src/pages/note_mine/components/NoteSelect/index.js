@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-19 10:17:37
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-19 13:26:47
+ * @LastEditTime: 2020-06-20 16:33:56
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -17,7 +17,9 @@ import {
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { connect } from '@tarojs/redux'
-import { selectData } from "../../../../mock/select"
+import { getCategory } from '@services/modules/category'
+import Login from '@utils/login'
+
 import './index.scss'
 
 class NoteSelect extends Component {
@@ -25,77 +27,131 @@ class NoteSelect extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showSelectMain: false,
-      mainCategoryList: [],
-      childrenCategoryList: [],
+      showSelectModal: false,
+      mainCategoriesList: [],
+      childCategoriesList: [],
       selectMainCategoryData: {},
       selectChildCategoryData: {},
     }
-    this.allData = []
+    this.AllChildCategoriesList = []
     this.timer = null
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      this.getData()
-    }, 200)
+    const {userInfo} = this.props
+    !userInfo.token && Login.login()
+    this.getAllCategoryData()
+  }
+  componentWillReceiveProps(nextProps) { 
+    this.handleSelectData(nextProps)
   }
   componentWillUnmount() { 
     if(!this.timer) return
     clearTimeout(this.timer)
     this.timer = null
   }
-  getData() { 
-    const data = selectData()
-    this.allData = data
-    const mainCategoryList = data.map(item => {
-      return {
-        categoryId: item.categoryId,
-        categoryName: item.categoryName,
-      }
-    })
-    this.setState({
-      mainCategoryList
-    }, () => {
+  /**
+   * 获取全部品类数据
+   * @return void
+   */
+  getAllCategoryData() {
+    getCategory(this).then(res => {
+      if (!res || res.length < 1) return
+      res.forEach(item => {
+        item.checked = false
+      })
+      const mainCategoriesList = res.filter(item => item.categoryLevel === 1)
+      const childCategoriesList = res.filter(item => item.categoryLevel === 2)
+      this.AllChildCategoriesList = childCategoriesList
+      this.setState({
+        mainCategoriesList
+      }, () => {
         this.timer = setTimeout(() => {
           this.props.onLoadEnd()
-        },200)
-    })
-  }
-
-  onChooseMainCategory(item, e) {
-    e.stopPropagation()
-    const { mainCategoryList } = this.state
-    const childrenCategoryList = mainCategoryList.map(ite => {
-      return {
-        categoryId: ite.categoryId,
-        categoryName: ite.categoryName,
-      }
-    })
-    this.setState({
-      childrenCategoryList,
-      selectMainCategoryData: item
+        }, 200)
+      })
     })
   }
   /**
-   * 当选择了子项
-   * @param {Object} item 参数描述
+   * 选择主品类
+   * @param {Object} city 选中的主品类
    * @return void
    */
-  onChooseChildCategory(item, e) {
-    e.stopPropagation()
+  onChooseMainCategory(item, autoSelectNext, e) {
+    e && e.stopPropagation()
+    const { selectMainCategoryData, selectChildCategoryData } = this.state;
+    if (!autoSelectNext && item.categoryId === selectMainCategoryData.categoryId) {
+      return
+    }
+    let childCategoriesList = this.AllChildCategoriesList.filter(child => child.parentId === item.categoryId)
+    let data = {
+      childCategoriesList,
+    }
+    // autoSelectNext 为true是编辑数据  自动选择下一项  故而不清除选中项
+    if (autoSelectNext) {
+      this.onChooseChildCategory(selectChildCategoryData, autoSelectNext)
+    } else {
+      data.selectMainCategoryData = item
+      data.selectChildCategoryData = {}
+    }
+    this.setState(data);
+  }
+  /**
+   * 选择子品类
+   * @param {Object} city 选中的城市
+   * @return void
+   */
+  onChooseChildCategory(item, autoSelectNext, e) {
+    e && e.stopPropagation()
+    let { selectChildCategoryData, selectMainCategoryData } = this.state;
+    if (!autoSelectNext && item.categoryId === selectChildCategoryData.categoryId) {
+      return
+    }
+    if (autoSelectNext) {
+      this.props.onChooseLastItem(item, selectMainCategoryData)
+    } else {
+      this.setState({
+        selectChildCategoryData: item,
+      }, () => {
+          this.props.onChooseLastItem(item, selectMainCategoryData)
+          this.controlSelectModal()
+      });
+    }
+  }
+  /**
+   * 控制显示隐藏选择栏
+   * @param {Object} e event对象
+   * @return void
+   */
+  controlSelectModal(e) { 
+    e && e.stopPropagation()
+    const { showSelectModal } = this.state
+    if (!showSelectModal) {
+      this.handleSelectData(this.props)
+    }
     this.setState({
-      selectChildCategoryData: item,
-    }, () => {
-        this.props.onChooseLastItem()
+      showSelectModal: !showSelectModal
     })
   }
-  controlSelectModal(e) { 
-    e.stopPropagation()
-    const {showSelectMain} = this.state
-    this.setState({
-      showSelectMain: !showSelectMain
-    })
+  /**
+   * 处理选择数据   
+   * @param {Object} props this.props
+   * @return void
+   */
+  handleSelectData(props) { 
+    const {selectMainCategoryData, selectChildCategoryData} = this.state
+    if (selectMainCategoryData.categoryId !== props.propsMainCategoryData.categoryId) {
+      let childCategoriesList = this.AllChildCategoriesList.filter(child => child.parentId === props.propsMainCategoryData.categoryId)
+      this.setState({
+        selectMainCategoryData: props.propsMainCategoryData,
+        childCategoriesList
+      })
+    }
+    if (selectChildCategoryData.categoryId !== props.propsChildCategoryData.categoryId) {
+      this.setState({
+        selectChildCategoryData: props.propsChildCategoryData
+      })
+    }
   }
 
   static options = {
@@ -108,9 +164,9 @@ class NoteSelect extends Component {
 
   render() {
     const {
-      showSelectMain,
-      mainCategoryList,
-      childrenCategoryList,
+      showSelectModal,
+      mainCategoriesList,
+      childCategoriesList,
       selectMainCategoryData,
       selectChildCategoryData,
     } = this.state
@@ -120,16 +176,8 @@ class NoteSelect extends Component {
     } = this.props
     const navHeight =( (system && system.navHeight) || 120)
     const modalHeight = `calc(100vh - ${navHeight}rpx)`
-    // 文字颜色样式
-    const titleTextClassName = classNames('note-select-title-wrapper note-select-title-text', {
-      'note-select-title-text-active': titleText
-    })
-    // icon样式
-    const iconRotateClassName = classNames('iconfont iconRectangle note-select-title-icon', {
-      'rotate180': titleText
-    })
     // 渲染主品类
-    const mainCategoryRender = mainCategoryList.map(item => {
+    const mainCategoryRender = mainCategoriesList.map(item => {
       const key = item.categoryId
       const noteItemClassName = classNames('note-select-modal-main-list-item', {
         'note-select-modal-main-list-item-active': selectMainCategoryData.categoryId === key
@@ -138,7 +186,7 @@ class NoteSelect extends Component {
         <View
           key={key}
           className={noteItemClassName}
-          onClick={this.onChooseMainCategory.bind(this, item)}
+          onClick={this.onChooseMainCategory.bind(this, item, false)}
         >
           {
             item.categoryName
@@ -147,7 +195,7 @@ class NoteSelect extends Component {
       )
     })
     // 渲染子品类
-    const childrenCategoryRender = childrenCategoryList.map(item => {
+    const childrenCategoryRender = childCategoriesList.map(item => {
       const key = item.categoryId
       const noteItemClassName = classNames('note-select-modal-main-list-item', {
         'note-select-modal-main-list-item-active': selectChildCategoryData.categoryId === key
@@ -156,7 +204,7 @@ class NoteSelect extends Component {
         <View
           key={key}
           className={noteItemClassName}
-          onClick={this.onChooseChildCategory.bind(this, item)}
+          onClick={this.onChooseChildCategory.bind(this, item, false)}
         >
           {
             item.categoryName
@@ -164,13 +212,22 @@ class NoteSelect extends Component {
         </View>
       )
     })
+    // 文字颜色样式
+    const titleTextClassName = classNames('note-select-title-wrapper note-select-title-text', {
+      'note-select-title-text-active': titleText
+    })
+    // icon样式
+    const iconRotateClassName = classNames('iconfont iconsanjiaoxing1 note-select-title-icon', {
+      'note-select-title-icon-active': titleText,
+      'rotate180': showSelectModal
+    })
     const modalClassName = classNames('note-select-modal-wrapper animation', {
-      'fadeOut': !showSelectMain,
-      'fadeIn': showSelectMain
+      'fadeOut': !showSelectModal,
+      'fadeIn': showSelectModal
     })
     const modalMainClassName = classNames('note-select-modal-main animation', {
-      'fadeOutUp': !showSelectMain,
-      'fadeInDown': showSelectMain
+      'fadeOutUp': !showSelectModal,
+      'fadeInDown': showSelectModal
     })
     return (
       <View
@@ -212,6 +269,9 @@ class NoteSelect extends Component {
 }
 
 NoteSelect.defaultProps = {
+  titleText: '全部',
+  propsMainCategoryData: {},
+  propsChildCategoryData: {},
   onLoadEnd: () => {},
   onChooseLastItem: () => {
     console.error('onChooseLastItem is not defined in note_mine/components/NoteSelect')
@@ -223,6 +283,7 @@ NoteSelect.propTypes = {
 }
 const mapStateToProps = (state) => {
   return {
+    userInfo: state.user_msg.userInfo,
     system: state.system.systemInfo
   }
 }
