@@ -20,22 +20,22 @@
       margin-right: 20px;
     }
 
-    .icon-next {
-      font-size: 24px;
-      color: $placeholder-color;
-    }
-
-    .rotated {
-      transform: rotate(180deg);
-    }
   }
-
+  
   .address {
     font-size: 28px;
     color: $font-color;
   }
-
+  
   .placeholder {
     color: $placeholder-color;
+  }
+  .icon-next {
+    font-size: 24px;
+    color: $placeholder-color;
+  }
+
+  .rotated {
+    transform: rotate(180deg);
   }
 }

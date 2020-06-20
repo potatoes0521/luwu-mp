@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 18:29:25
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-19 13:14:45
+ * @LastEditTime: 2020-06-20 13:00:29
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -134,7 +134,7 @@ export default class Location extends Taro.Component {
           <Text className={addressClassName}>{address.address || '选择商户地址'}</Text>
         </View>
         {
-          !onlyShow && <View className='location-right-icon iconRectangle rotated iconfont'></View>
+          !onlyShow && <View className='icon-next iconRectangle rotated iconfont'></View>
         }
         {
           this.props.children
