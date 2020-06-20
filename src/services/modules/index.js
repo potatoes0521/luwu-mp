@@ -4,7 +4,7 @@
  * @path: '@services/modules/index'
  * @Date: 2020-06-17 10:07:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-17 17:34:24
+ * @LastEditTime: 2020-06-19 22:25:28
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -18,5 +18,5 @@ import request from "../request"
 */
 // eslint-disable-next-line import/prefer-default-export
 export const getIndexListData = (that) => { 
-  return request.get(`${defaultResourceConfigURL}index/indexList.json`, {}, that, false)
+  return request.get(`${defaultResourceConfigURL}index/indexList.json?a=${Math.random()}`, {}, that, false)
 }
