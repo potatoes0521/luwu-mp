@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 17:35:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 18:26:59
+ * @LastEditTime: 2020-06-20 23:35:22
  * @mustParam: 必传参数
  *  imageList 要展示的图片
  * @optionalParam: 选传参数
@@ -142,7 +142,7 @@ Upload.defaultProps = {
   addBtnSize: 86,
   imageSize: 180,
   showAddBtn: false,
-  imageMarginRightSize: 20,
+  marginRightSize: 20,
   scrollViewWidth: 0,
   onUploadOK: () => {
     console.error('onUploadOK is not defined in @components/Upload')
@@ -153,7 +153,7 @@ Upload.propTypes = {
   imageList: PropTypes.array.isRequired,
   showAddBtn: PropTypes.bool,
   addBtnSize: PropTypes.number,
-  imageMarginRightSize:PropTypes.number,
+  marginRightSize: PropTypes.number,
   imageSize: PropTypes.number.isRequired,
   onUploadOK: PropTypes.func.isRequired
 }
