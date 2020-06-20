@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 15:17:57
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-18 15:44:55
+ * @LastEditTime: 2020-06-20 13:13:10
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  封装了Input样式 文档参照 https: //developers.weixin.qq.com/miniprogram/dev/component/input.html
@@ -32,7 +32,11 @@ export default class FormItem extends Component {
   static options = {
     addGlobalClass: true // 允许外部样式修改组件样式
   }
-
+  handleContentClick(){
+    if (!this.props.canInput) {
+      this.props.onContentClick()
+    }
+  }
   render() {
     const {
       placeholder,
@@ -61,7 +65,7 @@ export default class FormItem extends Component {
             important && <Text className='important'>*</Text>
           }
         </View>
-        <View className='form-content'>
+        <View className='form-content' onClick={this.handleContentClick.bind(this)}>
           <View className='form-input-wrapper'>
             <ComponentInput
               type={type}
@@ -95,6 +99,9 @@ export default class FormItem extends Component {
 }
 
 FormItem.defaultProps = {
+  onContentClick: ()=>{
+    console.error('onInput is not defined in ./components/FormItem')
+  },
   onInput: () => {
     console.error('onInput is not defined in ./components/FormItem')
   }
