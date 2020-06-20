@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 10:13:50
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 17:17:31
+ * @LastEditTime: 2020-06-20 17:25:46
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -17,6 +17,12 @@ import {
 } from '@config/request_config'
 import store from '@store/index'
 
+let token = ''
+store.subscribe(() => {
+  let state = store.getState(); //Redux数据state tree，由于使用了subscribe，当数据更改时会重新获取
+  token = state.user_msg.userInfo.token
+  console.log('token =======', token)
+})
 // import createSignData from './secret'
 const isProd = process.env.NODE_ENV === "production";
 
@@ -52,11 +58,6 @@ export default {
         }, 350)
       }
     }
-    let token = ''
-    store.subscribe(() => {
-      let state = store.getState(); //Redux数据state tree，由于使用了subscribe，当数据更改时会重新获取
-      token = state.user_msg.userInfo.token
-    })
     return new Promise((resolve, reject) => {
       Taro.request({
         url: requestURL,
