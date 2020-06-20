@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-20 12:11:19
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 12:18:23
+ * @LastEditTime: 2020-06-20 16:37:16
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,7 +16,7 @@ import request from "../request"
 * @return void
 */
 export const publishNote = (data, that) => { 
-  return request.get(``, {}, that, false)
+  return request.post(`materials//v1/note`, {}, that, false)
 }
 
 /**
@@ -24,7 +24,7 @@ export const publishNote = (data, that) => {
  * @return void
  */
 export const getNoteDetails = (data, that) => {
-  return request.get(``, {}, that, false)
+  return request.get(`materials​/v1​/note​/${data.noteId}`, data, that, false)
 }
 
 /**
@@ -32,7 +32,7 @@ export const getNoteDetails = (data, that) => {
  * @return void
  */
 export const editNote = (data, that) => {
-  return request.get(``, {}, that, false)
+  return request.put(`materials/v1/note/${data.noteId}`, data, that, false)
 }
 
 /**
@@ -40,5 +40,5 @@ export const editNote = (data, that) => {
  * @return void
  */
 export const getNoteList = (data, that) => {
-  return request.get(``, {}, that, false)
+  return request.get(`materials/v1/note`, data, that, false)
 }

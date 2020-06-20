@@ -1,10 +1,10 @@
 /*
  * @Author: liuYang
- * @description: 请填写描述信息
+ * @description: 公共请求处理
  * @path: 引入路径
  * @Date: 2020-06-15 10:13:50
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-17 18:12:35
+ * @LastEditTime: 2020-06-20 17:17:31
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -15,6 +15,8 @@ import {
   HTTP_STATUS,
   defaultApiURL
 } from '@config/request_config'
+import store from '@store/index'
+
 // import createSignData from './secret'
 const isProd = process.env.NODE_ENV === "production";
 
@@ -25,7 +27,6 @@ export const appVersion = '1.0.1'
 export default {
   baseOptions(url, data, that, loadingTitle, method) {
     let loadingTimer = null
-    // const { userInfo } = that.props;
     for (const i in data) {
       if (data[i] === '' && i !== 'locationId') {
         delete data[i]
@@ -51,6 +52,11 @@ export default {
         }, 350)
       }
     }
+    let token = ''
+    store.subscribe(() => {
+      let state = store.getState(); //Redux数据state tree，由于使用了subscribe，当数据更改时会重新获取
+      token = state.user_msg.userInfo.token
+    })
     return new Promise((resolve, reject) => {
       Taro.request({
         url: requestURL,
@@ -59,6 +65,7 @@ export default {
         header: {
           'content-type': contentType,
           "X-Ca-Stage": isProd ? "release" : "test",
+          Authorization: token
           // 'sign': sign || '',
         },
         success(res) {
@@ -140,5 +147,8 @@ export default {
   },
   post(url, data, that, loadingTitle = '提交中...') {
     return this.baseOptions(url, data, that, loadingTitle, 'POST')
+  },
+  put(url, data, that, loadingTitle = '提交中...') {
+    return this.baseOptions(url, data, that, loadingTitle, 'PUT')
   }
 }
