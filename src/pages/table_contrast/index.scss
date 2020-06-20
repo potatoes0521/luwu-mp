@@ -1,0 +1,248 @@
+@import '../../assets/css/theme.scss';
+
+$max-color: #D81E06;
+$min-color: #39AA47;
+$tips-color: #666666;
+$tips-title-color: #999999;
+$price-background-color: #FFFEF9;
+$area-background-color: #FAFBFF;
+$warning-background-color: #FFF2CB;
+$option-color: #4D4D4D;
+$table-border: #E5E5E5;
+$table-background-color: #FCFCFC;
+
+.page-wrapper {
+  // 顶部样式
+  .house-msg-wrapper {
+    width: 100%;
+    height: 134px;
+    box-sizing: border-box;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .msg-tips {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      font-size: 28px;
+
+      &-line {
+        width: 2px;
+        height: 28px;
+        margin: 0 10px;
+        background-color: $font-color;
+      }
+    }
+
+    .handle-wrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-sizing: border-box;
+      padding-left: 194px;
+      padding-right: 172px;
+      font-size: 24px;
+
+      .options-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .circular {
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          border: 2px solid $option-color;
+          margin-right: 8px;
+          &-active{
+            background-color: $option-color;
+          }
+        }
+      }
+    }
+  }
+}
+// 表格
+.table-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  position: relative;
+  // 表格左边
+  .table-left {
+    width: 172px;
+    border-top: 2px solid $table-border;
+    font-size: 28px;
+    color: $font-color;
+    box-sizing: border-box;
+  }
+  // 90高度的样式
+  .left-table-item-90 {
+    width: 168px;
+    height: 86px;
+    display: inline-block;
+    text-align: center;
+    border-right: 2px solid $table-border;
+    border-bottom: 2px solid $table-border;
+  }
+  // 90高度的样式居中
+  .align-canter{
+    padding: 0;
+    line-height: 90px;
+    border-bottom: none;
+    height: 90px;
+  }
+  // 公司标题居中
+  .company-title {
+    line-height: 40px;
+  }
+
+  .company-handle {
+    font-size: 24px;
+    color: $link-color;
+    margin-top: 2px;
+    line-height: 32px;
+  }
+  // 装修区域 就中间那一条
+  .area {
+    width: 100vw;
+    height: 60px;
+    background-color: $table-background-color;
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+    position: relative;
+    z-index: 5;
+    border-top: 2px solid $table-border;
+    border-bottom: 2px solid $table-border;
+  }
+  // 区域站位的
+  .area-static {
+    width: 100%;
+    height: 64px;
+  }
+  // 单元格  合并项的那种
+  .table-item-col-span {
+    width: 172px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    border-bottom: 2px solid $table-border;
+    // 左边施工条目
+    .table-item-title {
+      width: 90px;
+      height: 100%;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 16px;
+    }
+    // 右边3个的包裹
+    .table-item-right {
+      flex: 1;
+    }
+    
+    .item-child {
+      flex: 1;
+      height: 90px;
+      overflow: hidden;
+      padding: 0 10px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-left: 2px solid $table-border;
+      border-right: 2px solid $table-border;
+      .shengluehao {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
+    }
+  }
+
+  // 表格右边
+  .table-right{
+    flex: 1;
+    overflow: auto;
+    .company-list-wrapper{
+      white-space: nowrap;
+      .right-col-span{
+        width: 198px;
+        display: inline-block;
+        border-bottom: 2px solid $table-border;
+        overflow: hidden;
+        .right-col-span-item-child{
+          width: 198px;
+          height: 90px;
+          padding: 0 10px;
+          box-sizing: border-box;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-right: 2px solid $table-border;
+          font-size: 26px;
+        }
+        .remark-font{
+          font-size: 20px;
+        }
+        .remark{
+          white-space: pre-wrap;
+          height: 100%;
+          overflow-y: auto;
+        }
+      }
+    }
+  }
+  
+}
+.item-child-90 {
+  height: 92px;
+}
+.table-item-bottom{
+  box-sizing: border-box;
+  height: 120px !important;
+}
+
+.font26{
+  font-size: 26px;
+}
+
+.width196{
+  width: 196px !important;
+}
+
+.border-top{
+  border-top: 2px solid $table-border;
+}
+
+.border-bottom{
+  border-bottom: 2px solid $table-border;
+}
+
+.padding-top10{
+  padding-top: 10px;
+}
+
+.head-background{
+  background-color: $table-background-color;
+}
+
+.area-background {
+  background-color: $area-background-color;
+}
+
+.price-background {
+  background-color: $price-background-color;
+}
+

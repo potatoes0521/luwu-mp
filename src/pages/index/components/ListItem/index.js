@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 09:38:57
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-18 09:39:53
+ * @LastEditTime: 2020-06-19 22:28:31
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -86,7 +86,7 @@ export default class ListItem extends Component {
           className='item-image'
           onClick={this.handleClickImage.bind(this)}
         >
-          <Image lazyLoad className='image' src={defaultResourceImgURL + item.imgUrl}></Image>
+          <Image mode='aspectFill' lazyLoad className='image' src={defaultResourceImgURL + item.imgUrl}></Image>
         </View>
       </View>
     )
