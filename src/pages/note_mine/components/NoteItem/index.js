@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-19 09:47:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 17:35:40
+ * @LastEditTime: 2020-06-20 17:42:51
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -17,7 +17,7 @@ import Location from '@components/Location'
 
 import './index.scss'
 
-export default class index extends Component { 
+export default class NoteItem extends Component { 
   render() {
     const { item } = this.props
     const categoryName = item.mainCategory && item.mainCategory.categoryName || ''
@@ -64,6 +64,7 @@ export default class index extends Component {
           </View>
           <View className='upload'>
             <Upload
+              marginRightSize={42}
               imageList={item.goodsImageList || []}
               imageSize={140}
             ></Upload>
@@ -75,12 +76,12 @@ export default class index extends Component {
 
 }
 
-index.defaultProps = {
+NoteItem.defaultProps = {
   item: {
     goodsImageList: []
   },
 }
 
-index.propTypes = {
+NoteItem.propTypes = {
   item: PropTypes.object.isRequired
 }

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:36
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 17:26:32
+ * @LastEditTime: 2020-06-20 17:39:02
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -24,7 +24,11 @@ import './index.scss'
 const Mock = [
   {
     id: 1,
-    goodsImageList: ['', '', '', '']
+    goodsImageList: [
+      'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epUAVPUlLia4q2oqW9Mr9GLf9lSmD2xVMqkjut8GkjLiaK7ZTicMszqtwoo0GzYVmv5y6vLq8SVszEqw/132',
+      'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epUAVPUlLia4q2oqW9Mr9GLf9lSmD2xVMqkjut8GkjLiaK7ZTicMszqtwoo0GzYVmv5y6vLq8SVszEqw/132',
+      'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epUAVPUlLia4q2oqW9Mr9GLf9lSmD2xVMqkjut8GkjLiaK7ZTicMszqtwoo0GzYVmv5y6vLq8SVszEqw/132',
+      'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epUAVPUlLia4q2oqW9Mr9GLf9lSmD2xVMqkjut8GkjLiaK7ZTicMszqtwoo0GzYVmv5y6vLq8SVszEqw/132']
   },
   {
     id: 2,
@@ -64,7 +68,7 @@ class NoteMine extends Component {
     }
     getNoteList(sendData).then(res => {
       this.setState({
-        noteList: res
+        noteList: Mock
       })
     })
   }
