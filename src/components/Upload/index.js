@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 17:35:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 17:50:25
+ * @LastEditTime: 2020-06-20 18:26:59
  * @mustParam: 必传参数
  *  imageList 要展示的图片
  * @optionalParam: 选传参数
@@ -55,6 +55,7 @@ export default class Upload extends Component {
    */
   showImage(item, e) {
     e && e.stopPropagation();
+    console.log('item', item)
     Taro.previewImage({
       current: item,
       urls: this.props.imageList
@@ -88,7 +89,7 @@ export default class Upload extends Component {
           mode='aspectFill'
           className='image' 
           src={item}
-          onClick={() => this.showImage(item)}
+          onClick={this.showImage.bind(this, item)}
         ></Image>
       </View>
     ))
