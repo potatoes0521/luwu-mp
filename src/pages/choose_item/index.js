@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 15:25:39
+ * @LastEditTime: 2020-06-20 15:42:08
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -83,7 +83,7 @@ class ChooseItem extends Component {
    */
   chooseMainCategories(item, autoSelectNext) {
     const { selectMainCategoriesData, selectChildCategoriesData } = this.state
-    if (item.categoryId === selectMainCategoriesData.categoryId) { 
+    if (!autoSelectNext && item.categoryId === selectMainCategoriesData.categoryId) {
       return
     }
     let childCategoriesList = this.AllChildCategoriesList.filter(child => child.parentId === item.categoryId)
@@ -117,7 +117,7 @@ class ChooseItem extends Component {
    */
   chooseChildCategories(item, autoSelectNext) {
     const { selectChildCategoriesData } = this.state
-    if (item.categoryId === selectChildCategoriesData.categoryId) {
+    if (!autoSelectNext && item.categoryId === selectChildCategoriesData.categoryId) {
       return
     }
     let data = {
