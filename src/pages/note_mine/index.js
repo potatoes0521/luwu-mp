@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:36
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-19 13:31:41
+ * @LastEditTime: 2020-06-20 17:26:32
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -14,6 +14,8 @@ import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import SaveAreaView from '@components/SafeAreaView'
 import Skeleton from '@components/Skeleton'
+import { getNoteList } from '@services/modules/note'
+import Login from '@utils/login'
 import NoteItem from './components/NoteItem'
 import NoteSelect from './components/NoteSelect'
 
@@ -43,13 +45,45 @@ class NoteMine extends Component {
     super(props)
     this.state = {
       loading: false,
-      noteList: Mock // 给骨架屏提供一个mock\数据
+      noteList: Mock, // 给骨架屏提供一个mock\数据
+      selectTitleText: '',
+      noteList: []
     }
+    this.propsMainCategoryData = {}
+    this.propsChildCategoryData = {}
   }
+  async componentDidMount() { 
+    const {userInfo} = this.props
+    !userInfo.token && await Login.login()
+    this.getListData()
+  }
+  getListData() { 
+    let sendData = {
+      categoryId: this.propsMainCategoryData.categoryId || '',
+      secondCategoryId: this.propsMainCategoryData.categoryId || ''
+    }
+    getNoteList(sendData).then(res => {
+      this.setState({
+        noteList: res
+      })
+    })
+  }
+  /**
+   * loading结束
+   * @return void
+   */
   loadingEnd() { 
     this.setState({
       loading: true
     })
+  }
+  onChooseLastItem(item, FItem) {
+    const selectTitleText = FItem.categoryName + '-' + item.categoryName
+    this.setState({
+      selectTitleText
+    })
+    this.propsMainCategoryData = FItem
+    this.propsChildCategoryData = item
   }
   config = {
     navigationBarTitleText: '我的笔记',
@@ -59,7 +93,8 @@ class NoteMine extends Component {
   render() {
     const {
       loading,
-      noteList
+      noteList,
+      selectTitleText
     } = this.state
     const noteListRender = noteList.map(item => {
       const key = item.id
@@ -74,7 +109,13 @@ class NoteMine extends Component {
         home
       >
         <View className='page-wrapper skeleton'>
-          <NoteSelect onLoadEnd={this.loadingEnd.bind(this)} />
+          <NoteSelect
+            titleText={selectTitleText}
+            propsMainCategoryData={this.propsMainCategoryData}
+            propsChildCategoryData={this.propsChildCategoryData}
+            onChooseLastItem={this.onChooseLastItem.bind(this)}
+            onLoadEnd={this.loadingEnd.bind(this)}
+          />
           {
             noteListRender
           }
