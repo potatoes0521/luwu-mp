@@ -77,10 +77,13 @@
 .remark-wrapper{
   width: 100%;
   padding: 12px 30px;
+  box-sizing: border-box;
   min-height: 150px;
   .textarea{
+    width: 100%;
     font-size: 28px;
     line-height: 40px;
+    min-height: 120px;
     color: $font-color;
   }
   .placeholder-class{

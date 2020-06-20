@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-19 09:57:14
+ * @LastEditTime: 2020-06-20 23:44:02
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -18,7 +18,11 @@ import { connect } from '@tarojs/redux'
 import Upload from '@components/Upload'
 import Location from '@components/Location'
 import SaveAreaView from '@components/SafeAreaView'
+import Login from '@utils/login'
+import { publishNote } from '@services/modules/note'
+import { handleMoney } from '@utils/patter'
 import FormItem from './components/FormItem'
+
 import './index.scss'
 
 class NotePublish extends Component { 
@@ -31,12 +35,42 @@ class NotePublish extends Component {
       priceTagImageList: [], // 价签图片
       address: {
         address: ''
-      }
+      },
+      mainCategory: {
+        categoryName: '',
+        categoryId: '',
+      },
+      childCategory: {
+        categoryName: '',
+        categoryId: '',
+      },
+      brand: {
+        brandId: '',
+        brandName: ''
+      },
+      price: '',
+      priceUnit: '',
+      model: '',
+      remark: ''
     }
+    this.pageParams = {}
+    this.timer = null
   }
 
   componentDidMount() {
+    console.log('componentDidMount')
+    this.pageParams = this.$router.pageParams
+    this.login()
+    if (this.pageParams && this.pageParams.pageType === 'edit' ) {
 
+    }
+  }
+  componentWillUnmount() {
+    clearTimeout(this.timer)
+    this.timer = null
+  }
+  login() {
+    Login.login()
   }
   /**
    * 上传图片完成
@@ -91,11 +125,135 @@ class NotePublish extends Component {
       <View className='title'>{title}</View>
     )
   }
+  handleClickChooseCategory(){
+    Taro.navigateTo({
+      url: '/pages/choose_item/index'
+    })
+  }
   onCategoryInput(event) { 
     console.log('event', event)
   }
   
-  onPriceInput() { }
+  onPriceInput(e) {
+    let {target: {value}} = e
+    value = handleMoney(value)
+    console.log('value', value)
+    this.setState({
+      price: value
+    })
+    return value
+   }
+
+  onModelInput(e) { 
+    const {target: {value}} = e
+    this.setState({
+      model: value
+    })
+  }
+
+  onRemarkInput(e) { 
+    const {target: {value}} = e
+    this.setState({
+      remark: value
+    })
+  }
+  submit() {
+    const {
+      goodsImageList,
+      idCardImageList,
+      priceTagImageList,
+      address,
+      price,
+      priceUnit,
+      remark,
+      mainCategory,
+      childCategory,
+      brand,
+      model,
+    } = this.state
+    const testKey = {
+      goodsImageList: '至少上传一张商品图片~',
+      // idCardImageList: '',
+      // priceTagImageList,
+      mainCategory: '请选择品类',
+      childCategory: '请选择品类',
+      brand: '请选择品牌',
+      price: '请填写价格',
+      // priceUnit,
+      // remark: '',
+      address: '请选择建材商场~',
+    }
+    const state = this.state
+    let breakName = ''
+    for (const key in testKey) {
+      if (Array.isArray(state[key]) && state[key].length < 1) {
+        breakName = key
+        break
+      }
+      if (typeof state[key] === 'string' && !state[key]) {
+        breakName = key
+        break
+      }
+      if (Object.prototype.toString.call(state[key]) === '[object Object]') {
+        if (key === 'brand' && !state[key].brandId) {
+          breakName = key
+          break
+        } else if (key === 'address' && !state[key].address) {
+          breakName = key
+          break
+        } else if (key !== 'address' && !state[key].categoryId) {
+          breakName = key
+          break
+        }
+      }
+    }
+    console.log('breakName', breakName)
+    if (breakName) {
+      Taro.showToast({
+        title: testKey[breakName],
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
+    let sendData = {
+      categoryId: mainCategory.categoryId,
+      secondCategoryId: childCategory.categoryId,
+      brandId: brand.brandId,
+      data: {
+        goodsImageList,
+        idCardImageList,
+        priceTagImageList,
+        address,
+        price,
+        priceUnit,
+        remark,
+        mainCategory,
+        childCategory,
+        brand,
+        model
+      }
+    }
+    console.log('sendData', sendData)
+    publishNote(sendData, this).then(res => {
+      if (!res || !res.noteId) {
+        Taro.showToast({
+          title: '添加失败',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      }
+      Taro.showToast({
+        title: '添加成功',
+      })
+      this.timer = setTimeout(() => {
+        Taro.redirectTo({
+          url: `/pages/note_details/index?noteId=${res.noteId}`
+        })
+      }, 1800)
+    })
+  }
 
   config = {
     navigationBarTitleText: '',
@@ -108,10 +266,15 @@ class NotePublish extends Component {
       idCardImageList,
       priceTagImageList,
       address,
-      category,
       price,
-      remark
+      priceUnit,
+      remark,
+      mainCategory,
+      childCategory,
+      brand,
+      model,
     } = this.state
+    const categoryText = mainCategory && mainCategory.categoryId ? mainCategory.categoryName + ' - ' + childCategory.categoryName + ' - ' + brand.brandName : ''
     return (
       <SaveAreaView title='记笔记' back home >
         <View className='page-wrapper'>
@@ -138,27 +301,29 @@ class NotePublish extends Component {
               label='品类'
               unit='icon'
               iconName='iconRectangle rotated'
-              value={category}
+              value={categoryText}
               canInput={false}
               placeholder='请选择'
+              onContentClick={this.handleClickChooseCategory.bind(this)}
               onInput={this.onCategoryInput.bind(this)}
             />
             <FormItem
               line
               important
+              type='digit'
               unit='text'
               label='价格'
               value={price}
-              unitContent='/每片'
+              unitContent={priceUnit}
               placeholder='请输入'
               onInput={this.onPriceInput.bind(this)}
             />
             <FormItem
               unit='show'
               label='型号'
-              value={price}
+              value={model}
               placeholder='请输入'
-              onInput={this.onPriceInput.bind(this)}
+              onInput={this.onModelInput.bind(this)}
             />
           </View>
           <View className='form-wrapper card-wrapper'>
@@ -207,11 +372,12 @@ class NotePublish extends Component {
               autoHeight
               placeholder='记笔记…'
               value={remark}
+              onInput={this.onRemarkInput.bind(this)}
               maxlength={500}
             ></Textarea>
           </View>
           <View className='bottom-wrapper'>
-            <View className='button'>保存笔记</View>
+            <View className='button' onClick={this.submit.bind(this)}>保存笔记</View>
           </View>
         </View>
       </SaveAreaView>
