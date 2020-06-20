@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 15:08:22
+ * @LastEditTime: 2020-06-20 15:25:39
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -60,27 +60,47 @@ class ChooseItem extends Component {
       })
     })
   }
+  /**
+   * 如果是编辑来处理编辑
+   * @return void
+   */
   handleEdit() { 
-    getStorage()
+    getStorage('choose_category').then(res => {
+      this.setState({
+        selectMainCategoriesData: res.selectMainCategoriesData, // 选中的品类
+        selectChildCategoriesData: res.selectChildCategoriesData, // 选中的子品类
+        selectBrandData: res.selectChildCategoriesData
+      }, () => {
+          this.chooseMainCategories(res.selectMainCategoriesData , true)
+      })
+    })
   }
   /**
    * 选择主品类
    * @param {Object} city 选中的主品类
+   * @param {Boolean} autoSelectNext 自动选择下一个 Level
    * @return void
    */
-  chooseMainCategories(item) {
-    if (item.categoryId === this.state.selectMainCategoriesData.categoryId) { 
+  chooseMainCategories(item, autoSelectNext) {
+    const { selectMainCategoriesData, selectChildCategoriesData } = this.state
+    if (item.categoryId === selectMainCategoriesData.categoryId) { 
       return
     }
     let childCategoriesList = this.AllChildCategoriesList.filter(child => child.parentId === item.categoryId)
-    this.brandList = []
-    this.setState({
+    let data = {
       childCategoriesList,
       selectMainCategoriesData: item,
-      selectChildCategoriesData: {},
-      selectBrandData: {},
       brandList: [],
-    }, () => {
+    }
+    // autoSelectNext 为true是编辑数据  自动选择下一项  故而不清除选中项
+    if (autoSelectNext && selectChildCategoriesData) {
+      this.chooseChildCategories(selectChildCategoriesData, autoSelectNext)
+    } else {
+      data.selectChildCategoriesData = {}
+      data.selectBrandData = {}
+    }
+    this.brandList = []
+    this.setState(data, () => {
       getBrandList({
         categoryId: item.categoryId,
         status: 1
@@ -92,17 +112,23 @@ class ChooseItem extends Component {
   /**
    * 选择子品类
    * @param {Object} city 选中的城市
+   * @param {Boolean} autoSelectNext 自动选择下一个 Level
    * @return void
    */
-  chooseChildCategories(item) {
-    if (item.categoryId === this.state.selectChildCategoriesData.categoryId) {
+  chooseChildCategories(item, autoSelectNext) {
+    const { selectChildCategoriesData } = this.state
+    if (item.categoryId === selectChildCategoriesData.categoryId) {
       return
     }
-    this.setState({
-      selectChildCategoriesData: item,
-      selectBrandData: {},
+    let data = {
       brandList: this.brandList
-    });
+    }
+    // autoSelectNext 为true是编辑数据 故而不清除选中项
+    if (!autoSelectNext) {
+      data.selectChildCategoriesData = item
+      data.selectBrandData = {}
+    }
+    this.setState(data);
   }
   /**
    * 选择品牌
