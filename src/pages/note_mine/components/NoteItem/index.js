@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-19 09:47:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 17:55:47
+ * @LastEditTime: 2020-06-21 00:15:11
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -40,9 +40,9 @@ export default class NoteItem extends Component {
     const categoryName = item.mainCategory && item.mainCategory.categoryName || ''
     const brandName = item.brand && item.brand.brandName || ''
     const price = item.price || '-'
-    const priceUnit = item.priceUnit || ''
-    const model = item.model || ''
-    const time = item.timer
+    const priceUnit = item.priceUnit || '-'
+    const model = item.model || '-'
+    const time = item.createAt
     return (
       <View className='note-item'>
         <Location onlyShow address={item.address} >

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-19 10:17:37
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 17:16:18
+ * @LastEditTime: 2020-06-21 00:17:03
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -211,7 +211,8 @@ class NoteSelect extends Component {
     })
     // 文字颜色样式
     const titleTextClassName = classNames('note-select-title-wrapper note-select-title-text', {
-      'note-select-title-text-active': titleText
+      'note-select-title-text-active': titleText,
+      'border-bottom': !showSelectModal
     })
     // icon样式
     const iconRotateClassName = classNames('iconfont iconsanjiaoxing1 note-select-title-icon', {

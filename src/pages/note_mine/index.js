@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:36
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 18:34:19
+ * @LastEditTime: 2020-06-21 00:22:36
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -15,8 +15,8 @@ import { connect } from '@tarojs/redux'
 import SaveAreaView from '@components/SafeAreaView'
 import Skeleton from '@components/Skeleton'
 import { getNoteList } from '@services/modules/note'
-import Login from '@utils/login'
 import { defaultResourceImgURL } from '@config/request_config'
+import Login from '@utils/login'
 import NoteItem from './components/NoteItem'
 import NoteSelect from './components/NoteSelect'
 import BottomBtn from './components/bottomBtn'
@@ -66,11 +66,18 @@ class NoteMine extends Component {
   getListData() { 
     let sendData = {
       categoryId: this.propsMainCategoryData.categoryId || '',
-      secondCategoryId: this.propsMainCategoryData.categoryId || ''
+      secondCategoryId: this.propsChildCategoryData.categoryId || ''
     }
     getNoteList(sendData).then(res => {
+      const newData = res.map(item => {
+        const json = Object.assign({}, item.data)
+        delete item['data']
+        const data = Object.assign({}, item, json)
+        return data
+      })
+
       this.setState({
-        noteList: res
+        noteList: newData
       })
     })
   }
@@ -90,17 +97,19 @@ class NoteMine extends Component {
     })
     this.propsMainCategoryData = FItem
     this.propsChildCategoryData = item
+    this.getListData()
   }
+
   /**
    * 下拉刷新
    * @return void
    */
   onPullDownRefresh() {
     // 显示顶部刷新图标
-    // Taro.showNavigationBarLoading()
+    Taro.showNavigationBarLoading()
     this.getListData()
     // 隐藏导航栏加载框
-    // Taro.hideNavigationBarLoading();
+    Taro.hideNavigationBarLoading();
     // 停止下拉动作
     Taro.stopPullDownRefresh();
   }
@@ -121,6 +130,7 @@ class NoteMine extends Component {
   
   config = {
     navigationBarTitleText: '我的笔记',
+    enablePullDownRefresh: true,
     navigationStyle: 'custom'
   }
 
@@ -130,15 +140,17 @@ class NoteMine extends Component {
       noteList,
       selectTitleText
     } = this.state
+    const {userInfo} = this.props
     const noteListRender = noteList.map(item => {
       const key = item.noteId
       return (
         <NoteItem item={item} key={key} />
       )
     })
+    const navTitle = userInfo.userName ? userInfo.userName + '的笔记' : '笔记'
     return (
       <SaveAreaView
-        title='的笔记'
+        title={navTitle}
         back
         home
       >

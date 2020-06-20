@@ -74,8 +74,13 @@
     }
   }
 }
+
 .rotate180 {
   transform: rotate(180deg);
+}
+
+.border-bottom{
+  border-bottom: 2px solid $background-color;
 }
 @keyframes fadeIn {
   from {
