@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 15:17:57
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 13:13:10
+ * @LastEditTime: 2020-06-20 22:53:12
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  封装了Input样式 文档参照 https: //developers.weixin.qq.com/miniprogram/dev/component/input.html
@@ -57,6 +57,7 @@ export default class FormItem extends Component {
     const itemClassName = classNames('form-item', {
       'bottom-line': line
     })
+    const unitText = unitContent ? (unitContent.indexOf('/') !== -1 ? unitContent : '/' + unitContent) : ''
     return (
       <View className={itemClassName}>
         <View className='form-label'>
@@ -86,7 +87,7 @@ export default class FormItem extends Component {
                   unit === 'icon' && <Text className={`iconfont ${iconName} icon-next`}></Text>
                 }
                 {
-                  unit === 'text' && <Text className='unit-text'>{unitContent}</Text>
+                  unit === 'text' && <Text className='unit-text'>{unitText}</Text>
                 }
               </View>
             )
