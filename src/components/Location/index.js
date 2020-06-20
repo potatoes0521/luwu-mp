@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 18:29:25
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 13:00:29
+ * @LastEditTime: 2020-06-20 17:49:42
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -56,7 +56,8 @@ export default class Location extends Taro.Component {
    * @param {Boolean} openChoose 是否选择
    * @return void
    */
-  async handleGetLocation(openChoose) {
+  async handleGetLocation(openChoose, e) {
+    e && e.stopPropagation();
     if (this.props.onlyShow) return
     try {
       const locationData = await getUserLocation()
