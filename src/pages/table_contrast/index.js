@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-19 22:13:23
+ * @LastEditTime: 2020-06-21 00:07:49
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -185,7 +185,7 @@ class TableContrast extends Component {
             <View className={headTitleClassName}>{ite.projectName}</View>
             <View className='table-item-right'>
               <View className='item-child border-bottom'>元</View>
-              <View className={leftItemChildClassName}>数量</View>
+              <View className={leftItemChildClassName}>㎡</View>
               <View
                 className='item-child table-item-bottom'
                 style={{display: hiddenRemark ? 'none' : 'flex'}}
