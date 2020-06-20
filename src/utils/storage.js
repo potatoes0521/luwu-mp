@@ -1,20 +1,29 @@
 /*
  * @Author: liuYang
- * @description: 请填写描述信息
- * @path: 引入路径
+ * @description: 缓存
+ * @path: import { getStorage, setStorage, removeStorage } from '@utils/storage'
  * @Date: 2020-06-18 10:55:20
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-18 13:04:48
+ * @LastEditTime: 2020-06-20 15:10:07
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
 import Taro from '@tarojs/taro'
-
+/**
+* 缓存数据
+* @param {String} key 要缓存数据的key
+* @param {Any} value 要缓存的数据
+* @return void
+*/
 export const setStorage = (key, value) => {
   Taro.setStorageSync(`luwu_${key}`, JSON.stringify(value))
 }
-
+/**
+* 获取缓存
+* @param {String} key 要获取的缓存的key
+* @return void
+*/
 export const getStorage = (key) => {
   return new Promise(resolve => {
     try {
@@ -27,4 +36,12 @@ export const getStorage = (key) => {
       resolve(null)
     }
   })
+}
+/**
+* 删除指定key的数据
+* @param {String} key 要删除的缓存的key
+* @return void
+*/
+export const removeStorage = (key) => {
+  Taro.removeStorageSync(`luwu_${key}`)
 }
