@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-18 16:40:45
+ * @LastEditTime: 2020-06-20 12:54:22
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -36,13 +36,12 @@ class Index extends Component {
     }
   }
   componentDidMount() { 
+    console.log('componentDidMount')
     this.getListData()
     this.login()
   }
-  async login() { 
-    const userInfo = await Login.getUserInfo()
-    console.log('userInfo', userInfo)
-    userInfo && Login.useUserInfoLogin(userInfo)
+  login() { 
+    Login.login()
   }
   /**
    * 获取首页列表JSON数据
