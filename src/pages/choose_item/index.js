@@ -1,22 +1,22 @@
 /*
  * @Author: liuYang
- * @description: 请填写描述信息
+ * @description: 选择类别
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-19 09:25:24
+ * @LastEditTime: 2020-06-20 15:08:22
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import classNames from 'classnames'
 import { connect } from '@tarojs/redux'
-// import {} from '@services/modules/index'
+import { getCategory, getBrandList } from '@services/modules/category'
 import SaveAreaView from '@components/SafeAreaView'
-
-
+import Login from '@utils/login'
+import { getStorage } from '@utils/storage'
+import ListItem from './components/ListItem'
 import './index.scss'
 
 class ChooseItem extends Component { 
@@ -26,97 +26,115 @@ class ChooseItem extends Component {
     this.state = {
       mainCategoriesList: [], // 主品类
       childCategoriesList: [], // 子品类
-      brandList: [] // 品牌
+      brandList: [], // 品牌
+      selectMainCategoriesData: {}, // 选中的品类
+      selectChildCategoriesData: {}, // 选中的子品类
+      selectBrandData: {}
     }
+    this.AllChildCategoriesList = [] // 全部子品类数据
+    this.brandList = []
+    this.pageParams = {}
   }
 
   componentDidMount() {
+    this.getAllCategoryData()
+    this.pageParams = this.$router.params
+    this.pageParams.pageType === 'edit' && this.handleEdit()
+    const {userInfo} = this.props
+    !userInfo.token && Login.login()
   }
   /**
-   * 选择省份
-   * @param {Object} city 选中的省份
+   * 获取全部品类数据
+   * @return void
+   */
+  getAllCategoryData() { 
+    getCategory(this).then(res => {
+      if (!res || res.length < 1) return
+      const mainCategoriesList = res.filter(item => item.categoryLevel === 1)
+      const childCategoriesList = res.filter(item => item.categoryLevel === 2)
+      this.AllChildCategoriesList = childCategoriesList
+      console.log('mainCategoriesList', mainCategoriesList)
+      console.log('childCategoriesList', childCategoriesList)
+      this.setState({
+        mainCategoriesList
+      })
+    })
+  }
+  handleEdit() { 
+    getStorage()
+  }
+  /**
+   * 选择主品类
+   * @param {Object} city 选中的主品类
    * @return void
    */
   chooseMainCategories(item) {
-    let { mainCategoriesList } = this.state;
-    mainCategoriesList = this.handleDataChooseData(item, mainCategoriesList)
+    if (item.categoryId === this.state.selectMainCategoriesData.categoryId) { 
+      return
+    }
+    let childCategoriesList = this.AllChildCategoriesList.filter(child => child.parentId === item.categoryId)
+    this.brandList = []
     this.setState({
-      mainCategoriesList,
-      childCategoriesList: item.children,
+      childCategoriesList,
+      selectMainCategoriesData: item,
+      selectChildCategoriesData: {},
+      selectBrandData: {},
       brandList: [],
+    }, () => {
+      getBrandList({
+        categoryId: item.categoryId,
+        status: 1
+      }, this).then(res => {
+        this.brandList = res
+      })
     });
   }
   /**
-   * 选择城市
+   * 选择子品类
    * @param {Object} city 选中的城市
    * @return void
    */
-  chooseChildCategoriesList(city) {
-    console.log('city', city);
-    if (city.locationId === 1) {
-      return;
+  chooseChildCategories(item) {
+    if (item.categoryId === this.state.selectChildCategoriesData.categoryId) {
+      return
     }
-    let {
-      childCategoriesList,
-      mainCategoriesList
-    } = this.state;
-    this.handleFatherCity(city, mainCategoriesList);
-    childCategoriesList = this.handleDataChooseData(city, childCategoriesList);
-    // this.backGoFirstLine();
     this.setState({
-      childCategoriesList,
-      brandList: city.children || [],
+      selectChildCategoriesData: item,
+      selectBrandData: {},
+      brandList: this.brandList
     });
   }
   /**
-   * 选择区\县
-   * @param {Object} city 选中的区\县
+   * 选择品牌
+   * @param {Object} city 选中的品牌
    * @return void
    */
-  chooseArea(city) {
-    if (city.locationId === 1) {
+  chooseBrand(item) {
+    if (!item.categoryId) {
       return;
     }
-    let {
-      brandList,
-      childCategoriesList
-    } = this.state;
-    // 找到当前区\县所在的城市  并判断这个城市是不是在现在的列表内
-    this.handleFatherCity(city, childCategoriesList);
-    brandList = this.handleDataChooseData(city, brandList, this.lastChoose);
-    // this.backGoFirstLine();
     this.setState({
-      brandList,
+      selectBrandData: item,
     });
   }
-  handleFatherCity(city, FatherCategoriesList, onlyFind) {
-    let fatherCity = FatherCategoriesList.filter(item => {
-      return item.children ?
-        item.children.some(ite => ite.locationId === city.locationId) :
-        item.locationId === city.locationId;
-    })[0];
-    if (onlyFind) {
-      return fatherCity;
+  handlePrePageData() { 
+    let pages = Taro.getCurrentPages() //  获取页面栈
+    let prevPage = pages[pages.length - 2] // 上一个页面
+    if (!prevPage) {
+      return
     }
-  }
-  /**
-   * 并且处理数据
-   * @return void
-   */
-  handleDataChooseData(category, data) {
-    data.forEach(item => {
-      if (item.categoryId === category.categoryId) {
-        // 如果子集有选中的 他就不是取消
-        if (item.children && item.children.some(ite => ite.checked)) {
-          item.checked = true;
-        } else {
-          item.checked = !item.checked;
-        }
-      } else {
-        item.checked = false;
-      }
-    });
-    return data;
+    const {
+      selectMainCategoriesData, // 选中的品类
+      selectChildCategoriesData, // 选中的子品类
+      selectBrandData
+    } = this.state
+    prevPage.$component.setState({
+      mainCategory: selectMainCategoriesData,
+      childCategory: selectChildCategoriesData,
+      brand: selectBrandData
+    }, () => {
+      Taro.navigateBack()
+    })
   }
 
   config = {
@@ -125,13 +143,68 @@ class ChooseItem extends Component {
   }
 
   render() {
+    const {
+      mainCategoriesList,
+      childCategoriesList,
+      brandList,
+      selectMainCategoriesData, // 选中的品类
+      selectChildCategoriesData, // 选中的子品类
+      selectBrandData
+    } = this.state
+    const {system} = this.props
+    const navHeight = system && system.navHeight || 120
+    const mainCategoriesRender = mainCategoriesList.map(item => {
+      const key = item.categoryId
+      const active = key === selectMainCategoriesData.categoryId
+      return (
+        <ListItem
+          key={key}
+          item={item}
+          borderRight
+          active={active}
+          onClickItem={this.chooseMainCategories.bind(this)}
+        />
+      )
+    })
+    const childCategoriesRender = childCategoriesList.map(item => {
+      const key = item.categoryId
+      const active = key === selectChildCategoriesData.categoryId
+      const borderRight = brandList && brandList.length
+      return (
+        <ListItem
+          key={key}
+          item={item}
+          borderRight={!borderRight}
+          active={active}
+          onClickItem={this.chooseChildCategories.bind(this)}
+        />
+      )
+    })
+    const brandListRender = brandList.map(item => {
+      const key = item.brandId
+      const active = key === selectBrandData.brandId
+      return (
+        <ListItem 
+          key={key}
+          item={item}
+          borderLeft
+          active={active}
+          onClickItem={this.chooseBrand.bind(this)}
+        />
+      )
+    })
     return (
       <SaveAreaView
         title='选择品类'
         back
         home
       >
-        <View className='page-wrapper'>
+        <View
+          style={{
+            height: `calc(100vh - ${navHeight}rpx)`
+          }}
+          className='page-wrapper'
+        >
           <View className='fixed-nav'>
             <View className='fixed-nav-text'>主品类</View>
             <View className='fixed-nav-text'>子品类</View>
@@ -139,13 +212,19 @@ class ChooseItem extends Component {
           </View>
           <View className='main-wrapper'>
             <View className='child-list-wrapper'>
-              <View className='list-item'>瓷砖</View>
+              {
+                mainCategoriesRender
+              }
             </View>
             <View className='child-list-wrapper'>
-
+              {
+                childCategoriesRender
+              }
             </View>
             <View className='child-list-wrapper'>
-
+              {
+                brandListRender
+              }
             </View>
           </View>
         </View>
@@ -157,7 +236,8 @@ class ChooseItem extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userInfo: state.user_msg.userInfo
+    userInfo: state.user_msg.userInfo,
+    system: state.system.systemInfo
   }
 }
 export default connect(mapStateToProps)(ChooseItem)
