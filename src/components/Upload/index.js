@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 17:35:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 17:41:12
+ * @LastEditTime: 2020-06-20 17:50:25
  * @mustParam: 必传参数
  *  imageList 要展示的图片
  * @optionalParam: 选传参数
@@ -42,7 +42,8 @@ export default class Upload extends Component {
    * 选择image 上传
    * @return void
    */
-  chooseImage() {
+  chooseImage(e) {
+    e && e.stopPropagation();
     uploadImage({}).then(res => {
       this.props.onUploadOK(res)
     })
@@ -52,7 +53,8 @@ export default class Upload extends Component {
    * @param {String} item 要展示的图片
    * @return void
    */
-  showImage(item) {
+  showImage(item, e) {
+    e && e.stopPropagation();
     Taro.previewImage({
       current: item,
       urls: this.props.imageList
