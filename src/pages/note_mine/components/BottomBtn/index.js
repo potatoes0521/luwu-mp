@@ -4,13 +4,16 @@
  * @path: 引入路径
  * @Date: 2020-06-20 18:12:25
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 18:14:20
+ * @LastEditTime: 2020-06-20 18:36:25
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
 import Taro, { Component } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import {
+  View,
+  Button
+} from '@tarojs/components'
 import PropTypes from 'prop-types'
 
 import './index.scss'
@@ -24,7 +27,7 @@ export default class BottomBtn extends Component {
   render() {
     return (
       <View className='fixed-bottom-btn-wrapper'>
-        <View className='btn-public share-btn'>分享笔记</View>
+        <Button openType='share' className='btn-public share-btn'>分享笔记</Button>
         <View className='btn-public plain-btn' onClick={this.navigationTo.bind(this, 'note_publish')}>记笔记</View>
       </View>
     )

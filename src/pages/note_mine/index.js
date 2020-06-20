@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:36
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 18:28:11
+ * @LastEditTime: 2020-06-20 18:34:19
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,6 +16,7 @@ import SaveAreaView from '@components/SafeAreaView'
 import Skeleton from '@components/Skeleton'
 import { getNoteList } from '@services/modules/note'
 import Login from '@utils/login'
+import { defaultResourceImgURL } from '@config/request_config'
 import NoteItem from './components/NoteItem'
 import NoteSelect from './components/NoteSelect'
 import BottomBtn from './components/bottomBtn'
@@ -89,6 +90,33 @@ class NoteMine extends Component {
     })
     this.propsMainCategoryData = FItem
     this.propsChildCategoryData = item
+  }
+  /**
+   * 下拉刷新
+   * @return void
+   */
+  onPullDownRefresh() {
+    // 显示顶部刷新图标
+    // Taro.showNavigationBarLoading()
+    this.getListData()
+    // 隐藏导航栏加载框
+    // Taro.hideNavigationBarLoading();
+    // 停止下拉动作
+    Taro.stopPullDownRefresh();
+  }
+
+
+  /**
+   * 页面内转发
+   * @param {Object} res 微信返回参数
+   * @return void
+   */
+  onShareAppMessage() {
+    return {
+      title: `卖板信息实时更新，猛戳了解详情`,
+      path: `/pages/index/index`,
+      imageUrl: `${defaultResourceImgURL}/share/share_index.png`
+    }
   }
   
   config = {

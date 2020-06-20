@@ -24,6 +24,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
   }
 
   .share-btn {
@@ -35,5 +36,15 @@
     border: 1px solid $link-color;
     background: #ffffff;
     color: $link-color;
+  }
+
+  button {
+    line-height: 0;
+    padding: 0;
+    border: none;
+  }
+
+  button::after {
+    border: none;
   }
 }
