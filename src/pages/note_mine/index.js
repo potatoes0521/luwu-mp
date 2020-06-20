@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:36
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 17:39:02
+ * @LastEditTime: 2020-06-20 17:47:22
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -68,7 +68,7 @@ class NoteMine extends Component {
     }
     getNoteList(sendData).then(res => {
       this.setState({
-        noteList: Mock
+        noteList: res
       })
     })
   }
@@ -101,7 +101,7 @@ class NoteMine extends Component {
       selectTitleText
     } = this.state
     const noteListRender = noteList.map(item => {
-      const key = item.id
+      const key = item.noteId
       return (
         <NoteItem item={item} key={key} />
       )

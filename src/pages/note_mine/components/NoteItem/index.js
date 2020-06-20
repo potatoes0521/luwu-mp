@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-19 09:47:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 17:42:51
+ * @LastEditTime: 2020-06-20 17:55:47
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -14,10 +14,27 @@ import { View, Text } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import Upload from '@components/Upload'
 import Location from '@components/Location'
-
+import {setStorage, removeStorage} from '@utils/storage'
 import './index.scss'
 
 export default class NoteItem extends Component { 
+  componentWillUnmount() { 
+    removeStorage('note_details')
+  }
+  HandleEditData(e) { 
+    e && e.stopPropagation();
+    const { item } = this.props
+    setStorage('note_details', item)
+    Taro.navigateTo({
+      url: `/pages/note_publish/index?noteId=${item.noteId}&pageType=edit`
+    })
+  }
+  navigatorToDetails() { 
+    const { item } = this.props
+    Taro.navigateTo({
+      url: `/pages/note_details/index?noteId=${item.noteId}`
+    })
+  }
   render() {
     const { item } = this.props
     const categoryName = item.mainCategory && item.mainCategory.categoryName || ''
@@ -30,12 +47,12 @@ export default class NoteItem extends Component {
       <View className='note-item'>
         <Location onlyShow address={item.address} >
           <View className='tips'>
-            <Text className='tips-text'>编辑</Text>
+            <Text className='tips-text' onClick={this.HandleEditData.bind(this)}>编辑</Text>
             <Text className='text-line'></Text>
             <Text className='tips-text'>询底价</Text>
           </View>
         </Location>
-        <View className='note-main'>
+        <View className='note-main' onClick={this.navigatorToDetails.bind(this)}>
           <View className='note-line-details skeleton-square'>
             <View className='note-detail-item'>
               <View className='note-detail-item-label'>品类</View>
