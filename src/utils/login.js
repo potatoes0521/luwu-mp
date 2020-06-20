@@ -4,7 +4,7 @@
  * @path: "@utils/login"
  * @Date: 2020-06-17 16:04:08
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-17 17:31:32
+ * @LastEditTime: 2020-06-20 13:32:22
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -14,7 +14,14 @@ import {userLogin} from '@services/modules/user'
 import Actions from '@store/actions/index.js'
 
 export default {
-  useUserInfoLogin(params) {
+  async login(back){
+    const userInfo = await this.getUserInfo();
+    userInfo && await this.useUserInfoLogin(userInfo)
+    if (back && userInfo) {
+      this.handleBack()
+    }
+  },
+  useUserInfoLogin(params, back) {
     return new Promise(resolve => {
       const {
         userInfo,
@@ -39,7 +46,13 @@ export default {
             signature,
           }
           userLogin(sendData).then(data => {
+            Actions.changeUserInfo(
+              Object.assign({}, data)
+            )
             resolve(data)
+            if (back) {
+              this.handleBack()
+            }
           })
         }
       })
@@ -57,9 +70,22 @@ export default {
           resolve(res)
         },
         fail: () => {
+          Taro.navigateTo({
+            url: '/pages/auth/index'
+          })
           resolve(false)
-        }
+        },
       })
     })
+  },
+  handleBack() {
+    let pages = Taro.getCurrentPages() //  获取页面栈
+    let prevPage = pages[pages.length - 2] // 上一个页面
+    if(!prevPage) { 
+      return 
+    }
+    prevPage.onLoad()
+    Taro.navigateBack()
   }
 }
+
