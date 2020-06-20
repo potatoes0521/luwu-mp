@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:36
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 17:47:22
+ * @LastEditTime: 2020-06-20 18:28:11
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -18,6 +18,7 @@ import { getNoteList } from '@services/modules/note'
 import Login from '@utils/login'
 import NoteItem from './components/NoteItem'
 import NoteSelect from './components/NoteSelect'
+import BottomBtn from './components/bottomBtn'
 
 import './index.scss'
 
@@ -25,10 +26,10 @@ const Mock = [
   {
     id: 1,
     goodsImageList: [
-      'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epUAVPUlLia4q2oqW9Mr9GLf9lSmD2xVMqkjut8GkjLiaK7ZTicMszqtwoo0GzYVmv5y6vLq8SVszEqw/132',
-      'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epUAVPUlLia4q2oqW9Mr9GLf9lSmD2xVMqkjut8GkjLiaK7ZTicMszqtwoo0GzYVmv5y6vLq8SVszEqw/132',
-      'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epUAVPUlLia4q2oqW9Mr9GLf9lSmD2xVMqkjut8GkjLiaK7ZTicMszqtwoo0GzYVmv5y6vLq8SVszEqw/132',
-      'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epUAVPUlLia4q2oqW9Mr9GLf9lSmD2xVMqkjut8GkjLiaK7ZTicMszqtwoo0GzYVmv5y6vLq8SVszEqw/132']
+      '1.png',
+      '2.png',
+      '3.png',
+      '4.png']
   },
   {
     id: 2,
@@ -89,6 +90,7 @@ class NoteMine extends Component {
     this.propsMainCategoryData = FItem
     this.propsChildCategoryData = item
   }
+  
   config = {
     navigationBarTitleText: '我的笔记',
     navigationStyle: 'custom'
@@ -123,6 +125,7 @@ class NoteMine extends Component {
           {
             noteListRender
           }
+          <BottomBtn />
         </View>
         {!loading && <Skeleton />}
       </SaveAreaView>
