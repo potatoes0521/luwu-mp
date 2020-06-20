@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 17:35:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-19 13:32:10
+ * @LastEditTime: 2020-06-20 17:41:12
  * @mustParam: 必传参数
  *  imageList 要展示的图片
  * @optionalParam: 选传参数
@@ -30,7 +30,7 @@ export default class Upload extends Component {
 
   componentDidMount() {
     if (this.props.autoChoose) { 
-      this.chooseImage()
+      // this.chooseImage()
     }
   }
 
@@ -63,18 +63,21 @@ export default class Upload extends Component {
       imageList,
       addBtnSize,
       imageSize,
+      marginRightSize,
       showAddBtn,
       computedWidth
     } = this.props
     // 添加图片按钮
     const imageWidth = imageSize + 'rpx'
     const addBtnWidth = addBtnSize + 'rpx'
+    const imageMarginRightSize = marginRightSize + 'rpx'
     const imageListRender = imageList.map((item) => (
       <View
         style={{
           width: imageWidth,
           height: imageWidth,
           lineHeight: imageWidth,
+          marginRight: imageMarginRightSize
         }}
         className='picture-item skeleton-square'
         key={item}
@@ -136,6 +139,7 @@ Upload.defaultProps = {
   addBtnSize: 86,
   imageSize: 180,
   showAddBtn: false,
+  imageMarginRightSize: 20,
   scrollViewWidth: 0,
   onUploadOK: () => {
     console.error('onUploadOK is not defined in @components/Upload')
@@ -146,6 +150,7 @@ Upload.propTypes = {
   imageList: PropTypes.array.isRequired,
   showAddBtn: PropTypes.bool,
   addBtnSize: PropTypes.number,
+  imageMarginRightSize:PropTypes.number,
   imageSize: PropTypes.number.isRequired,
   onUploadOK: PropTypes.func.isRequired
 }
