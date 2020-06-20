@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-19 10:17:37
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 16:33:56
+ * @LastEditTime: 2020-06-20 17:16:18
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -18,7 +18,6 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { connect } from '@tarojs/redux'
 import { getCategory } from '@services/modules/category'
-import Login from '@utils/login'
 
 import './index.scss'
 
@@ -38,8 +37,6 @@ class NoteSelect extends Component {
   }
 
   componentDidMount() {
-    const {userInfo} = this.props
-    !userInfo.token && Login.login()
     this.getAllCategoryData()
   }
   componentWillReceiveProps(nextProps) { 
@@ -283,7 +280,6 @@ NoteSelect.propTypes = {
 }
 const mapStateToProps = (state) => {
   return {
-    userInfo: state.user_msg.userInfo,
     system: state.system.systemInfo
   }
 }
