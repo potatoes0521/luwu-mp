@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 22:47:54
+ * @LastEditTime: 2020-06-21 09:42:29
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -39,7 +39,6 @@ class ChooseItem extends Component {
   componentDidMount() {
     this.getAllCategoryData()
     this.pageParams = this.$router.params
-    this.pageParams.pageType === 'edit' && this.handleEdit()
     const {userInfo} = this.props
     !userInfo.token && Login.login()
   }
@@ -57,6 +56,8 @@ class ChooseItem extends Component {
       console.log('childCategoriesList', childCategoriesList)
       this.setState({
         mainCategoriesList
+      }, () => {
+        this.pageParams.pageType === 'edit' && this.handleEdit()
       })
     })
   }
@@ -69,9 +70,9 @@ class ChooseItem extends Component {
       this.setState({
         selectMainCategoriesData: res.selectMainCategoriesData, // 选中的品类
         selectChildCategoriesData: res.selectChildCategoriesData, // 选中的子品类
-        selectBrandData: res.selectChildCategoriesData
+        selectBrandData: res.selectBrandData
       }, () => {
-          this.chooseMainCategories(res.selectMainCategoriesData , true)
+          this.chooseMainCategories(res.selectMainCategoriesData, true)
       })
     })
   }
@@ -82,6 +83,7 @@ class ChooseItem extends Component {
    * @return void
    */
   chooseMainCategories(item, autoSelectNext) {
+    console.log('item1111', autoSelectNext)
     const { selectMainCategoriesData, selectChildCategoriesData } = this.state
     if (!autoSelectNext && item.categoryId === selectMainCategoriesData.categoryId) {
       return
@@ -92,9 +94,7 @@ class ChooseItem extends Component {
       brandList: [],
     }
     // autoSelectNext 为true是编辑数据  自动选择下一项  故而不清除选中项
-    if (autoSelectNext) {
-      this.chooseChildCategories(selectChildCategoriesData, autoSelectNext)
-    } else {
+    if (!autoSelectNext) {
       data.selectMainCategoriesData = item
       data.selectChildCategoriesData = {}
       data.selectBrandData = {}
@@ -106,6 +106,9 @@ class ChooseItem extends Component {
         status: 1
       }, this).then(res => {
         this.brandList = res
+        if (autoSelectNext) {
+          this.chooseChildCategories(selectChildCategoriesData, autoSelectNext)
+        }
       })
     });
   }
@@ -116,6 +119,7 @@ class ChooseItem extends Component {
    * @return void
    */
   chooseChildCategories(item, autoSelectNext) {
+    console.log('item', item, autoSelectNext)
     const { selectChildCategoriesData } = this.state
     if (!autoSelectNext && item.categoryId === selectChildCategoriesData.categoryId) {
       return

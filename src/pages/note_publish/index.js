@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 23:44:02
+ * @LastEditTime: 2020-06-21 09:43:18
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -21,6 +21,8 @@ import SaveAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { publishNote } from '@services/modules/note'
 import { handleMoney } from '@utils/patter'
+import { setStorage, removeStorage } from '@utils/storage'
+
 import FormItem from './components/FormItem'
 
 import './index.scss'
@@ -125,13 +127,28 @@ class NotePublish extends Component {
       <View className='title'>{title}</View>
     )
   }
-  handleClickChooseCategory(){
+  /**
+   * 点击了选择类别
+   * @return void
+   */
+  handleClickChooseCategory() {
+    let url = '/pages/choose_item/index'
+    const {
+      mainCategory,
+      childCategory,
+      brand
+    } = this.state
+    if (brand && brand.brandName) { 
+      url += '?pageType=edit'
+      setStorage('choose_category', {
+        selectMainCategoriesData: mainCategory,
+        selectChildCategoriesData: childCategory,
+        selectBrandData: brand,
+      })
+    }
     Taro.navigateTo({
-      url: '/pages/choose_item/index'
+      url
     })
-  }
-  onCategoryInput(event) { 
-    console.log('event', event)
   }
   
   onPriceInput(e) {
@@ -234,7 +251,6 @@ class NotePublish extends Component {
         model
       }
     }
-    console.log('sendData', sendData)
     publishNote(sendData, this).then(res => {
       if (!res || !res.noteId) {
         Taro.showToast({
@@ -247,6 +263,7 @@ class NotePublish extends Component {
       Taro.showToast({
         title: '添加成功',
       })
+      removeStorage('choose_category')
       this.timer = setTimeout(() => {
         Taro.redirectTo({
           url: `/pages/note_details/index?noteId=${res.noteId}`
@@ -305,7 +322,6 @@ class NotePublish extends Component {
               canInput={false}
               placeholder='请选择'
               onContentClick={this.handleClickChooseCategory.bind(this)}
-              onInput={this.onCategoryInput.bind(this)}
             />
             <FormItem
               line
