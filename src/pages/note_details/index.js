@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 10:52:19
+ * @LastEditTime: 2020-06-21 11:29:59
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -21,8 +21,9 @@ import { getNoteDetails } from '@services/modules/note'
 import Location from '@components/Location'
 import goodsState from '@config/noteGoodsKey'
 import NoteFromMain from '@/note_components/NoteFormMain'
+import BottomBtn from '@/note_components/BottomBtn'
 import ImageSwiper from './components/Swiper'
-import ImageVertical from './components/ImageVerticalList'
+import ImageVerticalList from './components/ImageVerticalList'
 
 import './index.scss'
 
@@ -52,7 +53,16 @@ class index extends Component {
       this.setState(data)
     })
   }
-
+  handleEditData() { 
+    Taro.navigateTo({
+      url: `/pages/note_publish/index?pageType=edit&noteId=${this.pageParams.noteId}`
+    })
+  }
+  handleOnRightBtnClick() {
+    Taro.redirectTo({
+      url: `/pages/note_publish/index`
+    })
+  }
   config = {
     navigationBarTitleText: '笔记详情',
     navigationStyle: 'custom'
@@ -65,6 +75,9 @@ class index extends Component {
       priceTagImageList,
       idCardImageList
     } = this.state
+    const {system} = this.props
+    const navHeight = ((system && system.navHeight) || 120)
+
     return (
       <SafeAreaView
         title='的笔记'
@@ -72,11 +85,16 @@ class index extends Component {
         home
       >
         <View className='page-wrapper'>
-          <Location onlyShow address={address} >
-            <View className='tips'>
-              <Text className='tips-text' onClick={this.HandleEditData.bind(this)}>编辑</Text>
-            </View>
-          </Location>
+          <View
+            style={{top:navHeight + 'rpx'}}
+            className='note-details-location-wrapper'
+          >
+            <Location onlyShow address={address} >
+              <View className='tips'>
+                <Text className='tips-text' onClick={this.handleEditData.bind(this)}>编辑</Text>
+              </View>
+            </Location>
+          </View>
           <View className='details-main-wrapper'>
             <View className='details-swiper-wrapper'>
               <ImageSwiper imageList={goodsImageList} />
@@ -85,14 +103,34 @@ class index extends Component {
               showRemark
               item={this.state}
             />
-            <ImageVertical
-              imageList={priceTagImageList}
-              title='价签'
-            />
-            <ImageVertical
-              imageList={idCardImageList}
-              title='名片'
-            />
+            {
+              (priceTagImageList || idCardImageList) && (
+                <View className='image-list-wrapper'>
+                  {
+                    priceTagImageList && (
+                      <ImageVerticalList
+                        imageList={priceTagImageList}
+                        title='价签'
+                      />
+                    )
+                  }
+                  {
+                    idCardImageList && (
+                      <ImageVerticalList
+                        imageList={idCardImageList}
+                        title='名片'
+                      />
+                    )
+                  }
+                </View>
+              )
+            }
+            <View className='bottom-fixed-wrapper'>
+              <BottomBtn
+                rightBtnText='继续记笔记'
+                onRightBtnClick={this.handleOnRightBtnClick.bind(this)}
+              />
+            </View>
           </View>
         </View>
       </SafeAreaView>
@@ -103,7 +141,8 @@ class index extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userInfo: state.user_msg.userInfo
+    userInfo: state.user_msg.userInfo,
+    system: state.system.systemInfo
   }
 }
 export default connect(mapStateToProps)(index)

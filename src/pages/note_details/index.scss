@@ -1,23 +1,40 @@
 @import '../../assets/css/theme.scss';
 
 .page-wrapper {
-  .tips {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    font-size: 28px;
-    color: $link-color;
-  }
-  .location-icon{
-    color: $font-color !important;
+  background-color: $background-color;
+  padding-bottom: 290px;
+  padding-top: 90px;
+  .note-details-location-wrapper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    height: 90px;
+    border-bottom: 2px solid $background-color;
+    z-index: 5;
+    .tips {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      font-size: 28px;
+      color: $link-color;
+    }
+    .location-icon{
+      color: $font-color !important;
+    }
   }
   .details-main-wrapper {
     padding: 0 30px;
-    padding-bottom: 44px;
     border-top: 2px solid $background-color;
+    background-color: #ffffff;
     .details-swiper-wrapper{
       margin-top: 20px;
       margin-bottom: 14px;
+    }
+    .image-list-wrapper{
+      padding-top: 74px;
+      padding-bottom: 30px;
     }
   }
   
