@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 09:43:18
+ * @LastEditTime: 2020-06-21 09:54:04
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -22,7 +22,7 @@ import Login from '@utils/login'
 import { publishNote } from '@services/modules/note'
 import { handleMoney } from '@utils/patter'
 import { setStorage, removeStorage } from '@utils/storage'
-
+import goodsState from '@config/noteGoodsKey'
 import FormItem from './components/FormItem'
 
 import './index.scss'
@@ -31,30 +31,9 @@ class NotePublish extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      goodsImageList: [], // 商品图片
-      idCardImageList: [], // 名片
-      priceTagImageList: [], // 价签图片
-      address: {
-        address: ''
-      },
-      mainCategory: {
-        categoryName: '',
-        categoryId: '',
-      },
-      childCategory: {
-        categoryName: '',
-        categoryId: '',
-      },
-      brand: {
-        brandId: '',
-        brandName: ''
-      },
-      price: '',
-      priceUnit: '',
-      model: '',
-      remark: ''
-    }
+    this.state = Object.assign({}, goodsState, {
+      // 除去公共key以外的字段定在这里
+    })
     this.pageParams = {}
     this.timer = null
   }
