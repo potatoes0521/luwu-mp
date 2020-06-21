@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 12:06:44
+ * @LastEditTime: 2020-06-21 12:35:30
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -42,14 +42,16 @@ class NoteDetails extends Component {
       priceTagImageList: [''], // 价签图片
     })
     this.pageParams = {}
+    this.notLogin = true
   }
 
-  async componentDidMount() { 
+  async componentDidShow() {
     this.pageParams = this.$router.params
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
     this.getNoteDetails()
-  } 
+  }
+  
   getNoteDetails() { 
     getNoteDetails({
       noteId: this.pageParams.noteId
@@ -97,10 +99,11 @@ class NoteDetails extends Component {
    * @return void
    */
   onShareAppMessage() {
+    const {userInfo} = this.props
     return {
-      title: `卖板信息实时更新，猛戳了解详情`,
-      path: `/pages/index/index`,
-      imageUrl: `${defaultResourceImgURL}/share/share_index.png`
+      title: `分享笔记详情 文案待定`,
+      path: `/pages/note_details/index?shareType=1&userId=${userInfo.userId}`,
+      imageUrl: `${defaultResourceImgURL}`
     }
   }
   config = {
