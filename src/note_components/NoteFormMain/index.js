@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-21 09:58:20
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 10:01:34
+ * @LastEditTime: 2020-06-21 10:35:09
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -20,13 +20,14 @@ import './index.scss'
 
 export default class NoteFormMain extends Component {
   render() {
-    let { item } = this.props
+    let { item, showRemark } = this.props
     const categoryName = item.mainCategory && item.mainCategory.categoryName || ''
     const brandName = item.brand && item.brand.brandName || ''
     const price = item.price || '-'
     const priceUnit = item.priceUnit || '-'
     const model = item.model || '-'
     const time = item.createAt
+    const remark = item.remark
     return (
       <Block>
         <View className='note-line-details skeleton-square'>
@@ -55,6 +56,22 @@ export default class NoteFormMain extends Component {
             <View className='note-detail-item-content'>{time}</View>
           </View>
         </View>
+        {
+          showRemark && remark && (
+            <Block>
+              <View className='note-line-details skeleton-square'>
+                <View className='note-detail-item'>
+                  <View className='note-detail-item-label'>笔记详情:</View>
+                </View>
+              </View>
+              <View className='note-form-main-remark' >
+                {
+                  remark
+                }
+              </View>
+            </Block>
+          )
+        }
       </Block>
     )
   }
@@ -62,6 +79,7 @@ export default class NoteFormMain extends Component {
 }
 
 NoteFormMain.defaultProps = {
+  showRemark: false,
   item: {},
 }
 
