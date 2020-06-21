@@ -4,21 +4,15 @@
  * @path: 引入路径
  * @Date: 2020-06-21 09:51:21
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 11:59:51
+ * @LastEditTime: 2020-06-21 12:05:09
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
 export default {
-  goodsImageList: [
-    ''
-  ], // 商品图片
-  idCardImageList: [
-    ''
-  ], // 名片
-  priceTagImageList: [
-    ''
-  ], // 价签图片
+  goodsImageList: [], // 商品图片
+  idCardImageList: [], // 名片
+  priceTagImageList: [], // 价签图片
   address: {
     address: ''
   },

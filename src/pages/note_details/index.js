@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 12:01:09
+ * @LastEditTime: 2020-06-21 12:05:44
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -37,7 +37,9 @@ class index extends Component {
     this.state = Object.assign({}, goodsState, {
       // 除去公共key以外的字段定在这里
       distributorCount: 0,
-      loading: true
+      loading: true,
+      idCardImageList: [''], // 名片
+      priceTagImageList: [''], // 价签图片
     })
     this.pageParams = {}
   }
