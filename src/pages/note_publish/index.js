@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 11:28:51
+ * @LastEditTime: 2020-06-21 12:03:41
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -50,8 +50,9 @@ class NotePublish extends Component {
     clearTimeout(this.timer)
     this.timer = null
   }
-  login() {
-    Login.login()
+  async login() {
+    const {userInfo} = this.props
+    !userInfo.token && await Login.login()
   }
   /**
    * 上传图片完成
