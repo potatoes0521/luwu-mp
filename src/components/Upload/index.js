@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 17:35:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 23:35:22
+ * @LastEditTime: 2020-06-21 11:03:50
  * @mustParam: 必传参数
  *  imageList 要展示的图片
  * @optionalParam: 选传参数
@@ -68,7 +68,8 @@ export default class Upload extends Component {
       imageSize,
       marginRightSize,
       showAddBtn,
-      computedWidth
+      computedWidth,
+      maxCount
     } = this.props
     // 添加图片按钮
     const imageWidth = imageSize + 'rpx'
@@ -106,7 +107,7 @@ export default class Upload extends Component {
         imageListRender
       }
       {
-        showAddBtn && (
+        showAddBtn && (maxCount === -1 || imageList < maxCount) && (
           <View
             style={{
               width: addBtnWidth,
@@ -137,6 +138,7 @@ export default class Upload extends Component {
 }
 
 Upload.defaultProps = {
+  maxCount: -1,
   imageList: [],
   autoChoose: false,
   addBtnSize: 86,
