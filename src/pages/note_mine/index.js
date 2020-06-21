@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:36
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 12:54:17
+ * @LastEditTime: 2020-06-21 19:54:08
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -50,10 +50,10 @@ class NoteMine extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      loading: false,
+      loading: true,
       noteList: Mock, // 给骨架屏提供一个mock\数据
       selectTitleText: '',
-      noteList: []
+      firstLoading: true
     }
     this.propsMainCategoryData = {}
     this.propsChildCategoryData = {}
@@ -65,8 +65,7 @@ class NoteMine extends Component {
   }
   componentDidShow() { 
     const { userInfo } = this.props
-    const { noteList } = this.state
-    if (!userInfo.token || noteList.length) {
+    if (!userInfo.token || !this.state.firstLoading) {
       return
     }
     this.getListData()
@@ -83,9 +82,9 @@ class NoteMine extends Component {
         const data = Object.assign({}, item, json)
         return data
       })
-
       this.setState({
-        noteList: newData
+        noteList: newData,
+        firstLoading: false
       })
     })
   }
@@ -95,7 +94,7 @@ class NoteMine extends Component {
    */
   loadingEnd() { 
     this.setState({
-      loading: true
+      loading: false
     })
   }
   onChooseLastItem(item, FItem) {
@@ -151,9 +150,11 @@ class NoteMine extends Component {
     const {
       loading,
       noteList,
+      firstLoading,
       selectTitleText
     } = this.state
-    const {userInfo} = this.props
+    const { userInfo } = this.props
+    console.log('noteList', noteList)
     const noteListRender = noteList.map(item => {
       const key = item.noteId
       return (
@@ -182,7 +183,7 @@ class NoteMine extends Component {
             onRightBtnClick={this.handleOnRightBtnClick.bind(this)}
           />
         </View>
-        {!loading && <Skeleton />}
+        {(loading || firstLoading) && <Skeleton />}
       </SaveAreaView>
     )
   }
