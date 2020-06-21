@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 10:35:52
+ * @LastEditTime: 2020-06-21 10:52:19
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -22,6 +22,7 @@ import Location from '@components/Location'
 import goodsState from '@config/noteGoodsKey'
 import NoteFromMain from '@/note_components/NoteFormMain'
 import ImageSwiper from './components/Swiper'
+import ImageVertical from './components/ImageVerticalList'
 
 import './index.scss'
 
@@ -60,7 +61,9 @@ class index extends Component {
   render() {
     const {
       address,
-      goodsImageList
+      goodsImageList,
+      priceTagImageList,
+      idCardImageList
     } = this.state
     return (
       <SafeAreaView
@@ -81,6 +84,14 @@ class index extends Component {
             <NoteFromMain
               showRemark
               item={this.state}
+            />
+            <ImageVertical
+              imageList={priceTagImageList}
+              title='价签'
+            />
+            <ImageVertical
+              imageList={idCardImageList}
+              title='名片'
             />
           </View>
         </View>

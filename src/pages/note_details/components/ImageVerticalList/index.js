@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-21 10:40:32
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 11:00:11
+ * @LastEditTime: 2020-06-21 11:01:20
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -24,7 +24,7 @@ export default class ImageVerticalList extends Component {
   render() {
     let { imageList, title } = this.props
     const imageListRender = imageList.map((item, index) => {
-      const itemTitle = title ? (imageList.length > 1 ? title + SectionToChinese(index) : title) : ''
+      const itemTitle = title ? (imageList.length > 1 ? title + SectionToChinese(index + 1) : title) : ''
       return (
         <View className='image-item' key={item}>
           <View className='image-wrapper'>

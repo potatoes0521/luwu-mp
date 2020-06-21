@@ -13,12 +13,14 @@
   }
   .details-main-wrapper {
     padding: 0 30px;
+    padding-bottom: 44px;
     border-top: 2px solid $background-color;
     .details-swiper-wrapper{
       margin-top: 20px;
       margin-bottom: 14px;
     }
   }
+  
   // 指示点样式写在子组件不会生效
   .swiper .wx-swiper-dot {
     width: 8px;
