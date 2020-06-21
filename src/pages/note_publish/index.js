@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 12:03:41
+ * @LastEditTime: 2020-06-21 12:12:47
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -19,7 +19,7 @@ import Upload from '@components/Upload'
 import Location from '@components/Location'
 import SaveAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
-import { publishNote } from '@services/modules/note'
+import { publishNote, getNoteDetails, editNote } from '@services/modules/note'
 import { handleMoney } from '@utils/patter'
 import { setStorage, removeStorage } from '@utils/storage'
 import goodsState from '@config/noteGoodsKey'
@@ -40,10 +40,11 @@ class NotePublish extends Component {
 
   componentDidMount() {
     console.log('componentDidMount')
-    this.pageParams = this.$router.pageParams
+    this.pageParams = this.$router.params
     this.login()
+    console.log('this.pageParams', this.pageParams)
     if (this.pageParams && this.pageParams.pageType === 'edit' ) {
-
+      this.getNoteDetails()
     }
   }
   componentWillUnmount() {
@@ -53,6 +54,16 @@ class NotePublish extends Component {
   async login() {
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
+  }
+  getNoteDetails() {
+    getNoteDetails({
+      noteId: this.pageParams.noteId
+    }).then((res) => {
+      const json = Object.assign({}, res.data)
+      delete res['data']
+      const data = Object.assign({}, res, json)
+      this.setState(data)
+    })
   }
   /**
    * 上传图片完成
@@ -231,29 +242,37 @@ class NotePublish extends Component {
         model
       }
     }
-    publishNote(sendData, this).then(res => {
-      if (!res || !res.noteId) {
+    if (this.pageParams.pageType === 'edit') { 
+      sendData.noteId = this.pageParams.noteId
+      editNote(sendData, this).then(() => {
         Taro.showToast({
-          title: '添加失败',
-          icon: 'none',
-          duration: 2000
+          title: '编辑成功',
         })
-        return
-      }
-      Taro.showToast({
-        title: '添加成功',
       })
-      removeStorage('choose_category')
       this.timer = setTimeout(() => {
-        if (this.pageParams.pageType === 'edit') { 
-          Taro.navigateBack()
-        } else {
+        Taro.navigateBack()
+      }, 1800)
+    } else {
+      publishNote(sendData, this).then(res => {
+        if (!res || !res.noteId) {
+          Taro.showToast({
+            title: '添加失败',
+            icon: 'none',
+            duration: 2000
+          })
+          return
+        }
+        Taro.showToast({
+          title: '添加成功',
+        })
+        removeStorage('choose_category')
+        this.timer = setTimeout(() => {
           Taro.redirectTo({
             url: `/pages/note_details/index?noteId=${res.noteId}`
           })
-        }
-      }, 1800)
-    })
+        }, 1800)
+      })
+    }
   }
 
   config = {
