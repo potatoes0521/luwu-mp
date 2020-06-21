@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 13:32:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-17 16:17:25
+ * @LastEditTime: 2020-06-21 12:26:16
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -22,13 +22,15 @@ class Auth extends Component {
    * @return void
    */
   getUserInfo(e) {
-    Login.useUserInfoLogin(e.target)
+    Login.useUserInfoLogin(e.target, true).then(res=>{
+      res
+    })
   }
   render() {
     const { userInfo } = this.props
     return userInfo && !userInfo.token && (
       <View className='modal'>
-        <Button type='button' openType='getUserInfo' lang='zh_CN' onGetUserInfo={this.getUserInfo} className='submit-btn'>111111</Button>
+        <Button type='button' openType='getUserInfo' lang='zh_CN' onGetUserInfo={this.getUserInfo} className='submit-btn'>授权</Button>
       </View>
     )
   }

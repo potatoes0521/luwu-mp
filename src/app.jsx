@@ -62,28 +62,30 @@ class App extends Component {
       // 权限鉴权
       'pages/auth/index',
       // 选择品类
-      'pages/choose_item/index'
+      'pages/choose_item/index',
+      // 表格
+      'pages/table_contrast/index'
     ],
-    tabBar: {
-      color: "#D8D8D8",
-      selectedColor: "#333333",
-      borderStyle: "black",
-      backgroundColor: "#ffffff",
-      list: [
-        {
-          pagePath: "pages/index/index",
-          iconPath: "assets/img/tab_bar/home.png",
-          selectedIconPath: "assets/img/tab_bar/home_active.png",
-          text: "首页"
-        },
-        {
-          pagePath: "pages/mine/index",
-          iconPath: "assets/img/tab_bar/mine.png",
-          selectedIconPath: "assets/img/tab_bar/mine_active.png",
-          text: "我的"
-        }
-      ]
-    },
+    // tabBar: {
+    //   color: "#D8D8D8",
+    //   selectedColor: "#333333",
+    //   borderStyle: "black",
+    //   backgroundColor: "#ffffff",
+    //   list: [
+    //     {
+    //       pagePath: "pages/index/index",
+    //       iconPath: "assets/img/tab_bar/home.png",
+    //       selectedIconPath: "assets/img/tab_bar/home_active.png",
+    //       text: "首页"
+    //     },
+    //     {
+    //       pagePath: "pages/mine/index",
+    //       iconPath: "assets/img/tab_bar/mine.png",
+    //       selectedIconPath: "assets/img/tab_bar/mine_active.png",
+    //       text: "我的"
+    //     }
+    //   ]
+    // },
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
