@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 09:38:57
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-19 22:28:31
+ * @LastEditTime: 2020-06-21 19:33:33
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -25,68 +25,166 @@
 import Taro, { Component } from '@tarojs/taro'
 import {
   View,
-  Block,
-  Text,
   Image
 } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import {defaultResourceImgURL} from '@config/request_config'
-import { handleNavigator} from '@utils/navigator'
+import { handleNavigator } from '@utils/navigator'
+import classNames from 'classnames'
+
 import './index.scss'
 
 export default class ListItem extends Component { 
-  static options = {
-    addGlobalClass: true
+  constructor() { 
+    this.state = {
+      height: '',
+      moveOne: null,
+    }
+    this.animation = Taro.createAnimation({
+      duration: 200,
+      delay: 0,
+      timingFunction: 'linear',
+    });
+    this.open = false
+    this.mainHeight = 0
+  }
+  componentDidMount() { 
+    this.getImageInfo()
+  }
+  componentWillReceiveProps(nextProps) { 
+    if (nextProps.showIndex === this.props.showIndex) { 
+      return
+    } else {
+      this.handleCloseAnimation()
+    }
+  }
+  /**
+   * 获取item的真实高度
+   * @return void
+   */
+  getViewHeight() { 
+    const {index} = this.props
+    Taro.createSelectorQuery()
+      .selectAll('.page-wrapper >>> .item-main')
+      .boundingClientRect()
+      .exec(res => {
+        const arr = res[0].map(ite => ite.height * 2).filter((item, idx) => idx === index);
+        this.mainHeight = arr[0]
+      })
+  }
+  /**
+   * 点击图片
+   * @return void
+   */
+  handleClickImage() {
+    if (this.open) {
+      this.handleCloseAnimation()
+    } else {
+      this.handleOpenAnimation()
+    }
+    const { index } = this.props
+    this.props.onClickImage(index)
   }
   
-  handleClickImage() {
-    let { item } = this.props
-    handleNavigator(item)
-    this.props.onClickImage()
+  /**
+   * 处理打开动画
+   * @return void
+   */
+  handleOpenAnimation() { 
+    this.animation.height(this.mainHeight + 'rpx');
+    this.animation.step();
+    this.setState({
+      moveOne: this.animation.export()
+    })
+    this.open = true
   }
-  handleWarningIconClick() { 
-    this.props.onClickWaringIcon()
+  /**
+   * 处理合起动画
+   * @return void
+   */
+  handleCloseAnimation() { 
+    this.animation.height('360rpx');
+    this.animation.step();
+    this.setState({
+      moveOne: this.animation.export()
+    })
+    this.open = false
+  }
+  onBtnClick(item, e) { 
+    e.stopPropagation();
+    handleNavigator(item)
+  }
+  getImageInfo() {
+    const {
+      item,
+      index,
+      listDataLength
+    } = this.props
+    if(!item.imgUrl) {
+      return
+    }
+    Taro.getImageInfo({
+      src: defaultResourceImgURL + item.imgUrl,
+      success: (res) => {
+        this.setState({
+          height: res.height + 'rpx'
+        }, () => {
+            if (index + 1 === listDataLength) {
+              this.props.onImageLoadEnd()
+            }
+          this.getViewHeight()
+        })
+      }
+    })
   }
   render() {
+    const {
+      height,
+      moveOne
+    } = this.state
     let { item, tips } = this.props
-    const tipsRender = tips.map((ite, idx) => {
-      const k = ite
+    const btnList = tips.map(ite => {
+      const key = ite.id
       return (
-        <Block key={k}>
-          <Text className='tips-text'>{ite.tipText}</Text>
-          {
-            idx < item.tips.length -1 && (<Text className='text-line'></Text>)
-          }
-        </Block>
+        <View
+          key={key}
+          style={{ backgroundColor: item.color }}
+          className='btn-item'
+          onClick={this.onBtnClick.bind(this, ite)}
+        >{ite.text}</View>
       )
+    })
+    const btnGroupClassName = classNames('btn-group', {
+      'just-around': tips.length === 2,
+      'just-between': tips.length === 3,
     })
     return (
       <View
         className='item-wrapper skeleton-square'
+        animation={moveOne}
       >
-        <View className='title-wrapper'>
-          <View className='title'>
-            <Text>{item.title}</Text>
-            <Text
-              className='iconfont iconshuoming icon-warning'
-              onClick={this.handleWarningIconClick.bind(this)}
-            ></Text>
+        <View className='item-main'>
+          <View
+            className='item-image'
+            onClick={this.handleClickImage.bind(this)}
+          >
+            <Image
+              lazyLoad
+              style={{height}}
+              // mode='aspectFill'
+              className='image'
+              src={defaultResourceImgURL + item.imgUrl}
+            ></Image>
           </View>
           {
             tips && tips.length && (
-              <View className='right-tips'>
+              <View className={btnGroupClassName}>
                 {
-                  tipsRender
+                  btnList
                 }
               </View>
             )
           }
-        </View>
-        <View
-          className='item-image'
-          onClick={this.handleClickImage.bind(this)}
-        >
-          <Image mode='aspectFill' lazyLoad className='image' src={defaultResourceImgURL + item.imgUrl}></Image>
         </View>
       </View>
     )

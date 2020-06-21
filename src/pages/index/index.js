@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 12:54:22
+ * @LastEditTime: 2020-06-21 19:32:16
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -13,30 +13,29 @@ import Taro, { Component } from '@tarojs/taro'
 import {
   View,
   Image,
-  Block,
-  ScrollView
 } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import classNames from 'classnames'
 import Actions from '@store/actions/index.js'
 import { defaultResourceImgURL } from "@config/request_config"
-// import bannerImg from "@img/index/banner.png"
 import { getIndexListData } from '@services/modules/index'
 import Skeleton from '@components/Skeleton'
 import Login from '@utils/login'
 import ListItem from './components/ListItem/index'
+import mock from '../../mock/index.json'
+
 import './index.scss'
 
 const bannerBigImg = `${defaultResourceImgURL}index/bannerBig.png`
+
 class Index extends Component {
   constructor() { 
     this.state = {
       listData: [{},{},{},{},{}], // 默认数据为了做骨架屏
-      loading: true
+      loading: true,
+      showIndex: -1
     }
   }
   componentDidMount() { 
-    console.log('componentDidMount')
     this.getListData()
     this.login()
   }
@@ -50,8 +49,7 @@ class Index extends Component {
   getListData() { 
     getIndexListData(this).then(res => {
       this.setState({
-        listData: res,
-        loading: false
+        listData: mock,
       })
     })
   }
@@ -59,8 +57,19 @@ class Index extends Component {
    * 处理ListItem的warning icon被点击
    * @return void
    */
-  handleListItemIconClick() { 
-    console.log('handleListItemIconClick')
+  handleListItemIconClick(index) { 
+    this.setState({
+      showIndex: index
+    })
+  }
+  /**
+   * 图片信息获取完成之后给骨架屏关了
+   * @return void
+   */
+  onImageLoadEnd() { 
+    this.setState({
+      loading: false
+    })
   }
   
   config = {
@@ -71,56 +80,33 @@ class Index extends Component {
   render() {
     const {
       listData,
-      loading
+      loading,
+      showIndex
     } = this.state
-    const listRender = listData.map(item => {
+    const listRender = listData.map((item, index) => {
       const key = item.title
       return (
         <ListItem
           key={key}
           item={item}
+          index={index}
+          showIndex={showIndex}
+          listDataLength={listData.length}
           tips={item.tips}
-          onClickWaringIcon={this.handleListItemIconClick.bind(this)}
+          onImageLoadEnd={this.onImageLoadEnd.bind(this)}
+          onClickImage={this.handleListItemIconClick.bind(this)}
         ></ListItem>
       )
     })
-    const lineRender = listData.map((item, index) => {
-      const key = item.title
-      const lineClassName = classNames('bottom-line skeleton-cylinder', {
-        'shot-line': index === listData.length - 1,
-      })
-      return (
-        <Block key={key}>
-          <View
-            style={{ borderColor: item.color, color: item.color }}
-            className='circular skeleton-circular'
-          >{index + 1}</View>
-          <View style={{ backgroundColor: item.color }} className={lineClassName}></View>
-          {
-            index === listData.length -1 && <View style={{color: item.color}} className='iconfont iconsanjiaoxing icon-triangle'></View>
-          }
-        </Block>
-      )
-    })
+    
     return (
       <View className='page-wrapper skeleton'>
         <View className='banner-wrapper skeleton-square'>
           <Image className='image' src={bannerBigImg}></Image>
         </View>
-        <ScrollView scrollY className='scroll-wrapper'>
-          <View className='list-wrapper'>
-            <View className='line-wrapper'>
-              {
-                lineRender
-              }
-            </View>
-            <View className='list'>
-              {
-                listRender
-              }
-            </View>
-          </View>
-        </ScrollView>
+        <View className='list-wrapper'>
+          {listRender}
+        </View>
         {
           loading && <Skeleton />
         }
