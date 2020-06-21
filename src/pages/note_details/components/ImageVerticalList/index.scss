@@ -1,0 +1,32 @@
+@import '../../../../assets/css/theme.scss';
+
+.image-vertical-wrapper{
+
+  .image-item{
+    width: 100%;
+    padding-top: 20px;
+    border-radius:8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    >.image-wrapper{
+      width: 100%;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .image {
+        width: 100%;
+        height: 100%;
+        border-radius:8px;
+      }
+    } 
+    .title{
+      padding-top: 20px;
+      font-size: 28px;
+      line-height: 40px;
+      color: $placeholder-color;
+    }
+  }
+}
