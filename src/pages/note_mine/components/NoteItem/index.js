@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-19 09:47:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 10:02:33
+ * @LastEditTime: 2020-06-21 12:14:38
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -37,6 +37,11 @@ export default class NoteItem extends Component {
       url: `/pages/note_details/index?noteId=${item.noteId}`
     })
   }
+  submitOffer() {
+    Taro.showToast({
+      title: '询价成功'
+    })
+  }
   render() {
     const { item } = this.props
     
@@ -46,7 +51,7 @@ export default class NoteItem extends Component {
           <View className='tips'>
             <Text className='tips-text' onClick={this.HandleEditData.bind(this)}>编辑</Text>
             <Text className='text-line'></Text>
-            <Text className='tips-text'>询底价</Text>
+            <Text className='tips-text' onClick={this.submitOffer.bind(this)}>询底价</Text>
           </View>
         </Location>
         <View className='note-main' onClick={this.navigatorToDetails.bind(this)}>
