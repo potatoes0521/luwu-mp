@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 11:49:26
+ * @LastEditTime: 2020-06-21 11:50:43
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -67,6 +67,11 @@ class index extends Component {
   handleOnRightBtnClick() {
     Taro.redirectTo({
       url: `/pages/note_publish/index`
+    })
+  }
+  submitOffer() { 
+    Taro.showToast({
+      title: '询价成功'
     })
   }
   /**
@@ -165,7 +170,7 @@ class index extends Component {
                 <View className='left-text'>
                   全城共有{distributorCount || '99'}家{brand.brandName || ''}{mainCategory.categoryName}专卖店
                 </View>
-                <View className='tips'>一键问价</View>
+                <View className='tips' onClick={this.submitOffer.bind(this)}>一键问价</View>
               </View>
               <BottomBtn
                 rightBtnText='继续记笔记'
