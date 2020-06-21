@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-21 10:40:32
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 11:01:20
+ * @LastEditTime: 2020-06-21 11:54:02
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -20,7 +20,13 @@ import {SectionToChinese} from '@utils/numberToCode'
 import './index.scss'
 
 export default class ImageVerticalList extends Component { 
-
+  onItemClick(item) {
+    Taro.previewImage({
+      current: item,
+      urls: this.props.imageList
+    })
+    this.props.onItemClick(item)
+  }
   render() {
     let { imageList, title } = this.props
     const imageListRender = imageList.map((item, index) => {
@@ -30,6 +36,7 @@ export default class ImageVerticalList extends Component {
           <View className='image-wrapper'>
             <Image
               lazy-load
+              onClick={this.onItemClick.bind(this)}
               src={item}
               mode='aspectFill'
               className='image'
@@ -52,10 +59,12 @@ export default class ImageVerticalList extends Component {
 
 ImageVerticalList.defaultProps = {
   imageList: [],
-  onClick: () => {console.error('onClick is not defined')}
+  onItemClick: () => {
+    console.error('onItemClick is not defined')
+  }
 }
 
 ImageVerticalList.propTypes = {
   imageList: PropTypes.array.isRequired,
-  onClick: PropTypes.func
+  onItemClick: PropTypes.func
 }
