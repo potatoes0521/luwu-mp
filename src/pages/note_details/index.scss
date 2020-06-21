@@ -45,6 +45,24 @@
       padding-bottom: 30px;
     }
   }
+  .share-bottom-fixed-wrapper,
+  .bottom-fixed-wrapper {
+    width: 100vw;
+    background-color: $background-color;
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+
+  .share-bottom-fixed-wrapper{
+    height: 140px;
+  }
+  .bottom-fixed-wrapper {
+    height: 260px;
+  }
+
   .bottom-fixed-wrapper{
     width: 100vw;
     height: 260px;
@@ -85,4 +103,8 @@
     border-radius: 50%;
     overflow: hidden;
   }
+}
+
+.bottom-padding160{
+  padding-bottom: 160px;
 }

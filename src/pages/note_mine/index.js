@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:36
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 11:25:50
+ * @LastEditTime: 2020-06-21 12:54:17
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -61,6 +61,14 @@ class NoteMine extends Component {
   async componentDidMount() { 
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
+    this.getListData()
+  }
+  componentDidShow() { 
+    const { userInfo } = this.props
+    const { noteList } = this.state
+    if (!userInfo.token || noteList.length) {
+      return
+    }
     this.getListData()
   }
   getListData() { 
@@ -127,9 +135,9 @@ class NoteMine extends Component {
    */
   onShareAppMessage() {
     return {
-      title: `卖板信息实时更新，猛戳了解详情`,
+      title: `文案暂定`,
       path: `/pages/index/index`,
-      imageUrl: `${defaultResourceImgURL}/share/share_index.png`
+      imageUrl: `${defaultResourceImgURL}/share/share_note_mine.png`
     }
   }
   

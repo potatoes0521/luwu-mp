@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 12:35:30
+ * @LastEditTime: 2020-06-21 12:55:00
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -18,6 +18,7 @@ import { connect } from '@tarojs/redux'
 import SafeAreaView from '@components/SafeAreaView'
 import Skeleton from '@components/Skeleton'
 import Login from '@utils/login'
+import classNames from 'classnames'
 import { getNoteDetails } from '@services/modules/note'
 import { defaultResourceImgURL } from '@config/request_config'
 import { random } from '@utils/numberToCode'
@@ -40,6 +41,7 @@ class NoteDetails extends Component {
       loading: true,
       idCardImageList: [''], // 名片
       priceTagImageList: [''], // 价签图片
+      isShare: false
     })
     this.pageParams = {}
     this.notLogin = true
@@ -51,7 +53,7 @@ class NoteDetails extends Component {
     !userInfo.token && await Login.login()
     this.getNoteDetails()
   }
-  
+
   getNoteDetails() { 
     getNoteDetails({
       noteId: this.pageParams.noteId
@@ -61,7 +63,10 @@ class NoteDetails extends Component {
       if (!res.distributorCount || res.distributorCount < 10) {
         res.distributorCount = random(50, 100)
       }
-      const data = Object.assign({}, res, json, {loading: false})
+      const data = Object.assign({}, res, json, {
+        loading: false,
+        isShare: this.pageParams.shareType
+      })
       this.setState(data)
     })
   }
@@ -72,7 +77,7 @@ class NoteDetails extends Component {
   }
   handleOnRightBtnClick() {
     Taro.redirectTo({
-      url: `/pages/note_publish/index`
+      url: `/pages/note_publish/index?`
     })
   }
   submitOffer() { 
@@ -103,7 +108,7 @@ class NoteDetails extends Component {
     return {
       title: `分享笔记详情 文案待定`,
       path: `/pages/note_details/index?shareType=1&userId=${userInfo.userId}`,
-      imageUrl: `${defaultResourceImgURL}`
+      imageUrl: `${defaultResourceImgURL}/share/share_note_details.png`
     }
   }
   config = {
@@ -121,26 +126,38 @@ class NoteDetails extends Component {
       distributorCount,
       mainCategory,
       brand,
-      loading
+      loading,
+      isShare
     } = this.state
     const {system} = this.props
     const navHeight = ((system && system.navHeight) || 120)
-
+    const bottomFixedButtonClassName = classNames({
+      'bottom-fixed-wrapper': !isShare,
+      'share-bottom-fixed-wrapper': isShare
+    })
+    const pageWrapperClassName = classNames('page-wrapper skeleton', {
+      'bottom-padding160': isShare
+    })
     return (
       <SafeAreaView
         title={mainCategory.categoryName || '录屋'}
         back
         home
       >
-        <View className='page-wrapper skeleton' >
+        <View className={pageWrapperClassName}>
           <View
             style={{top:navHeight + 'rpx'}}
             className='note-details-location-wrapper'
           >
             <Location onlyShow address={address} >
-              <View className='tips'>
-                <Text className='tips-text' onClick={this.handleEditData.bind(this)}>编辑</Text>
-              </View>
+              {
+                !isShare && (
+                  <View className='tips'>
+                    <Text className='tips-text' onClick={this.handleEditData.bind(this)}>编辑</Text>
+                  </View>
+                )
+              }
+              
             </Location>
           </View>
           <View className='details-main-wrapper'>
@@ -173,14 +190,19 @@ class NoteDetails extends Component {
                 </View>
               )
             }
-            <View className='bottom-fixed-wrapper'>
-              <View className='offer-price-wrapper'>
-                <View className='left-text'>
-                  全城共有{distributorCount || '99'}家{brand.brandName || ''}{mainCategory.categoryName}专卖店
-                </View>
-                <View className='tips' onClick={this.submitOffer.bind(this)}>一键问价</View>
-              </View>
+            <View className={bottomFixedButtonClassName}>
+              {
+                !isShare && (
+                  <View className='offer-price-wrapper'>
+                    <View className='left-text'>
+                      全城共有{distributorCount || '99'}家{brand.brandName || ''}{mainCategory.categoryName}专卖店
+                    </View>
+                    <View className='tips' onClick={this.submitOffer.bind(this)}>一键问价</View>
+                  </View>
+                )
+              }
               <BottomBtn
+                onlyShowShare
                 rightBtnText='继续记笔记'
                 onRightBtnClick={this.handleOnRightBtnClick.bind(this)}
               />
