@@ -1,10 +1,10 @@
 @import '../../../../assets/css/theme.scss';
 
 .image-vertical-wrapper{
-
+  border-top: 2px solid transparent;
   .image-item{
     width: 100%;
-    padding-top: 20px;
+    margin-top: 20px;
     border-radius:8px;
     overflow: hidden;
     display: flex;

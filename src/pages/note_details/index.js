@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 11:50:43
+ * @LastEditTime: 2020-06-21 12:01:09
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,6 +16,7 @@ import {
 } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import SafeAreaView from '@components/SafeAreaView'
+import Skeleton from '@components/Skeleton'
 import Login from '@utils/login'
 import { getNoteDetails } from '@services/modules/note'
 import { defaultResourceImgURL } from '@config/request_config'
@@ -35,7 +36,8 @@ class index extends Component {
     super(props)
     this.state = Object.assign({}, goodsState, {
       // 除去公共key以外的字段定在这里
-      distributorCount: 0
+      distributorCount: 0,
+      loading: true
     })
     this.pageParams = {}
   }
@@ -55,7 +57,7 @@ class index extends Component {
       if (!res.distributorCount || res.distributorCount < 10) {
         res.distributorCount = random(50, 100)
       }
-      const data = Object.assign({}, res, json)
+      const data = Object.assign({}, res, json, {loading: false})
       this.setState(data)
     })
   }
@@ -113,7 +115,8 @@ class index extends Component {
       idCardImageList,
       distributorCount,
       mainCategory,
-      brand
+      brand,
+      loading
     } = this.state
     const {system} = this.props
     const navHeight = ((system && system.navHeight) || 120)
@@ -124,7 +127,7 @@ class index extends Component {
         back
         home
       >
-        <View className='page-wrapper'>
+        <View className='page-wrapper skeleton' >
           <View
             style={{top:navHeight + 'rpx'}}
             className='note-details-location-wrapper'
@@ -136,7 +139,7 @@ class index extends Component {
             </Location>
           </View>
           <View className='details-main-wrapper'>
-            <View className='details-swiper-wrapper'>
+            <View className='details-swiper-wrapper skeleton-square' >
               <ImageSwiper imageList={goodsImageList} />
             </View>
             <NoteFromMain
@@ -179,6 +182,9 @@ class index extends Component {
             </View>
           </View>
         </View>
+        {
+          loading && <Skeleton />
+        }
       </SafeAreaView>
     )
   }
