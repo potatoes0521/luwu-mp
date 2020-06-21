@@ -1,7 +1,8 @@
 @import '../../assets/css/theme.scss';
-
-.page-wrapper {
+page{
   background-color: $background-color;
+}
+.page-wrapper {
   padding-bottom: 290px;
   padding-top: 90px;
 
@@ -39,9 +40,11 @@
       margin-top: 20px;
       margin-bottom: 14px;
     }
-
+    .form-wrapper{
+      padding-bottom: 30px;
+    }
     .image-list-wrapper {
-      padding-top: 74px;
+      padding-top: 44px;
       padding-bottom: 30px;
     }
   }

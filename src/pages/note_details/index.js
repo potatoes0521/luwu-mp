@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 12:55:00
+ * @LastEditTime: 2020-06-21 12:59:51
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -164,12 +164,14 @@ class NoteDetails extends Component {
             <View className='details-swiper-wrapper skeleton-square' >
               <ImageSwiper imageList={goodsImageList} />
             </View>
-            <NoteFromMain
-              showRemark
-              item={this.state}
-            />
+            <View className='form-wrapper'>
+              <NoteFromMain
+                showRemark
+                item={this.state}
+              />
+            </View>
             {
-              (priceTagImageList || idCardImageList) && (
+              ((priceTagImageList && priceTagImageList.length) || (idCardImageList && idCardImageList.length)) && (
                 <View className='image-list-wrapper'>
                   {
                     priceTagImageList && (
