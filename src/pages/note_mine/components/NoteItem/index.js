@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-19 09:47:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 00:15:11
+ * @LastEditTime: 2020-06-21 10:02:33
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -14,7 +14,9 @@ import { View, Text } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import Upload from '@components/Upload'
 import Location from '@components/Location'
-import {setStorage, removeStorage} from '@utils/storage'
+import { setStorage, removeStorage } from '@utils/storage'
+import NoteFromMain from '@/note_components/NoteFormMain'
+
 import './index.scss'
 
 export default class NoteItem extends Component { 
@@ -37,12 +39,7 @@ export default class NoteItem extends Component {
   }
   render() {
     const { item } = this.props
-    const categoryName = item.mainCategory && item.mainCategory.categoryName || ''
-    const brandName = item.brand && item.brand.brandName || ''
-    const price = item.price || '-'
-    const priceUnit = item.priceUnit || '-'
-    const model = item.model || '-'
-    const time = item.createAt
+    
     return (
       <View className='note-item'>
         <Location onlyShow address={item.address} >
@@ -53,32 +50,7 @@ export default class NoteItem extends Component {
           </View>
         </Location>
         <View className='note-main' onClick={this.navigatorToDetails.bind(this)}>
-          <View className='note-line-details skeleton-square'>
-            <View className='note-detail-item'>
-              <View className='note-detail-item-label'>品类</View>
-              <View className='note-detail-item-content'>{categoryName}</View>
-            </View>
-            <View className='note-detail-item'>
-              <View className='note-detail-item-label'>品牌</View>
-              <View className='note-detail-item-content'>{brandName}</View>
-            </View>
-          </View>
-          <View className='note-line-details skeleton-square'>
-            <View className='note-detail-item'>
-              <View className='note-detail-item-label'>价格</View>
-              <View className='note-detail-item-content'>{price}{priceUnit ? '/' : ''}{priceUnit}</View>
-            </View>
-            <View className='note-detail-item'>
-              <View className='note-detail-item-label'>型号</View>
-              <View className='note-detail-item-content'>{model}</View>
-            </View>
-          </View>
-          <View className='note-line-details skeleton-square'>
-            <View className='note-detail-item'>
-              <View className='note-detail-item-label'>记录时间</View>
-              <View className='note-detail-item-content'>{time}</View>
-            </View>
-          </View>
+          <NoteFromMain item={item} />
           <View className='upload'>
             <Upload
               marginRightSize={42}
