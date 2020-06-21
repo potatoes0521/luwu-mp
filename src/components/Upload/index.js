@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 17:35:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 11:03:50
+ * @LastEditTime: 2020-06-21 11:06:52
  * @mustParam: 必传参数
  *  imageList 要展示的图片
  * @optionalParam: 选传参数
@@ -44,7 +44,15 @@ export default class Upload extends Component {
    */
   chooseImage(e) {
     e && e.stopPropagation();
-    uploadImage({}).then(res => {
+    const { maxCount, imageList } = this.props
+    let count = 9
+    if (maxCount !== -1) {
+      count = maxCount - imageList.length
+    }
+    if (count === 0) {return}
+    uploadImage({
+        count
+      }).then(res => {
       this.props.onUploadOK(res)
     })
   }
