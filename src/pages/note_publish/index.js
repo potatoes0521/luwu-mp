@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 09:54:04
+ * @LastEditTime: 2020-06-21 11:28:51
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -244,9 +244,13 @@ class NotePublish extends Component {
       })
       removeStorage('choose_category')
       this.timer = setTimeout(() => {
-        Taro.redirectTo({
-          url: `/pages/note_details/index?noteId=${res.noteId}`
-        })
+        if (this.pageParams.pageType === 'edit') { 
+          Taro.navigateBack()
+        } else {
+          Taro.redirectTo({
+            url: `/pages/note_details/index?noteId=${res.noteId}`
+          })
+        }
       }, 1800)
     })
   }
