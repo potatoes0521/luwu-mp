@@ -9,6 +9,7 @@ module.exports = {
   mini: {},
   h5: {},
   alias: {
+    '@': path.resolve(__dirname, '..', 'src'),
     '@services': path.resolve(__dirname, '..', 'src/services'),
     '@components': path.resolve(__dirname, '..', 'src/components'),
     '@containers': path.resolve(__dirname, '..', 'src/containers'),

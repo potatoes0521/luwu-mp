@@ -18,6 +18,7 @@ module.exports = {
      */
   },
   alias: {
+    '@': path.resolve(__dirname, '..', 'src'),
     '@services': path.resolve(__dirname, '..', 'src/services'),
     '@components': path.resolve(__dirname, '..', 'src/components'),
     '@containers': path.resolve(__dirname, '..', 'src/containers'),
