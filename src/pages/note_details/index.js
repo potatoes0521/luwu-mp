@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 12:05:44
+ * @LastEditTime: 2020-06-21 12:06:44
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -30,7 +30,7 @@ import ImageVerticalList from './components/ImageVerticalList'
 
 import './index.scss'
 
-class index extends Component { 
+class NoteDetails extends Component { 
 
   constructor(props) {
     super(props)
@@ -199,4 +199,4 @@ const mapStateToProps = (state) => {
     system: state.system.systemInfo
   }
 }
-export default connect(mapStateToProps)(index)
+export default connect(mapStateToProps)(NoteDetails)
