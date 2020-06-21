@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:36
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 00:22:36
+ * @LastEditTime: 2020-06-21 11:25:50
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -17,9 +17,9 @@ import Skeleton from '@components/Skeleton'
 import { getNoteList } from '@services/modules/note'
 import { defaultResourceImgURL } from '@config/request_config'
 import Login from '@utils/login'
+import BottomBtn from '@/note_components/BottomBtn'
 import NoteItem from './components/NoteItem'
 import NoteSelect from './components/NoteSelect'
-import BottomBtn from './components/bottomBtn'
 
 import './index.scss'
 
@@ -113,7 +113,12 @@ class NoteMine extends Component {
     // 停止下拉动作
     Taro.stopPullDownRefresh();
   }
-
+  
+  handleOnRightBtnClick() { 
+    Taro.navigateTo({
+      url: `/pages/note_publish/index`
+    })
+  }
 
   /**
    * 页面内转发
@@ -165,7 +170,9 @@ class NoteMine extends Component {
           {
             noteListRender
           }
-          <BottomBtn />
+          <BottomBtn
+            onRightBtnClick={this.handleOnRightBtnClick.bind(this)}
+          />
         </View>
         {!loading && <Skeleton />}
       </SaveAreaView>
