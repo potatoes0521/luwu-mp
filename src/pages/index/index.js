@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 19:32:16
+ * @LastEditTime: 2020-06-22 17:57:39
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -21,11 +21,10 @@ import { getIndexListData } from '@services/modules/index'
 import Skeleton from '@components/Skeleton'
 import Login from '@utils/login'
 import ListItem from './components/ListItem/index'
-import mock from '../../mock/index.json'
 
 import './index.scss'
 
-const bannerBigImg = `${defaultResourceImgURL}index/bannerBig.png`
+const bannerBigImg = `${defaultResourceImgURL}index/bannerBig.png?${Math.random()}`
 
 class Index extends Component {
   constructor() { 
@@ -49,7 +48,7 @@ class Index extends Component {
   getListData() { 
     getIndexListData(this).then(res => {
       this.setState({
-        listData: mock,
+        listData: res,
       })
     })
   }
