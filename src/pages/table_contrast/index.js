@@ -5,7 +5,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 14:49:22
+ * @LastEditTime: 2020-06-22 14:57:49
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -71,7 +71,8 @@ class TableContrast extends Component {
           return {
             projectName: ite.projectName,
             projectId: ite.projectId,
-            special: ite.special
+            special: ite.special,
+            unit: ite.unit
           }
         }),
         projectArea: item.projectArea,
@@ -81,7 +82,6 @@ class TableContrast extends Component {
     this.setState({
       projectAreaList: projectAreaList
     })
-    console.log('newMock', newMock)
     // 处理每个公司的数据
     let createCompanyStateData = {}
     for (let i = 0; i < companyData.length; i++) {

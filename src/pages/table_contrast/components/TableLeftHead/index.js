@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-22 10:35:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 14:54:36
+ * @LastEditTime: 2020-06-22 14:56:06
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -50,7 +50,7 @@ export default class TableLeftHead extends Component {
           <View className={headTitleClassName}>{ite.projectName}</View>
           <View className='table-item-right border-left'>
             <View className='left-head-item-child border-bottom border-right'>元</View>
-            <View className={pingMiClassName}>㎡</View>
+            <View className={pingMiClassName}>{ite.unit || '㎡'}</View>
             <View
               className={remarkClassName}
               style={{display: hiddenRemark ? 'none' : 'flex'}}
