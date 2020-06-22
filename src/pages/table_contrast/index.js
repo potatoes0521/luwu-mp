@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 00:07:49
+ * @LastEditTime: 2020-06-22 14:34:52
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -12,19 +12,22 @@
 import Taro, { Component } from '@tarojs/taro'
 import {
   View,
-  Text,
-  Block
+  Text
 } from '@tarojs/components'
-import classNames from 'classnames'
 import { connect } from '@tarojs/redux'
 // import {} from '@services/modules'
 import SaveAreaView from '@components/SafeAreaView'
+import HouseMsg from './components/HouseMsg'
+import TableLeftHead from './components/TableLeftHead'
+import TableMain from './components/TableMain'
+
 import {
   companyData,
-  tableDataM
+  handleNewData
 } from '../../mock/table'
+import newMock from '../../mock/table_new.json'
+
 import './index.scss'
-import mock from '../../mock/table.json'
 
 class TableContrast extends Component {
 
@@ -34,58 +37,61 @@ class TableContrast extends Component {
       companyTableList: companyData,
       tableData: [],
       hiddenRemark: true,
-      hiddenIdentical: false
-      // projectAreaList: [],
+      hiddenIdentical: false,
+      projectAreaList: [],
+      companyData0: null,
+      companyData1: null,
+      companyData2: null,
+      companyData3: null,
+      companyData4: null,
+      companyData5: null,
+      companyData6: null,
+      companyData7: null,
+      companyData8: null,
+      companyData9: null,
+      companyData10: null,
     }
-    this.offsetTop = 99999
     this.mockData = []
   }
 
   componentDidMount() {
     this.handleMockData()
-    this.getTableOffset()
   }
-  getTableOffset() { 
-    Taro.createSelectorQuery()
-      .selectAll('.house-msg-wrapper')
-      .boundingClientRect()
-      .exec(res => {
-        this.offsetTop = res[0][0].height
-      })
-  }
-  handleMockData() { 
-    tableDataM(mock)
-    const projectAreaList = mock.map((item, index) => {
-      if (item.projectArea) {
-        return {
-          projectArea: item.projectArea,
-          index
-        }
+  handleMockData() {
+    const handleEndMockData = handleNewData(newMock)
+    const handleData = handleEndMockData.data
+    const projectAreaList = handleData.map((item, index) => {
+      return {
+        projectAreaList: item.items.map(ite => ite.projectName),
+        projectArea: item.projectArea,
+        special: item.special,
+        index
       }
     }).filter(item => !!item)
-    let data = []
-    for (let i = 0; i < projectAreaList.length; i++) {
-      let arr = []
-      mock.forEach((item, index) => {
-        if (item.projectArea && item.projectArea === projectAreaList[i].projectArea) {
-          arr = mock.slice(index + 1, projectAreaList[i + 1] ? projectAreaList[i + 1].index - 1 : -1)
+    let createCompanyStateData = {}
+    for (let i = 0; i < companyData.length; i++) {
+      const data = handleEndMockData.deepArr.map(item => {
+        return {
+          projectId: item.projectId,
+          projectName: item.projectName,
+          remark: item.remark,
+          price: item.shops[i][0] || '-',
+          num: item.shops[i][1] || '-',
+          totalPrice: item.shops[i][2] || '-'
         }
       })
-      data.push({
-        projectArea: projectAreaList[i].projectArea,
-        data: arr
-      })
+      createCompanyStateData[`companyData${i}`] = data
     }
-    console.log(data)
-    this.mockData = [...data]
+    this.setState(createCompanyStateData)
     this.setState({
-      tableData: data,
-      // projectAreaList: projectAreaList
+      // tableData: data,
+      projectAreaList: projectAreaList
     })
   }
-  
-  toggleHiddenRemark() { 
-    const { hiddenRemark } = this.state
+  toggleHiddenRemark() {
+    const {
+      hiddenRemark
+    } = this.state
     this.setState({
       hiddenRemark: !hiddenRemark
     })
@@ -96,8 +102,8 @@ class TableContrast extends Component {
       hiddenIdentical: !hiddenIdentical
     })
   }
-  hiddenCompany(index) { 
-    console.log('index', index)
+  
+  hiddenCompany(index) {
     let { companyTableList, tableData } = this.state
     companyTableList.splice(index, 1)
     tableData.forEach(item => {
@@ -110,9 +116,9 @@ class TableContrast extends Component {
     this.setState({
       companyTableList,
       tableData
-    })
-    
+    }) 
   }
+
   showAllData() { 
     this.setState({
       tableData: this.mockData
@@ -121,6 +127,7 @@ class TableContrast extends Component {
         this.forceUpdate()
     })
   }
+  
   config = {
     navigationBarTitleText: '我的',
     navigationStyle: 'custom'
@@ -130,23 +137,15 @@ class TableContrast extends Component {
     const {
       companyTableList,
       hiddenRemark,
-      tableData,
-      // projectAreaList
+      projectAreaList,
       hiddenIdentical
     } = this.state
-    // 左边数量要不要展示下边框   不展示工艺说明就有下边框
-    const leftItemChildClassName = classNames('item-child item-child-90', {
-      'border-bottom': !hiddenRemark
-    })
-    // 右边数量要不要展示下边框   不展示工艺说明就有下边框
-    const rightItemChildClassName = classNames('right-col-span-item-child item-child-90 area-background', {
-      'border-bottom': !hiddenRemark
-    })
+    // 公司列表
     const companyListRender = companyTableList.map((item, index) => {
       const key = item.companyId
       return (
         <View
-          className='head-background left-table-item-90 width196 border-top'
+          className='head-background left-table-item-90 width196 border-right border-bottom'
           key={key}
         >
           <View className='company-title padding-top10'>{item.companyName}</View>
@@ -154,156 +153,56 @@ class TableContrast extends Component {
         </View>
       )
     })
+    // 总价列表
     const companyTotalPriceListRender = companyTableList.map(item => {
       const key = item.companyId
       return (
         <View
-          className='left-table-item-90 align-canter font26 width196'
+          className='left-table-item-90 border-right font26 width196'
           key={key}
         >
           <Text className='company-title'>{item.totalPrice}</Text>
         </View>
       )
     })
-    const headTitleClassName = classNames('table-item-title', {
-      'shengluehao': hiddenRemark
-    })
-    const projectAreaListArea = tableData.map(item => {
-      const key = item.projectArea
-      let data = item.data
-      if (hiddenIdentical) {
-        data = item.data.filter(ite => ite.hide)
-        console.log('data', data)
-      }
-      const headListRender = data.map(ite => {
-        const ke = ite.projectName
-        return (
-          <View
-            className='table-item-col-span head-background'
-            key={ke}
-          >
-            <View className={headTitleClassName}>{ite.projectName}</View>
-            <View className='table-item-right'>
-              <View className='item-child border-bottom'>元</View>
-              <View className={leftItemChildClassName}>㎡</View>
-              <View
-                className='item-child table-item-bottom'
-                style={{display: hiddenRemark ? 'none' : 'flex'}}
-              >工艺说明</View>
-            </View>
-          </View>
-        )
-      })
+    const projectAreaListArea = projectAreaList.map(item => {
+      const key = item.index
       return (
-        <Block key={key}>
-          <View className='area'>{item.projectArea}</View>
-          {/* <View className='area'></View> */}
-          {
-            headListRender
-          }
-        </Block>
+        <TableLeftHead
+          key={key}
+          item={item}
+          hiddenRemark={hiddenRemark}
+          hiddenIdentical={hiddenIdentical}
+        />
       )
     })
-    const projectListRender = tableData.map(item => {
-      const key = item.projectArea
-      let data = item.data
-      if (hiddenIdentical) {
-        data = item.data.filter(ite => ite.hide)
-      }
-      const list = data.map(ite => {
-        const ke = ite.projectName
-        const sonItem = ite && ite.priceList && ite.priceList.map((it, index) => {
-          const k = it
-          return (
-            <View className='right-col-span' key={k}>
-              <View className='right-col-span-item-child border-bottom price-background'>{it || '-'}</View>
-              <View className={rightItemChildClassName}>{ite.areaList[index] || '-'}</View>
-              <View
-                className='right-col-span-item-child table-item-bottom remark-font'
-                style={{display: hiddenRemark ? 'none' : 'flex'}}
-              >
-                <View className='remark'>
-                  {ite.remark || '-'}
-                </View>
-              </View>
-            </View>
-          )
-        })
-        return (
-          <View
-            className='company-list-wrapper'
-            key={ke}
-          >
-            {
-              sonItem
-            }
-          </View>
-        )
-      })
-      return (
-        <Block key={key}>
-          <View className='area-static'></View>
-          {
-            list
-          }
-        </Block>
-      )
-    })
+    
     return (
       <SaveAreaView
         title='TA家的比价'
         back
       >
         <View className='page-wrapper'>
-          <View className='house-msg-wrapper'>
-            <View className='msg-tips'>
-              <Text className='text'>昌平区</Text>
-              <Text className='msg-tips-line'></Text>
-              <Text className='text'>张先生</Text>
-              <Text className='msg-tips-line'></Text>
-              <Text className='text'>48㎡</Text>
-              <Text className='msg-tips-line'></Text>
-              <Text className='text'>一室一厅</Text>
-              <Text className='msg-tips-line'></Text>
-              <Text className='text'>新房</Text>
-            </View>
-            <View className='handle-wrapper'>
-              <View
-                className='options-wrapper'
-                onClick={this.toggleHiddenIdentical.bind(this)}
-              >
-                <View className={classNames('circular', {
-                  'circular-active': hiddenIdentical
-                })}
-                ></View>
-                <View className='options-label'>隐藏相同项</View>
-              </View>
-              <View
-                className='options-wrapper'
-                onClick={this.toggleHiddenRemark.bind()}
-              >
-                <View className={classNames('circular', {
-                  'circular-active': !hiddenRemark
-                  })}
-                ></View>
-                <View className='options-label'>显示工艺说明</View>
-              </View>
-            </View>
-          </View>
+          <HouseMsg
+            hiddenRemark={hiddenRemark}
+            hiddenIdentical={hiddenIdentical}
+            onClickRemarkBtn={this.toggleHiddenRemark.bind(this)}
+            onClickIdenticalBtn={this.toggleHiddenIdentical.bind(this)}
+          />
           <View className='table-wrapper'>
-            <View className='table-left'>
-              <View className='left-table-item-90 head-background'>
+            <View className='table-left border-bottom border-right'>
+              <View className='border-bottom left-table-item-90 head-background'>
                 <View className='company-title padding-top10'>公 司</View>
                 <View className='company-handle' onClick={this.showAllData.bind(this)}>全部展开</View>
               </View>
-              <View className='head-background left-table-item-90 align-canter'>
+              <View className='head-background left-table-item-90' >
                 <Text className='company-title'>总价 (元)</Text>
               </View>
               {
                 projectAreaListArea
               }
             </View>
-            <View className='table-right'>
+            <View className='table-right border-bottom' >
               <View className='company-list-wrapper'>
                 {
                   companyListRender
@@ -314,9 +213,11 @@ class TableContrast extends Component {
                   companyTotalPriceListRender
                 }
               </View>
-              {
-                projectListRender
-              }
+              <View className='company-list-wrapper'>
+                <TableMain
+                  {...this.state}
+                />
+              </View>
             </View>
           </View>
         </View>
