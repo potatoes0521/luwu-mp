@@ -5,7 +5,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 15:07:28
+ * @LastEditTime: 2020-06-22 15:20:48
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -102,7 +102,10 @@ class TableContrast extends Component {
           special: item.special
         }
       })
-      createCompanyStateData[`companyData${i}`] = data
+      createCompanyStateData[`companyData${i}`] = {
+        data,
+        companyId: companyData[i].companyId,
+      }
     }
     this.setState(createCompanyStateData)
   }
@@ -127,17 +130,21 @@ class TableContrast extends Component {
     })
   }
   
-  hiddenCompany(index) {
+  hiddenCompany(index, companyId) {
     let { companyTableList } = this.state
     companyTableList.splice(index, 1)
-    const state = {
+    let state = {
       companyTableList,
+    }
+    for (const key in this.state) {
+      if (key.indexOf('companyData') !== -1 && this.state[key] && this.state[key].companyId === +companyId) {
+        state[key] = null
+      }
     }
     this.setState(state)
   }
 
   showAllData() { 
-    console.log('click showAllData')
     this.handleMockData(true)
   }
   
@@ -162,7 +169,7 @@ class TableContrast extends Component {
           key={key}
         >
           <View className='company-title padding-top10'>{item.companyName}</View>
-          <View className='company-handle' onClick={this.hiddenCompany.bind(this, index)}>隐藏</View>
+          <View className='company-handle' onClick={this.hiddenCompany.bind(this, index, key)}>隐藏</View>
         </View>
       )
     })
