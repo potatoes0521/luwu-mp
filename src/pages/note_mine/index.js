@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:36
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 19:54:08
+ * @LastEditTime: 2020-06-22 10:05:21
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -154,7 +154,6 @@ class NoteMine extends Component {
       selectTitleText
     } = this.state
     const { userInfo } = this.props
-    console.log('noteList', noteList)
     const noteListRender = noteList.map(item => {
       const key = item.noteId
       return (
