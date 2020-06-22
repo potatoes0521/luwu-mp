@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-22 10:35:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 14:20:50
+ * @LastEditTime: 2020-06-22 14:41:53
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -28,14 +28,17 @@ export default class TableLeftHead extends Component {
       data = item.projectAreaList.filter(ite => ite.hide)
     }
     const headListRender = data.map((ite, idx) => {
+      // 打开工艺说明 高度变高
       const headTitleClassName = classNames('table-item-title', {
         'border-bottom': idx !== data.length - 1,
         'height180': hiddenRemark,
         'height300': !hiddenRemark,
       })
+      // 打开工艺说明 没有下边框 用工艺说明的上边框
       const pingMiClassName = classNames('left-head-item-child border-right', {
         'border-bottom': hiddenRemark && idx !== data.length - 1
       })
+      // 该区域最后一个工艺说明没有下边框
       const remarkClassName = classNames('left-head-item-child table-item-bottom border-right border-top', {
         'border-bottom': idx !== data.length - 1
       })
