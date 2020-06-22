@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-22 14:31:15
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 15:18:01
+ * @LastEditTime: 2020-06-22 15:44:30
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -30,11 +30,12 @@ export default class TableMain extends Component {
     }
     const renderDom = data.map((item, index) => {
       const key = item.projectId
+      // 下边框显示规则  下一个不能是换区域  下一个不能是最后一个 不能打开备注
       const pingMiClassName = classNames('right-item-child border-right', {
-        'border-bottom': hiddenRemark && index !== data.length - 1
+        'border-bottom': hiddenRemark && index !== data.length - 1 && !(data[index + 1].projectId - item.projectId > 10)
       })
       const remarkClassName = classNames('right-item-child right-item-child-remark border-right border-top', {
-        'border-bottom': index !== data.length - 1
+        'border-bottom': index === 0 || !(item.projectId - data[index - 1].projectId > 10)
       })
       return (
         <Block key={key}>
