@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-22 10:35:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 14:56:06
+ * @LastEditTime: 2020-06-22 15:29:06
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -42,9 +42,12 @@ export default class TableLeftHead extends Component {
       const remarkClassName = classNames('left-head-item-child table-item-bottom border-right border-top', {
         'border-bottom': idx !== data.length - 1
       })
+      const HeaderClassName = classNames('table-item-col-span head-background', {
+        'warning-background': ite.special
+      })
       return (
         <View
-          className='table-item-col-span head-background'
+          className={HeaderClassName}
           key={ite}
         >
           <View className={headTitleClassName}>{ite.projectName}</View>
