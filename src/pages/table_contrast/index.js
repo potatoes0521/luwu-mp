@@ -5,7 +5,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 15:20:48
+ * @LastEditTime: 2020-06-22 15:27:03
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -91,6 +91,10 @@ class TableContrast extends Component {
     // 处理每个公司的数据
     let createCompanyStateData = {}
     for (let i = 0; i < companyData.length; i++) {
+      // 如果是二次渲染全部  并且  数值不是null 
+      if (showAll && createCompanyStateData[`companyData${i}`]) {
+        continue
+      }
       const data = handleEndMockData.deepArr.map(item => {
         return {
           projectId: item.projectId,
