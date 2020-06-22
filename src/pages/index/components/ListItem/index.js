@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 09:38:57
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 19:33:33
+ * @LastEditTime: 2020-06-22 08:52:02
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -51,6 +51,7 @@ export default class ListItem extends Component {
   componentDidMount() { 
     this.getImageInfo()
   }
+  
   componentWillReceiveProps(nextProps) { 
     if (nextProps.showIndex === this.props.showIndex) { 
       return
@@ -58,12 +59,16 @@ export default class ListItem extends Component {
       this.handleCloseAnimation()
     }
   }
+  componentDidShow() {
+    this.getViewHeight()
+  }
   /**
    * 获取item的真实高度
    * @return void
    */
   getViewHeight() { 
-    const {index} = this.props
+    const { index } = this.props
+    if (this.mainHeight) return
     Taro.createSelectorQuery()
       .selectAll('.page-wrapper >>> .item-main')
       .boundingClientRect()
