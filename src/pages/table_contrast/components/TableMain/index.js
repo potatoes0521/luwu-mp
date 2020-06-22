@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-22 14:31:15
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 14:35:05
+ * @LastEditTime: 2020-06-22 14:53:10
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -21,7 +21,13 @@ import './index.scss'
 
 export default class TableMain extends Component { 
   _renderCell(data) {
-    const {hiddenRemark} = this.props
+    const {
+      hiddenRemark,
+      hiddenIdentical
+    } = this.props
+    if (hiddenIdentical) {
+      data = data.filter(item => item.special)
+    }
     const renderDom = data.map((item, index) => {
       const key = item.projectId
       const pingMiClassName = classNames('right-item-child border-right', {

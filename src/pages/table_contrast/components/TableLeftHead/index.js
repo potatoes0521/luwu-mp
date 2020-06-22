@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-22 10:35:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 14:49:41
+ * @LastEditTime: 2020-06-22 14:54:36
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -25,7 +25,7 @@ export default class TableLeftHead extends Component {
     } = this.props
     let data = item.projectAreaList
     if (hiddenIdentical) {
-      data = item.projectAreaList.filter(ite => ite.hide)
+      data = item.projectAreaList.filter(ite => ite.special)
     }
     const headListRender = data.map((ite, idx) => {
       // 打开工艺说明 高度变高
