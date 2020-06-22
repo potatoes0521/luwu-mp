@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 12:12:47
+ * @LastEditTime: 2020-06-22 17:18:59
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -215,7 +215,6 @@ class NotePublish extends Component {
         }
       }
     }
-    console.log('breakName', breakName)
     if (breakName) {
       Taro.showToast({
         title: testKey[breakName],
