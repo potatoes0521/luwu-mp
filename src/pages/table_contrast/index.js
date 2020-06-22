@@ -5,7 +5,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 14:44:35
+ * @LastEditTime: 2020-06-22 14:49:22
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -67,15 +67,21 @@ class TableContrast extends Component {
     // 取出来工艺列表
     const projectAreaList = handleData.map((item, index) => {
       return {
-        projectAreaList: item.items.map(ite => ite.projectName),
+        projectAreaList: item.items.map(ite => {
+          return {
+            projectName: ite.projectName,
+            projectId: ite.projectId,
+            special: ite.special
+          }
+        }),
         projectArea: item.projectArea,
-        special: item.special,
         index
       }
     }).filter(item => !!item)
     this.setState({
       projectAreaList: projectAreaList
     })
+    console.log('newMock', newMock)
     // 处理每个公司的数据
     let createCompanyStateData = {}
     for (let i = 0; i < companyData.length; i++) {
@@ -86,7 +92,8 @@ class TableContrast extends Component {
           remark: item.remark,
           price: item.shops[i][0] || '-',
           num: item.shops[i][1] || '-',
-          totalPrice: item.shops[i][2] || '-'
+          totalPrice: item.shops[i][2] || '-',
+          special: item.special
         }
       })
       createCompanyStateData[`companyData${i}`] = data
@@ -103,6 +110,10 @@ class TableContrast extends Component {
       hiddenRemark: !hiddenRemark
     })
   }
+  /**
+   * 处理隐藏相同项
+   * @return void
+   */
   toggleHiddenIdentical() {
     const { hiddenIdentical } = this.state
     this.setState({

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-22 10:35:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 14:41:53
+ * @LastEditTime: 2020-06-22 14:49:41
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -47,7 +47,7 @@ export default class TableLeftHead extends Component {
           className='table-item-col-span head-background'
           key={ite}
         >
-          <View className={headTitleClassName}>{ite}</View>
+          <View className={headTitleClassName}>{ite.projectName}</View>
           <View className='table-item-right border-left'>
             <View className='left-head-item-child border-bottom border-right'>元</View>
             <View className={pingMiClassName}>㎡</View>
