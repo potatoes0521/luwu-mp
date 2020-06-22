@@ -1,10 +1,11 @@
 /*
  * @Author: liuYang
- * @description: 请填写描述信息
+ * @description: 比价表格
+ *  定义N多个公司按照N多个公司数据渲染 为了提高渲染效率
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 14:43:53
+ * @LastEditTime: 2020-06-22 14:44:35
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
