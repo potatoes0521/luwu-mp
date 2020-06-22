@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 14:34:52
+ * @LastEditTime: 2020-06-22 14:43:53
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -35,7 +35,6 @@ class TableContrast extends Component {
     super(props)
     this.state = {
       companyTableList: companyData,
-      tableData: [],
       hiddenRemark: true,
       hiddenIdentical: false,
       projectAreaList: [],
@@ -57,9 +56,14 @@ class TableContrast extends Component {
   componentDidMount() {
     this.handleMockData()
   }
+  /**
+   * 处理模拟数据源
+   * @return void
+   */
   handleMockData() {
     const handleEndMockData = handleNewData(newMock)
     const handleData = handleEndMockData.data
+    // 取出来工艺列表
     const projectAreaList = handleData.map((item, index) => {
       return {
         projectAreaList: item.items.map(ite => ite.projectName),
@@ -68,6 +72,10 @@ class TableContrast extends Component {
         index
       }
     }).filter(item => !!item)
+    this.setState({
+      projectAreaList: projectAreaList
+    })
+    // 处理每个公司的数据
     let createCompanyStateData = {}
     for (let i = 0; i < companyData.length; i++) {
       const data = handleEndMockData.deepArr.map(item => {
@@ -83,15 +91,13 @@ class TableContrast extends Component {
       createCompanyStateData[`companyData${i}`] = data
     }
     this.setState(createCompanyStateData)
-    this.setState({
-      // tableData: data,
-      projectAreaList: projectAreaList
-    })
   }
+  /**
+   * 处理切换显示工艺说明
+   * @return void
+   */
   toggleHiddenRemark() {
-    const {
-      hiddenRemark
-    } = this.state
+    const { hiddenRemark } = this.state
     this.setState({
       hiddenRemark: !hiddenRemark
     })
@@ -165,6 +171,7 @@ class TableContrast extends Component {
         </View>
       )
     })
+    // 所有工艺项的列表
     const projectAreaListArea = projectAreaList.map(item => {
       const key = item.index
       return (
