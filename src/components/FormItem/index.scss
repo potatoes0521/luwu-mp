@@ -30,7 +30,6 @@
     }
 
     .last-tips {
-      width: 108px;
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -48,6 +47,12 @@
       .rotated {
         transform: rotate(180deg);
       }
+    }
+    .lang-tips-wrapper {
+      width: 108px;
+    }
+    .short-tips-wrapper {
+      width: 60px;
     }
   }
 }
