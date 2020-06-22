@@ -63,7 +63,6 @@ export default class Upload extends Component {
    */
   showImage(item, e) {
     e && e.stopPropagation();
-    console.log('item', item)
     Taro.previewImage({
       current: item,
       urls: this.props.imageList

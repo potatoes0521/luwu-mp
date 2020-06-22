@@ -21,7 +21,6 @@ let token = ''
 store.subscribe(() => {
   let state = store.getState(); //Redux数据state tree，由于使用了subscribe，当数据更改时会重新获取
   token = state.user_msg.userInfo.token
-  console.log('token =======', token)
 })
 // import createSignData from './secret'
 const isProd = process.env.NODE_ENV === "production";

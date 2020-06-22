@@ -19,7 +19,6 @@ export const getUserLocation = () => {
     Taro.getLocation({
       type: 'gcj02'
     }).then(res => {
-      console.log(res)
       resolve(res)
     }).catch((err) => {
       reject(err);

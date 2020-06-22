@@ -211,7 +211,6 @@ const handleHide = (item, data) => {
     let arr = data.slice(0,3)
     for (let i of arr) {
       if (!i) {
-        console.log('i', i, data)
         return true
       }
     }

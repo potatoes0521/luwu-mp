@@ -52,8 +52,6 @@ class ChooseItem extends Component {
       const mainCategoriesList = res.filter(item => item.categoryLevel === 1)
       const childCategoriesList = res.filter(item => item.categoryLevel === 2)
       this.AllChildCategoriesList = childCategoriesList
-      console.log('mainCategoriesList', mainCategoriesList)
-      console.log('childCategoriesList', childCategoriesList)
       this.setState({
         mainCategoriesList
       }, () => {
@@ -83,7 +81,6 @@ class ChooseItem extends Component {
    * @return void
    */
   chooseMainCategories(item, autoSelectNext) {
-    console.log('item1111', autoSelectNext)
     const { selectMainCategoriesData, selectChildCategoriesData } = this.state
     if (!autoSelectNext && item.categoryId === selectMainCategoriesData.categoryId) {
       return
@@ -119,7 +116,6 @@ class ChooseItem extends Component {
    * @return void
    */
   chooseChildCategories(item, autoSelectNext) {
-    console.log('item', item, autoSelectNext)
     const { selectChildCategoriesData } = this.state
     if (!autoSelectNext && item.categoryId === selectChildCategoriesData.categoryId) {
       return
@@ -132,7 +128,6 @@ class ChooseItem extends Component {
       data.selectChildCategoriesData = item
       data.selectBrandData = {}
     }
-    console.log('data', data)
     this.setState(data);
   }
   /**

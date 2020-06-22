@@ -31,7 +31,6 @@ class Nav extends Component {
 
   getStatusBarHeight() { 
     const { system } = this.props
-    console.log('system', system)
     if (!system || !system.statusBarHeight){
       getSystemInfo()
     }
