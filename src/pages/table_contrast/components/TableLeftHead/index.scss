@@ -1,0 +1,72 @@
+@import '../../index.scss';
+
+// 单元格  合并项的那种
+.table-item-col-span {
+  width: 172px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+
+  // border-bottom: 2px solid $table-border;
+  // 左边施工条目
+  .table-item-title {
+    flex: 1;
+    overflow-y: auto;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 16px;
+  }
+
+  .height300 {
+    height: 300px;
+  }
+
+  .height180 {
+    height: 180px;
+  }
+
+  // 右边3个的包裹
+  .table-item-right {
+    width: 80px;
+  }
+
+  .left-head-item-child {
+    flex: 1;
+    height: 90px;
+    overflow: hidden;
+    padding: 0 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // border-left: 2px solid $table-border;
+    // border-right: 2px solid $table-border;
+  }
+}
+
+// 装修区域 就中间那一条
+.area {
+  width: 100vw;
+  height: 60px;
+  background-color: $table-background-color;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  position: relative;
+  z-index: 5;
+  border-top: 2px solid $table-border;
+  border-bottom: 2px solid $table-border;
+}
+
+// 区域站位的
+.area-static {
+  width: 100%;
+  height: 64px;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+}
