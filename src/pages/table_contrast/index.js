@@ -5,7 +5,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 15:27:03
+ * @LastEditTime: 2020-06-22 15:54:26
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -62,6 +62,7 @@ class TableContrast extends Component {
    * @return void
    */
   handleMockData(showAll) {
+    console.log('newMock', newMock)
     const handleEndMockData = handleNewData(newMock)
     if (showAll) { // 如果是二次显示  没必要处理一下施工区域
       this.setState({
@@ -100,10 +101,14 @@ class TableContrast extends Component {
           projectId: item.projectId,
           projectName: item.projectName,
           remark: item.remark,
-          price: item.shops[i][0] || '-',
-          num: item.shops[i][1] || '-',
-          totalPrice: item.shops[i][2] || '-',
-          special: item.special
+          price: item.priceArr[i] || '-',
+          num: item.areaArr[i] || '-',
+          totalPrice: item.totalPriceArr[i] || '-',
+          special: item.special,
+          maxPriceNum: item.maxPriceNum,
+          minPriceNum: item.minPriceNum,
+          maxAreaNum: item.maxAreaNum,
+          minAreaNum: item.minAreaNum
         }
       })
       createCompanyStateData[`companyData${i}`] = {

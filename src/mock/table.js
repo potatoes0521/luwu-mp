@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-19 15:04:28
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 13:10:44
+ * @LastEditTime: 2020-06-22 16:10:50
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -94,8 +94,22 @@ export const handleNewData = (mock) => {
   const data = mock.map(item => {
     const arr = item.items.map(ite => {
       const num = item.projectAreaId * 1000 + ite.projectId
+      const priceArr = ite.shops.map(it => parseFloat(it[0]))
+      const areaArr = ite.shops.map(it => parseFloat(it[1]))
+      const totalPriceArr = ite.shops.map(it => parseFloat(it[2]))
+      const maxPriceNum = findMaxNum(priceArr)
+      const minPriceNum = findMinNum(priceArr)
+      const maxAreaNum = findMaxNum(areaArr)
+      const minAreaNum = findMinNum(areaArr)
       return Object.assign({}, ite, {
-        projectId: num
+        projectId: num,
+        priceArr,
+        areaArr,
+        totalPriceArr,
+        maxPriceNum,
+        minPriceNum,
+        maxAreaNum,
+        minAreaNum
       })
     })
     return Object.assign({}, item, {
@@ -118,7 +132,18 @@ const deepFoolData = (mock) => {
   return arr
 }
 
-
+const findMaxNum = (arr) => {
+  arr = arr.map(item => parseFloat(item) || 0)
+  arr.sort((a, b) => b - a)
+  arr = arr.filter(item => !!item)
+  return arr[0]
+}
+const findMinNum = (arr) => {
+  arr = arr.map(item => parseFloat(item) || 0)
+  arr.sort((a, b) => a - b)
+  arr = arr.filter(item => !!item)
+  return arr[0]
+}
 export const tableDataM = (mock) => {
   mock.forEach((item) => {
     item.priceList = []
