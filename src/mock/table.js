@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-19 15:04:28
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-19 21:53:23
+ * @LastEditTime: 2020-06-22 13:10:44
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -14,7 +14,7 @@ export const companyData = [
   {
     companyId: 1,
     companyName: '尚雅建筑',
-    totalPrice: 100,
+    totalPrice: 22470.35,
   },
   {
     companyId: 2,
@@ -29,37 +29,37 @@ export const companyData = [
   {
     companyId: 4,
     companyName: '生活家',
-    totalPrice: 20736.60,
+    totalPrice: 21350.97,
   },
   {
     companyId: 5,
     companyName: '佳时特',
-    totalPrice: 20736.60,
+    totalPrice: 22379.80,
   },
   {
     companyId: 6,
     companyName: '建华',
-    totalPrice: 20736.60,
+    totalPrice: 27966.90,
   },
   {
     companyId: 7,
     companyName: '名都',
-    totalPrice: 20736.60,
+    totalPrice: 22823.82,
   },
   {
     companyId: 8,
     companyName: '天鹏',
-    totalPrice: 20736.60,
+    totalPrice: 21136.84,
   },
   {
     companyId: 9,
     companyName: '装术',
-    totalPrice: 20736.60,
+    totalPrice: 23686.93,
   },
   {
-    companyId: 9,
+    companyId: 10,
     companyName: '美家',
-    totalPrice: 20736.60,
+    totalPrice: 21766.11,
   }
 ]
 
@@ -89,6 +89,35 @@ export const canqiangpiData = {
     }
   ]
 }
+
+export const handleNewData = (mock) => {
+  const data = mock.map(item => {
+    const arr = item.items.map(ite => {
+      const num = item.projectAreaId * 1000 + ite.projectId
+      return Object.assign({}, ite, {
+        projectId: num
+      })
+    })
+    return Object.assign({}, item, {
+      items: arr
+    })
+  })
+  const deepArr = deepFoolData(data)
+  return {
+    data,
+    deepArr
+  }
+}
+
+const deepFoolData = (mock) => {
+  const data = mock.map(item => item.items)
+  let arr = []
+  for (const i of data){
+    arr = [...arr, ...i]
+  }
+  return arr
+}
+
 
 export const tableDataM = (mock) => {
   mock.forEach((item) => {
