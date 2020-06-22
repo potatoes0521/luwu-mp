@@ -5,7 +5,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 14:57:49
+ * @LastEditTime: 2020-06-22 15:07:28
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -35,7 +35,7 @@ class TableContrast extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      companyTableList: companyData,
+      companyTableList: [...companyData],
       hiddenRemark: true,
       hiddenIdentical: false,
       projectAreaList: [],
@@ -61,27 +61,33 @@ class TableContrast extends Component {
    * 处理模拟数据源
    * @return void
    */
-  handleMockData() {
+  handleMockData(showAll) {
     const handleEndMockData = handleNewData(newMock)
-    const handleData = handleEndMockData.data
-    // 取出来工艺列表
-    const projectAreaList = handleData.map((item, index) => {
-      return {
-        projectAreaList: item.items.map(ite => {
-          return {
-            projectName: ite.projectName,
-            projectId: ite.projectId,
-            special: ite.special,
-            unit: ite.unit
-          }
-        }),
-        projectArea: item.projectArea,
-        index
-      }
-    }).filter(item => !!item)
-    this.setState({
-      projectAreaList: projectAreaList
-    })
+    if (showAll) { // 如果是二次显示  没必要处理一下施工区域
+      this.setState({
+        companyTableList: [...companyData],
+      })
+    } else {
+      // 取出来工艺列表
+      const handleData = handleEndMockData.data
+      const projectAreaList = handleData.map((item, index) => {
+        return {
+          projectAreaList: item.items.map(ite => {
+            return {
+              projectName: ite.projectName,
+              projectId: ite.projectId,
+              special: ite.special,
+              unit: ite.unit
+            }
+          }),
+          projectArea: item.projectArea,
+          index
+        }
+      }).filter(item => !!item)
+      this.setState({
+        projectAreaList: projectAreaList
+      })
+    }
     // 处理每个公司的数据
     let createCompanyStateData = {}
     for (let i = 0; i < companyData.length; i++) {
@@ -122,28 +128,17 @@ class TableContrast extends Component {
   }
   
   hiddenCompany(index) {
-    let { companyTableList, tableData } = this.state
+    let { companyTableList } = this.state
     companyTableList.splice(index, 1)
-    tableData.forEach(item => {
-      item.data.forEach(ite => {
-        ite.priceList.splice(index, 1)
-        ite.areaList.splice(index, 1)
-        ite.remarkList.splice(index, 1)
-      })
-    })
-    this.setState({
+    const state = {
       companyTableList,
-      tableData
-    }) 
+    }
+    this.setState(state)
   }
 
   showAllData() { 
-    this.setState({
-      tableData: this.mockData
-    }, () => {
-        console.log('1111', 1111)
-        this.forceUpdate()
-    })
+    console.log('click showAllData')
+    this.handleMockData(true)
   }
   
   config = {
