@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 17:18:59
+ * @LastEditTime: 2020-06-22 17:33:10
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -23,7 +23,7 @@ import { publishNote, getNoteDetails, editNote } from '@services/modules/note'
 import { handleMoney } from '@utils/patter'
 import { setStorage, removeStorage } from '@utils/storage'
 import goodsState from '@config/noteGoodsKey'
-import FormItem from './components/FormItem'
+import FormItem from '@components/FormItem'
 
 import './index.scss'
 
