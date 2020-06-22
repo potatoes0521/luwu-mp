@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 17:35:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 11:06:52
+ * @LastEditTime: 2020-06-22 11:57:22
  * @mustParam: 必传参数
  *  imageList 要展示的图片
  * @optionalParam: 选传参数
@@ -22,7 +22,7 @@ import {
   ScrollView
 } from '@tarojs/components'
 import PropTypes from 'prop-types'
-import { uploadImage } from './upload_request'
+import { uploadImage } from './utils/upload_request'
 
 import './index.scss'
 
