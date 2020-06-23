@@ -20,7 +20,7 @@
     }
 
     &-content {
-      color: #666666;
+      color: $tips-color;
     }
   }
 
@@ -31,6 +31,6 @@
   padding-top: 20px;
   font-size: 28px;
   line-height: 40px;
-  color: #666666;
+  color: $tips-color;
   text-align: justify;
 }
