@@ -22,23 +22,62 @@ page {
 
   .upload-wrapper {
     width: 100%;
-    height: 224px;
     background-color: #ffffff;
-    padding: 34px 30px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    padding: 34px 0 30px;
     box-sizing: border-box;
 
     .upload-view {
+      width: 120px;
       height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      color: #D8D8D8;
+      border: 2px solid #D8D8D8;
+      margin: 0 auto;
     }
 
     .upload-tips {
+      margin-top: 20px;
       font-size: 20px;
       line-height: 28px;
       text-align: center;
       color: $placeholder-color;
+    }
+
+    .upload-over-wrapper {
+      margin-top: 30px;
+
+      .upload-title {
+        font-size: 26px;
+        line-height: 36px;
+        color: $font-color;
+        margin-left: 34px;
+      }
+
+      .upload-over-list {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .file-item {
+          height: 40px;
+          border-radius: 4px;
+          margin-top: 20px;
+          font-size: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          // margin-right: ;
+          color: $link-color;
+          border: 2px solid $link-color;
+          margin-left: 34px;
+          padding: 0 20px;
+        }
+
+      }
     }
   }
 
@@ -51,13 +90,14 @@ page {
     padding-bottom: 4px;
   }
 
-  .remark-wrapper{
+  .remark-wrapper {
     width: 100%;
     height: 182px;
     padding: 20px 30px;
     background-color: #ffffff;
     box-sizing: border-box;
-    .textarea{
+
+    .textarea {
       width: 100%;
       height: 140px;
       border: 2px solid $line-color;
@@ -69,14 +109,17 @@ page {
       box-sizing: border-box;
     }
   }
-  .bottom-tips{
+
+  .bottom-tips {
     line-height: 34px;
     color: #999999;
     font-size: 24px;
     padding-top: 10px;
     padding-left: 30px;
+    padding-bottom: 40px;
   }
-  .fixed-bottom-btm{
+
+  .fixed-bottom-btm {
     width: 100vw;
     height: 140px;
     position: fixed;
@@ -93,4 +136,3 @@ page {
     @include button-style;
   }
 }
-

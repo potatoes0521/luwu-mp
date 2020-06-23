@@ -13,7 +13,9 @@ class OfferExaminePublish extends Component {
 
   constructor(props) {
     super(props)
-    this.state={}
+    this.state = {
+      fileList: [1,2,3,4,5,6]
+    }
   }
 
   async componentDidMount() {
@@ -41,7 +43,18 @@ class OfferExaminePublish extends Component {
     console.log('fileList', fileList)
   }
   render() {
-    const {fileList} = this.state
+    const { fileList } = this.state
+    const fileListRender = fileList.map(item => {
+      const key = item.url
+      return (
+        <View
+          className='file-item'
+          key={key}
+        >
+          1111
+        </View>
+      )
+    })
     return (
       <SafeAreaView
         title='免费帮您审报价'
@@ -53,8 +66,16 @@ class OfferExaminePublish extends Component {
             this.renderTitle('上传户型图和报价单')
           }
           <View className='upload-wrapper'>
-            <View className='upload-view'></View>
+            <View className='upload-view iconfont iconbianzu'></View>
             <View className='upload-tips'>文件支持jpg/png/doc/docx/pdf/xls/xlsx  ( 5MB以内 )</View>
+            <View className='upload-over-wrapper'>
+              <View className='upload-title'>已上传文件</View>
+              <View className='upload-over-list'>
+                {
+                  fileListRender
+                }
+              </View>
+            </View>
           </View>
           {
             this.renderTitle('您的房屋信息')
