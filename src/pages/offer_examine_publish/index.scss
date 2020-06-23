@@ -1,0 +1,90 @@
+@import '../../assets/css/theme.scss';
+@import '../../assets/css/common.scss';
+
+page {
+  background-color: $background-color;
+}
+
+.page-wrapper {
+  padding-top: 10px;
+  padding-bottom: 140px;
+
+  .title {
+    width: 100%;
+    height: 78px;
+    color: $tips-title-color;
+    font-size: 26px;
+    line-height: 36px;
+    padding: 30px 30px 10px;
+    box-sizing: border-box;
+    background-color: $background-color;
+  }
+
+  .upload-wrapper {
+    width: 100%;
+    height: 224px;
+    background-color: #ffffff;
+    padding: 34px 30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+
+    .upload-view {
+      height: 120px;
+    }
+
+    .upload-tips {
+      font-size: 20px;
+      line-height: 28px;
+      text-align: center;
+      color: $placeholder-color;
+    }
+  }
+
+  .form-wrapper {
+    width: 100%;
+    height: 182px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    padding: 0 30px;
+    padding-bottom: 4px;
+  }
+
+  .remark-wrapper{
+    width: 100%;
+    height: 182px;
+    padding: 20px 30px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    .textarea{
+      width: 100%;
+      height: 140px;
+      border: 2px solid $line-color;
+    }
+  }
+  .bottom-tips{
+    line-height: 34px;
+    color: #999999;
+    font-size: 24px;
+    padding-top: 10px;
+    padding-left: 30px;
+  }
+  .fixed-bottom-btm{
+    width: 100vw;
+    height: 140px;
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: #ffffff;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include button-style;
+  }
+}
+
