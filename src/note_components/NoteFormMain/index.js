@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-21 09:58:20
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 10:35:09
+ * @LastEditTime: 2020-06-23 18:29:21
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -21,8 +21,8 @@ import './index.scss'
 export default class NoteFormMain extends Component {
   render() {
     let { item, showRemark } = this.props
-    const categoryName = item.mainCategory && item.mainCategory.categoryName || ''
-    const brandName = item.brand && item.brand.brandName || ''
+    const categoryName = item.mainCategory && item.mainCategory.categoryName || '-'
+    const brandName = item.brand && item.brand.brandName || '-'
     const price = item.price || '-'
     const priceUnit = item.priceUnit || '-'
     const model = item.model || '-'
