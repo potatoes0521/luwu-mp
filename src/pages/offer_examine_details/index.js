@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-23 10:55:14
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 14:43:36
+ * @LastEditTime: 2020-06-23 16:58:15
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -108,7 +108,6 @@ class OfferExamineDetails extends Component {
 const mapStateToProps = (state) => {
   return {
     userInfo: state.user_msg.userInfo,
-    system: state.system.systemInfo,
   }
 }
 export default connect(mapStateToProps)(OfferExamineDetails)

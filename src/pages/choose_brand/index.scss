@@ -1,0 +1,10 @@
+@import '../../assets/css/theme.scss';
+page{
+  background-color: $background-color;
+}
+.page-wrapper{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
