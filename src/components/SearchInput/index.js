@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-23 15:56:27
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 17:26:15
+ * @LastEditTime: 2020-06-23 17:46:18
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -36,16 +36,16 @@ export default class SearchInput extends Component {
    */
   searchInput(e) { 
     const { value } = e.target
-    const {data} = this.props
-    if (value.length < 1) return
+    const { data, filterKey } = this.props
     this.setState({value})
+    if (value.length < 1) return
     clearTimeout(this.timer)
     this.timer = setTimeout(() => {
       let filterDataList = data.filter(item => {
-        return (item && item['filterKey'] && item['filterKey'].indexOf(value) !== -1) || (item && item.spell && item.spell.indexOf(value) !== -1)
+        return (item && item[filterKey] && item[filterKey].indexOf(value) !== -1) || (item && item.spell && item.spell.indexOf(value) !== -1)
       })
       this.props.onSearchBrandOver(filterDataList)
-    },1000)
+    }, 1000)
   }
   handleClear() { 
     clearTimeout(this.timer)
