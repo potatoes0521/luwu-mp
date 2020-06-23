@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 14:55:39
+ * @LastEditTime: 2020-06-23 15:03:11
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -12,7 +12,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { getCategory, getBrandList } from '@services/modules/category'
+import { getCategory } from '@services/modules/category'
 import SaveAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getStorage } from '@utils/storage'
@@ -26,13 +26,10 @@ class ChooseItem extends Component {
     this.state = {
       mainCategoriesList: [], // 主品类
       childCategoriesList: [], // 子品类
-      brandList: [], // 品牌
       selectMainCategoriesData: {}, // 选中的品类
       selectChildCategoriesData: {}, // 选中的子品类
-      selectBrandData: {}
     }
     this.AllChildCategoriesList = [] // 全部子品类数据
-    this.brandList = []
     this.pageParams = {}
   }
 
@@ -68,7 +65,6 @@ class ChooseItem extends Component {
       this.setState({
         selectMainCategoriesData: res.selectMainCategoriesData, // 选中的品类
         selectChildCategoriesData: res.selectChildCategoriesData, // 选中的子品类
-        selectBrandData: res.selectBrandData
       }, () => {
           this.chooseMainCategories(res.selectMainCategoriesData, true)
       })
@@ -88,25 +84,16 @@ class ChooseItem extends Component {
     let childCategoriesList = this.AllChildCategoriesList.filter(child => child.parentId === item.categoryId)
     let data = {
       childCategoriesList,
-      brandList: [],
     }
     // autoSelectNext 为true是编辑数据  自动选择下一项  故而不清除选中项
     if (!autoSelectNext) {
       data.selectMainCategoriesData = item
       data.selectChildCategoriesData = {}
-      data.selectBrandData = {}
     }
-    this.brandList = []
     this.setState(data, () => {
-      getBrandList({
-        categoryId: item.categoryId,
-        status: 1
-      }, this).then(res => {
-        this.brandList = res
-        if (autoSelectNext) {
-          this.chooseChildCategories(selectChildCategoriesData, autoSelectNext)
-        }
-      })
+      if (autoSelectNext) {
+        this.chooseChildCategories(selectChildCategoriesData, autoSelectNext)
+      }
     });
   }
   /**
@@ -120,32 +107,19 @@ class ChooseItem extends Component {
     if (!autoSelectNext && item.categoryId === selectChildCategoriesData.categoryId) {
       return
     }
-    let data = {
-      brandList: this.brandList
-    }
+    let data = {}
     // autoSelectNext 为true是编辑数据 故而不清除选中项
     if (!autoSelectNext) {
       data.selectChildCategoriesData = item
-      data.selectBrandData = {}
     }
-    this.setState(data);
+    this.setState(data, () => {
+      this.handlePrePageData()
+    });
   }
   /**
-   * 选择品牌
-   * @param {Object} city 选中的品牌
+   * 处理上一页数据并返回
    * @return void
    */
-  chooseBrand(item) {
-    if (!item.categoryId) {
-      return;
-    }
-    this.setState({
-      selectBrandData: item,
-    }, () => {
-        this.handlePrePageData()
-    });
-    
-  }
   handlePrePageData() { 
     let pages = Taro.getCurrentPages() //  获取页面栈
     let prevPage = pages[pages.length - 2] // 上一个页面
@@ -155,12 +129,10 @@ class ChooseItem extends Component {
     const {
       selectMainCategoriesData, // 选中的品类
       selectChildCategoriesData, // 选中的子品类
-      selectBrandData
     } = this.state
     prevPage.$component.setState({
       mainCategory: selectMainCategoriesData,
       childCategory: selectChildCategoriesData,
-      brand: selectBrandData,
       priceUnit: selectChildCategoriesData.unit
     }, () => {
       Taro.navigateBack()
@@ -176,10 +148,8 @@ class ChooseItem extends Component {
     const {
       mainCategoriesList,
       childCategoriesList,
-      brandList,
       selectMainCategoriesData, // 选中的品类
       selectChildCategoriesData, // 选中的子品类
-      selectBrandData
     } = this.state
     const {system} = this.props
     const navHeight = system && system.navHeight || 120
@@ -199,30 +169,16 @@ class ChooseItem extends Component {
     const childCategoriesRender = childCategoriesList.map(item => {
       const key = item.categoryId
       const active = key === selectChildCategoriesData.categoryId
-      const borderRight = brandList && brandList.length
       return (
         <ListItem
           key={key}
           item={item}
-          borderRight={!borderRight}
           active={active}
           onClickItem={this.chooseChildCategories.bind(this)}
         />
       )
     })
-    const brandListRender = brandList.map(item => {
-      const key = item.brandId
-      const active = key === selectBrandData.brandId
-      return (
-        <ListItem 
-          key={key}
-          item={item}
-          borderLeft
-          active={active}
-          onClickItem={this.chooseBrand.bind(this)}
-        />
-      )
-    })
+   
     return (
       <SaveAreaView
         title='选择品类'
@@ -238,7 +194,6 @@ class ChooseItem extends Component {
           <View className='fixed-nav'>
             <View className='fixed-nav-text'>主品类</View>
             <View className='fixed-nav-text'>子品类</View>
-            <View className='fixed-nav-text'>建材品牌</View>
           </View>
           <View className='main-wrapper'>
             <View className='child-list-wrapper'>
@@ -249,11 +204,6 @@ class ChooseItem extends Component {
             <View className='child-list-wrapper'>
               {
                 childCategoriesRender
-              }
-            </View>
-            <View className='child-list-wrapper'>
-              {
-                brandListRender
               }
             </View>
           </View>
