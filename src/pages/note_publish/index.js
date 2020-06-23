@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 10:34:09
+ * @LastEditTime: 2020-06-23 10:42:53
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -334,7 +334,7 @@ class NotePublish extends Component {
             <FormItem
               line
               important
-              label='品类'
+              label='建材类型'
               unit='icon'
               iconName='iconRectangle rotated'
               value={categoryText}
@@ -347,7 +347,7 @@ class NotePublish extends Component {
               important
               type='digit'
               unit='text'
-              label='价格'
+              label='建材价格'
               value={price}
               unitContent={priceUnit}
               placeholder='请输入'
@@ -355,7 +355,7 @@ class NotePublish extends Component {
             />
             <FormItem
               unit='show'
-              label='型号'
+              label='建材型号'
               value={model}
               placeholder='请输入'
               onInput={this.onModelInput.bind(this)}
@@ -398,6 +398,7 @@ class NotePublish extends Component {
             onGetLocationData={this.onGetLocationData.bind(this)}
           />
           <View className='bottom-wrapper'>
+            <View className='bottom-btn-tips'>保存笔记马上全城询价，50家建材城等着给您报价</View>
             <View className='button' onClick={this.submit.bind(this)}>保存笔记</View>
           </View>
         </View>
