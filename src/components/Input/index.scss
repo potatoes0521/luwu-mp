@@ -1,8 +1,10 @@
 @import '../../assets/css/theme.scss';
-.input-wrapper{
+
+.input-wrapper {
   width: 100%;
 }
-.input-style{
+
+.input-style {
   width: 100%;
   height: 100%;
   color: $tips-color;
@@ -11,11 +13,14 @@
   margin: 0;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   text-align: right;
 }
 
-.placeholder-class{
+.flex-end {
+  justify-content: flex-end;
+}
+
+.placeholder-class {
   font-size: 28px;
   color: $placeholder-color;
 }

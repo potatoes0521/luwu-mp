@@ -4,11 +4,12 @@
  * @path: @components/input
  * @Date: 2020-06-18 14:44:05
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 12:14:20
+ * @LastEditTime: 2020-06-23 16:41:59
  * @mustParam: 必传参数
  *  文档参照 https: //developers.weixin.qq.com/miniprogram/dev/component/input.html
  *  没有封装进去的方法请自行拓展
  *  canInput 是否可以输入
+ *  justify 左右对齐方式  end右对齐 
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
@@ -30,10 +31,12 @@ export default class LickInput extends Component {
       maxlength,
       disabled,
       confirmType,
-      canInput
+      canInput,
+      justify,
     } = this.props
     const lickInputClassName = classNames('input-style', {
-      'placeholder-class': !value
+      'placeholder-class': !value,
+      'flex-end': justify === 'end'
     })
     const valueText = value.length > 18 ? value.substr(0, 18) + '...' : value
     return (
