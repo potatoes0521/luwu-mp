@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 15:08:06
+ * @LastEditTime: 2020-06-23 15:50:02
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -19,7 +19,7 @@ import { getStorage } from '@utils/storage'
 import ListItem from './components/ListItem'
 import './index.scss'
 
-class ChooseItem extends Component { 
+class ChooseCategory extends Component { 
 
   constructor(props) {
     super(props)
@@ -220,4 +220,4 @@ const mapStateToProps = (state) => {
     system: state.system.systemInfo
   }
 }
-export default connect(mapStateToProps)(ChooseItem)
+export default connect(mapStateToProps)(ChooseCategory)
