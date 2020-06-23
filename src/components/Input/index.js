@@ -4,7 +4,7 @@
  * @path: @components/input
  * @Date: 2020-06-18 14:44:05
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 22:55:12
+ * @LastEditTime: 2020-06-23 12:14:20
  * @mustParam: 必传参数
  *  文档参照 https: //developers.weixin.qq.com/miniprogram/dev/component/input.html
  *  没有封装进去的方法请自行拓展
@@ -35,7 +35,7 @@ export default class LickInput extends Component {
     const lickInputClassName = classNames('input-style', {
       'placeholder-class': !value
     })
-    const valueText = value.length > 20 ? value.substr(0, 20) + '...' : value
+    const valueText = value.length > 18 ? value.substr(0, 18) + '...' : value
     return (
       <View className='input-wrapper'>
         {
