@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-23 15:56:27
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 16:48:22
+ * @LastEditTime: 2020-06-23 17:26:15
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,6 +16,11 @@ import ComponentsInput from '../Input'
 import './index.scss'
 
 export default class SearchInput extends Component { 
+  constructor() { 
+    this.state = {
+      value: ''
+    }
+  }
   componentWillUnmount() { 
     clearTimeout(this.timer)
     this.timer = null
@@ -24,11 +29,16 @@ export default class SearchInput extends Component {
     addGlobalClass: true // 允许外部样式修改组件样式
   }
   timer = null
-
+  /**
+   * 开始搜索
+   * @param {Object} e event对象
+   * @return void
+   */
   searchInput(e) { 
     const { value } = e.target
     const {data} = this.props
     if (value.length < 1) return
+    this.setState({value})
     clearTimeout(this.timer)
     this.timer = setTimeout(() => {
       let filterDataList = data.filter(item => {
@@ -37,18 +47,32 @@ export default class SearchInput extends Component {
       this.props.onSearchBrandOver(filterDataList)
     },1000)
   }
+  handleClear() { 
+    clearTimeout(this.timer)
+    this.setState({
+      value: ''
+    }, () => {
+        this.props.onClearInput()
+    })
+  }
   render() {
+    const { value } = this.state
+    
     return (
       <View className='search-wrapper'>
         <View className='search-input'>
-          <View className='iconfont search-icon iconsousuo'></View>
+          <View className='iconfont search-input-icon iconsousuo'></View>
           <View className='input-wrapper'>
             <ComponentsInput
+              value={value}
               placeholder='请输入您想要搜索的品牌名称'
               canInput
               onInput={this.searchInput.bind(this)}
             />
           </View>
+          {
+            value && value.length && <View onClick={this.handleClear.bind(this)} className='iconfont search-input-close-icon iconhuaban'></View>
+          }
         </View>
       </View>
     )
@@ -59,6 +83,9 @@ export default class SearchInput extends Component {
 SearchInput.defaultProps = {
   data: [],
   filterKey: '',
+  onClearInput: () => {
+    console.error('onClearInput is not defined @components/SearchInput')
+  },
   onSearchBrandOver: () => {
     console.error('onSearchBrandOver is not defined @components/SearchInput')
   }
