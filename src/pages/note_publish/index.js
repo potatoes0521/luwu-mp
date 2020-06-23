@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 17:33:10
+ * @LastEditTime: 2020-06-23 10:34:09
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -293,10 +293,13 @@ class NotePublish extends Component {
       brand,
       model,
     } = this.state
+    const { system } = this.props
+    const fixedTipsTop = system && system.navHeight || 120
     const categoryText = mainCategory && mainCategory.categoryId ? mainCategory.categoryName + ' - ' + childCategory.categoryName + ' - ' + brand.brandName : ''
     return (
-      <SaveAreaView title='记笔记' back home >
+      <SaveAreaView title='记笔记' back home>
         <View className='page-wrapper'>
+          <View className='fixed-top-tips' style={{top: fixedTipsTop + 'prx'}}>这么多建材怎么选？记到笔记本里慢慢选~</View>
           <View className='goods-image-wrapper'>
             <View className='goods-image-list-wrapper'>
               <Upload
@@ -309,6 +312,20 @@ class NotePublish extends Component {
               />
             </View>
             <View className='goods-image-tips'>瓷砖类商品照片要注意拍摄光线哦~</View>
+          </View>
+          {
+            this.renderTitle('记笔记')
+          }
+          <View className='remark-wrapper'>
+            <Textarea
+              className='textarea'
+              placeholderClass='placeholder-class'
+              autoHeight
+              placeholder='建材信息记录下来不会忘哟~'
+              value={remark}
+              onInput={this.onRemarkInput.bind(this)}
+              maxlength={500}
+            ></Textarea>
           </View>
           {
             this.renderTitle('您看中的产品信息')
@@ -380,20 +397,6 @@ class NotePublish extends Component {
             address={address}
             onGetLocationData={this.onGetLocationData.bind(this)}
           />
-          {
-            this.renderTitle('备注')
-          }
-          <View className='remark-wrapper'>
-            <Textarea
-              className='textarea'
-              placeholderClass='placeholder-class'
-              autoHeight
-              placeholder='记笔记…'
-              value={remark}
-              onInput={this.onRemarkInput.bind(this)}
-              maxlength={500}
-            ></Textarea>
-          </View>
           <View className='bottom-wrapper'>
             <View className='button' onClick={this.submit.bind(this)}>保存笔记</View>
           </View>
@@ -406,6 +409,7 @@ class NotePublish extends Component {
 const mapStateToProps = (state) => {
   return {
     userInfo: state.user_msg.userInfo,
+    system: state.system.systemInfo
   }
 }
 
