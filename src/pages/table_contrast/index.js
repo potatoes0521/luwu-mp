@@ -5,16 +5,13 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 15:54:26
+ * @LastEditTime: 2020-06-23 09:07:02
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
 import Taro, { Component } from '@tarojs/taro'
-import {
-  View,
-  Text
-} from '@tarojs/components'
+import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 // import {} from '@services/modules'
 import SaveAreaView from '@components/SafeAreaView'
@@ -189,9 +186,7 @@ class TableContrast extends Component {
         <View
           className='left-table-item-90 border-right font26 width196'
           key={key}
-        >
-          <Text className='company-title'>{item.totalPrice}</Text>
-        </View>
+        >{item.totalPrice}</View>
       )
     })
     // 所有工艺项的列表
@@ -225,12 +220,12 @@ class TableContrast extends Component {
                 <View className='company-title padding-top10'>公 司</View>
                 <View className='company-handle' onClick={this.showAllData.bind(this)}>全部展开</View>
               </View>
-              <View className='head-background left-table-item-90' >
-                <Text className='company-title'>总价 (元)</Text>
+              <View className='head-background left-table-item-90'>总价 (元)</View>
+              <View className='head-list-wrapper'>
+                {
+                  projectAreaListArea
+                }
               </View>
-              {
-                projectAreaListArea
-              }
             </View>
             <View className='table-right border-bottom' >
               <View className='company-list-wrapper'>

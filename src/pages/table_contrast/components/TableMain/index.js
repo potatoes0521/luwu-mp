@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-22 14:31:15
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 16:13:37
+ * @LastEditTime: 2020-06-23 09:39:29
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -28,6 +28,10 @@ export default class TableMain extends Component {
     if (hiddenIdentical) {
       data = data.filter(item => item.special)
     }
+    const tableCellWrapperClassName = classNames('table-cell-wrapper', {
+      'height180': hiddenRemark,
+      'height300': !hiddenRemark,
+    })
     const renderDom = data.map((item, index) => {
       const key = item.projectId
       const priceClassName = classNames('right-item-child border-right border-bottom', {
@@ -40,20 +44,25 @@ export default class TableMain extends Component {
         'min-num-height': item.minAreaNum === item.num,
         'border-bottom': hiddenRemark && index !== data.length - 1 && !(data[index + 1].projectId - item.projectId > 10)
       })
-      const remarkClassName = classNames('right-item-child right-item-child-remark border-right border-top', {
+      const remarkClassName = classNames('right-item-child-remark border-right border-top', {
         'border-bottom': index === 0 || !(item.projectId - data[index - 1].projectId > 10)
       })
       return (
-        <Block key={key}>
+            
+        <Block key={key} >
           {
             index === 0 || (item.projectId - data[index - 1].projectId > 10) ? <View className='area-static' > </View> : null
           }
-          <View className={priceClassName}>{item.price || '-'}</View>
-          <View className={pingMiClassName}>{item.num || '-'}</View>
           <View
-            className={remarkClassName}
-            style={{display: hiddenRemark ? 'none' : 'flex'}}
-          >{item.remark || '-'}</View>
+            className={tableCellWrapperClassName}
+          >
+            <View className={priceClassName}>{item.price || '-'}</View>
+            <View className={pingMiClassName}>{item.num || '-'}</View>
+            <View
+              className={remarkClassName}
+              style={{display: hiddenRemark ? 'none' : 'flex'}}
+            >{item.remark || '-'}</View>
+          </View>
         </Block>
       )
     })
@@ -85,7 +94,7 @@ export default class TableMain extends Component {
     const companyData9Render = companyData9 ? this._renderCell(companyData9) : null
     const companyData10Render = companyData10 ? this._renderCell(companyData10) : null
     return (
-      <Block>
+      <View className='table-main-wrapper'>
         {
           companyData0 && <View className='right-table-item-wrapper'>{companyData0Render}</View>
         }
@@ -119,7 +128,7 @@ export default class TableMain extends Component {
         {
           companyData10 && <View className='right-table-item-wrapper'>{companyData10Render}</View>
         }
-      </Block>
+      </View>
     )
   }
 

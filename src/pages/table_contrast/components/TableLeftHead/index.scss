@@ -33,19 +33,33 @@
   // 右边3个的包裹
   .table-item-right {
     width: 80px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
   }
 
   .left-head-item-child {
     flex: 1;
-    height: 90px;
+    width: 100%;
     overflow: hidden;
     padding: 0 10px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
-    // border-left: 2px solid $table-border;
-    // border-right: 2px solid $table-border;
+  }
+  .left-head-item-child-remark{
+    width: 100%;
+    height: 120px;
+    padding: 10px;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    font-size: 20px;
+    box-sizing: border-box;
   }
 }
 
@@ -61,14 +75,6 @@
   z-index: 5;
   border-top: 2px solid $table-border;
   border-bottom: 2px solid $table-border;
-}
-
-// 区域站位的
-.area-static {
-  width: 100%;
-  height: 64px;
-  border-top: 2px solid transparent;
-  border-bottom: 2px solid transparent;
 }
 
 .warning-background{
