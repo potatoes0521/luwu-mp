@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 15:17:57
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 17:40:30
+ * @LastEditTime: 2020-06-23 16:42:57
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  封装了Input样式 文档参照 https: //developers.weixin.qq.com/miniprogram/dev/component/input.html
@@ -75,6 +75,7 @@ export default class FormItem extends Component {
           <View className='form-input-wrapper'>
             <ComponentInput
               type={type}
+              justify='end'
               value={value}
               canInput={canInput}
               disabled={disabled}
