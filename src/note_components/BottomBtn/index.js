@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-20 18:12:25
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 12:56:15
+ * @LastEditTime: 2020-06-22 18:15:07
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -31,7 +31,7 @@ export default class BottomBtn extends Component {
     })
     return (
       <View className={wrapperClassName}>
-        <Button openType='share' className='btn-public share-btn'>分享笔记</Button>
+        <Button openType='share' className='btn-public default-btn'>分享笔记</Button>
         {
           !onlyShowShare && (
             <View className='btn-public plain-btn' onClick={this.navigationTo.bind(this)}>{rightBtnText || ''}</View>

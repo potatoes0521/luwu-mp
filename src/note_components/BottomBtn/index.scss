@@ -18,27 +18,7 @@
   z-index: 3;
   border-top: 2px solid $background-color;
 
-  .btn-public {
-    width: 280px;
-    height: 80px;
-    border-radius: 6px;
-    font-size: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-  }
-
-  .share-btn {
-    background-color: $link-color;
-    color: #ffffff;
-  }
-
-  .plain-btn {
-    border: 1px solid $link-color;
-    background: #ffffff;
-    color: $link-color;
-  }
+  @include button-style;
 
   @include clear-button-default;
 }
