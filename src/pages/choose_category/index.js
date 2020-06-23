@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 15:03:11
+ * @LastEditTime: 2020-06-23 15:08:06
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -113,7 +113,7 @@ class ChooseItem extends Component {
       data.selectChildCategoriesData = item
     }
     this.setState(data, () => {
-      this.handlePrePageData()
+      !autoSelectNext && this.handlePrePageData()
     });
   }
   /**

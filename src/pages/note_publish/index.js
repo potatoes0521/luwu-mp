@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 11:02:42
+ * @LastEditTime: 2020-06-23 15:07:12
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -128,14 +128,12 @@ class NotePublish extends Component {
     const {
       mainCategory,
       childCategory,
-      brand
     } = this.state
-    if (brand && brand.brandName) { 
+    if (childCategory && childCategory.categoryName) {
       url += '?pageType=edit'
       setStorage('choose_category', {
         selectMainCategoriesData: mainCategory,
         selectChildCategoriesData: childCategory,
-        selectBrandData: brand,
       })
     }
     Taro.navigateTo({
@@ -310,7 +308,7 @@ class NotePublish extends Component {
     } = this.state
     const { system } = this.props
     const fixedTipsTop = system && system.navHeight || 120
-    const categoryText = mainCategory && mainCategory.categoryId ? mainCategory.categoryName + ' - ' + childCategory.categoryName + ' - ' + brand.brandName : ''
+    const categoryText = mainCategory && mainCategory.categoryId ? mainCategory.categoryName + ' - ' + childCategory.categoryName : ''
     return (
       <SaveAreaView title='记笔记' back home>
         <View className='page-wrapper'>
