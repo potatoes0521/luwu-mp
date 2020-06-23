@@ -124,7 +124,7 @@ class NotePublish extends Component {
    * @return void
    */
   handleClickChooseCategory() {
-    let url = '/pages/choose_item/index'
+    let url = '/pages/choose_category/index'
     const {
       mainCategory,
       childCategory,
