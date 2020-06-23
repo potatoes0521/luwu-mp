@@ -63,6 +63,7 @@ class App extends Component {
       'pages/auth/index',
       // 选择品类
       'pages/choose_category/index',
+      'pages/choose_brand/index',
       // 表格
       'pages/table_contrast/index',
       // 审报价
