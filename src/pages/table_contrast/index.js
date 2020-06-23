@@ -5,7 +5,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 09:07:02
+ * @LastEditTime: 2020-06-23 11:05:54
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -15,6 +15,7 @@ import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 // import {} from '@services/modules'
 import SaveAreaView from '@components/SafeAreaView'
+import { defaultResourceImgURL } from "@config/request_config"
 import HouseMsg from './components/HouseMsg'
 import TableLeftHead from './components/TableLeftHead'
 import TableMain from './components/TableMain'
@@ -36,6 +37,7 @@ class TableContrast extends Component {
       hiddenRemark: true,
       hiddenIdentical: false,
       projectAreaList: [],
+      isShare: false,
       companyData0: null,
       companyData1: null,
       companyData2: null,
@@ -52,6 +54,10 @@ class TableContrast extends Component {
   }
 
   componentDidMount() {
+    const params = this.$router.params
+    this.setState({
+      isShare: params && params.shareType === '1'
+    })
     this.handleMockData()
   }
   /**
@@ -153,7 +159,19 @@ class TableContrast extends Component {
   showAllData() { 
     this.handleMockData(true)
   }
-  
+  /**
+   * 页面内转发
+   * @param {Object} res 微信返回参数
+   * @return void
+   */
+  onShareAppMessage() {
+    const { userInfo } = this.props
+    return {
+      title: `分享`,
+      path: `/pages/index/index?shareType=1&userId=${userInfo.userId}`,
+      imageUrl: `${defaultResourceImgURL}/share/share_table_contrast.png`
+    }
+  }
   config = {
     navigationBarTitleText: '我的',
     navigationStyle: 'custom'
@@ -164,7 +182,8 @@ class TableContrast extends Component {
       companyTableList,
       hiddenRemark,
       projectAreaList,
-      hiddenIdentical
+      hiddenIdentical,
+      isShare
     } = this.state
     // 公司列表
     const companyListRender = companyTableList.map((item, index) => {
@@ -205,7 +224,7 @@ class TableContrast extends Component {
     return (
       <SaveAreaView
         title='TA家的比价'
-        back
+        back={!isShare}
       >
         <View className='page-wrapper'>
           <HouseMsg

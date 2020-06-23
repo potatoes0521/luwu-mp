@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 10:42:53
+ * @LastEditTime: 2020-06-23 11:02:42
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -22,6 +22,7 @@ import Login from '@utils/login'
 import { publishNote, getNoteDetails, editNote } from '@services/modules/note'
 import { handleMoney } from '@utils/patter'
 import { setStorage, removeStorage } from '@utils/storage'
+import { defaultResourceImgURL } from "@config/request_config"
 import goodsState from '@config/noteGoodsKey'
 import FormItem from '@components/FormItem'
 
@@ -273,7 +274,21 @@ class NotePublish extends Component {
       })
     }
   }
-
+  /**
+   * 页面内转发
+   * @param {Object} res 微信返回参数
+   * @return void
+   */
+  onShareAppMessage() {
+    const {
+      userInfo
+    } = this.props
+    return {
+      title: `分享首页`,
+      path: `/pages/index/index?shareType=1&userId=${userInfo.userId}`,
+      imageUrl: `${defaultResourceImgURL}/share/share_index.png`
+    }
+  }
   config = {
     navigationBarTitleText: '',
     navigationStyle: 'custom'
