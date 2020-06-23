@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 15:07:12
+ * @LastEditTime: 2020-06-23 15:44:09
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -34,6 +34,7 @@ class NotePublish extends Component {
     super(props)
     this.state = Object.assign({}, goodsState, {
       // 除去公共key以外的字段定在这里
+      canInputBrand: false
     })
     this.pageParams = {}
     this.timer = null
@@ -125,10 +126,7 @@ class NotePublish extends Component {
    */
   handleClickChooseCategory() {
     let url = '/pages/choose_category/index'
-    const {
-      mainCategory,
-      childCategory,
-    } = this.state
+    const { mainCategory, childCategory } = this.state
     if (childCategory && childCategory.categoryName) {
       url += '?pageType=edit'
       setStorage('choose_category', {
@@ -140,7 +138,25 @@ class NotePublish extends Component {
       url
     })
   }
-  
+  handleClickChooseBrand() { 
+    let url = '/pages/choose_brand/index'
+    const { brand } = this.state
+    if (brand && brand.categoryName) {
+      url += '?pageType=edit'
+      setStorage('choose_brand', {
+        selectBrand: brand
+      })
+    }
+    Taro.navigateTo({
+      url
+    })
+  }
+  onBrandInput(e) { 
+    let {target: {value}} = e
+    this.setState({
+      brand: {brandName: value}
+    })
+  }
   onPriceInput(e) {
     let {target: {value}} = e
     value = handleMoney(value)
@@ -182,9 +198,9 @@ class NotePublish extends Component {
       goodsImageList: '至少上传一张商品图片~',
       // idCardImageList: '',
       // priceTagImageList,
-      mainCategory: '请选择品类',
-      childCategory: '请选择品类',
-      brand: '请选择品牌',
+      // mainCategory: '请选择品类',
+      // childCategory: '请选择品类',
+      brand: '请选择建材品牌',
       price: '请填写价格',
       // priceUnit,
       // remark: '',
@@ -202,16 +218,17 @@ class NotePublish extends Component {
         break
       }
       if (Object.prototype.toString.call(state[key]) === '[object Object]') {
-        if (key === 'brand' && !state[key].brandId) {
+        if (key === 'brand' && !state[key].brandName) {
           breakName = key
           break
         } else if (key === 'address' && !state[key].address) {
           breakName = key
           break
-        } else if (key !== 'address' && !state[key].categoryId) {
-          breakName = key
-          break
         }
+        // else if (key !== 'address' && !state[key].categoryId) {
+        //   breakName = key
+        //   break
+        // }
       }
     }
     if (breakName) {
@@ -264,6 +281,7 @@ class NotePublish extends Component {
           title: '添加成功',
         })
         removeStorage('choose_category')
+        removeStorage('choose_brand')
         this.timer = setTimeout(() => {
           Taro.redirectTo({
             url: `/pages/note_details/index?noteId=${res.noteId}`
@@ -305,6 +323,7 @@ class NotePublish extends Component {
       childCategory,
       brand,
       model,
+      canInputBrand
     } = this.state
     const { system } = this.props
     const fixedTipsTop = system && system.navHeight || 120
@@ -346,7 +365,6 @@ class NotePublish extends Component {
           <View className='form-wrapper'>
             <FormItem
               line
-              important
               label='建材类型'
               unit='icon'
               iconName='iconRectangle rotated'
@@ -354,6 +372,18 @@ class NotePublish extends Component {
               canInput={false}
               placeholder='请选择'
               onContentClick={this.handleClickChooseCategory.bind(this)}
+            />
+            <FormItem
+              line
+              important
+              unit={canInputBrand ? true : 'icon'}
+              iconName='iconRectangle rotated'
+              label='建材品牌'
+              value={brand.brandName}
+              canInput={canInputBrand}
+              placeholder={canInputBrand ? '请输入' : '请选择'}
+              onInput={this.onBrandInput.bind(this)}
+              onContentClick={this.handleClickChooseBrand.bind(this)}
             />
             <FormItem
               line
@@ -407,7 +437,7 @@ class NotePublish extends Component {
             this.renderTitle('门店地址')
           }
           <Location
-            address={address}
+            address={address || {}}
             onGetLocationData={this.onGetLocationData.bind(this)}
           />
           <View className='bottom-wrapper'>
