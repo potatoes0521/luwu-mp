@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 15:44:09
+ * @LastEditTime: 2020-06-23 17:36:42
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -138,14 +138,16 @@ class NotePublish extends Component {
       url
     })
   }
+  /**
+   * 点击了选择品牌
+   * @return void
+   */
   handleClickChooseBrand() { 
-    let url = '/pages/choose_brand/index'
-    const { brand } = this.state
-    if (brand && brand.categoryName) {
-      url += '?pageType=edit'
-      setStorage('choose_brand', {
-        selectBrand: brand
-      })
+    const { mainCategory, brand } = this.state
+    let url = `/pages/choose_brand/index?categoryId=${mainCategory.categoryId}`
+    if (brand && brand.brandName) {
+      url += '&pageType=edit'
+      setStorage('choose_brand', brand)
     }
     Taro.navigateTo({
       url
