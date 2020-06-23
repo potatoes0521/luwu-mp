@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 11:01:48
+ * @LastEditTime: 2020-06-23 11:20:26
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -79,7 +79,7 @@ class Index extends Component {
   onShareAppMessage() {
     const {userInfo} = this.props
     return {
-      title: `分享首页`,
+      title: `录屋,和监理一起开启装修之旅吧~`,
       path: `/pages/index/index?shareType=1&userId=${userInfo.userId}`,
       imageUrl: `${defaultResourceImgURL}/share/share_index.png`
     }

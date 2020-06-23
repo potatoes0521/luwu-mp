@@ -284,7 +284,7 @@ class NotePublish extends Component {
       userInfo
     } = this.props
     return {
-      title: `分享首页`,
+      title: `录屋,和监理一起开启装修之旅吧`,
       path: `/pages/index/index?shareType=1&userId=${userInfo.userId}`,
       imageUrl: `${defaultResourceImgURL}/share/share_index.png`
     }

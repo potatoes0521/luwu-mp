@@ -4,7 +4,6 @@ import { View, Textarea } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 // import {} from '@services/modules/index'
 import SafeAreaView from '@components/SafeAreaView'
-import Upload from '@components/Upload'
 import FormItem from '@components/FormItem'
 import Login from '@utils/login'
 
@@ -38,8 +37,11 @@ class OfferExaminePublish extends Component {
     navigationBarTitleText: '免费申报价',
     navigationStyle: 'custom'
   }
-
+  onUploadOK(fileList) {
+    console.log('fileList', fileList)
+  }
   render() {
+    const {fileList} = this.state
     return (
       <SafeAreaView
         title='免费帮您审报价'
@@ -51,9 +53,7 @@ class OfferExaminePublish extends Component {
             this.renderTitle('上传户型图和报价单')
           }
           <View className='upload-wrapper'>
-            <View className='upload-view'>
-              <Upload />
-            </View>
+            <View className='upload-view'></View>
             <View className='upload-tips'>文件支持jpg/png/doc/docx/pdf/xls/xlsx  ( 5MB以内 )</View>
           </View>
           {
@@ -84,9 +84,7 @@ class OfferExaminePublish extends Component {
             this.renderTitle('补充信息')
           }
           <View className='remark-wrapper'>
-            <Textarea className='textarea'>
-
-            </Textarea>
+            <Textarea className='textarea'></Textarea>
           </View>
           {
             this.renderTitle('您的个人信息')

@@ -5,7 +5,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 11:05:54
+ * @LastEditTime: 2020-06-23 11:20:47
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -167,7 +167,7 @@ class TableContrast extends Component {
   onShareAppMessage() {
     const { userInfo } = this.props
     return {
-      title: `分享`,
+      title: `录屋,和监理一起开启装修之旅吧`,
       path: `/pages/index/index?shareType=1&userId=${userInfo.userId}`,
       imageUrl: `${defaultResourceImgURL}/share/share_table_contrast.png`
     }

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 10:55:48
+ * @LastEditTime: 2020-06-23 11:19:41
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -106,7 +106,7 @@ class NoteDetails extends Component {
   onShareAppMessage() {
     const {userInfo} = this.props
     return {
-      title: `分享笔记详情 文案待定`,
+      title: `${userInfo.nickName || '好友'}给你分享了他的建材笔记`,
       path: `/pages/note_details/index?shareType=1&userId=${userInfo.userId}`,
       imageUrl: `${defaultResourceImgURL}/share/share_note_details.png`
     }

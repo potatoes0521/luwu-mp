@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:36
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 10:05:21
+ * @LastEditTime: 2020-06-23 11:20:38
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -134,7 +134,7 @@ class NoteMine extends Component {
    */
   onShareAppMessage() {
     return {
-      title: `文案暂定`,
+      title: `录屋,和监理一起开启装修之旅吧`,
       path: `/pages/index/index`,
       imageUrl: `${defaultResourceImgURL}/share/share_note_mine.png`
     }
