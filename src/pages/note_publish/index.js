@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 17:36:42
+ * @LastEditTime: 2020-06-23 18:32:53
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -381,6 +381,7 @@ class NotePublish extends Component {
               unit={canInputBrand ? true : 'icon'}
               iconName='iconRectangle rotated'
               label='建材品牌'
+              focus={canInputBrand}
               value={brand.brandName}
               canInput={canInputBrand}
               placeholder={canInputBrand ? '请输入' : '请选择'}

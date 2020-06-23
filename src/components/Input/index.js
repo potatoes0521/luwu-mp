@@ -4,7 +4,7 @@
  * @path: @components/input
  * @Date: 2020-06-18 14:44:05
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 18:27:21
+ * @LastEditTime: 2020-06-23 18:32:17
  * @mustParam: 必传参数
  *  文档参照 https: //developers.weixin.qq.com/miniprogram/dev/component/input.html
  *  没有封装进去的方法请自行拓展
@@ -33,6 +33,7 @@ export default class LickInput extends Component {
       confirmType,
       canInput,
       justify,
+      focus
     } = this.props
     const lickInputClassName = classNames('input-style', {
       'placeholder-class': !value,
@@ -45,6 +46,7 @@ export default class LickInput extends Component {
           canInput ? (
             <Input
               type={type}
+              focus={focus}
               value={value}
               disabled={disabled}
               password={password}
