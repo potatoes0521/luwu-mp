@@ -4,7 +4,7 @@
  * @path: @components/input
  * @Date: 2020-06-18 14:44:05
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 16:41:59
+ * @LastEditTime: 2020-06-23 18:26:54
  * @mustParam: 必传参数
  *  文档参照 https: //developers.weixin.qq.com/miniprogram/dev/component/input.html
  *  没有封装进去的方法请自行拓展
@@ -34,10 +34,12 @@ export default class LickInput extends Component {
       canInput,
       justify,
     } = this.props
+    console.log('justify', justify)
     const lickInputClassName = classNames('input-style', {
       'placeholder-class': !value,
       'flex-end': justify === 'end'
     })
+    console.log('lickInputClassName', lickInputClassName)
     const valueText = value.length > 18 ? value.substr(0, 18) + '...' : value
     return (
       <View className='input-wrapper'>
@@ -52,7 +54,7 @@ export default class LickInput extends Component {
               placeholder={placeholder}
               confirmType={confirmType}
               onInput={this.props.onInput}
-              className='input-style'
+              className={lickInputClassName}
               placeholderClass='placeholder-class'
             ></Input>
             ): (
