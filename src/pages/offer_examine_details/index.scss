@@ -1,0 +1,84 @@
+@import '../../assets/css/theme.scss';
+@import '../../assets/css/common.scss';
+
+$successIcon: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/offer/success.png';
+$bottomBackgroundImage: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/offer/bottomBackground.png';
+page{
+  @include backgroundImage($bottomBackgroundImage, bottom center, 100vw 310px)
+}
+.page-wrapper {
+  width: 100%;
+  position: relative;
+  .success-icon-wrapper {
+    width: 100%;
+    height: 246px;
+    box-sizing: border-box;
+    padding: 50px 0 10px;
+
+    .success-icon {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto;
+      @include backgroundImage($successIcon)
+    }
+
+    .success-tips {
+      font-size: 26px;
+      color: $tips-color;
+      line-height: 38px;
+      text-align: center;
+      padding-top: 30px;
+    }
+  }
+
+  .title {
+    width: 100%;
+    height: 96px;
+    box-sizing: border-box;
+    padding: 40px 30px 14px;
+    line-height: 40px;
+    color: #999999;
+    font-size: 28px;
+    border-bottom: 2px solid $background-color;
+  }
+
+  .form-wrapper {
+    width: 100%;
+    line-height: 40px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+    padding-left: 30px;
+    font-size: 28px;
+    color: $font-color;
+
+    .form-label {
+      width: 168px;
+    }
+
+    .form-content {
+      flex: 1;
+      color: $tips-color;
+    }
+  }
+
+  .remark{
+    padding: 20px 66px 0 30px;
+    font-size: 26px;
+    color: $tips-color;
+    line-height: 36px;
+    text-align: justify;
+  }
+
+  .bottom-tips{
+    width: 100%;
+    height: 140px;
+    box-sizing: border-box;
+    padding-top: 70px;
+    text-align: center;
+    font-size: 28px;
+    line-height: 40px;
+    color: #999999;
+  }
+}

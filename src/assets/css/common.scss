@@ -17,7 +17,7 @@
     list-style: none;
   }
 }
-
+// 默认button样式
 @mixin button-style {
   .btn-public {
     width: 280px;
@@ -40,4 +40,11 @@
     background: #ffffff;
     color: $link-color;
   }
+}
+// 背景图片
+@mixin  backgroundImage($url, $position: center center, $cover: cover, $repeat: no-repeat){
+  background-image: url($url);
+  background-position: $position;
+  background-size: $cover;
+  background-repeat: $repeat;
 }
