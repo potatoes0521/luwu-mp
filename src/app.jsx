@@ -68,7 +68,8 @@ class App extends Component {
       'pages/table_contrast/index',
       // 审报价
       'pages/offer_examine_details/index',
-      'pages/offer_examine_publish/index'
+      'pages/offer_examine_publish/index',
+      'pages/offer_examine_list/index',
     ],
     // tabBar: {
     //   color: "#D8D8D8",
