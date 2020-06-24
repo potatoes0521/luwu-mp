@@ -47,6 +47,10 @@
       .rotated {
         transform: rotate(180deg);
       }
+
+      .rotated-90 {
+        transform: rotate(-90deg);
+      }
     }
 
     .lang-tips-wrapper {
