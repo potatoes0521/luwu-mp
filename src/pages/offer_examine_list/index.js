@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-23 18:42:57
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 19:12:17
+ * @LastEditTime: 2020-06-24 14:50:23
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -12,9 +12,10 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import {} from '@services/modules/index'
+import { getOfferList } from '@services/modules/offer'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
+import { defaultResourceImgURL } from '@config/request_config'
 
 import './index.scss'
 
@@ -22,12 +23,69 @@ class OfferExamineDetails extends Component {
 
   constructor(props) {
     super(props)
-    this.state={}
+    this.state = {
+      offerList: []
+    }
+    this.pageNum = 1
+    this.pageSize = 1000
+    this.flag = false
   }
 
   async componentDidMount() {
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
+    this.getOfferList()
+  }
+  getOfferList() { 
+    if(this.flag) return
+    const {userInfo} = this.props
+    getOfferList({
+      userId: userInfo.userId,
+      current: this.pageNum,
+      pageSize: this.pageSize
+    }).then(res => {
+      this.flag = false
+      if (!res || !res.data || !res.data.length) { 
+        return
+      }
+      if (res.data.length < this.pageSize) { 
+        this.flag = true
+      }
+      const { offerList } = this.state
+      let data = []
+      if (this.pageNum === 1) { 
+        data = res.data
+      } else {
+        data = [...offerList, ...res.data]
+      }
+      this.pageNum += 1
+      this.setState({
+        offerList: data
+      })
+    })
+  }
+  /**
+   * 处理查看文件
+   * @param {Type} file 参数描述
+   * @return void
+   */
+  handleClickFile(file) {
+    if (file.fileType === 'image') {
+      Taro.previewImage({
+        current: file.url
+      })
+    } else {
+      Taro.downloadFile({
+        url: file.url,
+        success: ({
+          tempFilePath
+        }) => {
+          Taro.openDocument({
+            filePath: tempFilePath
+          })
+        }
+      })
+    }
   }
   renderItem(label, content) { 
     return (
@@ -37,43 +95,85 @@ class OfferExamineDetails extends Component {
       </View>
     )
   }
+  /**
+   * 下拉刷新
+   * @return void
+   */
+  onPullDownRefresh() {
+    // 显示顶部刷新图标
+    Taro.showNavigationBarLoading()
+    this.pageNum = 1
+    this.flag = false
+    this.getOfferList()
+    // 隐藏导航栏加载框
+    Taro.hideNavigationBarLoading();
+    // 停止下拉动作
+    Taro.stopPullDownRefresh();
+  }
+  /**
+   * 页面内转发
+   * @param {Object} res 微信返回参数
+   * @return void
+   */
+  onShareAppMessage() {
+    return {
+      title: `录屋,和监理一起开启装修之旅吧`,
+      path: `/pages/index/index`,
+      imageUrl: `${defaultResourceImgURL}/share/share_offer_examine_list.png`
+    }
+  }
   config = {
     navigationBarTitleText: '我发布的免费审报价',
+    enablePullDownRefresh: true,
     navigationStyle: 'custom'
   }
 
   render() {
+    const { offerList } = this.state
+    const offerListRender = offerList.map(item => {
+      const itemKey = item.quotationId
+      const data = item.data || {}
+      const fileList = item && item.data && item.data.fileList || []
+      const fileListRender = fileList.map((file, index) => {
+        const key = file.url
+        return (
+          <View className='file-item' onClick={this.handleClickFile.bind(this, file)} key={key}>{`文件${index+1}`}</View>
+        )
+      })
+      return (
+        <View className='list-item'  key={itemKey}>
+          <View className='title'>{item.createAt}</View>
+          <View className='list-item-main'>
+            <View className='offer-line-details skeleton-square'>
+              {this.renderItem('房屋类型', data.model && data.model.modelName || '')}
+              {this.renderItem('房屋面积', `${data.area}㎡`)}
+            </View>
+            <View className='offer-line-details skeleton-square'>
+              {this.renderItem('量房联系人', data.userName)}
+              {this.renderItem('联系电话', data.mobile)}
+            </View>
+            <View className='file-wrapper'>
+              <View className='file-label'>相关文件</View>
+              <View className='file-content'>
+                {
+                  fileListRender
+                }
+              </View>
+            </View>
+          </View>
+        </View>
+      )
+    })
     return (
       <SafeAreaView
         title='我的报价'
         back
         home
       >
-        <View className='page-wrapper skeleton' >
-          <View className='list-item'>
-            <View className='title'>2020/10/10</View>
-            <View className='list-item-main'>
-              <View className='offer-line-details skeleton-square'>
-                {this.renderItem('房屋类型', '1')}
-                {this.renderItem('房屋面积', `${1}㎡`)}
-              </View>
-              <View className='offer-line-details skeleton-square'>
-                {this.renderItem('量房联系人', '1')}
-                {this.renderItem('联系电话', '1')}
-              </View>
-              <View className='file-wrapper'>
-                <View className='file-label'>相关文件</View>
-                <View className='file-content'>
-                  {[1, 2, 3, 4,5,6,7,8,9].map(item => {
-                    const key = item.url
-                    return (
-                      <View className='file-item' key={key}>1111</View>
-                    )
-                  })}
-                </View>
-              </View>
-            </View>
-          </View>
+        <View className='page-wrapper skeleton'>
+          {
+            offerListRender
+          }
         </View>
       </SafeAreaView>
     )
