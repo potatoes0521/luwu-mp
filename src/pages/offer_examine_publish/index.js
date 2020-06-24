@@ -9,6 +9,7 @@ import FormItem from '@components/FormItem'
 import Login from '@utils/login'
 import { uploadImage, uploadFile } from '@components/Upload/utils/upload_type'
 import OfferState from '@config/offerExamine'
+import { defaultResourceImgURL } from '@config/request_config'
 
 import './index.scss'
 
@@ -225,6 +226,18 @@ class OfferExaminePublish extends Component {
   stopPropagation(e) {
     e.stopPropagation()
     this.handleClickModel()
+  }
+  /**
+   * 页面内转发
+   * @param {Object} res 微信返回参数
+   * @return void
+   */
+  onShareAppMessage() {
+    return {
+      title: `录屋,和监理一起开启装修之旅吧`,
+      path: `/pages/index/index`,
+      imageUrl: `${defaultResourceImgURL}/share/share_index.png`
+    }
   }
   config = {
     navigationBarTitleText: '免费申报价',

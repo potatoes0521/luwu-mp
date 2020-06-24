@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-23 18:42:57
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-24 14:50:23
+ * @LastEditTime: 2020-06-24 14:54:13
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -87,6 +87,11 @@ class OfferExamineDetails extends Component {
       })
     }
   }
+  navigatorTo(quotationId) {
+    Taro.navigateTo({
+      url: `/pages/offer_examine_details/index?quotationId=${quotationId}`
+    })
+  }
   renderItem(label, content) { 
     return (
       <View className='offer-detail-item'>
@@ -119,7 +124,7 @@ class OfferExamineDetails extends Component {
     return {
       title: `录屋,和监理一起开启装修之旅吧`,
       path: `/pages/index/index`,
-      imageUrl: `${defaultResourceImgURL}/share/share_offer_examine_list.png`
+      imageUrl: `${defaultResourceImgURL}/share/share_index.png`
     }
   }
   config = {
@@ -131,7 +136,7 @@ class OfferExamineDetails extends Component {
   render() {
     const { offerList } = this.state
     const offerListRender = offerList.map(item => {
-      const itemKey = item.quotationId
+      const itemKey = item.data.quotationId || ''
       const data = item.data || {}
       const fileList = item && item.data && item.data.fileList || []
       const fileListRender = fileList.map((file, index) => {
@@ -141,7 +146,7 @@ class OfferExamineDetails extends Component {
         )
       })
       return (
-        <View className='list-item'  key={itemKey}>
+        <View className='list-item' onClick={this.navigatorTo.bind(this, itemKey)} key={itemKey}>
           <View className='title'>{item.createAt}</View>
           <View className='list-item-main'>
             <View className='offer-line-details skeleton-square'>

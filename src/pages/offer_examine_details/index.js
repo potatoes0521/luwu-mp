@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-23 10:55:14
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-24 14:24:30
+ * @LastEditTime: 2020-06-24 14:54:25
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -19,6 +19,7 @@ import { getOfferDetails } from '@services/modules/offer'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import OfferState from '@config/offerExamine'
+import { defaultResourceImgURL } from '@config/request_config'
 
 import './index.scss'
 
@@ -65,6 +66,18 @@ class OfferExamineDetails extends Component {
         <View className='form-content'>{content || '-'}</View>
       </View>
     )
+  }
+  /**
+   * 页面内转发
+   * @param {Object} res 微信返回参数
+   * @return void
+   */
+  onShareAppMessage() {
+    return {
+      title: `录屋,和监理一起开启装修之旅吧`,
+      path: `/pages/index/index`,
+      imageUrl: `${defaultResourceImgURL}/share/share_index.png`
+    }
   }
   config = {
     navigationBarTitleText: '免费审报价详情',
