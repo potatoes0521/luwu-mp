@@ -22,7 +22,7 @@ import {
   ScrollView
 } from '@tarojs/components'
 import PropTypes from 'prop-types'
-import { uploadImage } from './utils/upload_request'
+import { uploadImage } from './utils/upload_type'
 
 import './index.scss'
 

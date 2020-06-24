@@ -1,42 +1,22 @@
 /*
  * @Author: liuYang
- * @description: 请填写描述信息
- * @Date: 2019-11-12 10:04:11
+ * @description: 多文件上传和文件上传处理
+ * @path: 引入路径
+ * @Date: 2020-06-24 08:54:13
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 11:52:13
+ * @LastEditTime: 2020-06-24 08:55:57
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
+ * @emitFunction: 函数
  */
 import Taro from '@tarojs/taro'
 import {getOSSData} from '@services/modules/upload';
-
-export const uploadImage = ({
-  count = 9,
-  sizeType = ['compressed'],
-  sourceType = ['album', 'camera'],
-  that,
-}) => {
-  return new Promise(resolve => {
-    Taro.chooseImage({
-      count,
-      sizeType,
-      sourceType,
-      success: async (res) => {
-        var tempFilePaths = res.tempFilePaths;
-        uploadMultipleFiles(tempFilePaths, that).then(filePathArray => {
-          resolve(filePathArray)
-        })
-      }
-    })
-  })
-}
-
- /**
-  * 上传多个文件
-  * @param {Array} filePathsArray 图片临时路径的数组  里面是 字符串  ['1.png','2.png']
-  * @param {Object} that this
-  * @return void
-  */
+/**
+ * 上传多个文件
+ * @param {Array} filePathsArray 图片临时路径的数组  里面是 字符串  ['1.png','2.png']
+ * @param {Object} that this
+ * @return void
+ */
 export const uploadMultipleFiles = (filePathsArray, that) => {
   return new Promise(resolve => {
     let count = 0
@@ -50,15 +30,15 @@ export const uploadMultipleFiles = (filePathsArray, that) => {
     })
   })
 }
- /**
-  * 递归处理上传图片 对象方式传参
-  * @param {Array} {filePathsArray 图片临时路径的数组  里面是 字符串  ['1.png','2.png']
-  * @param {Number} count 现在是第几张
-  * @param {Array} completeFilePathsArray 将来存返回值的地方
-  * @param {Function} resolve promise
-  * @param {Object} that} this
-  * @return void
-  */
+/**
+ * 递归处理上传图片 对象方式传参
+ * @param {Array} {filePathsArray 图片临时路径的数组  里面是 字符串  ['1.png','2.png']
+ * @param {Number} count 现在是第几张
+ * @param {Array} completeFilePathsArray 将来存返回值的地方
+ * @param {Function} resolve promise
+ * @param {Object} that} this
+ * @return void
+ */
 export const uploadHandle = async ({
   filePathsArray,
   count,
