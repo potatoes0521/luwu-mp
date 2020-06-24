@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 10:13:50
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 16:15:20
+ * @LastEditTime: 2020-06-24 10:10:32
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -65,7 +65,7 @@ export default {
         header: {
           'content-type': contentType,
           "X-Ca-Stage": isProd ? "release" : "test",
-          Authorization: token
+          Authorization: token || ''
           // 'sign': sign || '',
         },
         success(res) {
