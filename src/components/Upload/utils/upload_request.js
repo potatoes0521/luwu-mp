@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-24 08:54:13
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-24 08:55:57
+ * @LastEditTime: 2020-06-24 09:53:43
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -15,9 +15,10 @@ import {getOSSData} from '@services/modules/upload';
  * 上传多个文件
  * @param {Array} filePathsArray 图片临时路径的数组  里面是 字符串  ['1.png','2.png']
  * @param {Object} that this
+ * @param {String} fileType 文件类型
  * @return void
  */
-export const uploadMultipleFiles = (filePathsArray, that) => {
+export const uploadMultipleFiles = ({ filePathsArray, fileType='image', that }) => {
   return new Promise(resolve => {
     let count = 0
     let completeFilePathsArray = []
@@ -26,7 +27,8 @@ export const uploadMultipleFiles = (filePathsArray, that) => {
       count,
       resolve,
       completeFilePathsArray,
-      that
+      that,
+      fileType
     })
   })
 }
@@ -37,6 +39,7 @@ export const uploadMultipleFiles = (filePathsArray, that) => {
  * @param {Array} completeFilePathsArray 将来存返回值的地方
  * @param {Function} resolve promise
  * @param {Object} that} this
+ * @param {String} fileType 文件类型
  * @return void
  */
 export const uploadHandle = async ({
@@ -45,16 +48,23 @@ export const uploadHandle = async ({
   completeFilePathsArray,
   resolve,
   that,
+  fileType = 'image'
 }) => {
+  console.log('fileType', fileType)
   if (filePathsArray.length > 1) {
     Taro.showLoading({
-      title: '正在上传第' + (count + 1) + '张图片',
+      title: '正在上传第' + (count + 1) + (fileType === 'image' ? '张': '个'),
+      mask: true
+    })
+  } else {
+    Taro.showLoading({
+      title: '正在上传',
       mask: true
     })
   }
   const aliOSSData = await getOSSData({}, that);
   const file = filePathsArray[count]
-  const list = file.split('/')
+  const list = fileType === 'image' ? file.split('/') : file.path.split('/')
   const fileName = list[list.length - 1]
   const formData = {
     key: aliOSSData.dir + "${filename}",
@@ -66,7 +76,7 @@ export const uploadHandle = async ({
   }
   Taro.uploadFile({
     url: aliOSSData.host,
-    filePath: file,
+    filePath: fileType === 'image' ? file : file.path,
     name: 'file',
     formData,
     header: {
@@ -96,7 +106,8 @@ export const uploadHandle = async ({
             count,
             completeFilePathsArray,
             resolve,
-            that
+            that,
+            fileType
           })
           console.log('正在上传第' + count + '张');
         }

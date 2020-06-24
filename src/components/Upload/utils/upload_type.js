@@ -3,7 +3,7 @@
  * @description: 处理上传类型  文档/图片
  * @Date: 2019-11-12 10:04:11
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-24 09:02:01
+ * @LastEditTime: 2020-06-24 09:51:00
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  */
@@ -29,8 +29,11 @@ export const uploadImage = ({
       sizeType,
       sourceType,
       success: async (res) => {
-        var tempFilePaths = res.tempFilePaths;
-        uploadMultipleFiles(tempFilePaths, that).then(filePathArray => {
+        const tempFilePaths = res.tempFilePaths;
+        uploadMultipleFiles({
+            filePathsArray: tempFilePaths,
+            that
+          }).then(filePathArray => {
           resolve(filePathArray)
         })
       }
@@ -47,14 +50,25 @@ export const uploadImage = ({
 export const uploadFile = ({
   count = 9,
   type = 'file',
+  that,
+  extension = ['doc', 'docx', 'pdf', 'xsl', 'xlsx']
 }) => {
-  Taro.chooseMessageFile({
-    count,
-    type,
-    success(res) {
-      console.log('res', res)
-      // tempFilePath可以作为img标签的src属性显示图片
-      const tempFilePaths = res.tempFiles
-    }
+  return new Promise(resolve => {
+    Taro.chooseMessageFile({
+      count,
+      type,
+      extension,
+      success(res) {
+        console.log('res', res)
+      const tempFilePaths = res.tempFiles;
+      uploadMultipleFiles({
+          filePathsArray: tempFilePaths,
+          fileType: 'file',
+          that
+        }).then(filePathArray => {
+        resolve(filePathArray)
+      })
+      }
+    })
   })
 }
