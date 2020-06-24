@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-23 10:55:14
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 16:58:15
+ * @LastEditTime: 2020-06-24 14:24:30
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -14,11 +14,11 @@ import {
   View,
   Block
 } from '@tarojs/components'
-// import classNames from 'classnames'
 import { connect } from '@tarojs/redux'
-// import {} from '@services/modules/index'
+import { getOfferDetails } from '@services/modules/offer'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
+import OfferState from '@config/offerExamine'
 
 import './index.scss'
 
@@ -26,12 +26,23 @@ class OfferExamineDetails extends Component {
 
   constructor(props) {
     super(props)
-    this.state={}
+    this.state = Object.assign({}, OfferState)
+    this.pageParams = {}
   }
 
   async componentDidMount() {
+    this.pageParams = this.$router.params
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
+    this.getOfferDetails()
+  }
+  getOfferDetails() {
+    getOfferDetails({
+      quotationId: this.pageParams.quotationId
+    }).then(res => {
+      if(!res || !res.data) return
+      this.setState(res.data)
+    })
   }
   /**
    * 页面标题
@@ -65,8 +76,8 @@ class OfferExamineDetails extends Component {
       model,
       area,
       remark,
-      name,
       mobile,
+      userName
     } = this.state
     return (
       <SafeAreaView
@@ -82,7 +93,7 @@ class OfferExamineDetails extends Component {
             </View>
           </View>
           {this.renderTitle('您的房屋信息')}
-          {this.renderFrom('类型', model)}
+          {this.renderFrom('类型', model.modelName)}
           {this.renderFrom('面积', area)}
           {
             remark && (
@@ -93,7 +104,7 @@ class OfferExamineDetails extends Component {
             )
           }
           {this.renderTitle('您的个人信息')}
-          {this.renderFrom('联系人', name)}
+          {this.renderFrom('联系人', userName)}
           {this.renderFrom('手机号码', mobile)}
           <View className='bottom-tips'>
             监理审完报价后会通过手机跟您联系
