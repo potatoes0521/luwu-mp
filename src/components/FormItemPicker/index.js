@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 14:20:27
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 14:33:38
+ * @LastEditTime: 2020-06-28 14:36:04
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  封装了Picker样式 文档参照 https://developers.weixin.qq.com/miniprogram/dev/component/picker.html
@@ -74,36 +74,35 @@ export default class FormItem extends Component {
             important && <Text className='important'>*</Text>
           }
         </View>
-        <View className='form-content'>
-          <View className='form-input-wrapper'>
-            <Picker
-              className='time-picker'
-              mode={mode}
-              fields={fields}
-              onChange={this.onPickerValueChange.bind(this)}
-            >
-              {
-                value ?
-                  <Text>{value}</Text>
-                  :
-                  <Text className='placeholder-class'>{placeholder}</Text>
-              }
-              <Text className='iconfont iconxiangyouxuanzejiantoux icon-style-right'></Text>
-            </Picker>
+        <Picker
+          className='time-picker'
+          mode={mode}
+          fields={fields}
+          onChange={this.onPickerValueChange.bind(this)}
+        >
+          <View className='form-content'>
+            <View className='form-input-wrapper'>
+                {
+                  value ?
+                    <Text>{value}</Text>
+                    :
+                    <Text className='placeholder-class'>{placeholder}</Text>
+                }
+            </View>
+            {
+              unit && (
+                <View className={lastTipsClassName}>
+                  {
+                    unit === 'icon' && <Text className={`iconfont ${iconName} icon-next`}></Text>
+                  }
+                  {
+                    unit === 'text' && <Text className='unit-text'>{unitText}</Text>
+                  }
+                </View>
+              )
+            }
           </View>
-          {
-            unit && (
-              <View className={lastTipsClassName}>
-                {
-                  unit === 'icon' && <Text className={`iconfont ${iconName} icon-next`}></Text>
-                }
-                {
-                  unit === 'text' && <Text className='unit-text'>{unitText}</Text>
-                }
-              </View>
-            )
-          }
-        </View>
+        </Picker>
       </View>
     )
   }
