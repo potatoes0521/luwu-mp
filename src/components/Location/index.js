@@ -4,21 +4,30 @@
  * @path: 引入路径
  * @Date: 2020-06-17 18:29:25
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 16:22:01
+ * @LastEditTime: 2020-06-28 17:04:41
  * @mustParam: 必传参数
+ *  address 地理位置数据  有经纬度和地址
  * @optionalParam: 选传参数
+ *  onlyShow 是否只是展示
+ *  label label展示项
+ *  style 值是form的话就只做表单展示
+ *  placeholder 
+ *  line 展示下边框
+ *  important 必填项
  * @emitFunction: 函数
+ *  onGetLocationData
  */ 
 import Taro from '@tarojs/taro'
 import {
   View,
-  Text
+  Text,
+  Block
 } from '@tarojs/components'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { getSetting, openSetting } from '@utils/publicWX.js'
 import { getStorage, setStorage } from '@utils/storage'
-import { getUserLocation, chooseLocation } from './location'
+import { getUserLocation, chooseLocation } from './utils/location'
 import './index.scss'
 
 export default class Location extends Taro.Component {
@@ -120,25 +129,56 @@ export default class Location extends Taro.Component {
   render() {
     const {
       address,
-      onlyShow
+      onlyShow,
+      label,
+      style,
+      placeholder,
+      line,
+      important
     } = this.props
     const addressClassName = classNames('address', {
       'placeholder': !address.address
     })
+    const locationClassName = classNames('location-wrapper-public', {
+      'location-form-wrapper': style === 'form',
+      'location-wrapper': style !== 'form',
+      'border-bottom': line 
+    })
     return (
       <View
-        className='location-wrapper'
+        className={locationClassName}
         onClick={() => this.handleGetLocation(true)}
       >
-        <View className='location-label skeleton-square' >
-          <View className='location-icon iconditu iconfont'></View>
-          <Text className={addressClassName}>{address.address || '选择商户地址'}</Text>
-        </View>
         {
-          !onlyShow && <View className='icon-next iconRectangle rotated iconfont'></View>
-        }
-        {
-          this.props.children
+          style === 'form' ? (
+            <Block>
+              <View className='location-label skeleton-square'>
+                <Text className='label'>{label}</Text>
+                {
+                  important && <Text className='important'>*</Text>
+                }
+              </View>
+              <View className='form-content' >
+                <Text className={addressClassName}>{address.address || placeholder || '选择商户地址'}</Text>
+                {
+                  !onlyShow && <View className='icon-next iconRectangle rotated iconfont form-icon-next'></View>
+                }
+              </View>
+            </Block>
+          ): (
+            <Block>
+              <View className='location-label skeleton-square' >
+                <View className='location-icon iconditu iconfont'></View>
+                <Text className={addressClassName}>{address.address || placeholder || '选择商户地址'}</Text>
+              </View>
+              {
+                !onlyShow && <View className='icon-next iconRectangle rotated iconfont'></View>
+              }
+              {
+                this.props.children
+              }
+            </Block>
+          )
         }
       </View>
     )
@@ -148,7 +188,12 @@ export default class Location extends Taro.Component {
 
 Location.defaultProps = {
   address: {},
-  onlyShow:false,
+  onlyShow: false,
+  label: '',
+  style: '',
+  placeholder: '',
+  line: '',
+  important: false,
   onGetLocationData: () => {
     console.log('onNoAuth is not defined in @components/Location')
   }
@@ -156,5 +201,11 @@ Location.defaultProps = {
 
 Location.propTypes = {
   address: PropTypes.object.isRequired,
+  onlyShow: PropTypes.bool,
+  label: PropTypes.string,
+  style: PropTypes.string,
+  placeholder: PropTypes.string,
+  line: PropTypes.string,
+  important: PropTypes.bool,
   onGetLocationData: PropTypes.func.isRequired
 } 

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 13:28:05
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 16:37:25
+ * @LastEditTime: 2020-06-28 16:59:13
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -19,6 +19,7 @@ import SafeAreaView from '@components/SafeAreaView'
 import FormItem from '@components/FormItem'
 import FormItemPicker from '@components/FormItemPicker'
 import Upload from '@components/Upload'
+import Location from '@components/Location'
 import Login from '@utils/login'
 import biddingState from '@config/biddingState'
 import { defaultResourceImgURL } from '@config/request_config'
@@ -205,6 +206,9 @@ class BiddingPublish extends Component {
       openModelModal: !openModelModal
     })
   }
+  onClickAddress() { 
+    
+  }
   /**
    * 页面内转发
    * @param {Object} res 微信返回参数
@@ -236,7 +240,8 @@ class BiddingPublish extends Component {
       houseModelViewTop,
       houseTypeViewTop,
       startTime,
-      endTime
+      endTime,
+      address
     } = this.state
     const modelModalRender = houseTypeModalData.map(item => {
       const key = item.modelId
@@ -365,17 +370,12 @@ class BiddingPublish extends Component {
               canInput
               onInput={this.onAreaInput.bind(this)}
             />
-            <FormItem
-              line
+            <Location
+              address={address.address || {}}
               label='区域位置'
-              important
-              unit='icon'
-              iconName={modelFormClassName}
-              shortUnit
-              value={model.modelName || ''}
-              canInput={false}
-              placeholder={openModelModal ? '' : '请选择'}
-              onContentClick={this.handleClickHouseType.bind(this)}
+              style='form'
+              placeholder='请选择'
+              line
             />
             <FormItemPicker
               label='预计装修时间'
@@ -422,6 +422,7 @@ class BiddingPublish extends Component {
               label='手机号码'
               type='number'
               unit
+              line
               important
               shortUnit
               maxlength={11}
