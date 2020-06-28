@@ -4,7 +4,7 @@
  * @path: "@utils/login"
  * @Date: 2020-06-17 16:04:08
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 13:32:22
+ * @LastEditTime: 2020-06-28 11:59:49
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -14,20 +14,21 @@ import {userLogin} from '@services/modules/user'
 import Actions from '@store/actions/index.js'
 
 export default {
-  async login(back){
+  async login(back) {
+    const wxCode = (await Taro.login()).code
     const userInfo = await this.getUserInfo();
-    userInfo && await this.useUserInfoLogin(userInfo)
+    userInfo && await this.useUserInfoLogin(userInfo, wxCode)
     if (back && userInfo) {
       this.handleBack()
     }
   },
-  useUserInfoLogin(params, back) {
-    return new Promise(resolve => {
+  useUserInfoLogin(params, wxCode) {
+    return new Promise(async resolve => {
       const {
         userInfo,
         signature,
         iv,
-        encryptedData
+        encryptedData,
       } = params
       Actions.changeUserInfo(
         Object.assign({}, userInfo, {
@@ -36,25 +37,18 @@ export default {
           encryptedData
         })
       )
-      Taro.login({
-        success: (res) => {
-          let sendData = {
-            appId: "wx08071be1bdb33e0c",
-            code: res.code,
-            encryptedData,
-            iv,
-            signature,
-          }
-          userLogin(sendData).then(data => {
-            Actions.changeUserInfo(
-              Object.assign({}, data)
-            )
-            resolve(data)
-            if (back) {
-              this.handleBack()
-            }
-          })
-        }
+      let sendData = {
+        appId: "wx08071be1bdb33e0c",
+        code: wxCode,
+        encryptedData,
+        iv,
+        signature,
+      }
+      userLogin(sendData).then(data => {
+        Actions.changeUserInfo(
+          Object.assign({}, data)
+        )
+        resolve(data)
       })
     })
   },
