@@ -5,7 +5,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 10:17:14
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 09:32:39
+ * @LastEditTime: 2020-06-28 18:27:34
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -17,9 +17,9 @@
 ### 🏠Core libs
 
 - Taro
-  版本为当前模板最近更新的时间对应的最新 release 2.2.7
+  版本为当前模板最近更新的时间对应的最新 release 2.2.8
 - Redux
-  版本为当前模板最近更新的时间对应的最新 release 2.2.7
+  版本为当前模板最近更新的时间对应的最新 release 2.2.8
 
 ### 🗄Files
 
