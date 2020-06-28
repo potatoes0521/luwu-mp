@@ -5,7 +5,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 10:17:14
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-15 16:10:10
+ * @LastEditTime: 2020-06-28 09:32:39
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -82,7 +82,7 @@ MyComp
 
 #### 状态管理中心
 
-目前的项目不会涉及过于复杂的数据流，因此采用 coding 效率更高的 MobX 作为状态管理工具
+目前的项目不会涉及过于复杂的数据流
 
 - **store**
 

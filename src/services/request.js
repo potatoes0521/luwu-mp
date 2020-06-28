@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 10:13:50
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-24 10:10:32
+ * @LastEditTime: 2020-06-28 09:40:42
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -37,10 +37,7 @@ export default {
         delete data[i]
       }
     }
-    let requestURL = defaultApiURL + url
-    if (url.indexOf('oss') !== -1 && url.indexOf('aliyuncs') !== -1) {
-      requestURL = url
-    }
+    let requestURL = url.startsWith('http') ? url : defaultApiURL + url
     console.log(data, '接口是' + url)
     if (loadingTitle) {
       if (method === 'POST') {
