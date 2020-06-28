@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 14:20:27
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 14:32:12
+ * @LastEditTime: 2020-06-28 14:33:38
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  封装了Picker样式 文档参照 https://developers.weixin.qq.com/miniprogram/dev/component/picker.html
@@ -114,14 +114,11 @@ FormItem.defaultProps = {
   shortUnit: false,
   mode: 'date',
   fields: 'day',
-  onContentClick: ()=>{
-    console.error('onInput is not defined in ./components/FormItem')
-  },
-  onInput: () => {
-    console.error('onInput is not defined in ./components/FormItem')
+  onPickerValueChange: () => {
+    console.error('onPickerValueChange is not defined in ./components/FormItemPicker')
   }
 }
 
 FormItem.propTypes = {
-  onInput: PropTypes.func.isRequired
+  onPickerValueChange: PropTypes.func.isRequired
 }
