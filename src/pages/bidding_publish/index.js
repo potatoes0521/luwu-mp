@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 13:28:05
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 15:52:36
+ * @LastEditTime: 2020-06-28 16:37:25
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -20,8 +20,7 @@ import FormItem from '@components/FormItem'
 import FormItemPicker from '@components/FormItemPicker'
 import Upload from '@components/Upload'
 import Login from '@utils/login'
-import OfferState from '@/config/offerExamineState'
-import houseType from '@config/houseType'
+import biddingState from '@config/biddingState'
 import { defaultResourceImgURL } from '@config/request_config'
 
 import './index.scss'
@@ -30,15 +29,12 @@ class BiddingPublish extends Component {
 
   constructor(props) {
     super(props)
-    this.state = Object.assign({}, OfferState, {
+    this.state = Object.assign({}, biddingState, {
       // 除去公共key以外的字段定在这里
       openModelModal: false,
+      openTypeModal: false,
       houseModelViewTop: 490,
       houseTypeViewTop: 490,
-      houseTypeModalData: houseType,
-      startTime: '',
-      endTime: '',
-      imageList: []
     })
     this.timer = null
   }
@@ -56,8 +52,17 @@ class BiddingPublish extends Component {
     })
   }
   handleClickHouseType() { 
-    
+    const { openTypeModal } = this.state
+    this.setState({
+      openTypeModal: !openTypeModal
+    })
   }
+  /**
+   * 打开
+   * @param {Type} item 参数描述
+   * @param {Type} e 参数描述
+   * @return void
+   */
   onClickModelModalItem(item, e) { 
     e.stopPropagation()
     this.setState({
@@ -194,6 +199,12 @@ class BiddingPublish extends Component {
     e.stopPropagation()
     this.handleClickModel()
   }
+  handleClickModel() {
+    const { openModelModal } = this.state
+    this.setState({
+      openModelModal: !openModelModal
+    })
+  }
   /**
    * 页面内转发
    * @param {Object} res 微信返回参数
@@ -214,11 +225,13 @@ class BiddingPublish extends Component {
     const {
       imageList,
       model,
+      type,
       area,
       remark,
       mobile,
       userName,
       openModelModal,
+      openTypeModal,
       houseTypeModalData,
       houseModelViewTop,
       houseTypeViewTop,
@@ -226,6 +239,19 @@ class BiddingPublish extends Component {
       endTime
     } = this.state
     const modelModalRender = houseTypeModalData.map(item => {
+      const key = item.modelId
+      const itemClassName = classNames('model-item', {
+        'model-item-active': item.modelId === model.modelId
+      })
+      return (
+        <View
+          className={itemClassName}
+          key={key}
+          onClick={this.onClickModelModalItem.bind(this, item)}
+        >{item.modelName}</View>
+      )
+    })
+    const typeModalRender = houseTypeModalData.map(item => {
       const key = item.modelId
       const itemClassName = classNames('model-item', {
         'model-item-active': item.modelId === model.modelId
@@ -304,14 +330,14 @@ class BiddingPublish extends Component {
               unit='icon'
               iconName={modelFormClassName}
               shortUnit
-              value={model.modelName || ''}
+              value={type.modelName || ''}
               canInput={false}
               placeholder={openModelModal ? '' : '请选择'}
               onContentClick={this.handleClickHouseType.bind(this)}
             />
             <View className='hide-line2'></View>
             {
-              openModelModal && (
+              openTypeModal && (
                 <View
                   className='model-modal-wrapper'
                   style={{top: houseTypeViewTop + 'rpx'}}
@@ -319,7 +345,7 @@ class BiddingPublish extends Component {
                 >
                   <View className='modal-main'>
                     {
-                      modelModalRender
+                      typeModalRender
                     }
                   </View>
                 </View>
@@ -373,7 +399,7 @@ class BiddingPublish extends Component {
               placeholder='请补充你对房屋的个性化要求, 更方便装企投标'
               value={remark}
               onInput={this.onRemarkInput.bind(this)}
-              maxlength={500}
+              maxlength={300}
             ></Textarea>
           </View>
           {

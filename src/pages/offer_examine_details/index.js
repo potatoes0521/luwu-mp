@@ -18,7 +18,7 @@ import { connect } from '@tarojs/redux'
 import { getOfferDetails } from '@services/modules/offer'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
-import OfferState from '@/config/offerExamineState'
+import OfferState from '@config/offerExamineState'
 import { defaultResourceImgURL } from '@config/request_config'
 
 import './index.scss'
