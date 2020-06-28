@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 11:20:26
+ * @LastEditTime: 2020-06-28 18:06:39
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -21,6 +21,7 @@ import { getIndexListData } from '@services/modules/index'
 import Skeleton from '@components/Skeleton'
 import Login from '@utils/login'
 import ListItem from './components/ListItem/index'
+import StickyTab from './components/StickyTab'
 
 import './index.scss'
 
@@ -31,7 +32,8 @@ class Index extends Component {
     this.state = {
       listData: [{},{},{},{},{}], // 默认数据为了做骨架屏
       loading: true,
-      showIndex: -1
+      showIndex: -1,
+      pageScrollTop: 0
     }
   }
   componentDidMount() { 
@@ -70,7 +72,6 @@ class Index extends Component {
       loading: false
     })
   }
-
   /**
    * 页面内转发
    * @param {Object} res 微信返回参数
@@ -84,6 +85,14 @@ class Index extends Component {
       imageUrl: `${defaultResourceImgURL}/share/share_index.png`
     }
   }
+  onPageScroll(e) { 
+    const { scrollTop } = e
+    const { pageScrollTop } = this.state
+    if (scrollTop === pageScrollTop) return
+    this.setState({
+      pageScrollTop: scrollTop
+    })
+  }
   
   config = {
     navigationBarTitleText: '首页',
@@ -94,7 +103,8 @@ class Index extends Component {
     const {
       listData,
       loading,
-      showIndex
+      showIndex,
+      pageScrollTop
     } = this.state
     const listRender = listData.map((item, index) => {
       const key = item.title
@@ -111,13 +121,15 @@ class Index extends Component {
         ></ListItem>
       )
     })
-    
     return (
-      <View className='page-wrapper skeleton'>
+      <View className='page-wrapper skeleton' id='sticky'>
         <View className='banner-wrapper skeleton-square'>
           <Image className='image' src={bannerBigImg}></Image>
         </View>
         <View className='list-wrapper'>
+          <StickyTab
+            pageScrollTop={pageScrollTop}
+          />
           {listRender}
         </View>
         {
