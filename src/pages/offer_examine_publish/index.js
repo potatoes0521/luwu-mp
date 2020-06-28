@@ -130,7 +130,8 @@ class OfferExaminePublish extends Component {
       area: value
     })
   }
-  onRemarkInput(value) { 
+  onRemarkInput(e) { 
+    const { target: value } = e
     this.setState({
       remark: value
     })

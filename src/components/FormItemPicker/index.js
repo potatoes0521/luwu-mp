@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 14:20:27
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 14:52:35
+ * @LastEditTime: 2020-06-28 15:33:22
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  封装了Picker样式 文档参照 https://developers.weixin.qq.com/miniprogram/dev/component/picker.html
@@ -46,7 +46,7 @@ export default class FormItem extends Component {
     let chooseTimer = getTimeDate(value)
     if (nowTimer > chooseTimer && notPast) {
       Taro.showToast({
-        title: notPast,
+        title: '选择的时间不能小于当前时间',
         icon: 'none'
       })
       return

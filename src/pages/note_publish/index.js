@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 14:56:00
+ * @LastEditTime: 2020-06-28 15:39:22
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -172,7 +172,8 @@ class NotePublish extends Component {
     })
   }
 
-  onRemarkInput(value) {
+  onRemarkInput(e) {
+    const { target: { value } } = e
     this.setState({
       remark: value
     })

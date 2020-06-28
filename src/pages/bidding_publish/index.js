@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 13:28:05
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 14:53:54
+ * @LastEditTime: 2020-06-28 15:38:55
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -33,10 +33,11 @@ class BiddingPublish extends Component {
     this.state = Object.assign({}, OfferState, houseType, {
       // 除去公共key以外的字段定在这里
       openModelModal: false,
-      modelViewTopFor: 490,
-      modelViewTop: 490,
+      houseModelViewTop: 490,
+      houseTypeViewTop: 490,
       startTime: '',
-      endTime: ''
+      endTime: '',
+      imageList: []
     })
     this.timer = null
   }
@@ -54,37 +55,20 @@ class BiddingPublish extends Component {
     })
   }
   onClickModelModalItem(item, e) { 
-    e.stopPropagation();
-    console.log('item', item)
+    e.stopPropagation()
     this.setState({
       model: item
     }, () => {
         this.handleClickModel()
     })
   }
-  onGoodsImageUpload() { 
-    
-  }
-  /**
-   * 处理查看文件
-   * @param {Type} file 参数描述
-   * @return void
-   */
-  handleClickFile(file) { 
-    if (file.fileType === 'image') { 
-      Taro.previewImage({
-        current: file.url
-      })
-    } else {
-      Taro.downloadFile({
-        url: file.url,
-        success: ({tempFilePath}) => {
-          Taro.openDocument({
-            filePath: tempFilePath
-          })
-        }
-      })
-    }
+  onImageUpload(imgList) { 
+    const {imageList} = this.state
+    this.setState({
+      imageList: [...imageList, ...imgList]
+    }, () => {
+      this.getHideLineTop()
+    })
   }
   getHideLineTop() {
     Taro.createSelectorQuery()
@@ -92,8 +76,6 @@ class BiddingPublish extends Component {
       .boundingClientRect()
       .exec(res => {
         const { system } = this.props
-        console.log('system', system)
-        console.log('res', res)
         this.setState({
           modelViewTop: res[0].top * 2 - (system && system.navHeight)
         })
@@ -104,7 +86,8 @@ class BiddingPublish extends Component {
       area: value
     })
   }
-  onRemarkInput(value) {
+  onRemarkInput(e) {
+    const { target: { value } } = e
     this.setState({
       remark: value
     })
@@ -233,7 +216,8 @@ class BiddingPublish extends Component {
       userName,
       openModelModal,
       houseTypeData,
-      modelViewTop,
+      houseModelViewTop,
+      houseTypeViewTop,
       startTime,
       endTime
     } = this.state
@@ -272,7 +256,7 @@ class BiddingPublish extends Component {
                 imageSize={180}
                 addBtnSizeType={86}
                 showAddBtn
-                onUploadOK={this.onGoodsImageUpload.bind(this)}
+                onUploadOK={this.onImageUpload.bind(this)}
               />
             </View>
             <View className='upload-tips'>请上传清晰完整的户型图~</View>
@@ -298,7 +282,7 @@ class BiddingPublish extends Component {
               openModelModal && (
                 <View
                   className='model-modal-wrapper'
-                  style={{top: modelViewTop + 'rpx'}}
+                  style={{top: houseModelViewTop + 'rpx'}}
                   onClick={this.stopPropagation.bind(this)}
                 >
                   <View className='modal-main'>
@@ -326,7 +310,7 @@ class BiddingPublish extends Component {
               openModelModal && (
                 <View
                   className='model-modal-wrapper'
-                  style={{top: modelViewTop + 'rpx'}}
+                  style={{top: houseTypeViewTop + 'rpx'}}
                   onClick={this.stopPropagation.bind(this)}
                 >
                   <View className='modal-main'>
@@ -382,6 +366,7 @@ class BiddingPublish extends Component {
               autoHeight
               className='textarea'
               placeholderClass='placeholder-class'
+              placeholder='请补充你对房屋的个性化要求, 更方便装企投标'
               value={remark}
               onInput={this.onRemarkInput.bind(this)}
               maxlength={500}
@@ -416,11 +401,12 @@ class BiddingPublish extends Component {
               onInput={this.onMobileInput.bind(this)}
             />
             <FormItemPicker
-              label='预计装修时间'
+              label='有效期限'
+              important
+              notPast
               unit='icon'
               iconName='iconRectangle rotated'
               shortUnit
-              langLabel
               value={endTime || ''}
               placeholder={openModelModal ? '' : '请选择'}
               onPickerValueChange={this.onChooseEndTime.bind(this)}
