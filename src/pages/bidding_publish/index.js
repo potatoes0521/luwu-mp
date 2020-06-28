@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 13:28:05
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 15:38:55
+ * @LastEditTime: 2020-06-28 15:52:36
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -20,7 +20,7 @@ import FormItem from '@components/FormItem'
 import FormItemPicker from '@components/FormItemPicker'
 import Upload from '@components/Upload'
 import Login from '@utils/login'
-import OfferState from '@config/offerExamine'
+import OfferState from '@/config/offerExamineState'
 import houseType from '@config/houseType'
 import { defaultResourceImgURL } from '@config/request_config'
 
@@ -30,11 +30,12 @@ class BiddingPublish extends Component {
 
   constructor(props) {
     super(props)
-    this.state = Object.assign({}, OfferState, houseType, {
+    this.state = Object.assign({}, OfferState, {
       // 除去公共key以外的字段定在这里
       openModelModal: false,
       houseModelViewTop: 490,
       houseTypeViewTop: 490,
+      houseTypeModalData: houseType,
       startTime: '',
       endTime: '',
       imageList: []
@@ -48,11 +49,14 @@ class BiddingPublish extends Component {
     clearTimeout(this.timer)
     this.timer = null
   }
-  handleClickModel() {
+  handleClickHouseModel() {
     const { openModelModal } = this.state
     this.setState({
       openModelModal: !openModelModal
     })
+  }
+  handleClickHouseType() { 
+    
   }
   onClickModelModalItem(item, e) { 
     e.stopPropagation()
@@ -215,13 +219,13 @@ class BiddingPublish extends Component {
       mobile,
       userName,
       openModelModal,
-      houseTypeData,
+      houseTypeModalData,
       houseModelViewTop,
       houseTypeViewTop,
       startTime,
       endTime
     } = this.state
-    const modelModalRender = houseTypeData.map(item => {
+    const modelModalRender = houseTypeModalData.map(item => {
       const key = item.modelId
       const itemClassName = classNames('model-item', {
         'model-item-active': item.modelId === model.modelId
@@ -275,7 +279,7 @@ class BiddingPublish extends Component {
               value={model.modelName || ''}
               canInput={false}
               placeholder={openModelModal ? '' : '请选择'}
-              onContentClick={this.handleClickModel.bind(this)}
+              onContentClick={this.handleClickHouseModel.bind(this)}
             />
             <View className='hide-line'></View>
             {
@@ -303,7 +307,7 @@ class BiddingPublish extends Component {
               value={model.modelName || ''}
               canInput={false}
               placeholder={openModelModal ? '' : '请选择'}
-              onContentClick={this.handleClickModel.bind(this)}
+              onContentClick={this.handleClickHouseType.bind(this)}
             />
             <View className='hide-line2'></View>
             {
@@ -345,7 +349,7 @@ class BiddingPublish extends Component {
               value={model.modelName || ''}
               canInput={false}
               placeholder={openModelModal ? '' : '请选择'}
-              onContentClick={this.handleClickModel.bind(this)}
+              onContentClick={this.handleClickHouseType.bind(this)}
             />
             <FormItemPicker
               label='预计装修时间'

@@ -23,7 +23,7 @@ import { publishNote, getNoteDetails, editNote } from '@services/modules/note'
 import { handleMoney } from '@utils/patter'
 import { setStorage, removeStorage } from '@utils/storage'
 import { defaultResourceImgURL } from "@config/request_config"
-import goodsState from '@config/noteGoodsKey'
+import goodsState from '@/config/noteState'
 import FormItem from '@components/FormItem'
 
 import './index.scss'

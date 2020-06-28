@@ -8,7 +8,7 @@ import SafeAreaView from '@components/SafeAreaView'
 import FormItem from '@components/FormItem'
 import Login from '@utils/login'
 import { uploadImage, uploadFile } from '@components/Upload/utils/upload_type'
-import OfferState from '@config/offerExamine'
+import OfferState from '@/config/offerExamineState'
 import { defaultResourceImgURL } from '@config/request_config'
 
 import './index.scss'
