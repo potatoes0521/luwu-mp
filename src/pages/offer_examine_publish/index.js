@@ -125,26 +125,22 @@ class OfferExaminePublish extends Component {
         })
       })
   }
-  onAreaInput(e) { 
-    const { target: { value } } = e
+  onAreaInput(value) { 
     this.setState({
       area: value
     })
   }
-  onRemarkInput(e) { 
-    const { target: { value } } = e
+  onRemarkInput(value) { 
     this.setState({
       remark: value
     })
   }
-  onUserNameInput(e) { 
-    const { target: { value } } = e
+  onUserNameInput(value) { 
     this.setState({
       userName: value
     })
   }
-  onMobileInput(e) { 
-    const { target: { value } } = e
+  onMobileInput(value) { 
     this.setState({
       mobile: value
     })

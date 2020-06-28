@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 14:20:27
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 14:36:04
+ * @LastEditTime: 2020-06-28 14:52:35
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  封装了Picker样式 文档参照 https://developers.weixin.qq.com/miniprogram/dev/component/picker.html
@@ -25,11 +25,13 @@ import {
   View,
   Text,
   Picker
-}
-from '@tarojs/components'
+} from '@tarojs/components'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-
+import {
+  getTimeDate,
+  timestampOfDay,
+} from '@utils/timer'
 import './index.scss'
 
 export default class FormItem extends Component { 
@@ -38,7 +40,18 @@ export default class FormItem extends Component {
   }
   onPickerValueChange(e) {
     e.stopPropagation();
-    this.props.onPickerValueChange()
+    const { target: { value } } = e
+    const {notPast} = this.props
+    let nowTimer = getTimeDate(timestampOfDay())
+    let chooseTimer = getTimeDate(value)
+    if (nowTimer > chooseTimer && notPast) {
+      Taro.showToast({
+        title: notPast,
+        icon: 'none'
+      })
+      return
+    }
+    this.props.onPickerValueChange(value)
   }
   render() {
     const {
@@ -53,7 +66,8 @@ export default class FormItem extends Component {
       iconName,
       shortUnit,
       langLabel,
-      fields
+      fields,
+      start
     } = this.props
     const itemClassName = classNames('form-item', {
       'bottom-line': line
@@ -78,6 +92,7 @@ export default class FormItem extends Component {
           className='time-picker'
           mode={mode}
           fields={fields}
+          start={start}
           onChange={this.onPickerValueChange.bind(this)}
         >
           <View className='form-content'>
@@ -113,6 +128,7 @@ FormItem.defaultProps = {
   shortUnit: false,
   mode: 'date',
   fields: 'day',
+  start: '',
   onPickerValueChange: () => {
     console.error('onPickerValueChange is not defined in ./components/FormItemPicker')
   }

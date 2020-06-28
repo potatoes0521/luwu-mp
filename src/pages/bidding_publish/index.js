@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 13:28:05
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 14:32:31
+ * @LastEditTime: 2020-06-28 14:53:54
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -35,6 +35,8 @@ class BiddingPublish extends Component {
       openModelModal: false,
       modelViewTopFor: 490,
       modelViewTop: 490,
+      startTime: '',
+      endTime: ''
     })
     this.timer = null
   }
@@ -97,26 +99,32 @@ class BiddingPublish extends Component {
         })
       })
   }
-  onAreaInput(e) { 
-    const { target: { value } } = e
+  onAreaInput(value) {
     this.setState({
       area: value
     })
   }
-  onRemarkInput(e) { 
-    const { target: { value } } = e
+  onRemarkInput(value) {
     this.setState({
       remark: value
     })
   }
-  onUserNameInput(e) { 
-    const { target: { value } } = e
+  onChooseStartTime(value) {
+    this.setState({
+      startTime: value
+    })
+  }
+  onChooseEndTime(value) {
+    this.setState({
+      endTime: value
+    })
+  }
+  onUserNameInput(value) {
     this.setState({
       userName: value
     })
   }
-  onMobileInput(e) { 
-    const { target: { value } } = e
+  onMobileInput(value) { 
     this.setState({
       mobile: value
     })
@@ -225,7 +233,9 @@ class BiddingPublish extends Component {
       userName,
       openModelModal,
       houseTypeData,
-      modelViewTop
+      modelViewTop,
+      startTime,
+      endTime
     } = this.state
     const modelModalRender = houseTypeData.map(item => {
       const key = item.modelId
@@ -356,13 +366,12 @@ class BiddingPublish extends Component {
             <FormItemPicker
               label='预计装修时间'
               unit='icon'
-              important
               iconName={modelFormClassName}
               shortUnit
               langLabel
-              value={model.modelName || ''}
+              value={startTime || ''}
               placeholder={openModelModal ? '' : '请选择'}
-              onContentClick={this.handleClickModel.bind(this)}
+              onPickerValueChange={this.onChooseStartTime.bind(this)}
             />
           </View>
           {
@@ -406,17 +415,15 @@ class BiddingPublish extends Component {
               canInput
               onInput={this.onMobileInput.bind(this)}
             />
-            <FormItem
-              label='有效期限'
-              type='number'
+            <FormItemPicker
+              label='预计装修时间'
               unit='icon'
               iconName='iconRectangle rotated'
               shortUnit
-              maxlength={11}
-              value={mobile}
-              placeholder='请选择'
-              canInput={false}
-              onInput={this.onMobileInput.bind(this)}
+              langLabel
+              value={endTime || ''}
+              placeholder={openModelModal ? '' : '请选择'}
+              onPickerValueChange={this.onChooseEndTime.bind(this)}
             />
           </View>
           <View className='bottom-tips'>您的联系信息需要您的确认才会提供给装企</View>
