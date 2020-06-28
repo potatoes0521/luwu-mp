@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 18:32:53
+ * @LastEditTime: 2020-06-28 13:56:22
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -395,7 +395,7 @@ class NotePublish extends Component {
               unit='text'
               label='建材价格'
               value={price}
-              unitContent={priceUnit}
+              unitContent={'/'+ priceUnit}
               placeholder='请输入'
               onInput={this.onPriceInput.bind(this)}
             />
