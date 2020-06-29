@@ -1,0 +1,59 @@
+@import '../../assets/css/theme.scss';
+page{
+  background-color: $background-color;
+}
+.page-wrapper {
+
+  .bidding-details-location-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    height: 90px;
+    border-bottom: 2px solid $background-color;
+    z-index: 5;
+
+    .location-icon {
+      color: $font-color !important;
+    }
+  }
+
+  .details-main-wrapper {
+    padding: 0 30px;
+    border-top: 2px solid $background-color;
+    background-color: #ffffff;
+
+    .details-swiper-wrapper {
+      margin-top: 20px;
+      margin-bottom: 14px;
+    }
+    .form-wrapper{
+      padding-bottom: 30px;
+    }
+    .image-list-wrapper {
+      padding-top: 44px;
+      padding-bottom: 30px;
+    }
+  }
+  
+  // 指示点样式写在子组件不会生效
+  .swiper .wx-swiper-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $placeholder-color;
+    overflow: hidden;
+  }
+
+  .swiper .wx-swiper-dot-active {
+    width: 8px !important;
+    height: 8px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+}
+
+.bottom-padding160{
+  padding-bottom: 160px;
+}
