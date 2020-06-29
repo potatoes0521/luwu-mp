@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 17:13:53
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 10:11:00
+ * @LastEditTime: 2020-06-29 10:20:03
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -21,28 +21,29 @@ class StickyTab extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      list: [1, 2, 3, 4],
-      fixed: false,
-      viewTop: 0
+      list: [
+        {
+          imageUrl: '',
+          text: '招标比价'
+        },
+        {
+          imageUrl: '',
+          text: '合作装企'
+        },
+        {
+          imageUrl: '',
+          text: '建材询价'
+        },
+        {
+          imageUrl: '',
+          text: '建材商店'
+        }
+      ],
     }
-    this.stickyScrollTop = 0
   }
 
   componentDidMount() {
     this.getStickyScrollTop()
-  }
-  componentWillReceiveProps(nextProps) { 
-    if (nextProps.pageScrollTop === this.props.pageScrollTop) return
-    const { fixed } = this.state
-    if (nextProps.pageScrollTop > this.stickyScrollTop && !fixed) {
-      this.setState({
-        fixed: true
-      })
-    } else if (nextProps.pageScrollTop < this.stickyScrollTop && fixed) {
-      this.setState({
-        fixed: false
-      })
-    }
   }
   getStickyScrollTop() {
     Promise.all([
@@ -50,10 +51,10 @@ class StickyTab extends Component {
       this.select('#sticky >>> .sticky-wrapper')
     ]).then(res => {
       console.log('res', res)
-      this.stickyScrollTop = res[1].top - res[0].height
-      this.setState({
-        viewTop: res[0].height
-      })
+      const { system } = this.props
+      const statusBarHeight = system && system.statusBarHeight || 88
+      const stickyScrollTop = res[1].top - statusBarHeight
+      this.props.onComputedScrollTop(stickyScrollTop)
     })
   }
   /**
@@ -70,11 +71,13 @@ class StickyTab extends Component {
   }
   render() {
     const {
-      list,
-      fixed,
-      viewTop
+      list
     } = this.state
-    const { activeIndex, system } = this.props
+    const {
+      activeIndex,
+      system,
+      fixed
+    } = this.props
     const statusBarHeight = system && system.statusBarHeight || 88
     const itemListRender = list.map((item, index) => {
       const itemClassName = classNames('sticky-list-item', {
@@ -94,7 +97,6 @@ class StickyTab extends Component {
         <View
           className={stickyClassWrapper}
           style={{
-            top: viewTop * 2 + 'rpx',
             paddingTop: fixed ? statusBarHeight + 'rpx' : 0
           }}
         >

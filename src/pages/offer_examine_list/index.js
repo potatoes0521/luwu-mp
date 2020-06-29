@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-23 18:42:57
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-24 14:54:13
+ * @LastEditTime: 2020-06-29 10:28:32
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -15,7 +15,7 @@ import { connect } from '@tarojs/redux'
 import { getOfferList } from '@services/modules/offer'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
-import { defaultResourceImgURL } from '@config/request_config'
+import { getImage } from '@img/cdn'
 
 import './index.scss'
 
@@ -124,7 +124,7 @@ class OfferExamineDetails extends Component {
     return {
       title: `录屋,和监理一起开启装修之旅吧`,
       path: `/pages/index/index`,
-      imageUrl: `${defaultResourceImgURL}/share/share_index.png`
+      imageUrl: getImage('share/share_index.png')
     }
   }
   config = {

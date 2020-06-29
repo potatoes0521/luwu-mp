@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 11:19:41
+ * @LastEditTime: 2020-06-29 10:26:39
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -20,7 +20,7 @@ import Skeleton from '@components/Skeleton'
 import Login from '@utils/login'
 import classNames from 'classnames'
 import { getNoteDetails } from '@services/modules/note'
-import { defaultResourceImgURL } from '@config/request_config'
+import { getImage } from '@img/cdn'
 import { random } from '@utils/numberToCode'
 import Location from '@components/Location'
 import goodsState from '@config/noteState'
@@ -108,7 +108,7 @@ class NoteDetails extends Component {
     return {
       title: `${userInfo.nickName || '好友'}给你分享了他的建材笔记`,
       path: `/pages/note_details/index?shareType=1&userId=${userInfo.userId}`,
-      imageUrl: `${defaultResourceImgURL}/share/share_note_details.png`
+      imageUrl: getImage('share/share_note_details.png')
     }
   }
   config = {

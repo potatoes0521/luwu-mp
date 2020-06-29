@@ -22,7 +22,7 @@ import Upload from '@components/Upload'
 import Location from '@components/Location'
 import Login from '@utils/login'
 import biddingState from '@config/biddingState'
-import { defaultResourceImgURL } from '@config/request_config'
+import { getImage } from '@img/cdn'
 
 import './index.scss'
 
@@ -218,7 +218,7 @@ class BiddingPublish extends Component {
     return {
       title: `录屋,和监理一起开启装修之旅吧`,
       path: `/pages/index/index`,
-      imageUrl: `${defaultResourceImgURL}/share/share_index.png`
+      imageUrl: getImage('share/share_index.png')
     }
   }
   config = {

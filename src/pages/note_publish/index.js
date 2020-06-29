@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 15:39:22
+ * @LastEditTime: 2020-06-29 10:27:41
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -22,7 +22,7 @@ import Login from '@utils/login'
 import { publishNote, getNoteDetails, editNote } from '@services/modules/note'
 import { handleMoney } from '@utils/patter'
 import { setStorage, removeStorage } from '@utils/storage'
-import { defaultResourceImgURL } from "@config/request_config"
+import { getImage } from '@img/cdn'
 import goodsState from '@config/noteState'
 import FormItem from '@components/FormItem'
 
@@ -300,7 +300,7 @@ class NotePublish extends Component {
     return {
       title: `录屋,和监理一起开启装修之旅吧`,
       path: `/pages/index/index?shareType=1&userId=${userInfo.userId}`,
-      imageUrl: `${defaultResourceImgURL}/share/share_index.png`
+      imageUrl: getImage('share/share_index.png')
     }
   }
   config = {

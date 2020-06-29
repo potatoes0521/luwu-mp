@@ -5,7 +5,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 11:20:47
+ * @LastEditTime: 2020-06-29 10:29:30
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -15,7 +15,7 @@ import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 // import {} from '@services/modules'
 import SaveAreaView from '@components/SafeAreaView'
-import { defaultResourceImgURL } from "@config/request_config"
+import { getImage } from '@img/cdn'
 import HouseMsg from './components/HouseMsg'
 import TableLeftHead from './components/TableLeftHead'
 import TableMain from './components/TableMain'
@@ -169,7 +169,7 @@ class TableContrast extends Component {
     return {
       title: `录屋,和监理一起开启装修之旅吧`,
       path: `/pages/index/index?shareType=1&userId=${userInfo.userId}`,
-      imageUrl: `${defaultResourceImgURL}/share/share_table_contrast.png`
+      imageUrl: getImage('share/share_table_contrast.png')
     }
   }
   config = {

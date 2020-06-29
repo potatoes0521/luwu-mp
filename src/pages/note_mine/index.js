@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:36
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 11:20:38
+ * @LastEditTime: 2020-06-29 10:27:09
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -15,7 +15,7 @@ import { connect } from '@tarojs/redux'
 import SaveAreaView from '@components/SafeAreaView'
 import Skeleton from '@components/Skeleton'
 import { getNoteList } from '@services/modules/note'
-import { defaultResourceImgURL } from '@config/request_config'
+import { getImage } from '@img/cdn'
 import Login from '@utils/login'
 import BottomBtn from '@/note_components/BottomBtn'
 import NoteItem from './components/NoteItem'
@@ -136,7 +136,7 @@ class NoteMine extends Component {
     return {
       title: `录屋,和监理一起开启装修之旅吧`,
       path: `/pages/index/index`,
-      imageUrl: `${defaultResourceImgURL}/share/share_note_mine.png`
+      imageUrl: getImage('share/share_note_mine.png')
     }
   }
   

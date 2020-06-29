@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 10:05:33
+ * @LastEditTime: 2020-06-29 10:26:04
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -19,24 +19,34 @@ import { defaultResourceImgURL } from "@config/request_config"
 // import { getIndexListData } from '@services/modules/index'
 import Skeleton from '@components/Skeleton'
 import Login from '@utils/login'
+import { getImage } from '@img/cdn'
 import StickyTab from './components/StickyTab'
-
+  
 import './index.scss'
 
-const bannerBigImg = `${defaultResourceImgURL}index/bannerBig.png?${Math.random()}`
+const bannerBigImg = getImage(`index/bannerBig.png?${Math.random()}`)
 
 class Index extends Component {
   constructor() { 
     this.state = {
       loading: false,
-      pageScrollTop: 0
+      fixed: false
     }
+    this.stickyScrollTop = 0
   }
   componentDidMount() { 
     this.login()
   }
   login() { 
     Login.login()
+  }
+  /**
+   * 当计算出滚动区域高度
+   * @param {Number} stickyScrollTop 需要滚动的高度
+   * @return void
+   */
+  onComputedScrollTop(stickyScrollTop) {
+    this.stickyScrollTop = stickyScrollTop
   }
   /**
    * 页面内转发
@@ -48,16 +58,21 @@ class Index extends Component {
     return {
       title: `录屋,和监理一起开启装修之旅吧~`,
       path: `/pages/index/index?shareType=1&userId=${userInfo.userId}`,
-      imageUrl: `${defaultResourceImgURL}/share/share_index.png`
+      imageUrl: getImage('share/share_index.png')
     }
   }
   onPageScroll(e) { 
     const { scrollTop } = e
-    const { pageScrollTop } = this.state
-    if (scrollTop === pageScrollTop) return
-    this.setState({
-      pageScrollTop: scrollTop
-    })
+    const { fixed } = this.state
+    if (scrollTop > this.stickyScrollTop && !fixed) {
+      this.setState({
+        fixed: true
+      })
+    } else if (scrollTop < this.stickyScrollTop && fixed) {
+      this.setState({
+        fixed: false
+      })
+    }
   }
   
   config = {
@@ -68,7 +83,7 @@ class Index extends Component {
   render() {
     const {
       loading,
-      pageScrollTop
+      fixed
     } = this.state
     return (
       <View className='page-wrapper skeleton' id='sticky'>
@@ -76,7 +91,8 @@ class Index extends Component {
           <Image className='banner-image' src={bannerBigImg}></Image>
         </View>
         <StickyTab
-          pageScrollTop={pageScrollTop}
+          fixed={fixed}
+          onComputedScrollTop={this.onComputedScrollTop.bind(this)}
         />
         {
           loading && <Skeleton />
