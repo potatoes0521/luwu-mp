@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 16:34:25
+ * @LastEditTime: 2020-06-29 17:09:15
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -19,13 +19,14 @@ import { connect } from '@tarojs/redux'
 import Skeleton from '@components/Skeleton'
 import Login from '@utils/login'
 import { getImage } from '@img/cdn'
+import Auth from '@components/auth'
 import StickyTab from './components/StickyTab'
 import FreeEvent from './components/FreeEvent'
 import Bidding from './components/Bidding'
 import Company from './components/Company'
 import Brand from './components/Brand'
 import Store from './components/Store'
-
+  
 import './index.scss'
 
 const bannerBigImg = getImage(`index/bannerBig.png?${Math.random()}`)
@@ -135,6 +136,7 @@ class Index extends Component {
         {
           loading && <Skeleton />
         }
+        <Auth />
       </View>
     )
   }
