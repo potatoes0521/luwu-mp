@@ -1,0 +1,133 @@
+@import '../../assets/css/theme.scss';
+@import '../../assets/css/common.scss';
+
+page {
+  background-color: $background-color;
+}
+
+.page-wrapper {
+  padding-top: 10px;
+  padding-bottom: 140px;
+  position: relative;
+
+  .title {
+    width: 100%;
+    height: 78px;
+    color: $tips-title-color;
+    font-size: 26px;
+    line-height: 36px;
+    padding: 30px 30px 10px;
+    box-sizing: border-box;
+    background-color: $background-color;
+  }
+
+  .upload {
+    &-wrapper {
+      background-color: #ffffff;
+      width: 100%;
+      height: 270px;
+      padding: 20px 30px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    &-tips {
+      font-size: 24px;
+      line-height: 34px;
+      color: $placeholder-color;
+      text-align: center;
+    }
+
+    &-list-wrapper {
+      width: 100%;
+      height: 180px;
+      padding: 0 30px;
+      box-sizing: border-box;
+      // display: flex;
+      // align-items: flex-end;
+    }
+  }
+
+
+  .form-wrapper {
+    width: 100%;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    padding: 0 30px;
+    padding-bottom: 4px;
+
+    .hide-line2,
+    .hide-line {
+      width: 100%;
+      height: 0;
+    }
+  }
+
+  .bottom-tips {
+    line-height: 34px;
+    color: #999999;
+    font-size: 24px;
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-bottom: 40px;
+  }
+
+  .fixed-bottom-btm {
+    width: 100vw;
+    height: 140px;
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: #ffffff;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include button-style;
+  }
+
+  .model-modal-wrapper {
+    width: 100vw;
+    height: calc(100vh - 476px);
+    position: absolute;
+    left: 0;
+    z-index: 2;
+    background-color: rgba(67, 67, 67, 0.27);
+
+    .modal-main {
+      border-top: 2px solid $background-color;
+      position: relative;
+      z-index: 3;
+
+      .model-item {
+        width: 100%;
+        height: 90px;
+        border-bottom: 2px solid $background-color;
+        box-sizing: border-box;
+        background-color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $font-color;
+        font-size: 30px;
+        position: relative;
+        z-index: 4;
+
+        &-active {
+          background-color: $background-color;
+          color: $link-color;
+        }
+      }
+    }
+  }
+}
+
+.placeholder-class {
+  font-size: 28px;
+  color: $placeholder-color;
+}
