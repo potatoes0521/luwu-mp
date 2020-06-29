@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 18:09:46
+ * @LastEditTime: 2020-06-29 18:11:28
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -19,7 +19,7 @@ import SafeAreaView from '@components/SafeAreaView'
 import Skeleton from '@components/Skeleton'
 import Login from '@utils/login'
 import classNames from 'classnames'
-import { getNoteDetails } from '@services/modules/note'
+import { getBiddingDetails } from '@services/modules/bidding'
 import { getImage } from '@img/cdn'
 import { random } from '@utils/numberToCode'
 import goodsState from '@config/noteState'
@@ -53,8 +53,8 @@ class BiddingDetails extends Component {
   }
 
   getNoteDetails() { 
-    getNoteDetails({
-      noteId: this.pageParams.noteId
+    getBiddingDetails({
+      biddingId: this.pageParams.biddingId
     }).then((res) => {
       const json = Object.assign({}, res.data)
       delete res['data']
@@ -70,12 +70,12 @@ class BiddingDetails extends Component {
   }
   handleEditData() { 
     Taro.navigateTo({
-      url: `/pages/note_publish/index?pageType=edit&noteId=${this.pageParams.noteId}`
+      url: `/pages/bidding_publish/index?pageType=edit&biddingId=${this.pageParams.biddingId}`
     })
   }
   handleOnRightBtnClick() {
     Taro.redirectTo({
-      url: `/pages/note_publish/index?`
+      url: `/pages/bidding_publish/index?`
     })
   }
   submitOffer() { 
@@ -105,8 +105,8 @@ class BiddingDetails extends Component {
     const {userInfo} = this.props
     return {
       title: `${userInfo.nickName || '好友'}给你分享了他的建材笔记`,
-      path: `/pages/note_details/index?shareType=1&userId=${userInfo.userId}`,
-      imageUrl: getImage('share/share_note_details.png')
+      path: `/pages/bidding_details/index?shareType=1&userId=${userInfo.userId}`,
+      imageUrl: getImage('share/share_bidding_details.png')
     }
   }
   config = {
