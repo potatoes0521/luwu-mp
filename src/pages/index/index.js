@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 14:44:16
+ * @LastEditTime: 2020-06-29 16:34:25
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -34,9 +34,10 @@ class Index extends Component {
   constructor() { 
     this.state = {
       loading: false,
-      fixed: false
+      fixed: false,
+      tabActiveIndex: 0
     }
-    this.stickyScrollTop = 0
+    this.stickyScrollData = {}
   }
   componentDidMount() { 
     this.login()
@@ -46,11 +47,12 @@ class Index extends Component {
   }
   /**
    * 当计算出滚动区域高度
-   * @param {Number} stickyScrollTop 需要滚动的高度
+   * @param {Number} stickyScrollTop 粘性需要滚动的高度
    * @return void
    */
-  onComputedScrollTop(stickyScrollTop) {
-    this.stickyScrollTop = stickyScrollTop
+  onComputedScrollTop(data) {
+    this.stickyScrollTop = data
+
   }
   /**
    * 页面内转发
@@ -67,16 +69,42 @@ class Index extends Component {
   }
   onPageScroll(e) { 
     const { scrollTop } = e
-    const { fixed } = this.state
-    if (scrollTop > this.stickyScrollTop && !fixed) {
+    const { fixed, tabActiveIndex } = this.state
+    const {
+      stickyScrollTop,
+      biddingScrollTop,
+      companyScrollTop,
+      brandScrollTop,
+      storeScrollTop,
+      screenHalf
+    } = this.stickyScrollTop
+    // 计算要不要固定
+    if (scrollTop > stickyScrollTop && !fixed) {
       this.setState({
         fixed: true
       })
-    } else if (scrollTop < this.stickyScrollTop && fixed) {
+    } else if (scrollTop < stickyScrollTop && fixed) {
       this.setState({
         fixed: false
       })
     }
+    // 屏幕中键那个线应该滚动的位置
+    const screenHalfLine = screenHalf + scrollTop
+    let nextTab = ''
+    if (screenHalfLine >= storeScrollTop) {
+      nextTab = 3
+    } else if (screenHalfLine >= brandScrollTop) {
+      nextTab = 2
+    } else if (screenHalfLine >= companyScrollTop) {
+      nextTab = 1
+    } else if (screenHalfLine >= biddingScrollTop) {
+      nextTab = 0
+    }
+    console.log('scrollTop', scrollTop)
+    if (nextTab === tabActiveIndex) return
+    this.setState({
+      tabActiveIndex: nextTab
+    })
   }
   
   config = {
@@ -87,7 +115,8 @@ class Index extends Component {
   render() {
     const {
       loading,
-      fixed
+      fixed,
+      tabActiveIndex
     } = this.state
     return (
       <View className='page-wrapper skeleton' id='sticky'>
@@ -96,6 +125,7 @@ class Index extends Component {
         </View>
         <StickyTab
           fixed={fixed}
+          activeIndex={tabActiveIndex}
           onComputedScrollTop={this.onComputedScrollTop.bind(this)}
         />
         <FreeEvent />

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 17:13:53
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 14:40:06
+ * @LastEditTime: 2020-06-29 16:33:46
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -47,27 +47,53 @@ class StickyTab extends Component {
         }
       ],
     }
+    this.loading = false // 用来判断是否计算过高度
+    this.scrollData = {}
   }
 
   componentDidMount() {
     this.getStatusBarHeight()
+  }
+  componentDidUpdate() { 
+    const { system } = this.props
+    if (system && system.statusBarHeight && !this.loading) {
+      this.getStickyScrollTop()
+    }
   }
   getStatusBarHeight() { 
     const { system } = this.props
     if (!system || !system.statusBarHeight){
       getSystemInfo()
     }
-    this.getStickyScrollTop()
   }
   getStickyScrollTop() {
     Promise.all([
-      this.select('#sticky >>> .banner-wrapper'),
-      this.select('#sticky >>> .sticky-wrapper')
+      this.select('#sticky >>> .sticky-wrapper'),
+      this.select('#sticky >>> .bidding'),
+      this.select('#sticky >>> .company'),
+      this.select('#sticky >>> .brand'),
+      this.select('#sticky >>> .store'),
+
     ]).then(res => {
+      this.loading = true
       const { system } = this.props
       const statusBarHeight = system && system.statusBarHeight || 88
-      const stickyScrollTop = res[1].top - (statusBarHeight / 2)
-      this.props.onComputedScrollTop(stickyScrollTop)
+      // 计算粘性tab的滚动高度
+      const stickyScrollTop = res[0].top - (statusBarHeight / 2)
+      const biddingScrollTop = res[1].top
+      const companyScrollTop = res[2].top
+      const brandScrollTop = res[3].top
+      const storeScrollTop = res[4].top
+      const screenHalf = system.safeArea.height / 2
+      this.scrollData = {
+        stickyScrollTop,
+        biddingScrollTop,
+        companyScrollTop,
+        brandScrollTop,
+        storeScrollTop,
+        screenHalf
+      }
+      this.props.onComputedScrollTop(this.scrollData)
     })
   }
   /**
@@ -81,6 +107,31 @@ class StickyTab extends Component {
         resolve(res[0])
       })
     )
+  }
+  handleScrollPage(index) { 
+    console.log('index', index)
+    const {
+      biddingScrollTop,
+      companyScrollTop,
+      brandScrollTop,
+      storeScrollTop,
+      screenHalf
+    } = this.scrollData
+    let scrollTop = 0
+    if (index === 3) {
+      scrollTop = storeScrollTop + screenHalf
+    } else if (index === 2) {
+      scrollTop = brandScrollTop + screenHalf
+    } else if (index === 1) {
+      scrollTop = companyScrollTop + screenHalf
+    } else if (index === 0) {
+      scrollTop = biddingScrollTop + screenHalf
+    }
+    console.log('scrollTop', scrollTop)
+    Taro.pageScrollTo({
+      scrollTop: scrollTop,
+      duration: 100
+    })
   }
   render() {
     const {
@@ -98,7 +149,11 @@ class StickyTab extends Component {
       })
       const key = item.text
       return (
-        <View key={key} className={itemClassName}>
+        <View
+          key={key}
+          className={itemClassName}
+          onClick={this.handleScrollPage.bind(this, index)}
+        >
           <Image className='item-image' src={item.imageUrl}></Image>
           <Text className='item-text'>{item.text}</Text>
         </View>
