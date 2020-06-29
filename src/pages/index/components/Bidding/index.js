@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 11:19:15
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 13:20:05
+ * @LastEditTime: 2020-06-29 14:58:29
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -62,7 +62,7 @@ export default class Bidding extends Component {
               <View className='big-margin-top small-tips'>共有38家装修公司投标</View>
               <View className='backgroundImage4'></View>
             </View>
-            <View className='small-item right-wrapper color5'>
+            <View className='small-item right-item color5'>
               <View className='title'>三室二厅二厨二卫</View>
               <View className='big-margin-top small-tips'>共有38家装修公司投标</View>
               <View className='backgroundImage5'></View>
