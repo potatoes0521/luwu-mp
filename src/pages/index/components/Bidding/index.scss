@@ -24,6 +24,7 @@ $backgroundImage5: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/index
     box-sizing: border-box;
     padding-left: 20px;
     padding-top: 20px;
+    border-radius: 8px;
   }
 
   .small-item {
@@ -131,4 +132,8 @@ $backgroundImage5: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/index
     height: 52px;
     @include backgroundImage($backgroundImage5)
   }
+}
+
+.margin-bottom {
+  margin-bottom: 20px;
 }

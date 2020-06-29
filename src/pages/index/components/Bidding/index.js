@@ -56,7 +56,7 @@ export default class Bidding extends Component {
               </View>
             </View>
           </View>
-          <View className='plain-wrapper'>
+          <View className='plain-wrapper margin-bottom'>
             <View className='big-item color4' >
               <View className='title'>三室二厅二厨二卫</View>
               <View className='big-margin-top small-tips'>共有38家装修公司投标</View>
