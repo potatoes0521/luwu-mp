@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 17:13:53
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 13:54:24
+ * @LastEditTime: 2020-06-29 14:40:06
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -20,6 +20,7 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { connect } from '@tarojs/redux'
 import { getImage } from '@img/cdn'
+import { getSystemInfo } from '@utils/publicWX'
 
 import './index.scss'
 
@@ -49,6 +50,13 @@ class StickyTab extends Component {
   }
 
   componentDidMount() {
+    this.getStatusBarHeight()
+  }
+  getStatusBarHeight() { 
+    const { system } = this.props
+    if (!system || !system.statusBarHeight){
+      getSystemInfo()
+    }
     this.getStickyScrollTop()
   }
   getStickyScrollTop() {
@@ -56,10 +64,8 @@ class StickyTab extends Component {
       this.select('#sticky >>> .banner-wrapper'),
       this.select('#sticky >>> .sticky-wrapper')
     ]).then(res => {
-      console.log('res', res)
       const { system } = this.props
       const statusBarHeight = system && system.statusBarHeight || 88
-      console.log('statusBarHeight', statusBarHeight)
       const stickyScrollTop = res[1].top - (statusBarHeight / 2)
       this.props.onComputedScrollTop(stickyScrollTop)
     })

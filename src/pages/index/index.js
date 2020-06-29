@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 14:01:02
+ * @LastEditTime: 2020-06-29 14:39:00
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -67,8 +67,6 @@ class Index extends Component {
   onPageScroll(e) { 
     const { scrollTop } = e
     const { fixed } = this.state
-    console.log('scrollTop', scrollTop)
-    console.log('object', this.stickyScrollTop)
     if (scrollTop > this.stickyScrollTop && !fixed) {
       this.setState({
         fixed: true
