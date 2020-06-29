@@ -4,7 +4,7 @@
  * @path: "@utils/login"
  * @Date: 2020-06-17 16:04:08
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 11:59:49
+ * @LastEditTime: 2020-06-29 17:01:35
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -64,9 +64,9 @@ export default {
           resolve(res)
         },
         fail: () => {
-          Taro.navigateTo({
-            url: '/pages/auth/index'
-          })
+          // Taro.navigateTo({
+          //   url: '/pages/auth/index'
+          // })
           resolve(false)
         },
       })

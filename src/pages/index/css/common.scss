@@ -3,6 +3,7 @@
 .card-wrapper {
   width: 100%;
   border-bottom: 30px solid $background-color;
+
   .card-plain {
     width: 100%;
     box-sizing: border-box;
@@ -19,18 +20,20 @@
     font-size: 24px;
     color: $link-color;
     box-sizing: border-box;
+
     .btn {
       text-align: center;
       width: 210px;
       height: 34px;
       position: relative;
     }
+
     .btn-active {
       font-size: 24px;
       font-weight: 700;
     }
 
-    .bottom-icon{
+    .bottom-icon {
       font-size: 10px;
       position: absolute;
       bottom: -14px;
