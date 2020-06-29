@@ -1,0 +1,134 @@
+@import '../../../../assets/css/common.scss';
+@import '../../css/common.scss';
+
+$backgroundImage1: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/index/bidding/bg1.png';
+$backgroundImage2: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/index/bidding/bg2.png';
+$backgroundImage3: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/index/bidding/bg3.png';
+$backgroundImage4: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/index/bidding/bg4.png';
+$backgroundImage5: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/index/bidding/bg5.png';
+.plain-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .big-wrapper {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  .big-item {
+    position: relative;
+    width: 356px;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-top: 20px;
+  }
+
+  .small-item {
+    position: relative;
+    width: 100%;
+    height: 95px;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-top: 20px;
+    border-radius: 8px;
+  }
+
+  .right-wrapper {
+    width: 324px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .title {
+    font-size: 22px;
+    line-height: 30px;
+    color: $font-color;
+    font-weight: 700;
+  }
+
+  .middle-title {
+    margin: 5px 0;
+    font-size: 20px;
+    line-height: 28px;
+    color: $tips-color;
+  }
+
+  .small-tips {
+    margin: 5px 0;
+    font-size: 16px;
+    line-height: 22px;
+    color: #999999;
+  }
+
+  .label{
+    margin-right: 16px;
+  }
+
+  .big-margin-bottom{
+    margin-bottom: 8px;
+  }
+  .big-margin-top {
+    margin-top: 8px;
+  }
+
+  .color1 {
+    background-color: #D8E9FF;
+  }
+  .color2 {
+    background-color: #FDEED5;
+  }
+  .color3 {
+    background-color: #FDDEDB;
+  }
+  .color4 {
+    background-color: #E3EBFF;
+  }
+  .color5 {
+    background-color: #FFDFCC;
+  }
+
+  .backgroundImage1 {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    width: 55px;
+    height: 55px;
+    @include backgroundImage($backgroundImage1)
+  }
+  .backgroundImage2 {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    width: 52px;
+    height: 52px;
+    @include backgroundImage($backgroundImage2)
+  }
+  .backgroundImage3 {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    width: 52px;
+    height: 52px;
+    @include backgroundImage($backgroundImage3)
+  }
+  .backgroundImage4 {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    width: 52px;
+    height: 52px;
+    @include backgroundImage($backgroundImage4)
+  }
+  .backgroundImage5 {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    width: 52px;
+    height: 52px;
+    @include backgroundImage($backgroundImage5)
+  }
+}

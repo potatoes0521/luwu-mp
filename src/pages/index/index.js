@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 10:44:24
+ * @LastEditTime: 2020-06-29 11:29:51
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -21,7 +21,8 @@ import Login from '@utils/login'
 import { getImage } from '@img/cdn'
 import StickyTab from './components/StickyTab'
 import FreeEvent from './components/FreeEvent'
-  
+import Bidding from './components/Bidding'
+
 import './index.scss'
 
 const bannerBigImg = getImage(`index/bannerBig.png?${Math.random()}`)
@@ -95,6 +96,7 @@ class Index extends Component {
           onComputedScrollTop={this.onComputedScrollTop.bind(this)}
         />
         <FreeEvent />
+        <Bidding />
         {
           loading && <Skeleton />
         }
