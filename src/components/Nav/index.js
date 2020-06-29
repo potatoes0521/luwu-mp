@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 16:25:43
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 10:31:20
+ * @LastEditTime: 2020-06-29 10:11:13
  *  title 标题用作导航标题
  * @optionalParam: 选传参数
  *  back 导航是否显示返回
@@ -39,10 +39,7 @@ class Nav extends Component {
     Taro.navigateBack()
   }
   switchTab() {
-    // Taro.switchTab({
-    //   url: '/pages/index/index'
-    // })
-    Taro.reLaunch({
+    Taro.switchTab({
       url: '/pages/index/index'
     })
   }
