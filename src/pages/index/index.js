@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 10:40:16
+ * @LastEditTime: 2020-06-29 10:44:24
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -20,6 +20,7 @@ import Skeleton from '@components/Skeleton'
 import Login from '@utils/login'
 import { getImage } from '@img/cdn'
 import StickyTab from './components/StickyTab'
+import FreeEvent from './components/FreeEvent'
   
 import './index.scss'
 
@@ -93,6 +94,7 @@ class Index extends Component {
           fixed={fixed}
           onComputedScrollTop={this.onComputedScrollTop.bind(this)}
         />
+        <FreeEvent />
         {
           loading && <Skeleton />
         }
