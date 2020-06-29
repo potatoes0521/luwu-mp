@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 10:26:04
+ * @LastEditTime: 2020-06-29 10:40:16
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -15,7 +15,6 @@ import {
   Image,
 } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { defaultResourceImgURL } from "@config/request_config"
 // import { getIndexListData } from '@services/modules/index'
 import Skeleton from '@components/Skeleton'
 import Login from '@utils/login'
