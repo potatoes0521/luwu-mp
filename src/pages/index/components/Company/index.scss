@@ -1,0 +1,14 @@
+@import '../../css/common.scss';
+
+.list-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  .list-item{
+    width: 160px;
+    height: 60px;
+    border: 2px solid #e2e2e2;
+    margin-bottom: 20px;
+  }
+}

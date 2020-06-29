@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 11:29:51
+ * @LastEditTime: 2020-06-29 13:28:54
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -22,6 +22,7 @@ import { getImage } from '@img/cdn'
 import StickyTab from './components/StickyTab'
 import FreeEvent from './components/FreeEvent'
 import Bidding from './components/Bidding'
+import Company from './components/Company'
 
 import './index.scss'
 
@@ -97,6 +98,7 @@ class Index extends Component {
         />
         <FreeEvent />
         <Bidding />
+        <Company />
         {
           loading && <Skeleton />
         }
