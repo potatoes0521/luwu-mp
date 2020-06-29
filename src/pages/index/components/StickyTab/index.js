@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 17:13:53
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 16:33:46
+ * @LastEditTime: 2020-06-29 16:50:41
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -109,7 +109,6 @@ class StickyTab extends Component {
     )
   }
   handleScrollPage(index) { 
-    console.log('index', index)
     const {
       biddingScrollTop,
       companyScrollTop,
@@ -119,15 +118,14 @@ class StickyTab extends Component {
     } = this.scrollData
     let scrollTop = 0
     if (index === 3) {
-      scrollTop = storeScrollTop + screenHalf
+      scrollTop = storeScrollTop
     } else if (index === 2) {
-      scrollTop = brandScrollTop + screenHalf
+      scrollTop = brandScrollTop - screenHalf
     } else if (index === 1) {
-      scrollTop = companyScrollTop + screenHalf
+      scrollTop = companyScrollTop - screenHalf
     } else if (index === 0) {
-      scrollTop = biddingScrollTop + screenHalf
+      scrollTop = biddingScrollTop - screenHalf
     }
-    console.log('scrollTop', scrollTop)
     Taro.pageScrollTo({
       scrollTop: scrollTop,
       duration: 100

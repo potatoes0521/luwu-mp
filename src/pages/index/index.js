@@ -100,7 +100,6 @@ class Index extends Component {
     } else if (screenHalfLine >= biddingScrollTop) {
       nextTab = 0
     }
-    console.log('scrollTop', scrollTop)
     if (nextTab === tabActiveIndex) return
     this.setState({
       tabActiveIndex: nextTab
