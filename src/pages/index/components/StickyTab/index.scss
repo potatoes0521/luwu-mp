@@ -22,7 +22,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     color: $tips-color;
+    .item-image{
+      width: 64px;
+      height: 74px;
+    }
+    .item-text{
+      line-height: 34px;
+      margin-top: 8px;
+      font-size: 24px;
+    }
     &-active {
       color: $font-color;
       font-weight: 700;

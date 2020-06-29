@@ -4,16 +4,22 @@
  * @path: 引入路径
  * @Date: 2020-06-28 17:13:53
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 10:20:03
+ * @LastEditTime: 2020-06-29 10:37:29
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text, Block } from '@tarojs/components'
+import {
+  View,
+  Text,
+  Image,
+  Block
+} from '@tarojs/components'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { connect } from '@tarojs/redux'
+import { getImage } from '@img/cdn'
 
 import './index.scss'
 
@@ -23,19 +29,19 @@ class StickyTab extends Component {
     this.state = {
       list: [
         {
-          imageUrl: '',
+          imageUrl: getImage('index/stickyTab/zhaobiaobijia.png'),
           text: '招标比价'
         },
         {
-          imageUrl: '',
+          imageUrl: getImage('index/stickyTab/hezuozhuangqi.png'),
           text: '合作装企'
         },
         {
-          imageUrl: '',
+          imageUrl: getImage('index/stickyTab/jiancaixunjia.png'),
           text: '建材询价'
         },
         {
-          imageUrl: '',
+          imageUrl: getImage('index/stickyTab/jiancaishangdian.png'),
           text: '建材商店'
         }
       ],
@@ -83,9 +89,11 @@ class StickyTab extends Component {
       const itemClassName = classNames('sticky-list-item', {
         'sticky-list-item-active': index === activeIndex
       })
+      const key = item.text
       return (
-        <View key={item} className={itemClassName}>
-          <Text className='item-text'></Text>
+        <View key={key} className={itemClassName}>
+          <Image className='item-image' src={item.imageUrl}></Image>
+          <Text className='item-text'>{item.text}</Text>
         </View>
       )
     })
