@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 13:51:33
+ * @LastEditTime: 2020-06-29 14:01:02
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -23,6 +23,7 @@ import StickyTab from './components/StickyTab'
 import FreeEvent from './components/FreeEvent'
 import Bidding from './components/Bidding'
 import Company from './components/Company'
+import Brand from './components/Brand'
 
 import './index.scss'
 
@@ -101,6 +102,7 @@ class Index extends Component {
         <FreeEvent />
         <Bidding />
         <Company />
+        <Brand />
         {
           loading && <Skeleton />
         }
