@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 10:42:14
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 11:16:01
+ * @LastEditTime: 2020-06-29 11:18:31
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -21,12 +21,16 @@ import './index.scss'
 const titleTextImage = getImage(`index/freeEvent/title.png?${Math.random()}`)
 
 export default class FreeEvent extends Component {
-  
+  navigator() { 
+    Taro.navigateTo({
+      url: '/pages/offer_examine_publish/index'
+    })
+  }
   render() {
     const { headerList } = this.props
     return (
       <View className='free-event-wrapper'>
-        <View className='btn-wrapper'>
+        <View className='btn-wrapper' onClick={this.navigator.bind(this)}>
           <Image src={titleTextImage} className='title-image'></Image>
           <View className='center-text'>看不懂装修报价嘛？让监理给您审审~</View>
           <View className='bottom-wrapper'>
