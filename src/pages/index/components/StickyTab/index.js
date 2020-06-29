@@ -4,24 +4,20 @@
  * @path: 引入路径
  * @Date: 2020-06-28 17:13:53
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 18:22:41
+ * @LastEditTime: 2020-06-29 10:11:00
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
 import Taro, { Component } from '@tarojs/taro'
-import { View, Block } from '@tarojs/components'
+import { View, Text, Block } from '@tarojs/components'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import { connect } from '@tarojs/redux'
 
 import './index.scss'
 
-export default class StickyTab extends Component {
-
-  // static options = {
-    // addGlobalClass: true // 允许外部样式修改组件样式
-  // }
-
+class StickyTab extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -78,13 +74,16 @@ export default class StickyTab extends Component {
       fixed,
       viewTop
     } = this.state
-    const { activeIndex } = this.props
+    const { activeIndex, system } = this.props
+    const statusBarHeight = system && system.statusBarHeight || 88
     const itemListRender = list.map((item, index) => {
       const itemClassName = classNames('sticky-list-item', {
         'sticky-list-item-active': index === activeIndex
       })
       return (
-        <View key={item} className={itemClassName}>1</View>
+        <View key={item} className={itemClassName}>
+          <Text className='item-text'></Text>
+        </View>
       )
     })
     const stickyClassWrapper = classNames('sticky-wrapper', {
@@ -95,7 +94,8 @@ export default class StickyTab extends Component {
         <View
           className={stickyClassWrapper}
           style={{
-            top: viewTop * 2 + 'rpx'
+            top: viewTop * 2 + 'rpx',
+            paddingTop: fixed ? statusBarHeight + 'rpx' : 0
           }}
         >
           {
@@ -120,3 +120,10 @@ StickyTab.propTypes = {
   pageScrollTop: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired
 }
+
+const mapStateToProps = (state) => {
+  return {
+    system: state.system.systemInfo
+  }
+}
+export default connect(mapStateToProps)(StickyTab);
