@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 17:13:53
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 10:37:29
+ * @LastEditTime: 2020-06-29 13:54:24
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -59,7 +59,8 @@ class StickyTab extends Component {
       console.log('res', res)
       const { system } = this.props
       const statusBarHeight = system && system.statusBarHeight || 88
-      const stickyScrollTop = res[1].top - statusBarHeight
+      console.log('statusBarHeight', statusBarHeight)
+      const stickyScrollTop = res[1].top - (statusBarHeight / 2)
       this.props.onComputedScrollTop(stickyScrollTop)
     })
   }
@@ -105,6 +106,7 @@ class StickyTab extends Component {
         <View
           className={stickyClassWrapper}
           style={{
+            height: fixed ? statusBarHeight + 170 + 'rpx' : '170rpx',
             paddingTop: fixed ? statusBarHeight + 'rpx' : 0
           }}
         >
@@ -113,7 +115,14 @@ class StickyTab extends Component {
           }
         </View>
         {
-          fixed && <View className='sticky-wrapper'></View>
+          fixed && (
+            <View
+              style={{
+                height: '170rpx',
+              }}
+              className='sticky-wrapper'
+            ></View>
+          )
         }
       </Block>
     )
