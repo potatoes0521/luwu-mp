@@ -88,7 +88,7 @@ export default class Company extends Component {
         </View>
         <View className='bottom-btn-wrapper'>
           <View className='btn'>
-            <View>1343家装企任你选</View>
+            <View>1343家装修公司任你选</View>
             <Text className='iconlujing iconfont bottom-icon'></Text>
           </View>
         </View>

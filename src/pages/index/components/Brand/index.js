@@ -46,22 +46,22 @@ export default class Brand extends Component {
                     </View>
                     <View className='text-main'>
                       <View className='text-title'>马可波罗-瓷砖</View>
-                      <View className='text-tips'>共有38家建材专卖店报价</View>
+                      <View className='text-tips'>共有38家建材商店报价</View>
                     </View>
                   </View>
                 )
               })
             }
           </View>
-          <View className='bottom-tips'>全城3000家建材商店等您来询价~</View>
+          <View className='bottom-tips'>全城3000家建材商店等您来比价~</View>
         </View>
         <View className='bottom-btn-wrapper'>
           <View className='btn'>
-            <View>大家的询价</View>
+            <View>大家的比价</View>
             {/* <Text className='iconlujing iconfont bottom-icon'></Text> */}
           </View>
           <View className='btn'>
-            <View>我也要询价</View>
+            <View>我也要比价</View>
             <Text className='iconlujing iconfont bottom-icon'></Text>
           </View>
         </View>

@@ -1,7 +1,9 @@
 @import '../../assets/css/theme.scss';
-page{
+
+page {
   background-color: $background-color;
 }
+
 .page-wrapper {
 
   .bidding-details-location-wrapper {
@@ -28,15 +30,17 @@ page{
       margin-top: 20px;
       margin-bottom: 14px;
     }
-    .form-wrapper{
+
+    .form-wrapper {
       padding-bottom: 30px;
     }
+
     .image-list-wrapper {
       padding-top: 44px;
       padding-bottom: 30px;
     }
   }
-  
+
   // 指示点样式写在子组件不会生效
   .swiper .wx-swiper-dot {
     width: 8px;
@@ -54,6 +58,6 @@ page{
   }
 }
 
-.bottom-padding160{
+.bottom-padding160 {
   padding-bottom: 160px;
 }

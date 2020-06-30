@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 17:13:53
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 16:50:41
+ * @LastEditTime: 2020-06-30 11:24:33
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -31,15 +31,15 @@ class StickyTab extends Component {
       list: [
         {
           imageUrl: getImage('index/stickyTab/zhaobiaobijia.png'),
-          text: '招标比价'
+          text: '装修招标'
         },
         {
           imageUrl: getImage('index/stickyTab/hezuozhuangqi.png'),
-          text: '合作装企'
+          text: '装修公司'
         },
         {
           imageUrl: getImage('index/stickyTab/jiancaixunjia.png'),
-          text: '建材询价'
+          text: '建材比价'
         },
         {
           imageUrl: getImage('index/stickyTab/jiancaishangdian.png'),

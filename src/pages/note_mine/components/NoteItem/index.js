@@ -39,7 +39,7 @@ export default class NoteItem extends Component {
   }
   submitOffer() {
     Taro.showToast({
-      title: '询价成功'
+      title: '比价成功'
     })
   }
   render() {

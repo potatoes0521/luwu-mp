@@ -396,7 +396,7 @@ class BiddingPublish extends Component {
               autoHeight
               className='textarea'
               placeholderClass='placeholder-class'
-              placeholder='请补充你对房屋的个性化要求, 更方便装企投标'
+              placeholder='请补充你对房屋的个性化要求, 更方便装修公司投标'
               value={remark}
               onInput={this.onRemarkInput.bind(this)}
               maxlength={300}
@@ -443,7 +443,7 @@ class BiddingPublish extends Component {
               onPickerValueChange={this.onChooseEndTime.bind(this)}
             />
           </View>
-          <View className='bottom-tips'>您的联系信息需要您的确认才会提供给装企</View>
+          <View className='bottom-tips'>您的联系信息需要您的确认才会提供给装修公司</View>
           <View className='fixed-bottom-btm'>
             <View className='btn-public default-btn' onClick={this.submit.bind(this)}>提交</View>
           </View>

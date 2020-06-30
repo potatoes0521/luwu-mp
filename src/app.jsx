@@ -86,7 +86,7 @@ class App extends Component {
           pagePath: "pages/index/index",
           iconPath: "assets/img/tab_bar/home.png",
           selectedIconPath: "assets/img/tab_bar/home_active.png",
-          text: "首页"
+          text: "装修|建材"
         },
         {
           pagePath: "pages/mine/index",

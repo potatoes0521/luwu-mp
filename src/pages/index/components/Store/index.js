@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 14:41:33
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 15:53:30
+ * @LastEditTime: 2020-06-30 11:22:37
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -151,7 +151,7 @@ export default class Store extends Component {
         </View>
         <View className='bottom-btn-wrapper'>
           <View className='btn'>
-            <View>建材专卖店</View>
+            <View>建材商店</View>
             {/* <Text className='iconlujing iconfont bottom-icon'></Text> */}
           </View>
           <View className='btn'>

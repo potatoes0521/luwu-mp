@@ -351,7 +351,7 @@ class BiddingPublish extends Component {
               onPickerValueChange={this.onChooseStartTime.bind(this)}
             />
           </View>
-          <View className='bottom-tips'>您的联系信息需要您的确认才会提供给装企</View>
+          <View className='bottom-tips'>您的联系信息需要您的确认才会提供给装修公司</View>
           <View className='fixed-bottom-btm'>
             <View className='btn-public default-btn' onClick={this.submit.bind(this)}>提交</View>
           </View>

@@ -82,7 +82,7 @@ class NoteDetails extends Component {
   }
   submitOffer() { 
     Taro.showToast({
-      title: '询价成功'
+      title: '比价成功'
     })
   }
   /**
@@ -197,7 +197,7 @@ class NoteDetails extends Component {
                 !isShare && (
                   <View className='offer-price-wrapper'>
                     <View className='left-text'>
-                      全城共有{distributorCount || '99'}家{brand.brandName || ''}{mainCategory.categoryName}专卖店
+                      全城共有{distributorCount || '99'}家{brand.brandName || ''}{mainCategory.categoryName}商店
                     </View>
                     <View className='tips' onClick={this.submitOffer.bind(this)}>一键问价</View>
                   </View>

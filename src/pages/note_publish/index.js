@@ -440,7 +440,7 @@ class NotePublish extends Component {
             onGetLocationData={this.onGetLocationData.bind(this)}
           />
           <View className='bottom-wrapper'>
-            <View className='bottom-btn-tips'>保存笔记马上全城询价，50家建材城等着给您报价</View>
+            <View className='bottom-btn-tips'>保存笔记马上全城比价，50家建材城等着给您报价</View>
             <View className='button' onClick={this.submit.bind(this)}>保存笔记</View>
           </View>
         </View>

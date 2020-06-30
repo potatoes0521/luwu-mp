@@ -80,7 +80,7 @@ class BiddingDetails extends Component {
   }
   submitOffer() { 
     Taro.showToast({
-      title: '询价成功'
+      title: '比价成功'
     })
   }
   /**
