@@ -1,0 +1,201 @@
+@import '../../assets/css/theme.scss';
+
+page {
+  background-color: $background-color;
+}
+
+.page-wrapper {
+  width: 100%;
+
+  .user-msg-wrapper {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 30px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+
+    .user-head {
+      width: 112px;
+      height: 112px;
+      box-sizing: border-box;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .msg-text-wrapper {
+      display: flex;
+      align-items: center;
+      margin-left: 34px;
+
+      .not-login {
+        font-size: 32px;
+        color: $font-color;
+      }
+
+      .login-msg{
+        &-wrapper{
+          display: flex;
+          align-items: center;
+          margin-bottom: 14px;
+        }
+        &-name{
+          font-size: 32px;
+          line-height: 45px;
+        }
+        &-vip-wrapper{
+          padding-top: 8px;
+          margin-left: 30px;
+          font-size: 24px;
+          color: #EFBF51;
+        }
+        &-phone-wrapper{
+          font-size: 28px;
+          color: $tips-color;
+          line-height: 40px;
+          .phone-tips{
+            font-size: 24px;
+          }
+        }
+      }
+    }
+  }
+
+  .form-wrapper {
+    padding: 0 32px;
+    background-color: #ffffff;
+    margin-top: 30px;
+
+    .form-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 26px;
+      padding-bottom: 26px;
+      border-bottom: 2px solid $line-color;
+    }
+
+    .form-item:last-child {
+      border: none;
+    }
+
+    .form-label {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      color: $font-color;
+      font-size: 28px;
+    }
+
+    .form-content {
+      flex: 1;
+
+      .form-right-icon {
+        font-size: 24px;
+        color: $placeholder-color;
+      }
+    }
+  }
+
+  .house-wrapper {
+    padding: 30px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .house-label {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+
+      .house-title {
+        font-size: 28px;
+        line-height: 40px;
+        color: $font-color;
+        margin-bottom: 10px;
+      }
+
+      .house-tips {
+        font-size: 22px;
+        line-height: 30px;
+        color: #999999;
+      }
+    }
+  }
+
+  .msg-wrapper {
+    margin-top: 30px;
+    background-color: #ffffff;
+    .house-plain{
+      padding: 20px 30px 10px 86px;
+      .house-form{
+        &-item{
+          display: flex;
+          align-items: center;
+          padding-bottom: 20px;
+          line-height: 40px;
+          font-size: 28px;
+        }
+        &-label{
+          color: $font-color;
+          margin-right: 100px;
+          width: 116px;
+        }
+        &-content{
+          color: $tips-color;
+        }
+      }
+    }
+  }
+
+  .title-wrapper {
+    height: 86px;
+    box-sizing: border-box;
+    padding: 30px 32px 14px 30px;
+    border-bottom: 2px solid $line-color;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .title-left,
+    .title-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 40px;
+    }
+    .title-text{
+      font-size: 28px;
+      color: $font-color;
+    }
+    .handle-text{
+      font-size: 22px;
+      color: $link-color;
+    }
+    .title-right-icon{
+      font-size: 24px;
+      color: $placeholder-color;
+      margin-left: 28px;
+    }
+  }
+
+}
+
+.right-icon {
+  font-size: 32px;
+  color: $placeholder-color;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
+
+.icon-public-style {
+  color: $font-color;
+  margin-right: 18px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
