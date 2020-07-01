@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 14:53:45
+ * @LastEditTime: 2020-07-01 15:03:59
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -145,6 +145,7 @@ class HousePublish extends Component {
     })
   }
   getLocationData(address) { 
+    console.log('address', address)
     this.setState({
       address
     })
@@ -251,7 +252,7 @@ class HousePublish extends Component {
               style='form'
               label='房屋位置'
               placeholder='请选择'
-              address={address.address || {}}
+              address={address || {}}
               onGetLocationData={this.getLocationData.bind(this)}
             />
           </View>
