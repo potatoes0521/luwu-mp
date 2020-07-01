@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 11:47:20
+ * @LastEditTime: 2020-07-01 13:12:08
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -223,6 +223,7 @@ class HousePublish extends Component {
               important
               unit='icon'
               label='装修预算'
+              canInput={false}
               placeholder='请选择'
               value={budget || ''}
               iconName='iconRectangle rotated'
@@ -234,15 +235,16 @@ class HousePublish extends Component {
               height100
               unit='icon'
               label='装修时间'
+              canInput={false}
               placeholder='请选择'
               value={startTime || ''}
               iconName='iconRectangle rotated'
               onContentClick={this.onChooseStartTime.bind(this)}
             />
           </View>
-          <View className='bottom-tips'>您的联系信息需要您的确认才会提供给装修公司</View>
+          <View className='bottom-tips'>添加房屋后，您将获得免费招标和3次免费建材比价的机会</View>
           <View className='fixed-bottom-btm'>
-            <View className='btn-public default-btn' onClick={this.submit.bind(this)}>提交</View>
+            <View className='btn-public default-btn submit-btn' onClick={this.submit.bind(this)}>提交</View>
           </View>
         </View>
       </SafeAreaView>
