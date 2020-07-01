@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 17:41:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 18:09:28
+ * @LastEditTime: 2020-07-01 18:21:04
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -35,11 +35,22 @@ class Mine extends Component {
     this.state = {
       houseList: []
     }
+    this.errLogin = false
   }
 
   async componentDidMount() {
     const {userInfo} = this.props
-    !userInfo.token && await Login.login()
+    if(!userInfo.token) {
+      await Login.login()
+    }
+  }
+  componentDidShow() { 
+    const { userInfo } = this.props
+    if (userInfo.token) {
+      this.getHouseList()
+    }
+  }
+  handleLogin() { 
     this.getHouseList()
   }
   getHouseList() { 
@@ -104,7 +115,7 @@ class Mine extends Component {
   render() {
     const { userInfo } = this.props
     const { houseList } = this.state
-    const notLogin = !userInfo.token || true
+    const notLogin = !userInfo.token
     return (
       <SafeAreaView
         title='个人中心'
@@ -150,20 +161,26 @@ class Mine extends Component {
           </View>
           <View className='history-wrapper' >
             <View className='history-item-public'>
-              {this.renderTabItem('iconji color1', '建材笔记', '已记录35次')}
+              {this.renderTabItem('iconji color1', '建材笔记', '您还未记录')}
             </View>
             <View className='history-item-public'>
-              {this.renderTabItem('iconbi color2', '建材比价', '已记录35次')}
+              {this.renderTabItem('iconbi color2', '建材比价', '您还未发起比价')}
             </View>
           </View>
           <MineHouse houseList={houseList} />
           <View className='form-wrapper' onClick={this.handleClickItem.bind(this)}>
-            {this.renderFormItem('icondingdan','支付订单', 'pay_order')}
-            {this.renderFormItem('icondianping','我的点评', 'comment')}
+            {
+              !notLogin && (
+                <Block>
+                  {this.renderFormItem('icondingdan','支付订单', 'pay_order')}
+                  {this.renderFormItem('icondianping','我的点评', 'comment')}
+                </Block>
+              )
+            }
             {this.renderFormItem('iconjubao','我的举报', 'report')}
             {this.renderFormItem('iconkefu','联系客服', 'service')}
           </View>
-          <Auth />
+          <Auth onLogin={this.handleLogin.bind(this)} />
         </View>
       </SafeAreaView>
     )

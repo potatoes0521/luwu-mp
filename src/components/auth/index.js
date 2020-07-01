@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:03:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 17:07:53
+ * @LastEditTime: 2020-07-01 18:20:27
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -24,8 +24,9 @@ class Auth extends Component {
    * 获取用户信息
    * @return void
    */
-  getUserInfo() {
-    Login.login()
+  async getUserInfo() {
+    await Login.login()
+    this.props.onLogin()
   }
   render() {
     const { userInfo } = this.props

@@ -4,7 +4,7 @@
  * @path: "@utils/login"
  * @Date: 2020-06-17 16:04:08
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 17:01:35
+ * @LastEditTime: 2020-07-01 18:17:48
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -18,6 +18,7 @@ export default {
     const wxCode = (await Taro.login()).code
     const userInfo = await this.getUserInfo();
     userInfo && await this.useUserInfoLogin(userInfo, wxCode)
+    Promise.resolve(true)
     if (back && userInfo) {
       this.handleBack()
     }
