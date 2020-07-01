@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 11:24:27
+ * @LastEditTime: 2020-07-01 11:31:31
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -158,6 +158,7 @@ class BiddingPublish extends Component {
           <View className='form-wrapper'>
             <FormItem
               line
+              height100
               important
               shortUnit
               unit='icon'
@@ -170,6 +171,7 @@ class BiddingPublish extends Component {
             />
             <FormItem
               line
+              height100
               important
               shortUnit
               unit='icon'
@@ -184,6 +186,7 @@ class BiddingPublish extends Component {
               line
               unitNum
               canInput
+              height100
               shortUnit
               important
               unit='text'
@@ -196,6 +199,7 @@ class BiddingPublish extends Component {
             />
             <Location
               line
+              height100
               important
               style='form'
               label='房屋位置'
@@ -205,6 +209,7 @@ class BiddingPublish extends Component {
             <FormItem
               shortUnit
               langLabel
+              height100
               unit='icon'
               label='装修时间'
               placeholder='请选择'

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 15:17:57
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-30 16:31:33
+ * @LastEditTime: 2020-07-01 11:29:48
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  没有封装进去的方法请自行拓展
@@ -37,17 +37,19 @@ export default class FormItem extends Component {
   }
   render() {
     const {
-      label,
-      important,
       unit,
-      unitContent,
       line,
+      label,
       iconName,
+      height100,
       shortUnit,
-      langLabel
+      important,
+      langLabel,
+      unitContent,
     } = this.props
     const itemClassName = classNames('form-item', {
-      'bottom-line': line
+      'bottom-line': line,
+      'height100': height100
     })
     const unitText = unitContent ? (unitContent.indexOf('/') !== -1 ? unitContent : '/' + unitContent) : ''
     const lastTipsClassName = classNames('last-tips', {

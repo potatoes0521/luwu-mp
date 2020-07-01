@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 18:29:25
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 11:25:09
+ * @LastEditTime: 2020-07-01 11:30:36
  * @mustParam: 必传参数
  *  address 地理位置数据  有经纬度和地址
  * @optionalParam: 选传参数
@@ -128,13 +128,14 @@ export default class Location extends Taro.Component {
   
   render() {
     const {
-      address,
-      onlyShow,
       label,
       style,
-      placeholder,
       line,
-      important
+      address,
+      onlyShow,
+      important,
+      height100,
+      placeholder,
     } = this.props
     const addressClassName = classNames('address', {
       'placeholder': !address.address
@@ -142,7 +143,8 @@ export default class Location extends Taro.Component {
     const locationClassName = classNames('location-wrapper-public', {
       'location-form-wrapper': style === 'form',
       'location-wrapper': style !== 'form',
-      'border-bottom': line 
+      'border-bottom': line,
+      'height100': height100
     })
     return (
       <View
