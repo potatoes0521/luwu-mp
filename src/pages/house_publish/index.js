@@ -88,7 +88,7 @@ class HousePublish extends Component {
 
   chooseAudio(type) { 
     this.setState({
-      houseType: type
+      decorateType: type
     })
   }
   getLocationData(address) { 
@@ -109,7 +109,7 @@ class HousePublish extends Component {
    * 处理房屋户型文字展示
    * @return void
    */
-  houseTypeText() { 
+  decorateTypeText() { 
     const {
       bedroom,
       sittingroom,
@@ -127,13 +127,13 @@ class HousePublish extends Component {
       startTime,
       budget,
       address,
-      houseType,
+      decorateType,
       bedroom,
       sittingroom,
       cookroom,
       washroom,
     } = this.state
-    if (houseType < 0) {
+    if (decorateType < 0) {
       this.showToast('请选择房屋类型')
       return
     }
@@ -159,7 +159,7 @@ class HousePublish extends Component {
         startTime,
         budget,
         address,
-        houseType,
+        decorateType,
         bedroom,
         sittingroom,
         cookroom,
@@ -210,9 +210,9 @@ class HousePublish extends Component {
       startTime,
       budget,
       address,
-      houseType
+      decorateType
     } = this.state
-    const houseTypeText = this.houseTypeText()
+    const decorateTypeText = this.decorateTypeText()
     return (
       <SafeAreaView
         title='完善房屋信息'
@@ -228,13 +228,13 @@ class HousePublish extends Component {
               <View className='audio-group'>
                 <View className='option' onClick={this.chooseAudio.bind(this, 0)}>
                   <View className='circular'>
-                    {houseType === 0 && <View className='circular-active'></View>}
+                    {decorateType === 0 && <View className='circular-active'></View>}
                   </View>
                   <View className='option-title'>毛坯房</View>
                 </View>
                 <View className='option' onClick={this.chooseAudio.bind(this, 1)}>
                   <View className='circular'>
-                    {houseType === 1 && <View className='circular-active'></View>}
+                    {decorateType === 1 && <View className='circular-active'></View>}
                   </View>
                   <View className='option-title'>旧房翻新</View>
                 </View>
@@ -249,7 +249,7 @@ class HousePublish extends Component {
               label='房屋户型'
               canInput={false}
               placeholder='请选择'
-              value={houseTypeText || ''}
+              value={decorateTypeText || ''}
               iconName='iconRectangle rotated'
               onContentClick={this.handleClickHouseType.bind(this)}
             />
