@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 16:02:25
+ * @LastEditTime: 2020-07-01 16:14:14
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -53,19 +53,19 @@ class HousePublish extends Component {
    */
   handleClickHouseType() { 
     const {
-      roomData,
-      livingRoomData,
-      kitchenData,
-      toiletData,
+      bedroom,
+      sittingroom,
+      cookroom,
+      washroom,
     } = this.state
     let url = '/pages/choose_house_type/index'
-    if (roomData.chinese || livingRoomData.chinese || kitchenData.chinese || toiletData.chinese) {
+    if (bedroom.chinese || sittingroom.chinese || cookroom.chinese || washroom.chinese) {
       url += '?pageType=edit'
       setStorage('choose_house_type', {
-        roomData,
-        livingRoomData,
-        kitchenData,
-        toiletData,
+        bedroom,
+        sittingroom,
+        cookroom,
+        washroom,
       })
     }
     Taro.navigateTo({ url })
@@ -111,15 +111,15 @@ class HousePublish extends Component {
    */
   houseTypeText() { 
     const {
-      roomData,
-      livingRoomData,
-      kitchenData,
-      toiletData,
+      bedroom,
+      sittingroom,
+      cookroom,
+      washroom,
     } = this.state
-    if (!roomData.chinese && !livingRoomData.chinese && !kitchenData.chinese && !toiletData.chinese) {
+    if (!bedroom.chinese && !sittingroom.chinese && !cookroom.chinese && !washroom.chinese) {
       return ''
     }
-    return (roomData.chinese || '-') + '室' + (livingRoomData.chinese || '-') + '厅' + (kitchenData.chinese || '-') + '厨' + (toiletData.chinese || '-') + '卫'
+    return (bedroom.chinese || '-') + '室' + (sittingroom.chinese || '-') + '厅' + (cookroom.chinese || '-') + '厨' + (washroom.chinese || '-') + '卫'
   }
   submit() {
     const {
@@ -128,16 +128,16 @@ class HousePublish extends Component {
       budget,
       address,
       houseType,
-      roomData,
-      livingRoomData,
-      kitchenData,
-      toiletData,
+      bedroom,
+      sittingroom,
+      cookroom,
+      washroom,
     } = this.state
     if (houseType < 0) {
       this.showToast('请选择房屋类型')
       return
     }
-    if (!roomData.chinese) {
+    if (!bedroom.chinese) {
       this.showToast('请选择房屋户型')
       return
     }
@@ -160,10 +160,10 @@ class HousePublish extends Component {
         budget,
         address,
         houseType,
-        roomData,
-        livingRoomData,
-        kitchenData,
-        toiletData,
+        bedroom,
+        sittingroom,
+        cookroom,
+        washroom,
       }
     }
     publishOffer(sendData, this).then(res => {

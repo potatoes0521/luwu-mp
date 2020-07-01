@@ -78,12 +78,12 @@ class ChooseHouseType extends Component {
   handleEdit() { 
     getStorage('choose_house_type').then((res) => {
       this.setState({
-        selectRoomData: res.roomData,
-        selectLivingRoomData: res.livingRoomData,
-        selectKitchenData: res.kitchenData,
-        selectToiletData: res.toiletData,
+        selectRoomData: res.bedroom,
+        selectLivingRoomData: res.sittingroom,
+        selectKitchenData: res.cookroom,
+        selectToiletData: res.washroom,
       }, () => {
-         this.chooseRoom(res.roomData, true)
+         this.chooseRoom(res.bedroom, true)
       })
     })
   }
@@ -138,10 +138,10 @@ class ChooseHouseType extends Component {
       selectToiletData: item
     })
     this.handlePrePageData({
-      roomData: selectRoomData,
-      livingRoomData: selectLivingRoomData,
-      kitchenData: selectKitchenData,
-      toiletData: item,
+      bedroom: selectRoomData,
+      sittingroom: selectLivingRoomData,
+      cookroom: selectKitchenData,
+      washroom: item,
     })
   }
   /**
