@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 15:00:55
+ * @LastEditTime: 2020-07-01 19:00:29
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,41 +16,16 @@ import SaveAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getStorage } from '@utils/storage'
 import ListItem from '@/choose_components/ListItem'
+import {houseType} from '@config/houseType'
 
 import './index.scss'
 
-const Mock = [
-  {
-    num: 1,
-    chinese: '一'
-  },
-  {
-    num: 2,
-    chinese: '二'
-  },
-  {
-    num: 3,
-    chinese: '三'
-  },
-  {
-    num: 4,
-    chinese: '四'
-  },
-  {
-    num: 5,
-    chinese: '五'
-  },
-  {
-    num: 6,
-    chinese: '六'
-  }
-]
 class ChooseHouseType extends Component { 
 
   constructor(props) {
     super(props)
     this.state = {
-      roomList: Mock, // 房屋
+      roomList: houseType, // 房屋
       livingRoomList: [], // 客厅
       kitchenList: [], // 厨房
       toiletList: [], // 卫生间
@@ -96,7 +71,7 @@ class ChooseHouseType extends Component {
     if (selectRoomData.num === item.num && !autoNext) return
     this.setState({
       selectRoomData: item,
-      livingRoomList: Mock
+      livingRoomList: houseType
     }, () => {
         if (autoNext) {
           this.chooseLivingRoom(selectLivingRoomData, autoNext)
@@ -111,7 +86,7 @@ class ChooseHouseType extends Component {
     if (selectLivingRoomData.num === item.num && !autoNext) return
     this.setState({
       selectLivingRoomData: item,
-      kitchenList: Mock
+      kitchenList: houseType
     }, () => {
         if (autoNext) {
           this.chooseKitchen(selectKitchenData, autoNext)
@@ -123,7 +98,7 @@ class ChooseHouseType extends Component {
     if (selectKitchenData.num === item.num && !autoNext) return
     this.setState({
       selectKitchenData: item,
-      toiletList: Mock
+      toiletList: houseType
     })
   }
   chooseToilet(item) {

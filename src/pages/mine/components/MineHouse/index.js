@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-01 09:55:00
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 18:09:47
+ * @LastEditTime: 2020-07-01 19:08:17
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -14,6 +14,7 @@ import { View, Block } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import { moneyData, timeData } from '@config/chooseOneState'
 import { getTimeDate } from '@utils/timer'
+import { handleHouseType } from '@/config/houseType'
 
 import './index.scss'
 
@@ -50,19 +51,6 @@ export default class MineHouse extends Component {
       </Block>
     )
   }
-   /**
-   * 处理房屋户型文字展示
-   * @return void
-   */
-  decorateTypeText(item) { 
-    const {
-      bedroom,
-      sittingroom,
-      cookroom,
-      washroom,
-    } = item
-    return (bedroom.chinese || '-') + '室' + (sittingroom.chinese || '-') + '厅' + (cookroom.chinese || '-') + '厨' + (washroom.chinese || '-') + '卫'
-  }
   static options = {
     addGlobalClass: true // 允许外部样式修改组件样式
   }
@@ -71,7 +59,13 @@ export default class MineHouse extends Component {
     const { houseList } = this.props
     const houseListRender = houseList.map(item => {
       const key = item.requireId
-      const decorateTypeText = this.decorateTypeText(item)
+      const roomData = handleHouseType(item)
+      const {
+        bedroom,
+        sittingroom,
+        cookroom,
+        washroom,
+      } = roomData
       const mouth = (getTimeDate(item.decorateTimeBefore) - getTimeDate(item.decorateTimeAfter)) / oneMouthTimer || 0
       const startTime = timeData.filter(ite => ite.timeMouth === mouth)[0]
       const budget = moneyData.filter(ite => ite.min === item.budgetMin)[0]
@@ -92,7 +86,9 @@ export default class MineHouse extends Component {
           <View className='like-border'></View>
           <View className='house-plain'>
             <View className='house-form-item'>
-              <View className='house-form-content'>{decorateTypeText}</View>
+              <View className='house-form-content'>
+                {(bedroom.chinese || '-') + '室' + (sittingroom.chinese || '-') + '厅' + (cookroom.chinese || '-') + '厨' + (washroom.chinese || '-') + '卫'}
+              </View>
               <View className='house-form-content margin-left30'>{item.decorateType ? '毛坯房' : '旧房翻新'}</View>
             </View>
               <View className='house-form-item'>

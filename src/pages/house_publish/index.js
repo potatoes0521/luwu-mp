@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 18:33:53
+ * @LastEditTime: 2020-07-01 18:59:55
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -26,6 +26,7 @@ import {
   getTimeDate
 } from '@utils/timer'
 import { moneyData, timeData } from '@config/chooseOneState'
+import { handleHouseType } from '@config/houseType'
 
 import './index.scss'
 
@@ -64,6 +65,7 @@ class HousePublish extends Component {
       const mouth = (getTimeDate(res.decorateTimeBefore) - getTimeDate(res.decorateTimeAfter)) / oneMouthTimer || 0
       const startTime = timeData.filter(item => item.timeMouth === mouth)
       const budget = moneyData.filter(item => item.min === res.budgetMin)[0]
+      const roomData = handleHouseType(res);
       const address = {
         address: res.address,
         longitude: res.longitude,
@@ -72,8 +74,8 @@ class HousePublish extends Component {
       const data = Object.assign({}, res, {
         startTime: startTime[0] || {},
         budget,
-        address
-      })
+        address,
+      }, roomData)
       this.setState(data)
     })
   }

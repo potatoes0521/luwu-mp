@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 18:42:23
+ * @LastEditTime: 2020-07-01 19:01:18
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,6 +16,7 @@ import { publishHouse, editHouse, getHouseDetails } from '@services/modules/hous
 import SafeAreaView from '@components/SafeAreaView'
 import FormItem from '@components/FormItem'
 import FormItemCustomContent from '@components/FormItemCustomContent'
+import FormItemPicker from '@components/FormItemPicker'
 import Location from '@components/Location'
 import Login from '@utils/login'
 import houseState from '@/config/houseState.js'
@@ -26,6 +27,7 @@ import {
   getTimeDate
 } from '@utils/timer'
 import { moneyData, timeData } from '@config/chooseOneState'
+import {handleHouseType} from '@config/houseType'
 
 import './index.scss'
 
@@ -64,6 +66,7 @@ class BiddingPublish extends Component {
       const mouth = (getTimeDate(res.decorateTimeBefore) - getTimeDate(res.decorateTimeAfter)) / oneMouthTimer || 0
       const startTime = timeData.filter(item => item.timeMouth === mouth)
       const budget = moneyData.filter(item => item.min === res.budgetMin)[0]
+      const roomData = handleHouseType(res)
       const address = {
         address: res.address,
         longitude: res.longitude,
@@ -73,7 +76,7 @@ class BiddingPublish extends Component {
         startTime: startTime[0] || {},
         budget,
         address
-      })
+      }, roomData)
       this.setState(data)
     })
   }
@@ -363,6 +366,46 @@ class BiddingPublish extends Component {
               value={startTime.timeText || ''}
               iconName='iconRectangle rotated'
               onContentClick={this.onChooseStartTime.bind(this)}
+            />
+          </View>
+          <View className='form-wrapper'>
+            <FormItem
+              line
+              shortUnit
+              langLabel
+              height100
+              important
+              unit='icon'
+              label='联 系 人 '
+              canInput={false}
+              placeholder='请选择'
+              value={budget.moneyText || ''}
+              iconName='iconRectangle rotated'
+              onContentClick={this.onChooseBudget.bind(this)}
+            />
+            <FormItem
+              shortUnit
+              langLabel
+              height100
+              important
+              unit='icon'
+              label='手机号码'
+              canInput={false}
+              placeholder='请选择'
+              value={startTime.timeText || ''}
+              iconName='iconRectangle rotated'
+              onContentClick={this.onChooseStartTime.bind(this)}
+            />
+          </View>
+          <View className='form-wrapper'>
+            <FormItemPicker
+              shortUnit
+              langLabel
+              height100
+              important
+              unit='icon'
+              label='有效期限'
+              iconName='iconRectangle rotated'
             />
           </View>
           <View className='bottom-tips'>添加房屋后，您将获得免费招标和3次免费建材比价的机会</View>
