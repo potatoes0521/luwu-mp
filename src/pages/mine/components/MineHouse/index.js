@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-01 09:55:00
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 17:35:59
+ * @LastEditTime: 2020-07-01 17:58:10
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -12,8 +12,12 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Block } from '@tarojs/components'
 import PropTypes from 'prop-types'
+import { moneyData, timeData } from '@config/chooseOneState'
+import { getTimeDate } from '@utils/timer'
 
 import './index.scss'
+
+const oneMouthTimer = 2592000000
 
 export default class MineHouse extends Component { 
   constructor(props) {
@@ -46,6 +50,19 @@ export default class MineHouse extends Component {
       </Block>
     )
   }
+   /**
+   * 处理房屋户型文字展示
+   * @return void
+   */
+  decorateTypeText(item) { 
+    const {
+      bedroom,
+      sittingroom,
+      cookroom,
+      washroom,
+    } = item
+    return (bedroom.chinese || '-') + '室' + (sittingroom.chinese || '-') + '厅' + (cookroom.chinese || '-') + '厨' + (washroom.chinese || '-') + '卫'
+  }
   static options = {
     addGlobalClass: true // 允许外部样式修改组件样式
   }
@@ -54,6 +71,11 @@ export default class MineHouse extends Component {
     const { houseList } = this.props
     const houseListRender = houseList.map(item => {
       const key = item.requireId
+      const decorateTypeText = this.decorateTypeText(item)
+      const mouth = (getTimeDate(item.decorateTimeBefore) - getTimeDate(item.decorateTimeAfter)) / oneMouthTimer || 0
+      const startTime = timeData.filter(ite => ite.timeMouth === mouth)[0]
+      const budget = moneyData.filter(ite => ite.min === item.budgetMin)[0]
+      console.log('startTime', startTime, budget)
       return (
         <View className='house-list-wrapper msg-wrapper' key={key}>
           <View className='title-wrapper'>
@@ -71,19 +93,23 @@ export default class MineHouse extends Component {
           <View className='like-border'></View>
           <View className='house-plain'>
             <View className='house-form-item'>
-              <View className='house-form-content'>一室二厅二厨二卫</View>
-              <View className='house-form-content margin-left30'>一室二厅二厨二卫</View>
+              <View className='house-form-content'>{decorateTypeText}</View>
+              <View className='house-form-content margin-left30'>{item.decorateType ? '毛坯房' : '旧房翻新'}</View>
             </View>
               <View className='house-form-item'>
-              <View className='house-form-content'>面积: ㎡</View>
-              <View className='house-form-content margin-left30'>装修预算: 10-15万</View>
+              <View className='house-form-content'>面积: {item.area}㎡</View>
+              <View className='house-form-content margin-left30'>装修预算: {budget.moneyText}</View>
             </View>
             <View className='house-form-item'>
-              <View className='house-form-content'>北京市昌平区</View>
+              <View className='house-form-content'>{item.address}</View>
             </View>
-            <View className='house-form-item'>
-              <View className='house-form-content'>预计 装修</View>
-            </View>
+            {
+              startTime && (
+                <View className='house-form-item'>
+                  <View className='house-form-content'>预计{startTime.substr(0, 7).replace('-', '年')}月装修</View>
+                </View>
+              )
+            }
           </View>
           <View className='like-border'></View>
           <View className='title-wrapper'>

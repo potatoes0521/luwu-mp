@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 17:17:20
+ * @LastEditTime: 2020-07-01 17:52:00
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -70,7 +70,7 @@ class HousePublish extends Component {
         latitude: res.latitude
       }
       const data = Object.assign({}, res, {
-        startTime,
+        startTime: startTime[0] || {},
         budget,
         address
       })
