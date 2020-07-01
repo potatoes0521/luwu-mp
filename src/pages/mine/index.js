@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 17:41:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-30 11:15:08
+ * @LastEditTime: 2020-07-01 09:06:59
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -98,9 +98,9 @@ class Mine extends Component {
               {notLogin && (<Text className='not-login'>点击登录</Text>)}
               <View className='login-msg'>
                 <View className='login-msg-wrapper'>
-                  <View className='login-msg-name'>阿萨德卡</View>
+                  <View className='login-msg-name'>{userInfo.nickName || ''}</View>
                   <View className='login-msg-vip-wrapper'>
-                    <Text className='iconfont'></Text>
+                    <Text className='iconfont iconhuiyuan vip-icon'></Text>
                     <Text className=''>登录用户</Text>
                   </View>
                 </View>
@@ -129,7 +129,7 @@ class Mine extends Component {
                   <View className='house-list-wrapper msg-wrapper'>
                     <View className='title-wrapper'>
                       <View className='title-left'>
-                        <View className='icon-public-style iconfont'></View>
+                        <View className='icon-public-style iconfangwu iconfont'></View>
                         <View className='title-text'>我的房屋</View>
                       </View>
                       <View className='title-right'>
@@ -152,10 +152,10 @@ class Mine extends Component {
             )
           }
           <View className='form-wrapper' onClick={this.handleClickItem.bind(this)}>
-            {this.renderFormItem('','支付订单', 'pay_order')}
-            {this.renderFormItem('','我的点评', 'comment')}
-            {this.renderFormItem('','我的举报', 'report')}
-            {this.renderFormItem('','联系客服', 'service')}
+            {this.renderFormItem('icondingdan','支付订单', 'pay_order')}
+            {this.renderFormItem('icondianping','我的点评', 'comment')}
+            {this.renderFormItem('iconjubao','我的举报', 'report')}
+            {this.renderFormItem('iconkefu','联系客服', 'service')}
           </View>
           <Auth />
         </View>

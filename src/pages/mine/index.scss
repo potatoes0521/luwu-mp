@@ -49,6 +49,17 @@ page {
           margin-left: 30px;
           font-size: 24px;
           color: #EFBF51;
+          display: flex;
+          align-items: center;
+          .vip-icon{
+            font-size: 28px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 6px;
+          }
         }
         &-phone-wrapper{
           font-size: 28px;
@@ -198,4 +209,5 @@ page {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 30px;
 }
