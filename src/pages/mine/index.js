@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 17:41:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 17:39:51
+ * @LastEditTime: 2020-07-01 17:42:14
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -73,7 +73,6 @@ class Mine extends Component {
   handleClickItem(e) { 
     const {target: {dataset: {item}}} = e
     if (!item) return
-    console.log('e', item)
     
   }
   /**

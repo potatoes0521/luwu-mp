@@ -4,7 +4,7 @@
  * @path: import { getStorage, setStorage, removeStorage } from '@utils/storage'
  * @Date: 2020-06-18 10:55:20
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 14:53:23
+ * @LastEditTime: 2020-07-01 17:44:14
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -43,5 +43,6 @@ export const getStorage = (key) => {
 * @return void
 */
 export const removeStorage = (key) => {
-  Taro.removeStorage(`luwu_${key}`)
+  console.log('key', key)
+  Taro.removeStorageSync(`luwu_${key}`)
 }
