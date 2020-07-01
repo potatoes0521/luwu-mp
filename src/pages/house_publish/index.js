@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 16:14:14
+ * @LastEditTime: 2020-07-01 16:50:43
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -21,6 +21,10 @@ import Login from '@utils/login'
 import houseState from '@/config/houseState.js'
 import { getImage } from '@img/cdn'
 import { setStorage, removeStorage } from "@utils/storage"
+import {
+  getDateTime,
+  timestampOfDay
+} from '@utils/timer'
 
 import './index.scss'
 
@@ -153,28 +157,34 @@ class HousePublish extends Component {
       this.showToast('请选择预算')
       return
     }
+    const { latitude, longitude } = address
+    const date = this.handleTimer(startTime)
     const sendData = {
-      data: {
-        area,
-        startTime,
-        budget,
-        address,
-        decorateType,
-        bedroom,
-        sittingroom,
-        cookroom,
-        washroom,
-      }
+      area,
+      startTime,
+      budget,
+      address: address.address,
+      longitude,
+      latitude,
+      decorateType,
+      bedroom,
+      sittingroom,
+      cookroom,
+      washroom,
+      budgetMin: budget.min,
+      budgetMax: budget.max,
+      decorateTimeBefore: date.decorateTimeBefore,
+      decorateTimeAfter: date.decorateTimeAfter
     }
-    publishOffer(sendData, this).then(res => {
-      if (!res || !res.quotationId) {
-        return
-      }
-      this.showToast('发布成功')
-      this.timer = setTimeout(() => {
-        Taro.navigateBack()
-      }, 1800)
-    })
+    // publishOffer(sendData, this).then(res => {
+    //   if (!res || !res.quotationId) {
+    //     return
+    //   }
+    //   this.showToast('发布成功')
+    //   this.timer = setTimeout(() => {
+    //     Taro.navigateBack()
+    //   }, 1800)
+    // })
   }
   /**
    * 显示toast
@@ -187,6 +197,18 @@ class HousePublish extends Component {
       icon: 'none',
       duration: 2000
     })
+  }
+  handleTimer(data) { 
+    if (!data.timeMouth || data.timeMouth <= 0) {
+      return
+    }
+    const nowDate = +new Date()
+    const afterDate = getDateTime(nowDate)
+    const beforeDate = getDateTime(nowDate + oneMouthTimer * data.timeMouth)
+    return {
+      decorateTimeBefore: beforeDate,
+      decorateTimeAfter: afterDate
+    }
   }
   /**
    * 页面内转发
