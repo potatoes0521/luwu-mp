@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 17:41:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 11:12:37
+ * @LastEditTime: 2020-07-01 17:39:51
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -13,11 +13,12 @@ import Taro, { Component } from '@tarojs/taro'
 import {
   View,
   Image,
-  Text
+  Text,
+  Block
 } from '@tarojs/components'
 // import classNames from 'classnames'
 import { connect } from '@tarojs/redux'
-// import {} from '@services/modules/index'
+import { getHouseList } from '@services/modules/house'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getImage } from '@img/cdn'
@@ -29,12 +30,32 @@ class Mine extends Component {
 
   constructor(props) {
     super(props)
-    this.state={}
+    this.state = {
+      houseList: []
+    }
   }
 
   async componentDidMount() {
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
+    this.getHouseList()
+  }
+  getHouseList() { 
+    const {userInfo} = this.props
+    getHouseList({
+      userId: userInfo.userId
+    }).then(res => {
+      console.log('res', res)
+    })
+  }
+  renderTabItem(iconName, title, tips) { 
+    return (
+      <Block>
+        <Text className={`iconfont history-icon ${iconName}`}></Text>
+        <View className='history-title'>{title}</View>
+        <View className='history-tips'>{tips}</View>
+      </Block>
+    )
   }
   renderFormItem(iconName, label, item) {
     return (
@@ -74,6 +95,7 @@ class Mine extends Component {
 
   render() {
     const { userInfo } = this.props
+    const { houseList } = this.state
     const notLogin = !userInfo.token || true
     return (
       <SafeAreaView
@@ -120,17 +142,13 @@ class Mine extends Component {
           </View>
           <View className='history-wrapper' >
             <View className='history-item-public'>
-              <Text className='iconfont iconji history-icon color1'></Text>
-              <View className='history-title'>建材笔记</View>
-              <View className='history-tips'>已记录35次</View>
+              {this.renderTabItem('iconji color1', '建材笔记', '已记录35次')}
             </View>
             <View className='history-item-public'>
-              <Text className='iconfont iconbi history-icon color2'></Text>
-              <View className='history-title'>建材比价</View>
-              <View className='history-tips'>已记录35次</View>
+              {this.renderTabItem('iconbi color2', '建材比价', '已记录35次')}
             </View>
           </View>
-          <MineHouse />
+          <MineHouse houseList={houseList} />
           <View className='form-wrapper' onClick={this.handleClickItem.bind(this)}>
             {this.renderFormItem('icondingdan','支付订单', 'pay_order')}
             {this.renderFormItem('icondianping','我的点评', 'comment')}

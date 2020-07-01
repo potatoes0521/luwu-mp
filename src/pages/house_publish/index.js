@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 16:50:43
+ * @LastEditTime: 2020-07-01 17:17:20
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -12,7 +12,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { publishOffer } from '@services/modules/offer'
+import { publishHouse, editHouse, getHouseDetails } from '@services/modules/house'
 import SafeAreaView from '@components/SafeAreaView'
 import FormItem from '@components/FormItem'
 import FormItemCustomContent from '@components/FormItemCustomContent'
@@ -23,8 +23,9 @@ import { getImage } from '@img/cdn'
 import { setStorage, removeStorage } from "@utils/storage"
 import {
   getDateTime,
-  timestampOfDay
+  getTimeDate
 } from '@utils/timer'
+import { moneyData, timeData } from '@config/chooseOneState'
 
 import './index.scss'
 
@@ -37,19 +38,44 @@ class HousePublish extends Component {
     this.state = Object.assign({}, houseState, {
       // 除去公共key以外的字段定在这里
     })
+    this.pageParams = {}
     this.timer = null
   }
 
   async componentDidMount() {
+    this.pageParams = this.$router.params
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
-    clearTimeout(this.timer)
-    this.timer = null
+    if (this.pageParams.pageType === 'edit') {
+      this.getHouseData()
+    }
   }
   componentWillUnmount() { 
+    clearTimeout(this.timer)
+    this.timer = null
     removeStorage('choose_house_type')
     removeStorage('choose_budget')
     removeStorage('choose_timer')
+  }
+  getHouseData() { 
+    getHouseDetails({
+      requireId: this.pageParams.requireId
+    }).then(res => {
+      const mouth = (getTimeDate(res.decorateTimeBefore) - getTimeDate(res.decorateTimeAfter)) / oneMouthTimer || 0
+      const startTime = timeData.filter(item => item.timeMouth === mouth)
+      const budget = moneyData.filter(item => item.min === res.budgetMin)[0]
+      const address = {
+        address: res.address,
+        longitude: res.longitude,
+        latitude: res.latitude
+      }
+      const data = Object.assign({}, res, {
+        startTime,
+        budget,
+        address
+      })
+      this.setState(data)
+    })
   }
   /**
    * 点了房屋户型
@@ -161,8 +187,6 @@ class HousePublish extends Component {
     const date = this.handleTimer(startTime)
     const sendData = {
       area,
-      startTime,
-      budget,
       address: address.address,
       longitude,
       latitude,
@@ -176,15 +200,25 @@ class HousePublish extends Component {
       decorateTimeBefore: date.decorateTimeBefore,
       decorateTimeAfter: date.decorateTimeAfter
     }
-    // publishOffer(sendData, this).then(res => {
-    //   if (!res || !res.quotationId) {
-    //     return
-    //   }
-    //   this.showToast('发布成功')
-    //   this.timer = setTimeout(() => {
-    //     Taro.navigateBack()
-    //   }, 1800)
-    // })
+    this.handleRequest(sendData)
+  }
+  handleRequest(sendData) {
+    if (this.pageParams.pageType === 'edit') { 
+      sendData.requireId = this.state.requireId
+      editHouse(sendData).then(() => {
+        this.showToast('编辑成功')
+      })
+    } else {
+      publishHouse(sendData).then(() => {
+        this.showToast('完善成功')
+      })
+    }
+    removeStorage('choose_house_type')
+    removeStorage('choose_budget')
+    removeStorage('choose_timer')
+    this.timer = setTimeout(() => {
+      Taro.navigateBack()
+    }, 1800)
   }
   /**
    * 显示toast
@@ -200,7 +234,10 @@ class HousePublish extends Component {
   }
   handleTimer(data) { 
     if (!data.timeMouth || data.timeMouth <= 0) {
-      return
+      return {
+        decorateTimeBefore: '',
+        decorateTimeAfter: ''
+      }
     }
     const nowDate = +new Date()
     const afterDate = getDateTime(nowDate)
