@@ -11,8 +11,7 @@ page {
     background-color: #ffffff;
     box-sizing: border-box;
     padding: 0 30px;
-    padding-bottom: 4px;
-
+    margin-bottom: 30px;
     .hide-line2,
     .hide-line {
       width: 100%;
@@ -83,4 +82,40 @@ page {
 .placeholder-class {
   font-size: 28px;
   color: $placeholder-color;
+}
+
+.audio-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .option {
+    margin-left: 44px;
+    display: flex;
+    align-items: center;
+
+    .circular {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      box-sizing: border-box;
+      border: 2px solid #979797;
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &-active {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background-color: #979797;
+      }
+    }
+
+    .option-title {
+      font-size: 28px;
+      color: $tips-color;
+    }
+  }
 }

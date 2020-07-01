@@ -4,31 +4,31 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 11:31:31
+ * @LastEditTime: 2020-07-01 11:47:20
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import classNames from 'classnames'
 import { connect } from '@tarojs/redux'
 import { publishOffer } from '@services/modules/offer'
 import SafeAreaView from '@components/SafeAreaView'
 import FormItem from '@components/FormItem'
+import FormItemCustomContent from '@components/FormItemCustomContent'
 // import Upload from '@components/Upload'
 import Location from '@components/Location'
 import Login from '@utils/login'
-import biddingState from '@config/biddingState'
+import houseState from '@/config/houseState.js'
 import { getImage } from '@img/cdn'
 
 import './index.scss'
 
-class BiddingPublish extends Component {
+class HousePublish extends Component {
 
   constructor(props) {
     super(props)
-    this.state = Object.assign({}, biddingState, {
+    this.state = Object.assign({}, houseState, {
       // 除去公共key以外的字段定在这里
     })
     this.timer = null
@@ -123,6 +123,9 @@ class BiddingPublish extends Component {
   onClickAddress() { 
     
   }
+  chooseAudio() { 
+    
+  }
   /**
    * 页面内转发
    * @param {Object} res 微信返回参数
@@ -141,34 +144,39 @@ class BiddingPublish extends Component {
   }
   render() {
     const {
-      // imageList,
-      model,
-      type,
       area,
       startTime,
-      address
+      budget,
+      address,
+      houseType
     } = this.state
     return (
       <SafeAreaView
-        title='发布招标信息'
+        title='完善房屋信息'
         back
-        home
       >
         <View className='page-wrapper'>
           <View className='form-wrapper'>
-            <FormItem
+            <FormItemCustomContent
               line
-              height100
               important
-              shortUnit
-              unit='icon'
               label='房屋类型'
-              canInput={false}
-              placeholder='请选择'
-              value={model.modelName || ''}
-              iconName='iconRectangle rotated'
-              onContentClick={this.handleClickHouseModel.bind(this)}
-            />
+            >
+              <View className='audio-group'>
+                <View className='option' onClick={this.chooseAudio.bind(this, 1)}>
+                  <View className='circular'>
+                    {houseType === 1 && <View className='circular-active'></View>}
+                  </View>
+                  <View className='option-title'>毛坯房</View>
+                </View>
+                <View className='option' onClick={this.chooseAudio.bind(this, 0)}>
+                  <View className='circular'>
+                    {houseType === 0 && <View className='circular-active'></View>}
+                  </View>
+                  <View className='option-title'>旧房翻新</View>
+                </View>
+              </View>
+            </FormItemCustomContent>
             <FormItem
               line
               height100
@@ -178,7 +186,7 @@ class BiddingPublish extends Component {
               label='房屋户型'
               canInput={false}
               placeholder='请选择'
-              value={type.modelName || ''}
+              value={'' || ''}
               iconName='iconRectangle rotated'
               onContentClick={this.handleClickHouseType.bind(this)}
             />
@@ -198,13 +206,27 @@ class BiddingPublish extends Component {
               onInput={this.onAreaInput.bind(this)}
             />
             <Location
-              line
               height100
               important
               style='form'
               label='房屋位置'
               placeholder='请选择'
               address={address.address || {}}
+            />
+          </View>
+          <View className='form-wrapper'>
+            <FormItem
+              line
+              shortUnit
+              langLabel
+              height100
+              important
+              unit='icon'
+              label='装修预算'
+              placeholder='请选择'
+              value={budget || ''}
+              iconName='iconRectangle rotated'
+              onContentClick={this.onChooseStartTime.bind(this)}
             />
             <FormItem
               shortUnit
@@ -235,4 +257,4 @@ const mapStateToProps = (state) => {
     system: state.system.systemInfo
   }
 }
-export default connect(mapStateToProps)(BiddingPublish)
+export default connect(mapStateToProps)(HousePublish)
