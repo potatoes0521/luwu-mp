@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 13:24:38
+ * @LastEditTime: 2020-07-01 13:45:32
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -160,6 +160,7 @@ class ChooseCategory extends Component {
         <ListItem
           key={key}
           item={item}
+          valueKey='categoryName'
           borderRight
           active={active}
           onClickItem={this.chooseMainCategories.bind(this)}
@@ -172,6 +173,7 @@ class ChooseCategory extends Component {
       return (
         <ListItem
           key={key}
+          valueKey='categoryName'
           item={item}
           active={active}
           onClickItem={this.chooseChildCategories.bind(this)}

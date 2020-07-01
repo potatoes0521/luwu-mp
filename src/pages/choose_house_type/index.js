@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 13:28:39
+ * @LastEditTime: 2020-07-01 13:43:44
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -23,12 +23,20 @@ class ChooseHouseType extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      mainCategoriesList: [], // 主品类
-      childCategoriesList: [], // 子品类
-      selectMainCategoriesData: {}, // 选中的品类
-      selectChildCategoriesData: {}, // 选中的子品类
+      roomList: [
+        {
+          num: 1,
+          chinese: '一'
+        }
+      ], // 房屋
+      livingRoomList: [], // 客厅
+      kitchenList: [], // 厨房
+      toiletList: [], // 卫生间
+      selectRoomData: {}, // 
+      selectLivingRoomData: {}, // 
+      selectKitchenData: {}, // 
+      selectToiletData: {}, // 
     }
-    this.AllChildCategoriesList = [] // 全部子品类数据
     this.pageParams = {}
   }
 
@@ -45,15 +53,17 @@ class ChooseHouseType extends Component {
   handleEdit() { 
     getStorage('choose_category').then(res => {
       this.setState({
-        selectMainCategoriesData: res.selectMainCategoriesData, // 选中的品类
-        selectChildCategoriesData: res.selectChildCategoriesData, // 选中的子品类
+        
       }, () => {
-          this.chooseMainCategories(res.selectMainCategoriesData, true)
+         
       })
     })
   }
   
-  
+  chooseRoom() {}
+  chooseLivingRoom() {}
+  chooseKitchen() {}
+  chooseToilet() {}
   /**
    * 处理上一页数据并返回
    * @return void
@@ -76,35 +86,65 @@ class ChooseHouseType extends Component {
 
   render() {
     const {
-      mainCategoriesList,
-      childCategoriesList,
-      selectMainCategoriesData, // 选中的品类
-      selectChildCategoriesData, // 选中的子品类
+      roomList,
+      livingRoomList,
+      kitchenList,
+      toiletList,
+      selectRoomData, // 
+      selectLivingRoomData, // 
+      selectKitchenData, // 
+      selectToiletData, // 
     } = this.state
     const {system} = this.props
     const navHeight = system && system.navHeight || 120
-    const mainCategoriesRender = mainCategoriesList.map(item => {
-      const key = item.categoryId
-      const active = key === selectMainCategoriesData.categoryId
+    const roomListRender = roomList.map(item => {
+      const key = item.num
+      const active = key === selectRoomData.num
       return (
         <ListItem
           key={key}
           item={item}
           borderRight
           active={active}
-          onClickItem={this.chooseMainCategories.bind(this)}
+          onClickItem={this.chooseRoom.bind(this)}
         />
       )
     })
-    const childCategoriesRender = childCategoriesList.map(item => {
-      const key = item.categoryId
-      const active = key === selectChildCategoriesData.categoryId
+    const livingRoomListRender = livingRoomList.map(item => {
+      const key = item.num
+      const active = key === selectLivingRoomData.num
+      return (
+        <ListItem
+          key={key}
+          item={item}
+          borderRight
+          active={active}
+          onClickItem={this.chooseLivingRoom.bind(this)}
+        />
+      )
+    })
+    const kitchenListRender = kitchenList.map(item => {
+      const key = item.num
+      const active = key === selectKitchenData.num
+      return (
+        <ListItem
+          key={key}
+          item={item}
+          borderRight
+          active={active}
+          onClickItem={this.chooseKitchen.bind(this)}
+        />
+      )
+    })
+    const toiletListRender = toiletList.map(item => {
+      const key = item.num
+      const active = key === selectToiletData.num
       return (
         <ListItem
           key={key}
           item={item}
           active={active}
-          onClickItem={this.chooseChildCategories.bind(this)}
+          onClickItem={this.chooseToilet.bind(this)}
         />
       )
     })
@@ -130,12 +170,22 @@ class ChooseHouseType extends Component {
           <View className='main-wrapper'>
             <View className='child-list-wrapper'>
               {
-                mainCategoriesRender
+                roomListRender
               }
             </View>
             <View className='child-list-wrapper'>
               {
-                childCategoriesRender
+                livingRoomListRender
+              }
+            </View>
+            <View className='child-list-wrapper'>
+              {
+                kitchenListRender
+              }
+            </View>
+            <View className='child-list-wrapper'>
+              {
+                toiletListRender
               }
             </View>
           </View>

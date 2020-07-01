@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-20 13:44:04
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-20 15:04:33
+ * @LastEditTime: 2020-07-01 13:45:13
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -25,7 +25,8 @@ export default class ListItem extends Taro.Component {
       item,
       active,
       borderRight,
-      borderLeft
+      borderLeft,
+      valueKey
     } = this.props
     const listItemClassName = classNames('list-item', {
       'list-item-active': active,
@@ -36,7 +37,7 @@ export default class ListItem extends Taro.Component {
       <View
         onClick={this.handleClickItem.bind(this, item)}
         className={listItemClassName}
-      >{item.categoryName || item.brandName || '-'}</View>
+      >{item[valueKey] || '-'}</View>
     )
   }
 
@@ -44,6 +45,7 @@ export default class ListItem extends Taro.Component {
 
 ListItem.defaultProps = {
   item: {},
+  valueKey: 'categoryName',
   active: false,
   borderRight: false,
   borderLeft: false,
