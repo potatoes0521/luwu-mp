@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 14:56:02
+ * @LastEditTime: 2020-07-01 15:47:55
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -12,11 +12,11 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { getCategory } from '@services/modules/category'
 import SaveAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getStorage } from '@utils/storage'
 import ListItem from '@/choose_components/ListItem'
+import { moneyData, timeData } from '@config/chooseOneState'
 
 import './index.scss'
 
@@ -25,7 +25,11 @@ class ChooseCategory extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      
+      title: '录屋',
+      data: [],
+      selectData: {},
+      valueKey: '',
+      valueKeyId: ''
     }
     this.pageParams = {}
   }
@@ -34,8 +38,52 @@ class ChooseCategory extends Component {
     this.pageParams = this.$router.params
     const {userInfo} = this.props
     !userInfo.token && Login.login()
+    this.handleInitPageData()
   }
-  
+  handleInitPageData() { 
+    let state = {}
+    const { chooseType, pageType} = this.pageParams
+    if (chooseType === 'time') {
+      state.title = '装修时间'
+      state.valueKey = 'timeText'
+      state.valueKeyId = 'timeId'
+      state.data = timeData
+      if (pageType === 'edit') {
+        getStorage('choose_timer').then(res => {
+          this.setState({
+            selectData: res
+          })
+        })
+      }
+    } else {
+      state.title = '装修预算'
+      state.valueKey = 'moneyText'
+      state.valueKeyId = 'moneyId'
+      state.data = moneyData
+      if (pageType === 'edit') {
+        getStorage('choose_budget').then(res => {
+          this.setState({
+            selectData: res
+          })
+        })
+      }
+    }
+    this.setState(state)
+  }
+  chooseItem(item) { 
+    this.setState({
+      selectData: item
+    }, () => {
+        const { chooseType } = this.pageParams
+        let data = {}
+        if (chooseType === 'time') { 
+          data.startTime = item
+        } else {
+          data.budget = item
+        }
+        this.handlePrePageData(data)
+    })
+  }
   /**
    * 处理上一页数据并返回
    * @return void
@@ -58,17 +106,33 @@ class ChooseCategory extends Component {
 
   render() {
     const {
-      
+      title,
+      data,
+      selectData,
+      valueKey,
+      valueKeyId
     } = this.state
     const {system} = this.props
     const navHeight = system && system.navHeight || 120
-    
+    const listRender = data.map(item => {
+      const key = item[valueKeyId]
+      const active = key === selectData[valueKeyId]
+      return (
+        <ListItem
+          key={key}
+          item={item}
+          borderRight
+          active={active}
+          valueKey={valueKey}
+          onClickItem={this.chooseItem.bind(this)}
+        />
+      )
+    })
    
     return (
       <SaveAreaView
-        title='选择品类'
+        title={title}
         back
-        home
       >
         <View
           style={{
@@ -76,16 +140,11 @@ class ChooseCategory extends Component {
           }}
           className='page-wrapper'
         >
-          <View className='fixed-nav'>
-            <View className='fixed-nav-text'>主品类</View>
-            <View className='fixed-nav-text'>子品类</View>
-          </View>
           <View className='main-wrapper'>
             <View className='child-list-wrapper'>
-              
-            </View>
-            <View className='child-list-wrapper'>
-              
+              {
+                listRender
+              }
             </View>
           </View>
         </View>

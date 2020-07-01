@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 15:03:59
+ * @LastEditTime: 2020-07-01 16:02:25
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -24,6 +24,8 @@ import { setStorage, removeStorage } from "@utils/storage"
 
 import './index.scss'
 
+const oneMouthTimer = 2592000000
+
 class HousePublish extends Component {
 
   constructor(props) {
@@ -42,10 +44,13 @@ class HousePublish extends Component {
   }
   componentWillUnmount() { 
     removeStorage('choose_house_type')
+    removeStorage('choose_budget')
+    removeStorage('choose_timer')
   }
-  handleClickHouseModel() {
-    
-  }
+  /**
+   * 点了房屋户型
+   * @return void
+   */
   handleClickHouseType() { 
     const {
       roomData,
@@ -71,84 +76,34 @@ class HousePublish extends Component {
       area: value
     })
   }
-  onChooseStartTime(value) {
-    this.setState({
-      startTime: value
-    })
-  }
-  submit() { 
-    const {
-      fileList,
-      model,
-      area,
-    } = this.state
-    const testKey = {
-      fileList: '请上传报价文件',
-      model: '请选择房屋类型',
-      area: '请填写房屋面积',
+  onChooseStartTime() {
+    const { startTime } = this.state
+    let url = '/pages/choose_one_item/index?chooseType=time'
+    if (startTime.moneyText) {
+      url += '&pageType=edit'
+      setStorage('choose_timer', startTime)
     }
-    let breakName = ''
-    for (const key in testKey) {
-      if (key === 'fileList' && fileList.length < 1) {
-        breakName = key
-        break
-      } else if (key === 'model' && !model.modelName) {
-        breakName = key
-        break
-      } else if (!this.state[key]) { 
-        breakName = key
-        break
-      }
-    }
-    if (breakName) {
-      Taro.showToast({
-        title: testKey[breakName],
-        icon: 'none',
-        duration: 2000
-      })
-      return
-    }
-    const sendData = {
-      data: {
-        fileList,
-        model,
-        area,
-      }
-    }
-    publishOffer(sendData, this).then(res => {
-      if (!res || !res.quotationId) {
-        return
-      }
-      Taro.showToast({
-        title: '发布成功'
-      })
-      this.timer = setTimeout(() => {
-        Taro.redirectTo({
-          url: `/pages/offer_examine_details/index?quotationId=${res.quotationId}`
-        })
-      }, 1800)
-    })
+    Taro.navigateTo({ url })
   }
-  stopPropagation(e) {
-    e.stopPropagation()
-    this.handleClickModel()
-  }
-  handleClickModel() {
-    
-  }
-  onClickAddress() { 
-    
-  }
+
   chooseAudio(type) { 
     this.setState({
       houseType: type
     })
   }
   getLocationData(address) { 
-    console.log('address', address)
     this.setState({
       address
     })
+  }
+  onChooseBudget() {
+    const { budget } = this.state
+    let url = '/pages/choose_one_item/index?chooseType=budget'
+    if (budget.moneyText) {
+      url += '&pageType=edit'
+      setStorage('choose_budget', budget)
+    }
+    Taro.navigateTo({ url })
   }
   /**
    * 处理房屋户型文字展示
@@ -165,6 +120,73 @@ class HousePublish extends Component {
       return ''
     }
     return (roomData.chinese || '-') + '室' + (livingRoomData.chinese || '-') + '厅' + (kitchenData.chinese || '-') + '厨' + (toiletData.chinese || '-') + '卫'
+  }
+  submit() {
+    const {
+      area,
+      startTime,
+      budget,
+      address,
+      houseType,
+      roomData,
+      livingRoomData,
+      kitchenData,
+      toiletData,
+    } = this.state
+    if (houseType < 0) {
+      this.showToast('请选择房屋类型')
+      return
+    }
+    if (!roomData.chinese) {
+      this.showToast('请选择房屋户型')
+      return
+    }
+    if (!area) {
+      this.showToast('请填写房屋面积')
+      return
+    }
+    if (!address.address) {
+      this.showToast('请选择房屋位置')
+      return
+    }
+    if (!budget.moneyText) {
+      this.showToast('请选择预算')
+      return
+    }
+    const sendData = {
+      data: {
+        area,
+        startTime,
+        budget,
+        address,
+        houseType,
+        roomData,
+        livingRoomData,
+        kitchenData,
+        toiletData,
+      }
+    }
+    publishOffer(sendData, this).then(res => {
+      if (!res || !res.quotationId) {
+        return
+      }
+      this.showToast('发布成功')
+      this.timer = setTimeout(() => {
+        Taro.navigateBack()
+      }, 1800)
+    })
+  }
+  /**
+   * 显示toast
+   * @param {String} text 参数描述
+   * @return void
+   */
+  showToast(text) {
+    Taro.showToast({
+      title: text,
+      icon: 'none',
+      duration: 2000
+    })
   }
   /**
    * 页面内转发
@@ -267,9 +289,9 @@ class HousePublish extends Component {
               label='装修预算'
               canInput={false}
               placeholder='请选择'
-              value={budget || ''}
+              value={budget.moneyText || ''}
               iconName='iconRectangle rotated'
-              onContentClick={this.onChooseStartTime.bind(this)}
+              onContentClick={this.onChooseBudget.bind(this)}
             />
             <FormItem
               shortUnit
@@ -279,7 +301,7 @@ class HousePublish extends Component {
               label='装修时间'
               canInput={false}
               placeholder='请选择'
-              value={startTime || ''}
+              value={startTime.timeText || ''}
               iconName='iconRectangle rotated'
               onContentClick={this.onChooseStartTime.bind(this)}
             />
