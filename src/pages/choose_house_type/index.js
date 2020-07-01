@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 13:21:16
+ * @LastEditTime: 2020-07-01 13:24:30
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,10 +16,10 @@ import { getCategory } from '@services/modules/category'
 import SaveAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getStorage } from '@utils/storage'
-import ListItem from '../../choose_components/ListItem'
+import ListItem from '@/choose_components/ListItem'
 import './index.scss'
 
-class ChooseCategory extends Component { 
+class ChooseHouseType extends Component { 
 
   constructor(props) {
     super(props)
@@ -220,4 +220,4 @@ const mapStateToProps = (state) => {
     system: state.system.systemInfo
   }
 }
-export default connect(mapStateToProps)(ChooseCategory)
+export default connect(mapStateToProps)(ChooseHouseType)
