@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 17:41:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 18:31:40
+ * @LastEditTime: 2020-07-01 18:32:12
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -41,7 +41,7 @@ class Mine extends Component {
   async componentDidMount() {
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
-    userInfo.token && this.getHouseList()
+    this.getHouseList()
   }
   componentDidShow() { 
     const { userInfo } = this.props

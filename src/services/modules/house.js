@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-01 16:51:28
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 17:19:39
+ * @LastEditTime: 2020-07-01 18:34:37
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -30,7 +30,7 @@ export const getHouseList = (data, that) => {
  * @return void
  */
 export const getHouseDetails = (data, that) => {
-  return request.post(`decorate/v1/decoraterequire/${data.requireId}`, data, that, false)
+  return request.get(`decorate/v1/decoraterequire/${data.requireId}`, data, that, false)
 }
 /**
  * 编辑房屋信息
