@@ -125,7 +125,8 @@ class OfferExaminePublish extends Component {
         })
       })
   }
-  onAreaInput(value) { 
+  onAreaInput(e) { 
+    const { target: { value } } = e
     this.setState({
       area: value
     })
@@ -136,12 +137,14 @@ class OfferExaminePublish extends Component {
       remark: value
     })
   }
-  onUserNameInput(value) { 
+  onUserNameInput(e) { 
+    const { target: { value } } = e
     this.setState({
       userName: value
     })
   }
-  onMobileInput(value) { 
+  onMobileInput(e) { 
+    const { target: { value } } = e
     this.setState({
       mobile: value
     })

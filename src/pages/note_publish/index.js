@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 10:27:41
+ * @LastEditTime: 2020-07-01 08:52:30
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -153,12 +153,14 @@ class NotePublish extends Component {
       url
     })
   }
-  onBrandInput(value) {
+  onBrandInput(e) {
+    const { target: { value } } = e
     this.setState({
       brand: {brandName: value}
     })
   }
-  onPriceInput(value) {
+  onPriceInput(e) {
+    let { target: { value } } = e
     value = handleMoney(value)
     this.setState({
       price: value
@@ -166,7 +168,8 @@ class NotePublish extends Component {
     return value
    }
 
-  onModelInput(value) {
+  onModelInput(e) {
+    const { target: { value } } = e
     this.setState({
       model: value
     })

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 13:28:05
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 16:59:13
+ * @LastEditTime: 2020-07-01 08:51:07
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -91,7 +91,8 @@ class BiddingPublish extends Component {
         })
       })
   }
-  onAreaInput(value) {
+  onAreaInput(e) {
+    const { target: { value } } = e
     this.setState({
       area: value
     })
@@ -102,22 +103,26 @@ class BiddingPublish extends Component {
       remark: value
     })
   }
-  onChooseStartTime(value) {
+  onChooseStartTime(e) {
+    const { target: { value } } = e
     this.setState({
       startTime: value
     })
   }
-  onChooseEndTime(value) {
+  onChooseEndTime(e) {
+    const { target: { value } } = e
     this.setState({
       endTime: value
     })
   }
-  onUserNameInput(value) {
+  onUserNameInput(e) {
+    const { target: { value } } = e
     this.setState({
       userName: value
     })
   }
-  onMobileInput(value) { 
+  onMobileInput(e) { 
+    const { target: { value } } = e
     this.setState({
       mobile: value
     })

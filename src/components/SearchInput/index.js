@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-23 15:56:27
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 14:56:37
+ * @LastEditTime: 2020-07-01 08:50:14
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -34,7 +34,8 @@ export default class SearchInput extends Component {
    * @param {Object} e event对象
    * @return void
    */
-  searchInput(value) {
+  searchInput(e) {
+    const { target: { value } } = e
     const { data, filterKey } = this.props
     this.setState({value})
     if (value.length < 1) return

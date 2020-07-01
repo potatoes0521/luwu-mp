@@ -4,7 +4,7 @@
  * @path: @components/input
  * @Date: 2020-06-18 14:44:05
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 14:55:01
+ * @LastEditTime: 2020-07-01 08:49:36
  * @mustParam: 必传参数
  *  文档参照 https: //developers.weixin.qq.com/miniprogram/dev/component/input.html
  *  没有封装进去的方法请自行拓展
@@ -56,7 +56,7 @@ export default class LickInput extends Component {
               maxlength={maxlength}
               placeholder={placeholder}
               confirmType={confirmType}
-              onInput={this.onInput.bind(this)}
+              onInput={this.props.onInput}
               className={lickInputClassName}
               placeholderClass='placeholder-class'
             ></Input>

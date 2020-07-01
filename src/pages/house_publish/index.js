@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 17:44:15
+ * @LastEditTime: 2020-07-01 08:51:27
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -90,7 +90,8 @@ class BiddingPublish extends Component {
         })
       })
   }
-  onAreaInput(value) {
+  onAreaInput(e) {
+    const { target: { value } } = e
     this.setState({
       area: value
     })
