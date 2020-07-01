@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-01 09:55:00
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 17:58:10
+ * @LastEditTime: 2020-07-01 18:09:47
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -75,7 +75,6 @@ export default class MineHouse extends Component {
       const mouth = (getTimeDate(item.decorateTimeBefore) - getTimeDate(item.decorateTimeAfter)) / oneMouthTimer || 0
       const startTime = timeData.filter(ite => ite.timeMouth === mouth)[0]
       const budget = moneyData.filter(ite => ite.min === item.budgetMin)[0]
-      console.log('startTime', startTime, budget)
       return (
         <View className='house-list-wrapper msg-wrapper' key={key}>
           <View className='title-wrapper'>

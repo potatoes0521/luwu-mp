@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 17:41:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 17:46:14
+ * @LastEditTime: 2020-07-01 18:09:28
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -25,6 +25,8 @@ import { getImage } from '@img/cdn'
 import Auth from '@components/auth'
 import MineHouse from './components/MineHouse/index'
 import './index.scss'
+
+const headerImage = getImage('mine/default_header.png')
 
 class Mine extends Component {
 
@@ -77,6 +79,11 @@ class Mine extends Component {
     if (!item) return
     
   }
+  navigatorTo() { 
+    Taro.navigateTo({
+      url: '/pages/offer_examine_publish/index'
+    })
+  }
   /**
    * 页面内转发
    * @param {Object} res 微信返回参数
@@ -105,7 +112,7 @@ class Mine extends Component {
         <View className='page-wrapper'>
           <View className='user-msg-wrapper'>
             <View className='user-head'>
-              <Image className='user-head' src={userInfo.avatarUrl}></Image>
+              <Image className='user-head' src={!notLogin ? userInfo.avatarUrl : headerImage}></Image>
             </View>
             <View className='msg-text-wrapper'>
               {
@@ -129,7 +136,7 @@ class Mine extends Component {
               }
             </View>
           </View>
-          <View className='form-wrapper'>
+          <View className='form-wrapper' onClick={this.navigatorTo.bind(this)}>
             <View className='form-item'>
               <View className='form-label'>
                 <Text className='iconfont icon-public-style iconshenhe'></Text>
