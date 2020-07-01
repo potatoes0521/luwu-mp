@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 13:43:44
+ * @LastEditTime: 2020-07-01 14:01:40
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,19 +16,41 @@ import SaveAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getStorage } from '@utils/storage'
 import ListItem from '@/choose_components/ListItem'
+
 import './index.scss'
 
+const Mock = [
+  {
+    num: 1,
+    chinese: '一'
+  },
+  {
+    num: 2,
+    chinese: '二'
+  },
+  {
+    num: 3,
+    chinese: '三'
+  },
+  {
+    num: 4,
+    chinese: '四'
+  },
+  {
+    num: 5,
+    chinese: '五'
+  },
+  {
+    num: 6,
+    chinese: '六'
+  }
+]
 class ChooseHouseType extends Component { 
 
   constructor(props) {
     super(props)
     this.state = {
-      roomList: [
-        {
-          num: 1,
-          chinese: '一'
-        }
-      ], // 房屋
+      roomList: Mock, // 房屋
       livingRoomList: [], // 客厅
       kitchenList: [], // 厨房
       toiletList: [], // 卫生间
@@ -51,7 +73,7 @@ class ChooseHouseType extends Component {
    * @return void
    */
   handleEdit() { 
-    getStorage('choose_category').then(res => {
+    getStorage('choose_category').then(() => {
       this.setState({
         
       }, () => {
@@ -60,10 +82,48 @@ class ChooseHouseType extends Component {
     })
   }
   
-  chooseRoom() {}
-  chooseLivingRoom() {}
-  chooseKitchen() {}
-  chooseToilet() {}
+  chooseRoom(item) {
+    const { selectRoomData } = this.state
+    if (selectRoomData.num === item.num) return
+    this.setState({
+      selectRoomData: item,
+      livingRoomList: Mock
+    })
+  }
+  chooseLivingRoom(item) {
+    const { selectLivingRoomData } = this.state
+    if (selectLivingRoomData.num === item.num) return
+    this.setState({
+      selectLivingRoomData: item,
+      kitchenList: Mock
+    })
+  }
+  chooseKitchen(item) {
+    const { selectKitchenData } = this.state
+    if (selectKitchenData.num === item.num) return
+    this.setState({
+      selectKitchenData: item,
+      toiletList: Mock
+    })
+  }
+  chooseToilet(item) {
+    const {
+      selectToiletData,
+      selectKitchenData,
+      selectLivingRoomData,
+      selectRoomData
+    } = this.state
+    if (selectToiletData.num === item.num) return
+    this.setState({
+      selectToiletData: item
+    })
+    this.handlePrePageData({
+      roomData: selectRoomData,
+      livingRoomData: selectLivingRoomData,
+      kitchenData: selectKitchenData,
+      toiletData: item,
+    })
+  }
   /**
    * 处理上一页数据并返回
    * @return void
@@ -106,6 +166,7 @@ class ChooseHouseType extends Component {
           item={item}
           borderRight
           active={active}
+          valueKey='num'
           onClickItem={this.chooseRoom.bind(this)}
         />
       )
@@ -119,6 +180,7 @@ class ChooseHouseType extends Component {
           item={item}
           borderRight
           active={active}
+          valueKey='num'
           onClickItem={this.chooseLivingRoom.bind(this)}
         />
       )
@@ -132,6 +194,7 @@ class ChooseHouseType extends Component {
           item={item}
           borderRight
           active={active}
+          valueKey='num'
           onClickItem={this.chooseKitchen.bind(this)}
         />
       )
@@ -144,6 +207,7 @@ class ChooseHouseType extends Component {
           key={key}
           item={item}
           active={active}
+          valueKey='num'
           onClickItem={this.chooseToilet.bind(this)}
         />
       )
@@ -151,9 +215,8 @@ class ChooseHouseType extends Component {
    
     return (
       <SaveAreaView
-        title='选择品类'
+        title='选择户型'
         back
-        home
       >
         <View
           style={{

@@ -1,9 +1,12 @@
 
 export default {
-  houseType: {}, // 房屋户型
+  roomData: {},
+  livingRoomData: {},
+  kitchenData: {},
+  toiletData: {},
   area: '', // 房屋面积
   budget: '', // 预算
   address: {}, // 地址
   startTime: '', // 装修时间
-  houseType: {}, // 房屋类型
+  houseType: -1, // 房屋类型
 }

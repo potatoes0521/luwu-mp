@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 13:12:08
+ * @LastEditTime: 2020-07-01 14:42:09
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -44,7 +44,9 @@ class HousePublish extends Component {
     
   }
   handleClickHouseType() { 
-    
+    Taro.navigateTo({
+      url: '/pages/choose_house_type/index'
+    })
   }
   onAreaInput(e) {
     const { target: { value } } = e
@@ -115,16 +117,36 @@ class HousePublish extends Component {
     this.handleClickModel()
   }
   handleClickModel() {
-    const { openModelModal } = this.state
-    this.setState({
-      openModelModal: !openModelModal
-    })
+    
   }
   onClickAddress() { 
     
   }
-  chooseAudio() { 
-    
+  chooseAudio(type) { 
+    this.setState({
+      houseType: type
+    })
+  }
+  getLocationData(address) { 
+    this.setState({
+      address
+    })
+  }
+  /**
+   * 处理房屋户型文字展示
+   * @return void
+   */
+  houseTypeText() { 
+    const {
+      roomData,
+      livingRoomData,
+      kitchenData,
+      toiletData,
+    } = this.state
+    if (!roomData.chinese && !livingRoomData.chinese && !kitchenData.chinese && !toiletData.chinese) {
+      return ''
+    }
+    return (roomData.chinese || '-') + '室' + (livingRoomData.chinese || '-') + '厅' + (kitchenData.chinese || '-') + '厨' + (toiletData.chinese || '-') + '卫'
   }
   /**
    * 页面内转发
@@ -150,6 +172,7 @@ class HousePublish extends Component {
       address,
       houseType
     } = this.state
+    const houseTypeText = this.houseTypeText()
     return (
       <SafeAreaView
         title='完善房屋信息'
@@ -163,15 +186,15 @@ class HousePublish extends Component {
               label='房屋类型'
             >
               <View className='audio-group'>
-                <View className='option' onClick={this.chooseAudio.bind(this, 1)}>
-                  <View className='circular'>
-                    {houseType === 1 && <View className='circular-active'></View>}
-                  </View>
-                  <View className='option-title'>毛坯房</View>
-                </View>
                 <View className='option' onClick={this.chooseAudio.bind(this, 0)}>
                   <View className='circular'>
                     {houseType === 0 && <View className='circular-active'></View>}
+                  </View>
+                  <View className='option-title'>毛坯房</View>
+                </View>
+                <View className='option' onClick={this.chooseAudio.bind(this, 1)}>
+                  <View className='circular'>
+                    {houseType === 1 && <View className='circular-active'></View>}
                   </View>
                   <View className='option-title'>旧房翻新</View>
                 </View>
@@ -186,7 +209,7 @@ class HousePublish extends Component {
               label='房屋户型'
               canInput={false}
               placeholder='请选择'
-              value={'' || ''}
+              value={houseTypeText || ''}
               iconName='iconRectangle rotated'
               onContentClick={this.handleClickHouseType.bind(this)}
             />
@@ -212,6 +235,7 @@ class HousePublish extends Component {
               label='房屋位置'
               placeholder='请选择'
               address={address.address || {}}
+              onGetLocationData={this.getLocationData.bind(this)}
             />
           </View>
           <View className='form-wrapper'>
