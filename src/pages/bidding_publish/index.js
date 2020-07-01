@@ -2,94 +2,103 @@
  * @Author: liuYang
  * @description: 请填写描述信息
  * @path: 引入路径
- * @Date: 2020-06-28 13:28:05
+ * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 08:51:07
+ * @LastEditTime: 2020-07-01 18:42:23
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
- */ 
+ */
 import Taro, { Component } from '@tarojs/taro'
-import { View, Textarea } from '@tarojs/components'
-import classNames from 'classnames'
+import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { publishOffer } from '@services/modules/offer'
-import { phoneNumberPatter } from '@utils/patter'
+import { publishHouse, editHouse, getHouseDetails } from '@services/modules/house'
 import SafeAreaView from '@components/SafeAreaView'
 import FormItem from '@components/FormItem'
-import FormItemPicker from '@components/FormItemPicker'
-import Upload from '@components/Upload'
+import FormItemCustomContent from '@components/FormItemCustomContent'
 import Location from '@components/Location'
 import Login from '@utils/login'
-import biddingState from '@config/biddingState'
+import houseState from '@/config/houseState.js'
 import { getImage } from '@img/cdn'
+import { setStorage, removeStorage } from "@utils/storage"
+import {
+  getDateTime,
+  getTimeDate
+} from '@utils/timer'
+import { moneyData, timeData } from '@config/chooseOneState'
 
 import './index.scss'
+
+const oneMouthTimer = 2592000000
 
 class BiddingPublish extends Component {
 
   constructor(props) {
     super(props)
-    this.state = Object.assign({}, biddingState, {
+    this.state = Object.assign({}, houseState, {
       // 除去公共key以外的字段定在这里
-      openModelModal: false,
-      openTypeModal: false,
-      houseModelViewTop: 490,
-      houseTypeViewTop: 490,
     })
+    this.pageParams = {}
     this.timer = null
   }
 
   async componentDidMount() {
+    this.pageParams = this.$router.params
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
+    if (this.pageParams.pageType === 'edit') {
+      this.getHouseData()
+    }
+  }
+  componentWillUnmount() { 
     clearTimeout(this.timer)
     this.timer = null
+    removeStorage('choose_house_type')
+    removeStorage('choose_budget')
+    removeStorage('choose_timer')
   }
-  handleClickHouseModel() {
-    const { openModelModal } = this.state
-    this.setState({
-      openModelModal: !openModelModal
-    })
-  }
-  handleClickHouseType() { 
-    const { openTypeModal } = this.state
-    this.setState({
-      openTypeModal: !openTypeModal
+  getHouseData() { 
+    getHouseDetails({
+      requireId: this.pageParams.requireId
+    }).then(res => {
+      const mouth = (getTimeDate(res.decorateTimeBefore) - getTimeDate(res.decorateTimeAfter)) / oneMouthTimer || 0
+      const startTime = timeData.filter(item => item.timeMouth === mouth)
+      const budget = moneyData.filter(item => item.min === res.budgetMin)[0]
+      const address = {
+        address: res.address,
+        longitude: res.longitude,
+        latitude: res.latitude
+      }
+      const data = Object.assign({}, res, {
+        startTime: startTime[0] || {},
+        budget,
+        address
+      })
+      this.setState(data)
     })
   }
   /**
-   * 打开
-   * @param {Type} item 参数描述
-   * @param {Type} e 参数描述
+   * 点了房屋户型
    * @return void
    */
-  onClickModelModalItem(item, e) { 
-    e.stopPropagation()
-    this.setState({
-      model: item
-    }, () => {
-        this.handleClickModel()
-    })
-  }
-  onImageUpload(imgList) { 
-    const {imageList} = this.state
-    this.setState({
-      imageList: [...imageList, ...imgList]
-    }, () => {
-      this.getHideLineTop()
-    })
-  }
-  getHideLineTop() {
-    Taro.createSelectorQuery()
-      .select('.hide-line')
-      .boundingClientRect()
-      .exec(res => {
-        const { system } = this.props
-        this.setState({
-          modelViewTop: res[0].top * 2 - (system && system.navHeight)
-        })
+  handleClickHouseType() { 
+    const {
+      bedroom,
+      sittingroom,
+      cookroom,
+      washroom,
+    } = this.state
+    let url = '/pages/choose_house_type/index'
+    if (bedroom.chinese || sittingroom.chinese || cookroom.chinese || washroom.chinese) {
+      url += '?pageType=edit'
+      setStorage('choose_house_type', {
+        bedroom,
+        sittingroom,
+        cookroom,
+        washroom,
       })
+    }
+    Taro.navigateTo({ url })
   }
   onAreaInput(e) {
     const { target: { value } } = e
@@ -97,122 +106,146 @@ class BiddingPublish extends Component {
       area: value
     })
   }
-  onRemarkInput(e) {
-    const { target: { value } } = e
+  onChooseStartTime() {
+    const { startTime } = this.state
+    let url = '/pages/choose_one_item/index?chooseType=time'
+    if (startTime.moneyText) {
+      url += '&pageType=edit'
+      setStorage('choose_timer', startTime)
+    }
+    Taro.navigateTo({ url })
+  }
+
+  chooseAudio(type) { 
     this.setState({
-      remark: value
+      decorateType: type
     })
   }
-  onChooseStartTime(e) {
-    const { target: { value } } = e
+  getLocationData(address) { 
     this.setState({
-      startTime: value
+      address
     })
   }
-  onChooseEndTime(e) {
-    const { target: { value } } = e
-    this.setState({
-      endTime: value
-    })
-  }
-  onUserNameInput(e) {
-    const { target: { value } } = e
-    this.setState({
-      userName: value
-    })
-  }
-  onMobileInput(e) { 
-    const { target: { value } } = e
-    this.setState({
-      mobile: value
-    })
-  }
-  submit() { 
-    const {
-      fileList,
-      model,
-      area,
-      remark,
-      mobile,
-      userName,
-    } = this.state
-    const testKey = {
-      fileList: '请上传报价文件',
-      model: '请选择房屋类型',
-      area: '请填写房屋面积',
-      userName: '请填写联系人',
-      mobile: '请填写手机号',
+  onChooseBudget() {
+    const { budget } = this.state
+    let url = '/pages/choose_one_item/index?chooseType=budget'
+    if (budget.moneyText) {
+      url += '&pageType=edit'
+      setStorage('choose_budget', budget)
     }
-    let breakName = ''
-    for (const key in testKey) {
-      if (key === 'fileList' && fileList.length < 1) {
-        breakName = key
-        break
-      } else if (key === 'model' && !model.modelName) {
-        breakName = key
-        break
-      } else if (!this.state[key]) { 
-        breakName = key
-        break
-      }
-    }
-    if (!phoneNumberPatter.test(mobile)) {
-      breakName = 'mobile'
-    }
-    if (breakName) {
-      Taro.showToast({
-        title: testKey[breakName],
-        icon: 'none',
-        duration: 2000
-      })
-      return
-    }
-    const sendData = {
-      data: {
-        fileList,
-        model,
-        area,
-        remark,
-        mobile,
-        userName,
-      }
-    }
-    publishOffer(sendData, this).then(res => {
-      if (!res || !res.quotationId) {
-        return
-      }
-      Taro.showToast({
-        title: '发布成功'
-      })
-      this.timer = setTimeout(() => {
-        Taro.redirectTo({
-          url: `/pages/offer_examine_details/index?quotationId=${res.quotationId}`
-        })
-      }, 1800)
-    })
+    Taro.navigateTo({ url })
   }
   /**
-   * 公共标题
-   * @param {String} title 标题文字
+   * 处理房屋户型文字展示
    * @return void
    */
-  renderTitle(title) { 
-    return (
-      <View className='title'>{title}</View>
-    )
+  decorateTypeText() { 
+    const {
+      bedroom,
+      sittingroom,
+      cookroom,
+      washroom,
+    } = this.state
+    if (!bedroom.chinese && !sittingroom.chinese && !cookroom.chinese && !washroom.chinese) {
+      return ''
+    }
+    return (bedroom.chinese || '-') + '室' + (sittingroom.chinese || '-') + '厅' + (cookroom.chinese || '-') + '厨' + (washroom.chinese || '-') + '卫'
   }
-  stopPropagation(e) {
-    e.stopPropagation()
-    this.handleClickModel()
+  submit() {
+    const {
+      area,
+      startTime,
+      budget,
+      address,
+      decorateType,
+      bedroom,
+      sittingroom,
+      cookroom,
+      washroom,
+    } = this.state
+    if (decorateType < 0) {
+      this.showToast('请选择房屋类型')
+      return
+    }
+    if (!bedroom.chinese) {
+      this.showToast('请选择房屋户型')
+      return
+    }
+    if (!area) {
+      this.showToast('请填写房屋面积')
+      return
+    }
+    if (!address.address) {
+      this.showToast('请选择房屋位置')
+      return
+    }
+    if (!budget.moneyText) {
+      this.showToast('请选择预算')
+      return
+    }
+    const { latitude, longitude } = address
+    const date = this.handleTimer(startTime)
+    const sendData = {
+      area,
+      address: address.address,
+      longitude,
+      latitude,
+      decorateType,
+      bedroom: bedroom.num,
+      sittingroom: sittingroom.num,
+      cookroom: cookroom.num,
+      washroom: washroom.num,
+      budgetMin: budget.min,
+      budgetMax: budget.max,
+      decorateTimeBefore: date.decorateTimeBefore,
+      decorateTimeAfter: date.decorateTimeAfter
+    }
+    this.handleRequest(sendData)
   }
-  handleClickModel() {
-    const { openModelModal } = this.state
-    this.setState({
-      openModelModal: !openModelModal
+  handleRequest(sendData) {
+    if (this.pageParams.pageType === 'edit') { 
+      sendData.requireId = this.state.requireId
+      editHouse(sendData).then(() => {
+        this.showToast('编辑成功')
+      })
+    } else {
+      publishHouse(sendData).then(() => {
+        this.showToast('完善成功')
+      })
+    }
+    removeStorage('choose_house_type')
+    removeStorage('choose_budget')
+    removeStorage('choose_timer')
+    this.timer = setTimeout(() => {
+      Taro.navigateBack()
+    }, 1800)
+  }
+  /**
+   * 显示toast
+   * @param {String} text 参数描述
+   * @return void
+   */
+  showToast(text) {
+    Taro.showToast({
+      title: text,
+      icon: 'none',
+      duration: 2000
     })
   }
-  onClickAddress() { 
-    
+  handleTimer(data) { 
+    if (!data.timeMouth || data.timeMouth <= 0) {
+      return {
+        decorateTimeBefore: '',
+        decorateTimeAfter: ''
+      }
+    }
+    const nowDate = +new Date()
+    const afterDate = getDateTime(nowDate)
+    const beforeDate = getDateTime(nowDate + oneMouthTimer * data.timeMouth)
+    return {
+      decorateTimeBefore: beforeDate,
+      decorateTimeAfter: afterDate
+    }
   }
   /**
    * 页面内转发
@@ -232,225 +265,109 @@ class BiddingPublish extends Component {
   }
   render() {
     const {
-      imageList,
-      model,
-      type,
       area,
-      remark,
-      mobile,
-      userName,
-      openModelModal,
-      openTypeModal,
-      houseTypeModalData,
-      houseModelViewTop,
-      houseTypeViewTop,
       startTime,
-      endTime,
-      address
+      budget,
+      address,
+      decorateType
     } = this.state
-    const modelModalRender = houseTypeModalData.map(item => {
-      const key = item.modelId
-      const itemClassName = classNames('model-item', {
-        'model-item-active': item.modelId === model.modelId
-      })
-      return (
-        <View
-          className={itemClassName}
-          key={key}
-          onClick={this.onClickModelModalItem.bind(this, item)}
-        >{item.modelName}</View>
-      )
-    })
-    const typeModalRender = houseTypeModalData.map(item => {
-      const key = item.modelId
-      const itemClassName = classNames('model-item', {
-        'model-item-active': item.modelId === model.modelId
-      })
-      return (
-        <View
-          className={itemClassName}
-          key={key}
-          onClick={this.onClickModelModalItem.bind(this, item)}
-        >{item.modelName}</View>
-      )
-    })
-    const modelFormClassName = classNames('iconRectangle', {
-      'rotated-90': openModelModal,
-      'rotated': !openModelModal
-    })
+    const decorateTypeText = this.decorateTypeText()
     return (
       <SafeAreaView
         title='发布招标信息'
         back
-        home
       >
         <View className='page-wrapper'>
-          {
-            this.renderTitle('上传户型图')
-          }
-          <View className='upload-wrapper' >
-            <View className='upload-list-wrapper'>
-              <Upload
-                imageList={imageList}
-                autoChoose
-                imageSize={180}
-                addBtnSizeType={86}
-                showAddBtn
-                onUploadOK={this.onImageUpload.bind(this)}
-              />
-            </View>
-            <View className='upload-tips'>请上传清晰完整的户型图~</View>
-          </View>
-          {
-            this.renderTitle('您的房屋信息')
-          }
           <View className='form-wrapper'>
-            <FormItem
+            <FormItemCustomContent
               line
+              important
               label='房屋类型'
-              important
-              unit='icon'
-              iconName={modelFormClassName}
-              shortUnit
-              value={model.modelName || ''}
-              canInput={false}
-              placeholder={openModelModal ? '' : '请选择'}
-              onContentClick={this.handleClickHouseModel.bind(this)}
-            />
-            <View className='hide-line'></View>
-            {
-              openModelModal && (
-                <View
-                  className='model-modal-wrapper'
-                  style={{top: houseModelViewTop + 'rpx'}}
-                  onClick={this.stopPropagation.bind(this)}
-                >
-                  <View className='modal-main'>
-                    {
-                      modelModalRender
-                    }
+            >
+              <View className='audio-group'>
+                <View className='option' onClick={this.chooseAudio.bind(this, 0)}>
+                  <View className='circular'>
+                    {decorateType === 0 && <View className='circular-active'></View>}
                   </View>
+                  <View className='option-title'>毛坯房</View>
                 </View>
-              )
-            }
+                <View className='option' onClick={this.chooseAudio.bind(this, 1)}>
+                  <View className='circular'>
+                    {decorateType === 1 && <View className='circular-active'></View>}
+                  </View>
+                  <View className='option-title'>旧房翻新</View>
+                </View>
+              </View>
+            </FormItemCustomContent>
             <FormItem
               line
-              label='房屋户型'
+              height100
               important
-              unit='icon'
-              iconName={modelFormClassName}
               shortUnit
-              value={type.modelName || ''}
+              unit='icon'
+              label='房屋户型'
               canInput={false}
-              placeholder={openModelModal ? '' : '请选择'}
+              placeholder='请选择'
+              value={decorateTypeText || ''}
+              iconName='iconRectangle rotated'
               onContentClick={this.handleClickHouseType.bind(this)}
             />
-            <View className='hide-line2'></View>
-            {
-              openTypeModal && (
-                <View
-                  className='model-modal-wrapper'
-                  style={{top: houseTypeViewTop + 'rpx'}}
-                  onClick={this.stopPropagation.bind(this)}
-                >
-                  <View className='modal-main'>
-                    {
-                      typeModalRender
-                    }
-                  </View>
-                </View>
-              )
-            }
             <FormItem
-              label='房屋面积'
-              important
               line
-              type='digit'
-              unit='text'
-              unitContent='㎡'
               unitNum
-              shortUnit
-              value={area}
-              placeholder='请输入房屋面积'
               canInput
+              height100
+              shortUnit
+              important
+              unit='text'
+              type='digit'
+              value={area}
+              label='房屋面积'
+              unitContent='㎡'
+              placeholder='请输入房屋面积'
               onInput={this.onAreaInput.bind(this)}
             />
             <Location
-              address={address.address || {}}
-              label='区域位置'
+              height100
+              important
               style='form'
+              label='房屋位置'
               placeholder='请选择'
-              line
-            />
-            <FormItemPicker
-              label='预计装修时间'
-              unit='icon'
-              iconName={modelFormClassName}
-              shortUnit
-              langLabel
-              value={startTime || ''}
-              placeholder={openModelModal ? '' : '请选择'}
-              onPickerValueChange={this.onChooseStartTime.bind(this)}
+              address={address || {}}
+              onGetLocationData={this.getLocationData.bind(this)}
             />
           </View>
-          {
-            this.renderTitle('补充信息')
-          }
-          <View className='remark-wrapper'>
-            <Textarea
-              autoHeight
-              className='textarea'
-              placeholderClass='placeholder-class'
-              placeholder='请补充你对房屋的个性化要求, 更方便装修公司投标'
-              value={remark}
-              onInput={this.onRemarkInput.bind(this)}
-              maxlength={300}
-            ></Textarea>
-          </View>
-          {
-            this.renderTitle('您的个人信息')
-          }
           <View className='form-wrapper'>
             <FormItem
               line
-              label='联系人'
-              unit
-              important
               shortUnit
-              value={userName}
-              placeholder='请输入'
-              canInput
-              maxlength={6}
-              onInput={this.onUserNameInput.bind(this)}
+              langLabel
+              height100
+              important
+              unit='icon'
+              label='装修预算'
+              canInput={false}
+              placeholder='请选择'
+              value={budget.moneyText || ''}
+              iconName='iconRectangle rotated'
+              onContentClick={this.onChooseBudget.bind(this)}
             />
             <FormItem
-              label='手机号码'
-              type='number'
-              unit
-              line
-              important
               shortUnit
-              maxlength={11}
-              value={mobile}
-              placeholder='请输入'
-              canInput
-              onInput={this.onMobileInput.bind(this)}
-            />
-            <FormItemPicker
-              label='有效期限'
-              important
-              notPast
+              langLabel
+              height100
               unit='icon'
+              label='装修时间'
+              canInput={false}
+              placeholder='请选择'
+              value={startTime.timeText || ''}
               iconName='iconRectangle rotated'
-              shortUnit
-              value={endTime || ''}
-              placeholder={openModelModal ? '' : '请选择'}
-              onPickerValueChange={this.onChooseEndTime.bind(this)}
+              onContentClick={this.onChooseStartTime.bind(this)}
             />
           </View>
-          <View className='bottom-tips'>您的联系信息需要您的确认才会提供给装修公司</View>
+          <View className='bottom-tips'>添加房屋后，您将获得免费招标和3次免费建材比价的机会</View>
           <View className='fixed-bottom-btm'>
-            <View className='btn-public default-btn' onClick={this.submit.bind(this)}>提交</View>
+            <View className='btn-public default-btn submit-btn' onClick={this.submit.bind(this)}>提交</View>
           </View>
         </View>
       </SafeAreaView>
