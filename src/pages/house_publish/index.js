@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 11:18:27
+ * @LastEditTime: 2020-07-01 11:24:27
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -158,57 +158,58 @@ class BiddingPublish extends Component {
           <View className='form-wrapper'>
             <FormItem
               line
-              label='房屋类型'
               important
-              unit='icon'
-              iconName='iconRectangle rotated'
               shortUnit
-              value={model.modelName || ''}
+              unit='icon'
+              label='房屋类型'
               canInput={false}
               placeholder='请选择'
+              value={model.modelName || ''}
+              iconName='iconRectangle rotated'
               onContentClick={this.handleClickHouseModel.bind(this)}
             />
             <FormItem
               line
-              label='房屋户型'
               important
-              unit='icon'
-              iconName='iconRectangle rotated'
               shortUnit
-              value={type.modelName || ''}
+              unit='icon'
+              label='房屋户型'
               canInput={false}
               placeholder='请选择'
+              value={type.modelName || ''}
+              iconName='iconRectangle rotated'
               onContentClick={this.handleClickHouseType.bind(this)}
             />
             <FormItem
-              label='房屋面积'
-              important
               line
-              type='digit'
-              unit='text'
-              unitContent='㎡'
               unitNum
-              shortUnit
-              value={area}
-              placeholder='请输入房屋面积'
               canInput
+              shortUnit
+              important
+              unit='text'
+              type='digit'
+              value={area}
+              label='房屋面积'
+              unitContent='㎡'
+              placeholder='请输入房屋面积'
               onInput={this.onAreaInput.bind(this)}
             />
             <Location
-              address={address.address || {}}
-              label='区域位置'
-              style='form'
-              placeholder='请选择'
               line
+              important
+              style='form'
+              label='房屋位置'
+              placeholder='请选择'
+              address={address.address || {}}
             />
             <FormItem
-              label='预计装修时间'
-              unit='icon'
-              iconName='iconRectangle rotated'
               shortUnit
               langLabel
-              value={startTime || ''}
+              unit='icon'
+              label='装修时间'
               placeholder='请选择'
+              value={startTime || ''}
+              iconName='iconRectangle rotated'
               onContentClick={this.onChooseStartTime.bind(this)}
             />
           </View>
