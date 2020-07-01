@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 08:51:27
+ * @LastEditTime: 2020-07-01 11:18:27
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,8 +16,7 @@ import { connect } from '@tarojs/redux'
 import { publishOffer } from '@services/modules/offer'
 import SafeAreaView from '@components/SafeAreaView'
 import FormItem from '@components/FormItem'
-import FormItemPicker from '@components/FormItemPicker'
-import Upload from '@components/Upload'
+// import Upload from '@components/Upload'
 import Location from '@components/Location'
 import Login from '@utils/login'
 import biddingState from '@config/biddingState'
@@ -31,10 +30,6 @@ class BiddingPublish extends Component {
     super(props)
     this.state = Object.assign({}, biddingState, {
       // 除去公共key以外的字段定在这里
-      openModelModal: false,
-      openTypeModal: false,
-      houseModelViewTop: 490,
-      houseTypeViewTop: 490,
     })
     this.timer = null
   }
@@ -46,49 +41,10 @@ class BiddingPublish extends Component {
     this.timer = null
   }
   handleClickHouseModel() {
-    const { openModelModal } = this.state
-    this.setState({
-      openModelModal: !openModelModal
-    })
+    
   }
   handleClickHouseType() { 
-    const { openTypeModal } = this.state
-    this.setState({
-      openTypeModal: !openTypeModal
-    })
-  }
-  /**
-   * 打开
-   * @param {Type} item 参数描述
-   * @param {Type} e 参数描述
-   * @return void
-   */
-  onClickModelModalItem(item, e) { 
-    e.stopPropagation()
-    this.setState({
-      model: item
-    }, () => {
-        this.handleClickModel()
-    })
-  }
-  onImageUpload(imgList) { 
-    const {imageList} = this.state
-    this.setState({
-      imageList: [...imageList, ...imgList]
-    }, () => {
-      this.getHideLineTop()
-    })
-  }
-  getHideLineTop() {
-    Taro.createSelectorQuery()
-      .select('.hide-line')
-      .boundingClientRect()
-      .exec(res => {
-        const { system } = this.props
-        this.setState({
-          modelViewTop: res[0].top * 2 - (system && system.navHeight)
-        })
-      })
+    
   }
   onAreaInput(e) {
     const { target: { value } } = e
@@ -154,16 +110,6 @@ class BiddingPublish extends Component {
       }, 1800)
     })
   }
-  /**
-   * 公共标题
-   * @param {String} title 标题文字
-   * @return void
-   */
-  renderTitle(title) { 
-    return (
-      <View className='title'>{title}</View>
-    )
-  }
   stopPropagation(e) {
     e.stopPropagation()
     this.handleClickModel()
@@ -195,48 +141,13 @@ class BiddingPublish extends Component {
   }
   render() {
     const {
-      imageList,
+      // imageList,
       model,
       type,
       area,
-      openModelModal,
-      openTypeModal,
-      houseTypeModalData,
-      houseModelViewTop,
-      houseTypeViewTop,
       startTime,
       address
     } = this.state
-    const modelModalRender = houseTypeModalData.map(item => {
-      const key = item.modelId
-      const itemClassName = classNames('model-item', {
-        'model-item-active': item.modelId === model.modelId
-      })
-      return (
-        <View
-          className={itemClassName}
-          key={key}
-          onClick={this.onClickModelModalItem.bind(this, item)}
-        >{item.modelName}</View>
-      )
-    })
-    const typeModalRender = houseTypeModalData.map(item => {
-      const key = item.modelId
-      const itemClassName = classNames('model-item', {
-        'model-item-active': item.modelId === model.modelId
-      })
-      return (
-        <View
-          className={itemClassName}
-          key={key}
-          onClick={this.onClickModelModalItem.bind(this, item)}
-        >{item.modelName}</View>
-      )
-    })
-    const modelFormClassName = classNames('iconRectangle', {
-      'rotated-90': openModelModal,
-      'rotated': !openModelModal
-    })
     return (
       <SafeAreaView
         title='发布招标信息'
@@ -244,82 +155,31 @@ class BiddingPublish extends Component {
         home
       >
         <View className='page-wrapper'>
-          {
-            this.renderTitle('上传户型图')
-          }
-          <View className='upload-wrapper' >
-            <View className='upload-list-wrapper'>
-              <Upload
-                imageList={imageList}
-                autoChoose
-                imageSize={180}
-                addBtnSizeType={86}
-                showAddBtn
-                onUploadOK={this.onImageUpload.bind(this)}
-              />
-            </View>
-            <View className='upload-tips'>请上传清晰完整的户型图~</View>
-          </View>
-          {
-            this.renderTitle('您的房屋信息')
-          }
           <View className='form-wrapper'>
             <FormItem
               line
               label='房屋类型'
               important
               unit='icon'
-              iconName={modelFormClassName}
+              iconName='iconRectangle rotated'
               shortUnit
               value={model.modelName || ''}
               canInput={false}
-              placeholder={openModelModal ? '' : '请选择'}
+              placeholder='请选择'
               onContentClick={this.handleClickHouseModel.bind(this)}
             />
-            <View className='hide-line'></View>
-            {
-              openModelModal && (
-                <View
-                  className='model-modal-wrapper'
-                  style={{top: houseModelViewTop + 'rpx'}}
-                  onClick={this.stopPropagation.bind(this)}
-                >
-                  <View className='modal-main'>
-                    {
-                      modelModalRender
-                    }
-                  </View>
-                </View>
-              )
-            }
             <FormItem
               line
               label='房屋户型'
               important
               unit='icon'
-              iconName={modelFormClassName}
+              iconName='iconRectangle rotated'
               shortUnit
               value={type.modelName || ''}
               canInput={false}
-              placeholder={openModelModal ? '' : '请选择'}
+              placeholder='请选择'
               onContentClick={this.handleClickHouseType.bind(this)}
             />
-            <View className='hide-line2'></View>
-            {
-              openTypeModal && (
-                <View
-                  className='model-modal-wrapper'
-                  style={{top: houseTypeViewTop + 'rpx'}}
-                  onClick={this.stopPropagation.bind(this)}
-                >
-                  <View className='modal-main'>
-                    {
-                      typeModalRender
-                    }
-                  </View>
-                </View>
-              )
-            }
             <FormItem
               label='房屋面积'
               important
@@ -341,15 +201,15 @@ class BiddingPublish extends Component {
               placeholder='请选择'
               line
             />
-            <FormItemPicker
+            <FormItem
               label='预计装修时间'
               unit='icon'
-              iconName={modelFormClassName}
+              iconName='iconRectangle rotated'
               shortUnit
               langLabel
               value={startTime || ''}
-              placeholder={openModelModal ? '' : '请选择'}
-              onPickerValueChange={this.onChooseStartTime.bind(this)}
+              placeholder='请选择'
+              onContentClick={this.onChooseStartTime.bind(this)}
             />
           </View>
           <View className='bottom-tips'>您的联系信息需要您的确认才会提供给装修公司</View>
