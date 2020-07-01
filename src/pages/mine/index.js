@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 17:41:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 18:21:04
+ * @LastEditTime: 2020-07-01 18:29:31
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -133,14 +133,21 @@ class Mine extends Component {
                   <View className='login-msg'>
                     <View className='login-msg-wrapper'>
                       <View className='login-msg-name'>{userInfo.nickName || ''}</View>
-                      <View className='login-msg-vip-wrapper'>
-                        <Text className='iconfont iconhuiyuan vip-icon'></Text>
-                        <Text className=''>登录用户</Text>
+                        <View className='login-msg-vip-wrapper'>
+                          {
+                            userInfo.isMember && (<Text className='iconfont iconhuiyuan vip-icon'></Text>)
+                          }
+                        <Text>{userInfo.isMember ? '录屋会员' : '登录用户' }</Text>
                       </View>
                     </View>
                     <View className='login-msg-phone-wrapper'>
-                      {/* <Text className='phone-msg'>手机号 138****5678</Text> */}
-                      <Text className='phone-tips'>绑定手机号码立即成为录屋会员</Text>
+                      {
+                        userInfo.isMember ? (
+                          <Text className='phone-msg'>手机号 {userInfo.phone}</Text>
+                        ): (
+                          <Text className='phone-tips'>绑定手机号码立即成为录屋会员</Text>
+                        )
+                      }
                     </View>
                   </View>
                 )
