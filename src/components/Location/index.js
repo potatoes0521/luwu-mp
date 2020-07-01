@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 18:29:25
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 17:04:41
+ * @LastEditTime: 2020-07-01 11:25:09
  * @mustParam: 必传参数
  *  address 地理位置数据  有经纬度和地址
  * @optionalParam: 选传参数
@@ -153,10 +153,12 @@ export default class Location extends Taro.Component {
           style === 'form' ? (
             <Block>
               <View className='location-label skeleton-square'>
-                <Text className='label'>{label}</Text>
-                {
-                  important && <Text className='important'>*</Text>
-                }
+                <Text className='label'>
+                  {label}
+                  {
+                    important && <Text className='important'>*</Text>
+                  }
+                </Text>
               </View>
               <View className='form-content' >
                 <Text className={addressClassName}>{address.address || placeholder || '选择商户地址'}</Text>
