@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 14:42:09
+ * @LastEditTime: 2020-07-01 14:53:45
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,11 +16,11 @@ import { publishOffer } from '@services/modules/offer'
 import SafeAreaView from '@components/SafeAreaView'
 import FormItem from '@components/FormItem'
 import FormItemCustomContent from '@components/FormItemCustomContent'
-// import Upload from '@components/Upload'
 import Location from '@components/Location'
 import Login from '@utils/login'
 import houseState from '@/config/houseState.js'
 import { getImage } from '@img/cdn'
+import { setStorage, removeStorage } from "@utils/storage"
 
 import './index.scss'
 
@@ -40,13 +40,30 @@ class HousePublish extends Component {
     clearTimeout(this.timer)
     this.timer = null
   }
+  componentWillUnmount() { 
+    removeStorage('choose_house_type')
+  }
   handleClickHouseModel() {
     
   }
   handleClickHouseType() { 
-    Taro.navigateTo({
-      url: '/pages/choose_house_type/index'
-    })
+    const {
+      roomData,
+      livingRoomData,
+      kitchenData,
+      toiletData,
+    } = this.state
+    let url = '/pages/choose_house_type/index'
+    if (roomData.chinese || livingRoomData.chinese || kitchenData.chinese || toiletData.chinese) {
+      url += '?pageType=edit'
+      setStorage('choose_house_type', {
+        roomData,
+        livingRoomData,
+        kitchenData,
+        toiletData,
+      })
+    }
+    Taro.navigateTo({ url })
   }
   onAreaInput(e) {
     const { target: { value } } = e

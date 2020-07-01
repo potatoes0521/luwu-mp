@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 14:37:35
+ * @LastEditTime: 2020-07-01 14:51:30
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -52,6 +52,8 @@ class NotePublish extends Component {
   componentWillUnmount() {
     clearTimeout(this.timer)
     this.timer = null
+    removeStorage('choose_category')
+    removeStorage('choose_brand')
   }
   async login() {
     const {userInfo} = this.props

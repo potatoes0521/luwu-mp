@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 14:46:16
+ * @LastEditTime: 2020-07-01 14:56:02
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -58,38 +58,11 @@ class ChooseCategory extends Component {
 
   render() {
     const {
-      mainCategoriesList,
-      childCategoriesList,
-      selectMainCategoriesData, // 选中的品类
-      selectChildCategoriesData, // 选中的子品类
+      
     } = this.state
     const {system} = this.props
     const navHeight = system && system.navHeight || 120
-    const mainCategoriesRender = mainCategoriesList.map(item => {
-      const key = item.categoryId
-      const active = key === selectMainCategoriesData.categoryId
-      return (
-        <ListItem
-          key={key}
-          item={item}
-          borderRight
-          active={active}
-          onClickItem={this.chooseMainCategories.bind(this)}
-        />
-      )
-    })
-    const childCategoriesRender = childCategoriesList.map(item => {
-      const key = item.categoryId
-      const active = key === selectChildCategoriesData.categoryId
-      return (
-        <ListItem
-          key={key}
-          item={item}
-          active={active}
-          onClickItem={this.chooseChildCategories.bind(this)}
-        />
-      )
-    })
+    
    
     return (
       <SaveAreaView
@@ -109,14 +82,10 @@ class ChooseCategory extends Component {
           </View>
           <View className='main-wrapper'>
             <View className='child-list-wrapper'>
-              {
-                mainCategoriesRender
-              }
+              
             </View>
             <View className='child-list-wrapper'>
-              {
-                childCategoriesRender
-              }
+              
             </View>
           </View>
         </View>

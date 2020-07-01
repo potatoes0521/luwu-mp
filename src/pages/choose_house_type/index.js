@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 14:01:40
+ * @LastEditTime: 2020-07-01 15:00:55
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -66,6 +66,9 @@ class ChooseHouseType extends Component {
     this.pageParams = this.$router.params
     const {userInfo} = this.props
     !userInfo.token && Login.login()
+    if (this.pageParams.pageType === 'edit') {
+      this.handleEdit()
+    }
   }
   
   /**
@@ -73,34 +76,51 @@ class ChooseHouseType extends Component {
    * @return void
    */
   handleEdit() { 
-    getStorage('choose_category').then(() => {
+    getStorage('choose_house_type').then((res) => {
       this.setState({
-        
+        selectRoomData: res.roomData,
+        selectLivingRoomData: res.livingRoomData,
+        selectKitchenData: res.kitchenData,
+        selectToiletData: res.toiletData,
       }, () => {
-         
+         this.chooseRoom(res.roomData, true)
       })
     })
   }
   
-  chooseRoom(item) {
-    const { selectRoomData } = this.state
-    if (selectRoomData.num === item.num) return
+  chooseRoom(item, autoNext) {
+    const {
+      selectRoomData,
+      selectLivingRoomData
+    } = this.state
+    if (selectRoomData.num === item.num && !autoNext) return
     this.setState({
       selectRoomData: item,
       livingRoomList: Mock
+    }, () => {
+        if (autoNext) {
+          this.chooseLivingRoom(selectLivingRoomData, autoNext)
+        }
     })
   }
-  chooseLivingRoom(item) {
-    const { selectLivingRoomData } = this.state
-    if (selectLivingRoomData.num === item.num) return
+  chooseLivingRoom(item, autoNext) {
+    const {
+      selectLivingRoomData,
+      selectKitchenData
+    } = this.state
+    if (selectLivingRoomData.num === item.num && !autoNext) return
     this.setState({
       selectLivingRoomData: item,
       kitchenList: Mock
+    }, () => {
+        if (autoNext) {
+          this.chooseKitchen(selectKitchenData, autoNext)
+        }
     })
   }
-  chooseKitchen(item) {
+  chooseKitchen(item, autoNext) {
     const { selectKitchenData } = this.state
-    if (selectKitchenData.num === item.num) return
+    if (selectKitchenData.num === item.num && !autoNext) return
     this.setState({
       selectKitchenData: item,
       toiletList: Mock
