@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 17:41:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 09:06:59
+ * @LastEditTime: 2020-07-01 11:12:37
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -13,8 +13,7 @@ import Taro, { Component } from '@tarojs/taro'
 import {
   View,
   Image,
-  Text,
-  Block
+  Text
 } from '@tarojs/components'
 // import classNames from 'classnames'
 import { connect } from '@tarojs/redux'
@@ -23,7 +22,7 @@ import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getImage } from '@img/cdn'
 import Auth from '@components/auth'
-
+import MineHouse from './components/MineHouse/index'
 import './index.scss'
 
 class Mine extends Component {
@@ -36,14 +35,6 @@ class Mine extends Component {
   async componentDidMount() {
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
-  }
-  renderHouseFormItem(label, content) {
-    return (
-      <View className='house-form-item'>
-        <View className='house-form-label'>{label}</View>
-        <View className='house-form-content'>{content}</View>
-      </View> 
-    )
   }
   renderFormItem(iconName, label, item) {
     return (
@@ -83,8 +74,7 @@ class Mine extends Component {
 
   render() {
     const { userInfo } = this.props
-    const hasHouse = false
-    const notLogin = false
+    const notLogin = !userInfo.token || true
     return (
       <SafeAreaView
         title='个人中心'
@@ -95,62 +85,52 @@ class Mine extends Component {
               <Image className='user-head' src={userInfo.avatarUrl}></Image>
             </View>
             <View className='msg-text-wrapper'>
-              {notLogin && (<Text className='not-login'>点击登录</Text>)}
-              <View className='login-msg'>
-                <View className='login-msg-wrapper'>
-                  <View className='login-msg-name'>{userInfo.nickName || ''}</View>
-                  <View className='login-msg-vip-wrapper'>
-                    <Text className='iconfont iconhuiyuan vip-icon'></Text>
-                    <Text className=''>登录用户</Text>
+              {
+                notLogin ? (
+                  <Text className='not-login'>点击登录</Text>
+                ) : (
+                  <View className='login-msg'>
+                    <View className='login-msg-wrapper'>
+                      <View className='login-msg-name'>{userInfo.nickName || ''}</View>
+                      <View className='login-msg-vip-wrapper'>
+                        <Text className='iconfont iconhuiyuan vip-icon'></Text>
+                        <Text className=''>登录用户</Text>
+                      </View>
+                    </View>
+                    <View className='login-msg-phone-wrapper'>
+                      {/* <Text className='phone-msg'>手机号 138****5678</Text> */}
+                      <Text className='phone-tips'>绑定手机号码立即成为录屋会员</Text>
+                    </View>
                   </View>
-                </View>
-                <View className='login-msg-phone-wrapper'>
-                  {/* <Text className='phone-msg'>手机号 138****5678</Text> */}
-                  <Text className='phone-tips'>绑定手机号码立即成为录屋会员</Text>
-                </View>
+                )
+              }
+            </View>
+          </View>
+          <View className='form-wrapper'>
+            <View className='form-item'>
+              <View className='form-label'>
+                <Text className='iconfont icon-public-style iconshenhe'></Text>
+                <Text>我的报价审核单</Text>
+              </View>
+              <View className='form-content'>
+                <View className='form-tips'>还未提交报价审核</View>
+                <View className='iconfont iconRectangle form-right-icon rotated'></View>
               </View>
             </View>
           </View>
-          {
-            hasHouse ? (
-              <Block>
-                <View className='house-wrapper form-wrapper'>
-                  <View className='form-label house-label'>
-                    <View className='house-title'>添加房屋信息</View>
-                    <View className='house-tips'>添加房屋后，您将获得免费招标和3次免费建材比价机会</View>
-                  </View>
-                  <View className='from-content'>
-                    <View className='iconfont iconRectangle rotated right-icon'></View>
-                  </View>
-                </View>
-              </Block>
-            ): (
-                <Block>
-                  <View className='house-list-wrapper msg-wrapper'>
-                    <View className='title-wrapper'>
-                      <View className='title-left'>
-                        <View className='icon-public-style iconfangwu iconfont'></View>
-                        <View className='title-text'>我的房屋</View>
-                      </View>
-                      <View className='title-right'>
-                        <View className='handle-text'>添加新房</View>
-                        <View className='iconfont iconRectangle title-right-icon rotated'></View>
-                      </View>
-                    </View>
-                    <View className='house-plain'>
-                      <View className='house-item'>
-                        {this.renderHouseFormItem('房型', 'xxxxx')}
-                        {this.renderHouseFormItem('户型', 'xxxxx')}
-                        {this.renderHouseFormItem('面积', 'xxxxx')}
-                        {this.renderHouseFormItem('房屋位置', 'xxxxx')}
-                        {this.renderHouseFormItem('装修预算', 'xxxxx')}
-                        {this.renderHouseFormItem('装修时间', 'xxxxx')}
-                      </View>
-                    </View>
-                  </View>
-                </Block>
-            )
-          }
+          <View className='history-wrapper' >
+            <View className='history-item-public'>
+              <Text className='iconfont iconji history-icon color1'></Text>
+              <View className='history-title'>建材笔记</View>
+              <View className='history-tips'>已记录35次</View>
+            </View>
+            <View className='history-item-public'>
+              <Text className='iconfont iconbi history-icon color2'></Text>
+              <View className='history-title'>建材比价</View>
+              <View className='history-tips'>已记录35次</View>
+            </View>
+          </View>
+          <MineHouse />
           <View className='form-wrapper' onClick={this.handleClickItem.bind(this)}>
             {this.renderFormItem('icondingdan','支付订单', 'pay_order')}
             {this.renderFormItem('icondianping','我的点评', 'comment')}

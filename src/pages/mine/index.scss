@@ -34,24 +34,27 @@ page {
         color: $font-color;
       }
 
-      .login-msg{
-        &-wrapper{
+      .login-msg {
+        &-wrapper {
           display: flex;
           align-items: center;
           margin-bottom: 14px;
         }
-        &-name{
+
+        &-name {
           font-size: 32px;
           line-height: 45px;
         }
-        &-vip-wrapper{
+
+        &-vip-wrapper {
           padding-top: 8px;
           margin-left: 30px;
           font-size: 24px;
           color: #EFBF51;
           display: flex;
           align-items: center;
-          .vip-icon{
+
+          .vip-icon {
             font-size: 28px;
             width: 32px;
             height: 32px;
@@ -61,11 +64,13 @@ page {
             margin-right: 6px;
           }
         }
-        &-phone-wrapper{
+
+        &-phone-wrapper {
           font-size: 28px;
           color: $tips-color;
           line-height: 40px;
-          .phone-tips{
+
+          .phone-tips {
             font-size: 24px;
           }
         }
@@ -101,92 +106,76 @@ page {
 
     .form-content {
       flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
 
       .form-right-icon {
         font-size: 24px;
         color: $placeholder-color;
       }
-    }
-  }
 
-  .house-wrapper {
-    padding: 30px 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .house-label {
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-
-      .house-title {
-        font-size: 28px;
-        line-height: 40px;
-        color: $font-color;
-        margin-bottom: 10px;
-      }
-
-      .house-tips {
+      .form-tips {
         font-size: 22px;
-        line-height: 30px;
         color: #999999;
+        margin-right: 26px;
       }
     }
   }
 
-  .msg-wrapper {
-    margin-top: 30px;
-    background-color: #ffffff;
-    .house-plain{
-      padding: 20px 30px 10px 86px;
-      .house-form{
-        &-item{
-          display: flex;
-          align-items: center;
-          padding-bottom: 20px;
-          line-height: 40px;
-          font-size: 28px;
-        }
-        &-label{
-          color: $font-color;
-          margin-right: 100px;
-          width: 116px;
-        }
-        &-content{
-          color: $tips-color;
-        }
-      }
-    }
-  }
-
-  .title-wrapper {
-    height: 86px;
+  .history-wrapper {
+    width: 100%;
     box-sizing: border-box;
-    padding: 30px 32px 14px 30px;
-    border-bottom: 2px solid $line-color;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    .title-left,
-    .title-right {
+    padding: 30px 24px;
+    background-color: #ffffff;
+    margin-top: 30px;
+
+    .history-item-public {
+      width: 330px;
+      height: 176px;
+      box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.04);
+      border-radius: 8px;
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      line-height: 40px;
-    }
-    .title-text{
-      font-size: 28px;
-      color: $font-color;
-    }
-    .handle-text{
-      font-size: 22px;
-      color: $link-color;
-    }
-    .title-right-icon{
-      font-size: 24px;
-      color: $placeholder-color;
-      margin-left: 28px;
+      flex-direction: column;
+
+      .history-icon {
+        width: 72px;
+        height: 72px;
+        font-size: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .color1 {
+        color: #FFD5A3;
+      }
+
+      .color2 {
+        color: #B8EEFF;
+      }
+
+      .history-title {
+        font-size: 30px;
+        color: $font-color;
+        line-height: 42px;
+        font-weight: 700;
+        margin-bottom: 24px;
+      }
+
+      .history-tips {
+        font-size: 24px;
+        color: #999999;
+      }
     }
   }
 
