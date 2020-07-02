@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 14:06:34
+ * @LastEditTime: 2020-07-02 14:30:21
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -31,7 +31,7 @@ class BiddingPublish extends Component {
     this.state = Object.assign({}, houseState, {
       // 除去公共key以外的字段定在这里
       remark: '',
-      formType: 'publish',
+      formType: 'edit',
       requireId: '',
       images: []
     })
@@ -46,7 +46,6 @@ class BiddingPublish extends Component {
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
     this.setState({
-      formType: 'edit',
       requireId: this.pageParams.requireId
     })
   }
@@ -63,11 +62,18 @@ class BiddingPublish extends Component {
   }
 
   submit() {
-    const { requireId } = this.state
+    const {
+      requireId,
+      images
+    } = this.state
     const formForHouse = this.formForHouse.judgeAndEmitData()
     if (!formForHouse) return
     const formForUser = this.formForUser.judgeAndEmitData()
     if (!formForUser) return
+    if (!images || !images.length) {
+      this.showToast('至少上传一张户型图')
+      return
+    }
     let sendData = Object.assign({}, {
       requireId
     }, formForHouse, formForUser)
@@ -101,7 +107,7 @@ class BiddingPublish extends Component {
   onImageUpload(imageList) { 
     const { images } = this.state
     this.setState({
-      images: [...images, imageList]
+      images: [...images, ...imageList]
     })
   }
   /**
@@ -181,7 +187,7 @@ class BiddingPublish extends Component {
             ></Textarea>
             <View className='num-tips'>{300 - remark.length}</View>
           </View>
-          <FormForUserInfo res={node => this.formForUser = node} />
+          <FormForUserInfo ref={node => this.formForUser = node} />
           <View className='fixed-bottom-btm'>
             <View className='bottom-tips'>您的联系信息需要您的确认才会提供给装修公司</View>
             <View className='btn-public default-btn submit-btn' onClick={this.submit.bind(this)}>提交</View>

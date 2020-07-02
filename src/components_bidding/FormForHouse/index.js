@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 09:41:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 13:16:55
+ * @LastEditTime: 2020-07-02 14:20:07
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -171,7 +171,7 @@ export default class FormForHouse extends Component {
       this.showToast('请选择房屋类型')
       return false
     }
-    if (!bedroom.chinese) {
+    if (!bedroom.chinese && !sittingroom.chinese && !cookroom.chinese && !washroom.chinese) {
       this.showToast('请选择房屋户型')
       return false
     }
@@ -355,6 +355,12 @@ export default class FormForHouse extends Component {
 }
 
 FormForHouse.defaultProps = {
+  startTime: {},
+  budget: {},
+  bedroom: {},
+  sittingroom: {},
+  cookroom: {},
+  washroom: {},
   onClick: () => {console.error('onClick is not defined')}
 }
 

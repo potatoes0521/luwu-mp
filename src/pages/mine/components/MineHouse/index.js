@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-01 09:55:00
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 11:17:54
+ * @LastEditTime: 2020-07-02 14:11:40
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -23,7 +23,14 @@ export default class MineHouse extends Component {
     this.state={}
   }
 
-  componentDidMount() {
+  navigatorToBidding(item) { 
+    let url = ''
+    if (item.progress === 0 || !item.progress) {
+      url = `/pages/bidding_publish/index?requireId=${item.requireId}`
+    } else {
+      url = `/pages/bidding_details/index?requireId=${item.requireId}`
+    }
+    Taro.navigateTo({ url })
   }
   navigatorToPublishHouse(type, item) { 
     let url = '/pages/house_publish/index'
@@ -110,7 +117,7 @@ export default class MineHouse extends Component {
             </View>
           </View>
           <View className='renovation-plain'>
-            <View className='renovation-item'>
+            <View className='renovation-item' onClick={this.navigatorToBidding.bind(this, item)}>
               {this.renderBottomStyle(1, '装修招标', '您还未招标')}
             </View>
             <View className='renovation-item'>
