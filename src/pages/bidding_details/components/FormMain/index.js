@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-21 09:58:20
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 16:50:08
+ * @LastEditTime: 2020-07-02 20:30:57
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -40,7 +40,7 @@ export default class FormMain extends Component {
       remark,
       area,
     } = this.props
-    const categoryName = (bedroom.chinese || '-') + '室' + (sittingroom.chinese || '-') + '厅' + (cookroom.chinese || '-') + '厨' + (washroom.chinese || '-') + '卫'
+    const houseType = (bedroom.chinese || '-') + '室' + (sittingroom.chinese || '-') + '厅' + (cookroom.chinese || '-') + '厨' + (washroom.chinese || '-') + '卫'
     const areaText = area + '㎡'
     const decorateTypeText = decorateType ? '毛坯房' : '旧房翻新'
     const budgetText = budget.moneyText
@@ -49,7 +49,7 @@ export default class FormMain extends Component {
     return (
       <Block>
         <View className='bidding-line-details skeleton-square'>
-          {this.renderItem('户型', categoryName)}
+          {this.renderItem('户型', houseType)}
           {this.renderItem('房型', decorateTypeText)}
         </View>
         <View className='bidding-line-details skeleton-square'>

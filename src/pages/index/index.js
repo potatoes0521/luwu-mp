@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 18:52:08
+ * @LastEditTime: 2020-07-02 20:25:15
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -20,6 +20,7 @@ import Skeleton from '@components/Skeleton'
 import Login from '@utils/login'
 import { getImage } from '@assets/cdn'
 import Auth from '@components/auth'
+import { getHouseList } from '@/services/modules/house'
 import StickyTab from './components/StickyTab'
 import FreeEvent from './components/FreeEvent'
 import Bidding from './components/Bidding'
@@ -36,13 +37,19 @@ class Index extends Component {
     this.state = {
       loading: false,
       fixed: false,
-      tabActiveIndex: 0
+      tabActiveIndex: 0,
+      biddingList: []
     }
     this.stickyScrollTop = {}
 
   }
   componentDidMount() { 
     this.login()
+    getHouseList().then(res => {
+      this.setState({
+        biddingList: res.splice(0, 5)
+      })
+    })
   }
   login() { 
     Login.login()
@@ -54,7 +61,6 @@ class Index extends Component {
    */
   onComputedScrollTop(data) {
     this.stickyScrollTop = data
-
   }
   /**
    * 页面内转发
@@ -117,7 +123,8 @@ class Index extends Component {
     const {
       loading,
       fixed,
-      tabActiveIndex
+      tabActiveIndex,
+      biddingList
     } = this.state
     return (
       <View className='page-wrapper skeleton' id='sticky'>
@@ -130,7 +137,7 @@ class Index extends Component {
           onComputedScrollTop={this.onComputedScrollTop.bind(this)}
         />
         <FreeEvent />
-        <Bidding />
+        <Bidding biddingList={biddingList} />
         <Company />
         <Brand />
         <Store />
