@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:36
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 21:19:14
+ * @LastEditTime: 2020-07-02 21:34:20
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -57,10 +57,8 @@ class NoteMine extends Component {
     }
     this.propsMainCategoryData = {}
     this.propsChildCategoryData = {}
-    this.pageParams = {}
   }
   async componentDidMount() { 
-    this.pageParams = this.$router.params
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
     this.getListData()
@@ -78,10 +76,6 @@ class NoteMine extends Component {
       secondCategoryId: this.propsChildCategoryData.categoryId || ''
     }
     getNoteList(sendData).then(res => {
-      if (this.pageParams.from == 'index' && res.length < 1) { 
-        this.handleOnRightBtnClick()
-        return
-      }
       const newData = res.map(item => {
         const json = Object.assign({}, item.data)
         delete item['data']

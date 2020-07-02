@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 17:41:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 21:16:37
+ * @LastEditTime: 2020-07-02 21:34:47
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -23,6 +23,7 @@ import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getImage } from '@assets/cdn'
 import Auth from '@components/auth'
+import { getNoteList } from '@services/modules/note'
 import MineHouse from './components/MineHouse/index'
 import './index.scss'
 
@@ -33,7 +34,8 @@ class Mine extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      houseList: []
+      houseList: [],
+      noteLength: 0
     }
     this.errLogin = false
   }
@@ -42,11 +44,13 @@ class Mine extends Component {
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
     this.getHouseList()
+    this.getNoteList()
   }
   componentDidShow() { 
     const { userInfo } = this.props
     if (userInfo.token) {
       this.getHouseList()
+      this.getNoteList()
     }
   }
   handleLogin() { 
@@ -59,6 +63,13 @@ class Mine extends Component {
     }).then(res => {
       this.setState({
         houseList: res
+      })
+    })
+  }
+  getNoteList() { 
+    getNoteList({}).then(res => {
+      this.setState({
+        noteLength: res.length
       })
     })
   }
@@ -118,7 +129,10 @@ class Mine extends Component {
 
   render() {
     const { userInfo } = this.props
-    const { houseList } = this.state
+    const {
+      houseList,
+      noteLength
+    } = this.state
     const notLogin = !userInfo.token
     return (
       <SafeAreaView
@@ -176,9 +190,9 @@ class Mine extends Component {
           <View className='history-wrapper' >
             <View
               className='history-item-public'
-              onClick={this.navigatorTo.bind(this, 'note_mine', 'from=mine')}
+              onClick={this.navigatorTo.bind(this, noteLength ? 'note_mine' : 'note_publish')}
             >
-              {this.renderTabItem('iconji color1', '建材笔记', '您还未记录')}
+              {this.renderTabItem('iconji color1', '建材笔记', noteLength ? `已记录${noteLength}次` : '您还未记录')}
             </View>
             <View className='history-item-public'>
               {this.renderTabItem('iconbi color2', '建材比价', '您还未发起比价')}

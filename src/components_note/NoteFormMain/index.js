@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-21 09:58:20
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 18:54:43
+ * @LastEditTime: 2020-07-02 21:30:06
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -43,7 +43,7 @@ export default class NoteFormMain extends Component {
           {this.renderItem('品牌', brandName)}
         </View>
         <View className='note-line-details skeleton-square'>
-          {this.renderItem('价格', price + priceUnit ? '/' : '' + priceUnit)}
+          {this.renderItem('价格', price + priceUnit ? '-' : '' + priceUnit)}
           {this.renderItem('型号', model)}
         </View>
         <View className='note-line-details skeleton-square'>
