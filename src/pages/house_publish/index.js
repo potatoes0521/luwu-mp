@@ -26,11 +26,9 @@ import {
   getTimeDate
 } from '@utils/timer'
 import { moneyData, timeData } from '@config/chooseOneState'
-import { handleHouseType } from '@config/houseType'
+import { handleHouseType, oneMouthTimer } from '@config/houseType'
 
 import './index.scss'
-
-const oneMouthTimer = 2592000000
 
 class HousePublish extends Component {
 
