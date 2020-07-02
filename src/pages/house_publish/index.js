@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 11:11:48
+ * @LastEditTime: 2020-07-02 11:22:31
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -111,7 +111,11 @@ class HousePublish extends Component {
       requireId,
       startTime,
       budget,
-      houseType
+      houseType,
+      bedroom,
+      sittingroom,
+      cookroom,
+      washroom,
     } = this.state
     return (
       <SafeAreaView
@@ -125,6 +129,10 @@ class HousePublish extends Component {
             startTime={startTime}
             budget={budget}
             houseType={houseType}
+            bedroom={bedroom}
+            sittingroom={sittingroom}
+            cookroom={cookroom}
+            washroom={washroom}
             ref={
               (node) => this.formForHouse = node
             }

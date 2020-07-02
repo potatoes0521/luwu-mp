@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 09:40:18
+ * @LastEditTime: 2020-07-02 11:21:21
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -103,12 +103,10 @@ class ChooseHouseType extends Component {
   }
   chooseToilet(item) {
     const {
-      selectToiletData,
       selectKitchenData,
       selectLivingRoomData,
       selectRoomData
     } = this.state
-    if (selectToiletData.num === item.num) return
     this.setState({
       selectToiletData: item
     })
