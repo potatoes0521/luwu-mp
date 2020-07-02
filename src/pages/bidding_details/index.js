@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 17:21:26
+ * @LastEditTime: 2020-07-02 17:26:47
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -22,6 +22,7 @@ import Login from '@utils/login'
 // import classNames from 'classnames'
 // import { getBiddingTemplate } from '@services/modules/bidding'
 import { getHouseDetails } from '@services/modules/house'
+import { getBidList } from '@services/modules/bidding'
 import { handleRequestData } from '@config/houseType'
 import { getImage } from '@img/cdn'
 import biddingState from '@/config/biddingState'
@@ -37,7 +38,8 @@ class BiddingDetails extends Component {
     this.state = Object.assign({}, biddingState, {
       // 除去公共key以外的字段定在这里
       loading: true,
-      isShare: false
+      isShare: false,
+      shopList: []
     })
     this.pageParams = {}
     this.notLogin = true
@@ -48,6 +50,7 @@ class BiddingDetails extends Component {
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
     this.getHouseData()
+    this.getBidList()
   }
 
   getHouseData() {
@@ -56,6 +59,15 @@ class BiddingDetails extends Component {
     }).then(res => {
       const data = handleRequestData(res)
       this.setState(data)
+    })
+  }
+  getBidList() {
+    getBidList({
+      requireId: this.pageParams.requireId
+    }).then(res => {
+      this.setState({
+        shopList: res
+      })
     })
   }
   handleProgressText() { 
@@ -127,6 +139,7 @@ class BiddingDetails extends Component {
   render() {
     const {
       images,
+      shopList,
       // loading,
       isShare
     } = this.state
@@ -150,12 +163,16 @@ class BiddingDetails extends Component {
           <View className='progress-btn'>当前阶段：{progressText}</View>
           <View className='bidding-wrapper'>
             <View>
-              <Text className='heigh-light-text'>99</Text>
-              <Text>99</Text>
+              {
+                shopList.length && (
+                  <Text className='heigh-light-text'>{shopList.length}</Text>
+                )
+              }
+              <Text>{shopList.length ? '家装修公司投标' : '还没有装修公司投标'}</Text>
             </View>
             <View>
-              <Text className='heigh-light-text'>99</Text>
-              <Text>99</Text>
+              {/* <Text className='heigh-light-text'>99</Text> */}
+              <Text>未量房</Text>
             </View>
           </View>
           <View className='bid-wrapper'>

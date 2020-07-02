@@ -96,8 +96,8 @@ page {
       height: 90px;
       box-sizing: border-box;
       border-radius: 4px;
-      border: 2px solid #F4801E;
-      color: #F4801E;
+      border: 2px solid $link-color;
+      color: $link-color;
       display: flex;
       align-items: center;
       justify-content: center;
