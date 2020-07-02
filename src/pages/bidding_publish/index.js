@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 09:49:44
+ * @LastEditTime: 2020-07-02 10:06:57
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -20,9 +20,8 @@ import Login from '@utils/login'
 import houseState from '@/config/houseState.js'
 import { getImage } from '@img/cdn'
 import { removeStorage } from "@utils/storage"
-import { getDateTime } from '@utils/timer'
-import { oneMouthTimer } from '@config/houseType'
 
+import FormFroHouse from '@/components_bidding/FormForHouse'
 
 import './index.scss'
 
@@ -36,6 +35,7 @@ class BiddingPublish extends Component {
     })
     this.pageParams = {}
     this.timer = null
+    this.formForHouse = null
   }
 
   async componentDidMount() {
@@ -55,55 +55,15 @@ class BiddingPublish extends Component {
   }
   
   submit() {
-    const {
-      area,
-      startTime,
-      budget,
-      address,
-      decorateType,
-      bedroom,
-      sittingroom,
-      cookroom,
-      washroom,
-    } = this.state
-    if (decorateType < 0) {
-      this.showToast('请选择房屋类型')
+    const { } = this.state
+    const formForHouse = this.formForHouse.judgeAndEmitData()
+    console.log('formForHouse', formForHouse)
+    if (!formForHouse) {
       return
     }
-    if (!bedroom.chinese) {
-      this.showToast('请选择房屋户型')
-      return
-    }
-    if (!area) {
-      this.showToast('请填写房屋面积')
-      return
-    }
-    if (!address.address) {
-      this.showToast('请选择房屋位置')
-      return
-    }
-    if (!budget.moneyText) {
-      this.showToast('请选择预算')
-      return
-    }
-    const { latitude, longitude } = address
-    const date = this.handleTimer(startTime)
-    const sendData = {
-      area,
-      address: address.address,
-      longitude,
-      latitude,
-      decorateType,
-      bedroom: bedroom.num,
-      sittingroom: sittingroom.num,
-      cookroom: cookroom.num,
-      washroom: washroom.num,
-      budgetMin: budget.min,
-      budgetMax: budget.max,
-      decorateTimeBefore: date.decorateTimeBefore,
-      decorateTimeAfter: date.decorateTimeAfter
-    }
-    this.handleRequest(sendData)
+    console.log('formForHouse', formForHouse)
+    let sendData = Object.assign({}, formForHouse, {})
+    // this.handleRequest(sendData)
   }
   handleRequest(sendData) {
     if (this.pageParams.pageType === 'edit') { 
@@ -135,21 +95,8 @@ class BiddingPublish extends Component {
       duration: 2000
     })
   }
-  handleTimer(data) { 
-    if (!data.timeMouth || data.timeMouth <= 0) {
-      return {
-        decorateTimeBefore: '',
-        decorateTimeAfter: ''
-      }
-    }
-    const nowDate = +new Date()
-    const afterDate = getDateTime(nowDate)
-    const beforeDate = getDateTime(nowDate + oneMouthTimer * data.timeMouth)
-    return {
-      decorateTimeBefore: beforeDate,
-      decorateTimeAfter: afterDate
-    }
-  }
+  onInputUserName() { }
+  onInputPhoneNumber() { }
   /**
    * 页面内转发
    * @param {Object} res 微信返回参数
@@ -168,11 +115,8 @@ class BiddingPublish extends Component {
   }
   render() {
     const {
-      area,
       startTime,
       budget,
-      address,
-      decorateType,
       remark
     } = this.state
     return (
@@ -181,7 +125,7 @@ class BiddingPublish extends Component {
         back
       >
         <View className='page-wrapper'>
-          
+          <FormFroHouse ref={(node)=> this.formForHouse = node} />
           <View className='form-wrapper upload-wrapper'>
             <View className='form-label-title'>上传图片</View>
             
@@ -210,7 +154,7 @@ class BiddingPublish extends Component {
               placeholder='请选择'
               value={budget.moneyText || ''}
               iconName='iconRectangle rotated'
-              onContentClick={this.onChooseBudget.bind(this)}
+              onContentClick={this.onInputUserName.bind(this)}
             />
             <FormItem
               shortUnit
@@ -223,7 +167,7 @@ class BiddingPublish extends Component {
               placeholder='请选择'
               value={startTime.timeText || ''}
               iconName='iconRectangle rotated'
-              onContentClick={this.onChooseStartTime.bind(this)}
+              onContentClick={this.onInputPhoneNumber.bind(this)}
             />
           </View>
           <View className='form-wrapper'>

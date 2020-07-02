@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 09:41:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 09:50:59
+ * @LastEditTime: 2020-07-02 10:06:32
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -18,9 +18,9 @@ import houseState from '@/config/houseState.js'
 import { moneyData, timeData } from '@config/chooseOneState'
 import { handleHouseType, oneMouthTimer } from '@config/houseType'
 import { setStorage, removeStorage } from "@utils/storage"
-import { getTimeDate } from '@utils/timer'
+import { getTimeDate,getDateTime } from '@utils/timer'
 import { getHouseDetails } from '@services/modules/house'
-
+import FormItem from '@components/FormItem'
 import './index.scss'
 
 export default class index extends Component { 
@@ -123,6 +123,84 @@ export default class index extends Component {
       address
     })
   }
+  judgeAndEmitData() {
+    const {
+      area,
+      startTime,
+      budget,
+      address,
+      decorateType,
+      bedroom,
+      sittingroom,
+      cookroom,
+      washroom,
+    } = this.state
+    if (decorateType < 0) {
+      this.showToast('请选择房屋类型')
+      return false
+    }
+    if (!bedroom.chinese) {
+      this.showToast('请选择房屋户型')
+      return false
+    }
+    if (!area) {
+      this.showToast('请填写房屋面积')
+      return false
+    }
+    if (!address.address) {
+      this.showToast('请选择房屋位置')
+      return false
+    }
+    if (!budget.moneyText) {
+      this.showToast('请选择预算')
+      return false
+    }
+    const { latitude, longitude } = address
+    const date = this.handleTimer(startTime)
+    const sendData = {
+      area,
+      address: address.address,
+      longitude,
+      latitude,
+      decorateType,
+      bedroom: bedroom.num,
+      sittingroom: sittingroom.num,
+      cookroom: cookroom.num,
+      washroom: washroom.num,
+      budgetMin: budget.min,
+      budgetMax: budget.max,
+      decorateTimeBefore: date.decorateTimeBefore,
+      decorateTimeAfter: date.decorateTimeAfter
+    }
+    return sendData
+  }
+  /**
+   * 显示toast
+   * @param {String} text 参数描述
+   * @return void
+   */
+  showToast(text) {
+    Taro.showToast({
+      title: text,
+      icon: 'none',
+      duration: 2000
+    })
+  }
+  handleTimer(data) {
+    if (!data.timeMouth || data.timeMouth <= 0) {
+      return {
+        decorateTimeBefore: '',
+        decorateTimeAfter: ''
+      }
+    }
+    const nowDate = +new Date()
+    const afterDate = getDateTime(nowDate)
+    const beforeDate = getDateTime(nowDate + oneMouthTimer * data.timeMouth)
+    return {
+      decorateTimeBefore: beforeDate,
+      decorateTimeAfter: afterDate
+    }
+  }
   /**
    * 处理房屋户型文字展示
    * @return void
@@ -147,7 +225,6 @@ export default class index extends Component {
       budget,
       address,
       decorateType,
-      remark
     } = this.state
     const decorateTypeText = this.decorateTypeText()
     return (
