@@ -4,13 +4,13 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 19:01:18
+ * @LastEditTime: 2020-07-02 09:37:21
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */
 import Taro, { Component } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { View, Textarea } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { publishHouse, editHouse, getHouseDetails } from '@services/modules/house'
 import SafeAreaView from '@components/SafeAreaView'
@@ -39,6 +39,7 @@ class BiddingPublish extends Component {
     super(props)
     this.state = Object.assign({}, houseState, {
       // 除去公共key以外的字段定在这里
+      remark: ''
     })
     this.pageParams = {}
     this.timer = null
@@ -137,6 +138,9 @@ class BiddingPublish extends Component {
       setStorage('choose_budget', budget)
     }
     Taro.navigateTo({ url })
+  }
+  onRemarkInput() { 
+    
   }
   /**
    * 处理房屋户型文字展示
@@ -272,7 +276,8 @@ class BiddingPublish extends Component {
       startTime,
       budget,
       address,
-      decorateType
+      decorateType,
+      remark
     } = this.state
     const decorateTypeText = this.decorateTypeText()
     return (
@@ -367,6 +372,21 @@ class BiddingPublish extends Component {
               iconName='iconRectangle rotated'
               onContentClick={this.onChooseStartTime.bind(this)}
             />
+          </View>
+          <View className='form-wrapper upload-wrapper'>
+            <View className='form-label-title'>上传图片</View>
+            
+          </View>
+          <View className='form-wrapper textarea-wrapper'>
+            <View className='form-label-title'>补充信息</View>
+            <Textarea
+              autoHeight
+              value={remark}
+              maxlength={300}
+              className='textarea'
+              placeholderClass='placeholder-class'
+              onInput={this.onRemarkInput.bind(this)}
+            ></Textarea>
           </View>
           <View className='form-wrapper'>
             <FormItem

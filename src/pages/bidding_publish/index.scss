@@ -12,6 +12,40 @@ page {
     box-sizing: border-box;
     padding: 0 30px;
     margin-bottom: 30px;
+
+    .form-label-title {
+      font-size: 28px;
+      line-height: 40px;
+      padding: 20px 0;
+      color: $font-color;
+    }
+
+    .textarea {
+      width: 100%;
+      min-height: 140px;
+      border: 2px solid $line-color;
+      border-radius: 8px;
+      font-size: 28px;
+      line-height: 40px;
+      color: $tips-color;
+      padding: 16px;
+      box-sizing: border-box;
+    }
+  }
+
+  .upload-wrapper {
+    padding-bottom: 30px;
+    .form-label-title {
+      padding-bottom: 11px;
+    }
+  }
+
+  .textarea-wrapper {
+    padding-bottom: 30px;
+
+    .form-label-title {
+      padding-bottom: 26px;
+    }
   }
 
   .audio-group {
