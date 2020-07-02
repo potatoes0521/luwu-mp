@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 11:19:15
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 19:43:06
+ * @LastEditTime: 2020-07-02 20:01:42
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -12,10 +12,12 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import PropTypes from 'prop-types'
-import {req} from '@/mock/re'
+import { req } from '@/mock/re'
+import { connect } from '@tarojs/redux'
+
 import './index.scss'
 
-export default class Bidding extends Component { 
+class Bidding extends Component { 
   constructor() { 
     this.state = {
       biddingList: req.bidding
@@ -25,20 +27,19 @@ export default class Bidding extends Component {
     
   }
   navigatorTo() { 
-    Taro.navigateTo({
-      url: '/pages/bidding_publish/index'
-    })
+    const { userInfo } = this.props
+    let url = '/pages/bidding_publish/index'
+    if (!userInfo.phone && !userInfo.isMember) {
+      url = '/pages/vip/index'
+    }
+    Taro.navigateTo({ url })
   }
   static options = {
     addGlobalClass: true // 允许外部样式修改组件样式
   }
   render() {  
     const { biddingList } = this.state
-    const data1 = biddingList[0] || {}
-    const data2 = biddingList[1] || {}
-    const data3 = biddingList[2] || {}
-    const data4 = biddingList[3] || {}
-    const data5 = biddingList[4] || {}
+    const [data1 = {}, data2 = {}, data3 = {}, data4 = {}, data5 = {}] = biddingList
     return (
       <View className='card-wrapper bidding'>
         <View className='card-plain'>
@@ -109,3 +110,11 @@ Bidding.defaultProps = {
 Bidding.propTypes = {
   onClick: PropTypes.func.isRequired
 }
+
+// 如果需要引入store
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.user_msg.userInfo
+  }
+}
+export default connect(mapStateToProps)(Bidding);

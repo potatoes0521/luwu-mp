@@ -77,7 +77,8 @@ class App extends Component {
       'pages/bidding_details/index',
       'pages/bidding_list/index',
 
-      'pages/house_publish/index'
+      'pages/house_publish/index',
+      'pages/vip/index'
     ],
     tabBar: {
       color: "#D8D8D8",
