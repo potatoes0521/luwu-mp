@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 11:19:15
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 20:33:15
+ * @LastEditTime: 2020-07-02 20:34:53
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -25,6 +25,11 @@ class Bidding extends Component {
       url = '/pages/vip/index'
     }
     Taro.navigateTo({ url })
+  }
+  navigatorBiddingList() { 
+    Taro.navigateTo({
+      url: '/pages/bidding_list/index'
+    })
   }
   static options = {
     addGlobalClass: true // 允许外部样式修改组件样式
@@ -85,7 +90,7 @@ class Bidding extends Component {
           </View>
         </View>
         <View className='bottom-btn-wrapper'>
-          <View className='btn'>
+          <View className='btn' onClick={this.navigatorBiddingList.bind(this)}>
             <View>大家的招标</View>
             {/* <Text className='iconlujing iconfont bottom-icon'></Text> */}
           </View>
