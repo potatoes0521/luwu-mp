@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 13:56:20
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 18:42:28
+ * @LastEditTime: 2020-07-02 19:01:39
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -36,6 +36,11 @@ export default class Brand extends Component {
       this.setState({
         brandList: res
       })
+    })
+  }
+  navigator() { 
+    Taro.navigateTo({
+      url: '/pages/table_contrast/index'
     })
   }
   static options = {
@@ -73,7 +78,7 @@ export default class Brand extends Component {
           <View className='bottom-tips'>全城3000家建材商店等您来比价~</View>
         </View>
         <View className='bottom-btn-wrapper'>
-          <View className='btn'>
+          <View className='btn' onClick={this.navigator.bind(this)}>
             <View>大家的比价</View>
             {/* <Text className='iconlujing iconfont bottom-icon'></Text> */}
           </View>
