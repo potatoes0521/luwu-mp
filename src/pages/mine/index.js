@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 17:41:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 20:51:29
+ * @LastEditTime: 2020-07-02 21:05:21
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -60,6 +60,11 @@ class Mine extends Component {
       this.setState({
         houseList: res
       })
+    })
+  }
+  goToVip() {
+    Taro.navigateTo({
+      url: '/pages/vip/index'
     })
   }
   renderTabItem(iconName, title, tips) { 
@@ -144,7 +149,7 @@ class Mine extends Component {
                         userInfo.isMember ? (
                           <Text className='phone-msg'>手机号 {userInfo.phone}</Text>
                         ): (
-                          <Text className='phone-tips'>绑定手机号码立即成为录屋会员</Text>
+                          <Text className='phone-tips' onClick={this.goToVip.bind(this)}>绑定手机号码立即成为录屋会员</Text>
                         )
                       }
                     </View>
