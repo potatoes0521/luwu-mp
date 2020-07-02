@@ -75,6 +75,7 @@ class App extends Component {
       // 招标
       'pages/bidding_publish/index',
       'pages/bidding_details/index',
+      'pages/bidding_list/index',
 
       'pages/house_publish/index'
     ],
