@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 15:17:57
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 11:29:48
+ * @LastEditTime: 2020-07-02 20:58:54
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  没有封装进去的方法请自行拓展
@@ -25,7 +25,7 @@ import classNames from 'classnames'
 
 import './index.scss'
 
-export default class FormItem extends Component { 
+export default class FormItemCustomContent extends Component {
   static options = {
     addGlobalClass: true // 允许外部样式修改组件样式
   }
@@ -90,13 +90,13 @@ export default class FormItem extends Component {
 
 }
 
-FormItem.defaultProps = {
+FormItemCustomContent.defaultProps = {
   shortUnit: false,
   onContentClick: ()=>{
     console.error('onInput is not defined in ./components/FormItem')
   },
 }
 
-FormItem.propTypes = {
+FormItemCustomContent.propTypes = {
   onContentClick: PropTypes.func
 }

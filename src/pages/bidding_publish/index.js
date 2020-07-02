@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 19:54:30
+ * @LastEditTime: 2020-07-02 20:54:51
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -47,8 +47,6 @@ class BiddingPublish extends Component {
       this.setState({
         requireId: this.pageParams.requireId
       })
-    } else {
-      this.handleOtherHouse()
     }
   }
   componentWillUnmount() { 
@@ -69,12 +67,6 @@ class BiddingPublish extends Component {
         this.setState({
           requireId: res[res.length - 1].requireId
         })
-      } else {
-        publishHouse({}).then(({requireId}) => {
-          this.setState({
-            requireId
-          })
-        })
       }
     })
   }
@@ -85,12 +77,15 @@ class BiddingPublish extends Component {
     })
   }
 
-  submit() {
+  async submit() {
     const {
-      requireId,
       images,
       remark
     } = this.state
+    let { requireId } = this.state
+    if (!requireId) { 
+      requireId = await publishHouse({}).requireId
+    }
     const formForHouse = this.formForHouse.judgeAndEmitData()
     if (!formForHouse) return
     const formForUser = this.formForUser.judgeAndEmitData()
@@ -201,7 +196,7 @@ class BiddingPublish extends Component {
                 onUploadOK={this.onImageUpload.bind(this)}
               />
             </View>
-            <View className='upload-tips'>请保持图片清晰</View>
+            <View className='upload-tips'>请上传清晰完整的户型图片</View>
           </View>
           <View className='form-wrapper textarea-wrapper'>
             <View className='form-label-title'>补充信息</View>
@@ -221,7 +216,6 @@ class BiddingPublish extends Component {
             ref={node => this.formForUser = node}
           />
           <View className='fixed-bottom-btm'>
-            <View className='bottom-tips'>您的联系信息需要您的确认才会提供给装修公司</View>
             <View className='btn-public default-btn submit-btn' onClick={this.submit.bind(this)}>提交</View>
           </View>
         </View>

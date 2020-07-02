@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-01 09:55:00
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 20:41:30
+ * @LastEditTime: 2020-07-02 20:53:25
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -14,10 +14,11 @@ import { View, Block } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import { moneyData } from '@config/chooseOneState'
 import { handleHouseType } from '@/config/houseType'
+import { connect } from '@tarojs/redux'
 
 import './index.scss'
 
-export default class MineHouse extends Component { 
+class MineHouse extends Component { 
   constructor(props) {
     super(props)
     this.state={}
@@ -86,7 +87,7 @@ export default class MineHouse extends Component {
               <View className='title-text'>我的房屋</View>
             </View>
             <View className='title-right'>
-              <View className='handle-text'>添加新房</View>
+              <View className='handle-text' onClick={this.navigatorToPublishHouse.bind(this, 'new')}>添加新房</View>
               <View className='line'></View>
               <View className='handle-text' onClick={this.navigatorToPublishHouse.bind(this, 'edit', item)}>编辑</View>
               <View className='iconfont iconRectangle title-right-icon rotated'></View>
@@ -173,3 +174,11 @@ MineHouse.defaultProps = {
 MineHouse.propTypes = {
   onClick: PropTypes.func.isRequired
 }
+
+// 如果需要引入store
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.user_msg.userInfo
+  }
+}
+export default connect(mapStateToProps)(MineHouse);

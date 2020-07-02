@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 17:41:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 18:32:12
+ * @LastEditTime: 2020-07-02 20:51:29
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -53,7 +53,7 @@ class Mine extends Component {
     this.getHouseList()
   }
   getHouseList() { 
-    const {userInfo} = this.props
+    const { userInfo } = this.props
     getHouseList({
       userId: userInfo.userId
     }).then(res => {

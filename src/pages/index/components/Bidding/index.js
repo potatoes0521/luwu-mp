@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 11:19:15
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 20:34:53
+ * @LastEditTime: 2020-07-02 20:46:53
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -26,6 +26,11 @@ class Bidding extends Component {
     }
     Taro.navigateTo({ url })
   }
+  navigatorToDetails(item) { 
+    Taro.navigateTo({
+      url: '/pages/bidding_details/index?requireId=' + item.requireId
+    })
+  }
   navigatorBiddingList() { 
     Taro.navigateTo({
       url: '/pages/bidding_list/index'
@@ -46,7 +51,7 @@ class Bidding extends Component {
       <View className='card-wrapper bidding'>
         <View className='card-plain'>
           <View className='plain-wrapper'>
-            <View className='big-wrapper big-item color1' >
+            <View className='big-wrapper big-item color1' onClick={this.navigatorToDetails.bind(this, data1)}>
               <View className='title big-margin-bottom'>{data1.text}</View>
               <View className='middle-title'>
                 <Text className='label'>类型</Text>
@@ -64,12 +69,18 @@ class Bidding extends Component {
               <View className='backgroundImage1'></View>
             </View>
             <View className='big-wrapper right-wrapper'>
-              <View className='small-item color2'>
+              <View
+                className='small-item color2'
+                onClick={this.navigatorToDetails.bind(this, data2)}
+              >
                 <View className='title'>{data2.text}</View>
                 {/* <View className='big-margin-top small-tips'>共有家装修公司投标</View> */}
                 <View className='backgroundImage2'></View>
               </View>
-              <View className='small-item color3'>
+              <View
+                className='small-item color3'
+                onClick={this.navigatorToDetails.bind(this, data3)}
+              >
                 <View className='title'>{data3.text}</View>
                 {/* <View className='big-margin-top small-tips'>共有家装修公司投标</View> */}
                 <View className='backgroundImage3'></View>
@@ -77,12 +88,18 @@ class Bidding extends Component {
             </View>
           </View>
           <View className='plain-wrapper margin-bottom'>
-            <View className='big-item color4' >
+            <View
+              className='big-item color4'
+              onClick={this.navigatorToDetails.bind(this, data4)}
+            >
               <View className='title'>{data4.text}</View>
               {/* <View className='big-margin-top small-tips'>共有家装修公司投标</View> */}
               <View className='backgroundImage4'></View>
             </View>
-            <View className='small-item right-item color5'>
+            <View
+              className='small-item right-item color5'
+              onClick={this.navigatorToDetails.bind(this, data5)}
+            >
               <View className='title'>{data5.text}</View>
               {/* <View className='big-margin-top small-tips'>共有家装修公司投标</View> */}
               <View className='backgroundImage5'></View>
