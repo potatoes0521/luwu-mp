@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 18:11:28
+ * @LastEditTime: 2020-07-02 14:34:28
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,13 +16,14 @@ import {
 } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import SafeAreaView from '@components/SafeAreaView'
-import Skeleton from '@components/Skeleton'
+// import Skeleton from '@components/Skeleton'
 import Login from '@utils/login'
 import classNames from 'classnames'
-import { getBiddingDetails } from '@services/modules/bidding'
+import { getBiddingTemplate } from '@services/modules/bidding'
+import { getHouseDetails } from '@services/modules/house'
+import { handleRequestData } from '@config/houseType'
 import { getImage } from '@img/cdn'
-import { random } from '@utils/numberToCode'
-import goodsState from '@config/noteState'
+import houseState from '@/config/houseState.js'
 import FromMain from './components/FormMain'
 import ImageSwiper from './components/Swiper'
 import ImageVerticalList from './components/ImageVerticalList'
@@ -33,7 +34,7 @@ class BiddingDetails extends Component {
 
   constructor(props) {
     super(props)
-    this.state = Object.assign({}, goodsState, {
+    this.state = Object.assign({}, houseState, {
       // 除去公共key以外的字段定在这里
       distributorCount: 0,
       loading: true,
@@ -49,22 +50,15 @@ class BiddingDetails extends Component {
     this.pageParams = this.$router.params
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
-    this.getNoteDetails()
+    this.getHouseData()
   }
 
-  getNoteDetails() { 
-    getBiddingDetails({
-      biddingId: this.pageParams.biddingId
-    }).then((res) => {
-      const json = Object.assign({}, res.data)
-      delete res['data']
-      if (!res.distributorCount || res.distributorCount < 10) {
-        res.distributorCount = random(50, 100)
-      }
-      const data = Object.assign({}, res, json, {
-        loading: false,
-        isShare: this.pageParams.shareType
-      })
+  getHouseData() {
+    getHouseDetails({
+      requireId: this.pageParams.requireId
+    }).then(res => {
+      this.firstLoading = true
+      const data = handleRequestData(res)
       this.setState(data)
     })
   }

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 14:30:21
+ * @LastEditTime: 2020-07-02 14:42:42
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -17,7 +17,7 @@ import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getImage } from '@img/cdn'
 import { removeStorage } from "@utils/storage"
-import houseState from '@/config/houseState.js'
+import biddingState from '@/config/biddingState'
 import FormForHouse from '@/components_bidding/FormForHouse'
 import FormForUserInfo from '@/components_bidding/FormForUserInfo'
 import Upload from '@components/Upload'
@@ -28,12 +28,8 @@ class BiddingPublish extends Component {
 
   constructor(props) {
     super(props)
-    this.state = Object.assign({}, houseState, {
+    this.state = Object.assign({}, biddingState, {
       // 除去公共key以外的字段定在这里
-      remark: '',
-      formType: 'edit',
-      requireId: '',
-      images: []
     })
     this.pageParams = {}
     this.timer = null
@@ -110,6 +106,11 @@ class BiddingPublish extends Component {
       images: [...images, ...imageList]
     })
   }
+  onUserNameChange(userName) {
+    this.setState({
+      userName
+    })
+  }
   /**
    * 页面内转发
    * @param {Object} res 微信返回参数
@@ -138,7 +139,8 @@ class BiddingPublish extends Component {
       sittingroom,
       cookroom,
       washroom,
-      images
+      images,
+      userName
     } = this.state
     return (
       <SafeAreaView
@@ -148,27 +150,26 @@ class BiddingPublish extends Component {
         <View className='page-wrapper'>
           <FormForHouse
             type={formType}
-            requireId={requireId}
-            startTime={startTime}
             budget={budget}
-            houseType={houseType}
             bedroom={bedroom}
-            sittingroom={sittingroom}
             cookroom={cookroom}
             washroom={washroom}
-            ref={
-              (node) => this.formForHouse = node
-            }
+            requireId={requireId}
+            startTime={startTime}
+            houseType={houseType}
+            sittingroom={sittingroom}
+            ref={node => this.formForHouse = node}
+            onUserNameChange={this.onUserNameChange.bind(this)}
           />
           <View className='form-wrapper upload-wrapper'>
             <View className='form-label-title'>上传图片</View>
             <View className='upload-view'>
               <Upload
-                imageList={images}
                 autoChoose
-                imageSize={96}
-                addBtnSizeType={96}
                 showAddBtn
+                imageSize={96}
+                imageList={images}
+                addBtnSizeType={96}
                 onUploadOK={this.onImageUpload.bind(this)}
               />
             </View>
@@ -187,7 +188,10 @@ class BiddingPublish extends Component {
             ></Textarea>
             <View className='num-tips'>{300 - remark.length}</View>
           </View>
-          <FormForUserInfo ref={node => this.formForUser = node} />
+          <FormForUserInfo
+            userName={userName}
+            ref={node => this.formForUser = node}
+          />
           <View className='fixed-bottom-btm'>
             <View className='bottom-tips'>您的联系信息需要您的确认才会提供给装修公司</View>
             <View className='btn-public default-btn submit-btn' onClick={this.submit.bind(this)}>提交</View>

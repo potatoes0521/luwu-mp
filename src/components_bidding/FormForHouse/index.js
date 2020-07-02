@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 09:41:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 14:20:07
+ * @LastEditTime: 2020-07-02 14:40:39
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -80,16 +80,13 @@ export default class FormForHouse extends Component {
     removeStorage('choose_budget')
     removeStorage('choose_timer')
   }
-  // static options = {
-  //   addGlobalClass: true // 允许外部样式修改组件样式
-  // }
-
   getHouseData(props) { 
     getHouseDetails({
       requireId: props.requireId
     }).then(res => {
       this.firstLoading = true
       const data = handleRequestData(res)
+      this.props.onUserNameChange(res.userName || '')
       this.setState(data)
     })
   }
@@ -361,6 +358,7 @@ FormForHouse.defaultProps = {
   sittingroom: {},
   cookroom: {},
   washroom: {},
+  onUserNameChange: () => {console.log('onUserNameChange is not defined')},
   onClick: () => {console.error('onClick is not defined')}
 }
 
