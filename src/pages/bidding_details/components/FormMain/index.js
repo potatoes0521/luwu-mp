@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-21 09:58:20
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 16:49:21
+ * @LastEditTime: 2020-07-02 16:50:08
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -14,7 +14,7 @@ import {
   View,
   Block
 } from '@tarojs/components'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 
 import './index.scss'
 
