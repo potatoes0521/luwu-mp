@@ -6,30 +6,12 @@ page {
 
 .page-wrapper {
 
-  .bidding-details-location-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    height: 90px;
-    border-bottom: 2px solid $background-color;
-    z-index: 5;
-
-    .location-icon {
-      color: $font-color !important;
-    }
-  }
-
   .details-main-wrapper {
     padding: 0 30px;
     border-top: 2px solid $background-color;
     background-color: #ffffff;
 
-    .details-swiper-wrapper {
-      margin-top: 20px;
-      margin-bottom: 14px;
-    }
+    
 
     .form-wrapper {
       padding-bottom: 30px;
@@ -39,6 +21,10 @@ page {
       padding-top: 44px;
       padding-bottom: 30px;
     }
+  }
+  .details-swiper-wrapper {
+    margin-top: 20px;
+    margin-bottom: 14px;
   }
 
   // 指示点样式写在子组件不会生效

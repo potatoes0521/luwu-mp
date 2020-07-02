@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 14:34:28
+ * @LastEditTime: 2020-07-02 14:49:48
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -23,10 +23,9 @@ import { getBiddingTemplate } from '@services/modules/bidding'
 import { getHouseDetails } from '@services/modules/house'
 import { handleRequestData } from '@config/houseType'
 import { getImage } from '@img/cdn'
-import houseState from '@/config/houseState.js'
+import biddingState from '@/config/biddingState'
 import FromMain from './components/FormMain'
 import ImageSwiper from './components/Swiper'
-import ImageVerticalList from './components/ImageVerticalList'
 
 import './index.scss'
 
@@ -34,12 +33,9 @@ class BiddingDetails extends Component {
 
   constructor(props) {
     super(props)
-    this.state = Object.assign({}, houseState, {
+    this.state = Object.assign({}, biddingState, {
       // 除去公共key以外的字段定在这里
-      distributorCount: 0,
       loading: true,
-      idCardImageList: [''], // 名片
-      priceTagImageList: [''], // 价签图片
       isShare: false
     })
     this.pageParams = {}
@@ -57,7 +53,6 @@ class BiddingDetails extends Component {
     getHouseDetails({
       requireId: this.pageParams.requireId
     }).then(res => {
-      this.firstLoading = true
       const data = handleRequestData(res)
       this.setState(data)
     })
@@ -111,54 +106,28 @@ class BiddingDetails extends Component {
 
   render() {
     const {
-      goodsImageList,
-      priceTagImageList,
-      idCardImageList,
+      images,
       loading,
       isShare
     } = this.state
-    const pageWrapperClassName = classNames('page-wrapper skeleton', {
-      'bottom-padding160': isShare
-    })
     return (
       <SafeAreaView
         title='我的招标'
         back={!isShare}
         home
       >
-        <View className={pageWrapperClassName}>
+        <View className='page-wrapper skeleton' >
+          <View className='details-swiper-wrapper skeleton-square' >
+            <ImageSwiper imageList={images} />
+          </View>
           <View className='details-main-wrapper'>
-            <View className='details-swiper-wrapper skeleton-square' >
-              <ImageSwiper imageList={goodsImageList} />
-            </View>
             <View className='form-wrapper'>
               <FromMain
                 showRemark
                 item={this.state}
               />
             </View>
-            {
-              ((priceTagImageList && priceTagImageList.length) || (idCardImageList && idCardImageList.length)) && (
-                <View className='image-list-wrapper'>
-                  {
-                    priceTagImageList && (
-                      <ImageVerticalList
-                        imageList={priceTagImageList}
-                        title='价签'
-                      />
-                    )
-                  }
-                  {
-                    idCardImageList && (
-                      <ImageVerticalList
-                        imageList={idCardImageList}
-                        title='名片'
-                      />
-                    )
-                  }
-                </View>
-              )
-            }
+            
           </View>
         </View>
         {

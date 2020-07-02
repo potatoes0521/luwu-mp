@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 09:41:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 14:40:39
+ * @LastEditTime: 2020-07-02 14:56:12
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -41,22 +41,22 @@ export default class FormForHouse extends Component {
       cookroom,
       washroom,
     } = this.state
-    if (nextProps.bedroom && nextProps.bedroom.num !== bedroom.num) {
+    if (nextProps.bedroom && nextProps.bedroom.num && nextProps.bedroom.num !== bedroom.num) {
       this.setState({
         bedroom: nextProps.bedroom
       })
     }
-    if (nextProps.sittingroom && nextProps.sittingroom.num !== sittingroom.num) {
+    if (nextProps.sittingroom && nextProps.sittingroom.num && nextProps.sittingroom.num !== sittingroom.num) {
       this.setState({
         sittingroom: nextProps.sittingroom
       })
     }
-    if (nextProps.cookroom && nextProps.cookroom.num !== cookroom.num) {
+    if (nextProps.cookroom && nextProps.cookroom.num && nextProps.cookroom.num !== cookroom.num) {
       this.setState({
         cookroom: nextProps.cookroom
       })
     }
-    if (nextProps.washroom && nextProps.washroom.num !== washroom.num) {
+    if (nextProps.washroom && nextProps.washroom.num && nextProps.washroom.num !== washroom.num) {
       this.setState({
         washroom: nextProps.washroom
       })
