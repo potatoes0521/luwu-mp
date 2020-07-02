@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 17:26:47
+ * @LastEditTime: 2020-07-02 17:29:30
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -181,7 +181,9 @@ class BiddingDetails extends Component {
                 <Text className='iconfont iconzhaobiao bid-icon'></Text>
                 <Text>招标评比</Text>
               </View>
-              <View className='title-tips'>共xx家装修公司投标</View>
+              <View className='title-tips'>
+                {shopList.length ? `共${shopList.length}家装修公司投标` : '还没有装修公司投标'}
+              </View>
             </View>
             <View className='form-item'>
               <View className='form-item-label'>
