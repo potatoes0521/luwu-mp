@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 14:42:42
+ * @LastEditTime: 2020-07-02 14:58:31
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -60,7 +60,8 @@ class BiddingPublish extends Component {
   submit() {
     const {
       requireId,
-      images
+      images,
+      remark
     } = this.state
     const formForHouse = this.formForHouse.judgeAndEmitData()
     if (!formForHouse) return
@@ -71,22 +72,21 @@ class BiddingPublish extends Component {
       return
     }
     let sendData = Object.assign({}, {
-      requireId
+      requireId,
+      images,
+      remark
     }, formForHouse, formForUser)
     publishBidding(sendData, this).then(() => {
       this.showToast('发布成功')
-      this.handleClear()
+      removeStorage('choose_house_type')
+      removeStorage('choose_budget')
+      removeStorage('choose_timer')
+      this.timer = setTimeout(() => {
+        Taro.redirectTo({
+          url: `/pages/bidding_details/index?requireId=${requireId}`
+        })
+      }, 1800)
     })
-  }
-  handleClear() {
-    removeStorage('choose_house_type')
-    removeStorage('choose_budget')
-    removeStorage('choose_timer')
-    this.timer = setTimeout(() => {
-      Taro.redirectTo({
-        url: `/pages/bidding_details/index?requireId=${this.requireId}`
-      })
-    }, 1800)
   }
   /**
    * 显示toast

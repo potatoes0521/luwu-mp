@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-21 09:58:20
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 18:08:17
+ * @LastEditTime: 2020-07-02 15:20:59
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -28,43 +28,43 @@ export default class FormMain extends Component {
     )
   }
   render() {
-    let { item, showRemark } = this.props
-    const categoryName = item.mainCategory && item.mainCategory.categoryName || '-'
-    const brandName = item.brand && item.brand.brandName || '-'
-    const price = item.price || '-'
-    const priceUnit = item.priceUnit || ''
-    const model = item.model || '-'
-    const time = item.createAt
-    const remark = item.remark
+    const {
+      decorateType,
+      bedroom,
+      sittingroom,
+      cookroom,
+      washroom,
+      budget,
+      address,
+      decorateTimeBefore,
+      remark,
+      area,
+    } = this.props
+    const categoryName = (bedroom.chinese || '-') + '室' + (sittingroom.chinese || '-') + '厅' + (cookroom.chinese || '-') + '厨' + (washroom.chinese || '-') + '卫'
+    const areaText = area + '㎡'
+    const decorateTypeText = decorateType ? '毛坯房' : '旧房翻新'
+    const budgetText = budget.moneyText
+    const addressText = address.address || ''
+    const time = decorateTimeBefore.substr(0, 7).replace('-', '年') + '月'
     return (
       <Block>
         <View className='bidding-line-details skeleton-square'>
-          {this.renderItem('品类', categoryName)}
-          {this.renderItem('品牌', brandName)}
+          {this.renderItem('户型', categoryName)}
+          {this.renderItem('房型', decorateTypeText)}
         </View>
         <View className='bidding-line-details skeleton-square'>
-          {this.renderItem('价格', price + priceUnit ? '/' : '' + priceUnit)}
-          {this.renderItem('型号', model)}
+          {this.renderItem('面积', areaText)}
+          {this.renderItem('预算', budgetText)}
         </View>
         <View className='bidding-line-details skeleton-square'>
-          {this.renderItem('记录时间', time)}
+          {this.renderItem('房屋位置', addressText)}
         </View>
-        {
-          showRemark && remark && (
-            <Block>
-              <View className='bidding-line-details skeleton-square'>
-                <View className='bidding-detail-item'>
-                  <View className='bidding-detail-item-label'>笔记详情:</View>
-                </View>
-              </View>
-              <View className='bidding-form-main-remark' >
-                {
-                  remark
-                }
-              </View>
-            </Block>
-          )
-        }
+        <View className='bidding-line-details skeleton-square'>
+          {this.renderItem('装修时间', time)}
+        </View>
+        <View className='bidding-line-details skeleton-square'>
+          {this.renderItem('其他要求', remark)}
+        </View>
       </Block>
     )
   }
@@ -73,7 +73,16 @@ export default class FormMain extends Component {
 
 FormMain.defaultProps = {
   showRemark: false,
-  item: {},
+  bedroom: {},
+  sittingroom: {},
+  cookroom: {},
+  washroom: {},
+  decorateType : 0,
+  budget: {},
+  address: {},
+  decorateTimeBefore: '',
+  remark: '',
+  area: '',
 }
 
 FormMain.propTypes = {

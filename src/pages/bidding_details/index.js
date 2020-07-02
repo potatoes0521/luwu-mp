@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 14:49:48
+ * @LastEditTime: 2020-07-02 15:37:36
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -18,8 +18,8 @@ import { connect } from '@tarojs/redux'
 import SafeAreaView from '@components/SafeAreaView'
 // import Skeleton from '@components/Skeleton'
 import Login from '@utils/login'
-import classNames from 'classnames'
-import { getBiddingTemplate } from '@services/modules/bidding'
+// import classNames from 'classnames'
+// import { getBiddingTemplate } from '@services/modules/bidding'
 import { getHouseDetails } from '@services/modules/house'
 import { handleRequestData } from '@config/houseType'
 import { getImage } from '@img/cdn'
@@ -57,20 +57,20 @@ class BiddingDetails extends Component {
       this.setState(data)
     })
   }
-  handleEditData() { 
-    Taro.navigateTo({
-      url: `/pages/bidding_publish/index?pageType=edit&biddingId=${this.pageParams.biddingId}`
-    })
-  }
-  handleOnRightBtnClick() {
-    Taro.redirectTo({
-      url: `/pages/bidding_publish/index?`
-    })
-  }
-  submitOffer() { 
-    Taro.showToast({
-      title: '比价成功'
-    })
+  handleProgressText() { 
+    const { progress } = this.state
+    switch (progress) {
+      case 0:
+        return '未招标';
+      case 1:
+        return '招标中';
+      case 2:
+        return '装修比价中';
+      case 3:
+        return '报价审核中';
+      case 4:
+        return '装修施工中';
+    }
   }
   /**
    * 下拉刷新
@@ -98,6 +98,7 @@ class BiddingDetails extends Component {
       imageUrl: getImage('share/share_bidding_details.png')
     }
   }
+  
   config = {
     navigationBarTitleText: '我的招标',
     enablePullDownRefresh: true,
@@ -107,9 +108,10 @@ class BiddingDetails extends Component {
   render() {
     const {
       images,
-      loading,
+      // loading,
       isShare
     } = this.state
+    const progressText = this.handleProgressText()
     return (
       <SafeAreaView
         title='我的招标'
@@ -123,11 +125,23 @@ class BiddingDetails extends Component {
           <View className='details-main-wrapper'>
             <View className='form-wrapper'>
               <FromMain
-                showRemark
-                item={this.state}
+                {...this.state}
               />
             </View>
-            
+            <View className='progress-btn'>当前阶段：{progressText}</View>
+            <View className='bidding-wrapper'>
+              <View>
+                <Text className='heigh-light-text'>99</Text>
+                <Text>99</Text>
+              </View>
+              <View>
+                <Text className='heigh-light-text'>99</Text>
+                <Text>99</Text>
+              </View>
+            </View>
+            <View className='bid-wrapper'>
+              
+            </View>
           </View>
         </View>
         {
