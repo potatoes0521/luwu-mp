@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 17:35:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 08:51:52
+ * @LastEditTime: 2020-07-02 08:58:41
  * @mustParam: 必传参数
  *  imageList 要展示的图片
  * @optionalParam: 选传参数
@@ -127,7 +127,8 @@ export default class Upload extends Component {
             </View>
           )
         }
-        { imageList && imageList.length < 1 && (
+        {
+          imageList && imageList.length < 1 && (
             <View
               style={{
                 width: imageWidth,
@@ -135,10 +136,11 @@ export default class Upload extends Component {
                 lineHeight: imageWidth,
               }}
               className='picture-item'
-            ></View>)
-          }
+            ></View>
+          )
+        }
       </ScrollView>
-  )
+    )
   }
 
 }
