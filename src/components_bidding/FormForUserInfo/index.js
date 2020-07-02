@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 11:28:35
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 14:44:15
+ * @LastEditTime: 2020-07-02 21:02:18
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -154,7 +154,6 @@ class FormForUserInfo extends Component {
           getPhoneNumberError || phone ? (
             <FormItem
               unit
-              line
               shortUnit
               langLabel
               height100
