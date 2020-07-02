@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 10:17:10
+ * @LastEditTime: 2020-07-02 11:11:48
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -28,7 +28,8 @@ class HousePublish extends Component {
     super(props)
     this.state = Object.assign({}, houseState, {
       // 除去公共key以外的字段定在这里
-      formType: 'publish'
+      formType: 'publish',
+      requireId: ''
     })
     this.pageParams = {}
     this.timer = null
@@ -41,7 +42,8 @@ class HousePublish extends Component {
     !userInfo.token && await Login.login()
     if (this.pageParams.pageType === 'edit') {
       this.setState({
-        formType: 'edit'
+        formType: 'edit',
+        requireId: this.pageParams.requireId
       })
     }
   }
@@ -104,14 +106,29 @@ class HousePublish extends Component {
     navigationStyle: 'custom'
   }
   render() {
-    const { formType } = this.state
+    const {
+      formType,
+      requireId,
+      startTime,
+      budget,
+      houseType
+    } = this.state
     return (
       <SafeAreaView
         title='完善房屋信息'
         back
       >
         <View className='page-wrapper'>
-          <FormFroHouse type={formType} ref={(node)=> this.formForHouse = node} />
+          <FormFroHouse
+            type={formType}
+            requireId={requireId}
+            startTime={startTime}
+            budget={budget}
+            houseType={houseType}
+            ref={
+              (node) => this.formForHouse = node
+            }
+          />
           <View className='bottom-tips'>添加房屋后，您将获得免费招标和3次免费建材比价的机会</View>
           <View className='fixed-bottom-btm'>
             <View className='btn-public default-btn submit-btn' onClick={this.submit.bind(this)}>提交</View>
@@ -120,7 +137,6 @@ class HousePublish extends Component {
       </SafeAreaView>
     )
   }
-
 }
 
 const mapStateToProps = (state) => {

@@ -9,6 +9,8 @@
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
+import { moneyData, timeData } from '@config/chooseOneState'
+import { getTimeDate } from '@utils/timer'
 
 export const houseType = [
   {
@@ -49,4 +51,22 @@ export const handleHouseType = (res) => {
     cookroom,
     washroom
   }
+}
+
+export const handleRequestData = (res) => {
+  const mouth = (getTimeDate(res.decorateTimeBefore) - getTimeDate(res.decorateTimeAfter)) / oneMouthTimer || 0
+  const startTime = timeData.filter(item => item.timeMouth === mouth)
+  const budget = moneyData.filter(item => item.min === res.budgetMin)[0]
+  const roomData = handleHouseType(res)
+  const address = {
+    address: res.address,
+    longitude: res.longitude,
+    latitude: res.latitude
+  }
+  const data = Object.assign({}, res, {
+    startTime: startTime[0] || {},
+    budget,
+    address
+  }, roomData)
+  return data
 }

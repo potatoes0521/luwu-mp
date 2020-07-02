@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 09:41:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 10:25:03
+ * @LastEditTime: 2020-07-02 11:15:07
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -15,10 +15,9 @@ import PropTypes from 'prop-types'
 import FormItemCustomContent from '@components/FormItemCustomContent'
 import Location from '@components/Location'
 import houseState from '@/config/houseState.js'
-import { moneyData, timeData } from '@config/chooseOneState'
-import { handleHouseType, oneMouthTimer } from '@config/houseType'
+import { handleRequestData, oneMouthTimer } from '@config/houseType'
 import { setStorage, removeStorage } from "@utils/storage"
-import { getTimeDate,getDateTime } from '@utils/timer'
+import { getDateTime } from '@utils/timer'
 import { getHouseDetails } from '@services/modules/house'
 import FormItem from '@components/FormItem'
 import './index.scss'
@@ -29,10 +28,51 @@ export default class index extends Component {
     this.state = Object.assign({}, houseState, {
       // 除去公共key以外的字段定在这里
     })
+    this.firstLoading = false
   }
   componentDidMount() { 
-    if (this.props.type === 'edit') {
-      this.getHouseData()
+  }
+  componentWillReceiveProps(nextProps) { 
+    const {
+      startTime,
+      budget,
+      bedroom,
+      sittingroom,
+      cookroom,
+      washroom,
+    } = this.state
+    if (nextProps.bedroom && nextProps.bedroom.num !== bedroom.num) {
+      this.setState({
+        bedroom: nextProps.bedroom
+      })
+    }
+    if (nextProps.sittingroom && nextProps.sittingroom.num !== sittingroom.num) {
+      this.setState({
+        sittingroom: nextProps.sittingroom
+      })
+    }
+    if (nextProps.cookroom && nextProps.cookroom.num !== cookroom.num) {
+      this.setState({
+        cookroom: nextProps.cookroom
+      })
+    }
+    if (nextProps.washroom && nextProps.washroom.num !== washroom.num) {
+      this.setState({
+        washroom: nextProps.washroom
+      })
+    }
+    if (nextProps.startTime && nextProps.startTime.timeId !== startTime.timeId) {
+      this.setState({
+        startTime: nextProps.startTime
+      })
+    }
+    if (nextProps.budget && nextProps.budget.moneyId !== budget.moneyId) {
+      this.setState({
+        budget: nextProps.budget
+      })
+    }
+    if (!this.firstLoading && nextProps.type === 'edit' && nextProps.requireId) {
+      this.getHouseData(nextProps)
     }
   }
   componentWillUnmount() {
@@ -44,24 +84,12 @@ export default class index extends Component {
   //   addGlobalClass: true // 允许外部样式修改组件样式
   // }
 
-  getHouseData() { 
+  getHouseData(props) { 
     getHouseDetails({
-      requireId: this.pageParams.requireId
+      requireId: props.requireId
     }).then(res => {
-      const mouth = (getTimeDate(res.decorateTimeBefore) - getTimeDate(res.decorateTimeAfter)) / oneMouthTimer || 0
-      const startTime = timeData.filter(item => item.timeMouth === mouth)
-      const budget = moneyData.filter(item => item.min === res.budgetMin)[0]
-      const roomData = handleHouseType(res)
-      const address = {
-        address: res.address,
-        longitude: res.longitude,
-        latitude: res.latitude
-      }
-      const data = Object.assign({}, res, {
-        startTime: startTime[0] || {},
-        budget,
-        address
-      }, roomData)
+      this.firstLoading = true
+      const data = handleRequestData(res)
       this.setState(data)
     })
   }

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-01 09:55:00
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 09:50:44
+ * @LastEditTime: 2020-07-02 11:17:54
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -12,9 +12,8 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Block } from '@tarojs/components'
 import PropTypes from 'prop-types'
-import { moneyData, timeData } from '@config/chooseOneState'
-import { getTimeDate } from '@utils/timer'
-import { handleHouseType, oneMouthTimer } from '@/config/houseType'
+import { moneyData } from '@config/chooseOneState'
+import { handleHouseType } from '@/config/houseType'
 
 import './index.scss'
 
@@ -64,8 +63,7 @@ export default class MineHouse extends Component {
         cookroom,
         washroom,
       } = roomData
-      const mouth = (getTimeDate(item.decorateTimeBefore) - getTimeDate(item.decorateTimeAfter)) / oneMouthTimer || 0
-      const startTime = timeData.filter(ite => ite.timeMouth === mouth)[0]
+      const startTime = item.decorateTimeBefore
       const budget = moneyData.filter(ite => ite.min === item.budgetMin)[0]
       return (
         <View className='house-list-wrapper msg-wrapper' key={key}>

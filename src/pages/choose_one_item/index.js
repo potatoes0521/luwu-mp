@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 15:47:55
+ * @LastEditTime: 2020-07-02 10:40:49
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -81,6 +81,7 @@ class ChooseCategory extends Component {
         } else {
           data.budget = item
         }
+        console.log('data', data)
         this.handlePrePageData(data)
     })
   }

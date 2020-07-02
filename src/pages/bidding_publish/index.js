@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 10:06:57
+ * @LastEditTime: 2020-07-02 10:49:17
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -30,7 +30,9 @@ class BiddingPublish extends Component {
     super(props)
     this.state = Object.assign({}, houseState, {
       // 除去公共key以外的字段定在这里
-      remark: ''
+      remark: '',
+      formType: 'publish',
+      requireId: ''
     })
     this.pageParams = {}
     this.timer = null
@@ -41,14 +43,17 @@ class BiddingPublish extends Component {
     this.pageParams = this.$router.params
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
+    if (this.pageParams.pageType === 'edit') {
+      this.setState({
+        formType: 'edit',
+        requireId: this.pageParams.requireId
+      })
+    }
   }
   componentWillUnmount() { 
     clearTimeout(this.timer)
     this.timer = null
   }
-  
-
-  
   onRemarkInput() { 
     
   }
@@ -116,7 +121,10 @@ class BiddingPublish extends Component {
     const {
       startTime,
       budget,
-      remark
+      remark,
+      formType,
+      requireId,
+      houseType
     } = this.state
     return (
       <SafeAreaView
@@ -124,7 +132,16 @@ class BiddingPublish extends Component {
         back
       >
         <View className='page-wrapper'>
-          <FormFroHouse ref={(node)=> this.formForHouse = node} />
+          <FormFroHouse
+            type={formType}
+            requireId={requireId}
+            startTime={startTime}
+            budget={budget}
+            houseType={houseType}
+            ref={
+              (node) => this.formForHouse = node
+            }
+          />
           <View className='form-wrapper upload-wrapper'>
             <View className='form-label-title'>上传图片</View>
             
