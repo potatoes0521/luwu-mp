@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 09:41:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 10:06:32
+ * @LastEditTime: 2020-07-02 10:25:03
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -40,9 +40,9 @@ export default class index extends Component {
     removeStorage('choose_budget')
     removeStorage('choose_timer')
   }
-  static options = {
-    addGlobalClass: true // 允许外部样式修改组件样式
-  }
+  // static options = {
+  //   addGlobalClass: true // 允许外部样式修改组件样式
+  // }
 
   getHouseData() { 
     getHouseDetails({

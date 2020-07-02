@@ -20,7 +20,6 @@ import Login from '@utils/login'
 import houseState from '@/config/houseState.js'
 import { getImage } from '@img/cdn'
 import { removeStorage } from "@utils/storage"
-
 import FormFroHouse from '@/components_bidding/FormForHouse'
 
 import './index.scss'

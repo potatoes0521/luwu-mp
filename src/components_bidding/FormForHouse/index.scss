@@ -1,0 +1,46 @@
+@import '../../assets/css/theme.scss';
+
+.form-wrapper{
+  width: 100%;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  padding: 0 30px;
+  margin-bottom: 30px;
+
+  .audio-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .option {
+      margin-left: 44px;
+      display: flex;
+      align-items: center;
+
+      .circular {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        box-sizing: border-box;
+        border: 2px solid #979797;
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &-active {
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+          background-color: #979797;
+        }
+      }
+
+      .option-title {
+        font-size: 28px;
+        color: $tips-color;
+      }
+    }
+  }
+
+}
