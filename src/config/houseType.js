@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 13:44:27
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 14:52:24
+ * @LastEditTime: 2020-07-02 17:40:15
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -45,10 +45,10 @@ export const houseType = [
 export const oneMouthTimer = 2592000000
 
 export const handleHouseType = (res) => {
-  const bedroom = houseType.filter(item => item.num === res.bedroom)[0]
-  const sittingroom = houseType.filter(item => item.num === res.sittingroom)[0]
-  const cookroom = houseType.filter(item => item.num === res.cookroom)[0]
-  const washroom = houseType.filter(item => item.num === res.washroom)[0]
+  const bedroom = houseType.filter(item => item.num === res.bedroom)[0] || {}
+  const sittingroom = houseType.filter(item => item.num === res.sittingroom)[0] || {}
+  const cookroom = houseType.filter(item => item.num === res.cookroom)[0] || {}
+  const washroom = houseType.filter(item => item.num === res.washroom)[0] || {}
   return {
     bedroom,
     sittingroom,
@@ -59,8 +59,8 @@ export const handleHouseType = (res) => {
 
 export const handleRequestData = (res) => {
   const mouth = (getTimeDate(res.decorateTimeBefore) - getTimeDate(res.decorateTimeAfter)) / oneMouthTimer || 0
-  const startTime = timeData.filter(item => item.timeMouth === mouth)
-  const budget = moneyData.filter(item => item.min === res.budgetMin)[0]
+  const startTime = timeData.filter(item => item.timeMouth === mouth) || {}
+  const budget = moneyData.filter(item => item.min === res.budgetMin)[0] || {}
   const roomData = handleHouseType(res)
   const address = {
     address: res.address,

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 17:29:30
+ * @LastEditTime: 2020-07-02 17:55:16
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -39,7 +39,8 @@ class BiddingDetails extends Component {
       // 除去公共key以外的字段定在这里
       loading: true,
       isShare: false,
-      shopList: []
+      shopList: [],
+      userId: ''
     })
     this.pageParams = {}
     this.notLogin = true
@@ -141,17 +142,20 @@ class BiddingDetails extends Component {
       images,
       shopList,
       // loading,
-      isShare
+      isShare,
+      userId
     } = this.state
+    const { userInfo } = this.props
     const progressText = this.handleProgressText()
+    const title = (userId === userInfo.userId ? '我的' : '业主的') + '装修招标'
     return (
       <SafeAreaView
-        title='我的招标'
+        title={title}
         back={!isShare}
       >
         <View className='page-wrapper skeleton' >
           <View className='details-swiper-wrapper skeleton-square' >
-            <ImageSwiper imageList={images} />
+            <ImageSwiper imageList={Array.isArray(images) ? images : []} />
           </View>
           <View className='details-main-wrapper'>
             <View className='form-wrapper'>
