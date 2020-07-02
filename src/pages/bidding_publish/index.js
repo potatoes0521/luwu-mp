@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 14:58:31
+ * @LastEditTime: 2020-07-02 19:54:30
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -13,6 +13,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Textarea } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { publishBidding } from '@services/modules/bidding'
+import { getHouseList, publishHouse } from '@services/modules/house'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getImage } from '@assets/cdn'
@@ -41,15 +42,42 @@ class BiddingPublish extends Component {
     this.pageParams = this.$router.params
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
-    this.setState({
-      requireId: this.pageParams.requireId
-    })
+    // 判断进来的时候有么有房屋ID  有就处理  没有就去下一个判断
+    if (this.pageParams.requireId) {
+      this.setState({
+        requireId: this.pageParams.requireId
+      })
+    } else {
+      this.handleOtherHouse()
+    }
   }
   componentWillUnmount() { 
     clearTimeout(this.timer)
     this.timer = null
   }
-
+  /**
+   * 处理其他房屋信息
+   * @return void
+   */
+  handleOtherHouse() { 
+    const { userInfo } = this.props
+    // 判断有没有房屋数据  没有就创建一个房屋  然后取ID   有房屋就取最后一个
+    getHouseList({
+      userId: userInfo.userId
+    }).then(res => {
+      if (res && res.length) { 
+        this.setState({
+          requireId: res[res.length - 1].requireId
+        })
+      } else {
+        publishHouse({}).then(({requireId}) => {
+          this.setState({
+            requireId
+          })
+        })
+      }
+    })
+  }
   onRemarkInput(e) { 
     const { target: {value} } = e
     this.setState({

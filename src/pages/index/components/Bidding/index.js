@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 11:19:15
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 14:58:29
+ * @LastEditTime: 2020-07-02 19:43:06
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -12,59 +12,76 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import PropTypes from 'prop-types'
-
+import {req} from '@/mock/re'
 import './index.scss'
 
 export default class Bidding extends Component { 
+  constructor() { 
+    this.state = {
+      biddingList: req.bidding
+    }
+  }
+  componentDidMount() { 
+    
+  }
+  navigatorTo() { 
+    Taro.navigateTo({
+      url: '/pages/bidding_publish/index'
+    })
+  }
   static options = {
     addGlobalClass: true // 允许外部样式修改组件样式
   }
-
   render() {  
-    let {  } = this.props
+    const { biddingList } = this.state
+    const data1 = biddingList[0] || {}
+    const data2 = biddingList[1] || {}
+    const data3 = biddingList[2] || {}
+    const data4 = biddingList[3] || {}
+    const data5 = biddingList[4] || {}
     return (
       <View className='card-wrapper bidding'>
         <View className='card-plain'>
           <View className='plain-wrapper'>
             <View className='big-wrapper big-item color1' >
-              <View className='title big-margin-bottom'>三室二厅二厨二卫</View>
+              <View className='title big-margin-bottom'>{data1.huxing}</View>
               <View className='middle-title'>
                 <Text className='label'>类型</Text>
-                <Text>老房</Text> 
+                <Text>{data1.leixing}</Text> 
               </View>
               <View className='middle-title'>
                 <Text className='label'>面积</Text>
-                <Text>老房</Text> 
+                <Text>{data1.area}</Text> 
               </View>
               <View className='middle-title'>
                 <Text className='label'>预算</Text>
-                <Text>老房</Text> 
+                <Text>{data1.yusuan}</Text> 
               </View>
-              <View className='big-margin-top small-tips'>共有38家装修公司投标</View>
+              {/* <View className='big-margin-top small-tips'>共有家装修公司投标</View> */}
               <View className='backgroundImage1'></View>
             </View>
             <View className='big-wrapper right-wrapper'>
               <View className='small-item color2'>
-                <View className='title'>三室二厅二厨二卫</View>
-                <View className='big-margin-top small-tips'>共有38家装修公司投标</View>
+                <View className='title'>{data2.huxing}</View>
+                {/* <View className='big-margin-top small-tips'>共有家装修公司投标</View> */}
                 <View className='backgroundImage2'></View>
               </View>
               <View className='small-item color3'>
-                <View className='title'>三室二厅二厨二卫</View>
-                <View className='big-margin-top small-tips'>共有38家装修公司投标</View>
+                <View className='title'>{data3.huxing}</View>
+                {/* <View className='big-margin-top small-tips'>共有家装修公司投标</View> */}
                 <View className='backgroundImage3'></View>
               </View>
             </View>
           </View>
           <View className='plain-wrapper margin-bottom'>
             <View className='big-item color4' >
-              <View className='title'>三室二厅二厨二卫</View>
-              <View className='big-margin-top small-tips'>共有38家装修公司投标</View>
+              <View className='title'>{data4.huxing}</View>
+              {/* <View className='big-margin-top small-tips'>共有家装修公司投标</View> */}
               <View className='backgroundImage4'></View>
             </View>
             <View className='small-item right-item color5'>
-              <View className='title'>三室二厅二厨二卫</View>
-              <View className='big-margin-top small-tips'>共有38家装修公司投标</View>
+              <View className='title'>{data5.huxing}</View>
+              {/* <View className='big-margin-top small-tips'>共有家装修公司投标</View> */}
               <View className='backgroundImage5'></View>
             </View>
           </View>
@@ -74,7 +91,7 @@ export default class Bidding extends Component {
             <View>大家的招标</View>
             {/* <Text className='iconlujing iconfont bottom-icon'></Text> */}
           </View>
-          <View className='btn'>
+          <View className='btn' onClick={this.navigatorTo.bind(this)}>
             <View>我也要招标</View>
             <Text className='iconlujing iconfont bottom-icon'></Text>
           </View>
