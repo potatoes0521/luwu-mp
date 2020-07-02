@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 17:35:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 11:57:22
+ * @LastEditTime: 2020-07-02 08:51:52
  * @mustParam: 必传参数
  *  imageList 要展示的图片
  * @optionalParam: 选传参数
@@ -27,7 +27,6 @@ import { uploadImage } from './utils/upload_type'
 import './index.scss'
 
 export default class Upload extends Component { 
-
   componentDidMount() {
     if (this.props.autoChoose) { 
       // this.chooseImage()
@@ -49,7 +48,7 @@ export default class Upload extends Component {
     if (maxCount !== -1) {
       count = maxCount - imageList.length
     }
-    if (count === 0) {return}
+    if (count < 0) {count = 1}
     uploadImage({
         count
       }).then(res => {
@@ -102,43 +101,43 @@ export default class Upload extends Component {
       </View>
     ))
     return (
-    <ScrollView
-      scrollX
-      style={{
-          width: `calc(100vw - ${computedWidth}rpx)`,
-          height: imageWidth
-        }}
-      className='scroll-view'
-    >
-      {
-        imageListRender
-      }
-      {
-        showAddBtn && (maxCount === -1 || imageList < maxCount) && (
-          <View
-            style={{
-              width: addBtnWidth,
-              height: addBtnWidth,
-              lineHeight: addBtnWidth,
-            }}
-            className='add-btn-public'
-            onClick={this.chooseImage.bind(this)}
-          >
-            <Text className='iconfont iconbianzu icon-upload-img'></Text>
-          </View>
-        )
-      }
-      { imageList && imageList.length < 1 && (
-          <View
-            style={{
-              width: imageWidth,
-              height: imageWidth,
-              lineHeight: imageWidth,
-            }}
-            className='picture-item'
-          ></View>)
+      <ScrollView
+        scrollX
+        style={{
+            width: `calc(100vw - ${computedWidth}rpx)`,
+            height: imageWidth
+          }}
+        className='scroll-view'
+      >
+        {
+          imageListRender
         }
-    </ScrollView>
+        {
+          showAddBtn && (maxCount === -1 || imageList.length < maxCount) && (
+            <View
+              style={{
+                width: addBtnWidth,
+                height: addBtnWidth,
+                lineHeight: addBtnWidth,
+              }}
+              className='add-btn-public'
+              onClick={this.chooseImage.bind(this)}
+            >
+              <Text className='iconfont iconbianzu icon-upload-img'></Text>
+            </View>
+          )
+        }
+        { imageList && imageList.length < 1 && (
+            <View
+              style={{
+                width: imageWidth,
+                height: imageWidth,
+                lineHeight: imageWidth,
+              }}
+              className='picture-item'
+            ></View>)
+          }
+      </ScrollView>
   )
   }
 
