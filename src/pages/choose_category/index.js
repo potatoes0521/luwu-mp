@@ -16,7 +16,7 @@ import { getCategory } from '@services/modules/category'
 import SaveAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getStorage } from '@utils/storage'
-import ListItem from '@/choose_components/ListItem'
+import ListItem from '@/components_choose/ListItem'
 import './index.scss'
 
 class ChooseCategory extends Component { 

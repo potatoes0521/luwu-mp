@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 19:00:29
+ * @LastEditTime: 2020-07-02 09:40:18
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -15,7 +15,7 @@ import { connect } from '@tarojs/redux'
 import SaveAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getStorage } from '@utils/storage'
-import ListItem from '@/choose_components/ListItem'
+import ListItem from '@/components_choose/ListItem'
 import {houseType} from '@config/houseType'
 
 import './index.scss'

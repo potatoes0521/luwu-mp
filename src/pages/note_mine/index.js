@@ -17,7 +17,7 @@ import Skeleton from '@components/Skeleton'
 import { getNoteList } from '@services/modules/note'
 import { getImage } from '@img/cdn'
 import Login from '@utils/login'
-import BottomBtn from '@/note_components/BottomBtn'
+import BottomBtn from '@/components_note/BottomBtn'
 import NoteItem from './components/NoteItem'
 import NoteSelect from './components/NoteSelect'
 

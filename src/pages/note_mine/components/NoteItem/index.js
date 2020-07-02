@@ -15,7 +15,7 @@ import PropTypes from 'prop-types'
 import Upload from '@components/Upload'
 import Location from '@components/Location'
 import { setStorage, removeStorage } from '@utils/storage'
-import NoteFromMain from '@/note_components/NoteFormMain'
+import NoteFromMain from '@/components_note/NoteFormMain'
 
 import './index.scss'
 

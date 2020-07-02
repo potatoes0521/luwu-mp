@@ -15,7 +15,7 @@ import { connect } from '@tarojs/redux'
 import SaveAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getStorage } from '@utils/storage'
-import ListItem from '@/choose_components/ListItem'
+import ListItem from '@/components_choose/ListItem'
 import { moneyData, timeData } from '@config/chooseOneState'
 
 import './index.scss'
