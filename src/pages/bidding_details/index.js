@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 16:48:44
+ * @LastEditTime: 2020-07-02 17:21:26
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -73,6 +73,11 @@ class BiddingDetails extends Component {
         return '装修施工中';
     }
   }
+  navigator() { 
+    Taro.navigateTo({
+      url: '/pages/table_contrast/index'
+    })
+  }
   renderProcess(title, content, next) { 
     return (
       <Block>
@@ -130,7 +135,6 @@ class BiddingDetails extends Component {
       <SafeAreaView
         title='我的招标'
         back={!isShare}
-        home
       >
         <View className='page-wrapper skeleton' >
           <View className='details-swiper-wrapper skeleton-square' >
@@ -164,16 +168,16 @@ class BiddingDetails extends Component {
             </View>
             <View className='form-item'>
               <View className='form-item-label'>
-                <View>一室一厅</View>
-                <Text className='iconfont iconsanjiaoxing1 icon-xia'></Text>
+                {/* <View>一室一厅</View>
+                <Text className='iconfont iconsanjiaoxing1 icon-xia'></Text> */}
               </View>
-              <View className='form-content'>招标价格对比</View>
+              <View className='form-content' onClick={this.navigator.bind(this)}>招标价格对比</View>
             </View>
             <View className='tips-wrapper'>
               <View>如上房型是本平台根据房型面积测算出的施工量，您可以选择跟您房屋类似的方案，对装修公司进行测比。</View>
               <View className='last'>装修公司的价格是根据您选择的房屋面积，利用装修公司的基础项价格估算的结果，可能会跟实际价格差距较大，仅供参考。</View>
             </View>
-            <View className='basics-wrapper'>
+            {/* <View className='basics-wrapper'>
               <View className='basics-title'>
                 <Text className='iconfont iconjiantou jiantou-icon'></Text>
                 <Text>基础项最低价</Text>
@@ -197,7 +201,7 @@ class BiddingDetails extends Component {
                 <Text>一号装修公司</Text>
                 <Text>一号装修公司</Text>
               </View>
-            </View>
+            </View> */}
             <View className='process-wrapper'>
               {this.renderProcess('方案比价','您还未约量房', true)}
               {this.renderProcess('报价审核','您未提交报价审核', true)}
