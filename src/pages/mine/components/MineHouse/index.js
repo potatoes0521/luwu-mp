@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-01 09:55:00
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 19:08:17
+ * @LastEditTime: 2020-07-02 09:50:44
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -14,11 +14,9 @@ import { View, Block } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import { moneyData, timeData } from '@config/chooseOneState'
 import { getTimeDate } from '@utils/timer'
-import { handleHouseType } from '@/config/houseType'
+import { handleHouseType, oneMouthTimer } from '@/config/houseType'
 
 import './index.scss'
-
-const oneMouthTimer = 2592000000
 
 export default class MineHouse extends Component { 
   constructor(props) {

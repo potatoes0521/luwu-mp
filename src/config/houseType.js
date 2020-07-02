@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 13:44:27
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 19:02:55
+ * @LastEditTime: 2020-07-02 09:50:13
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -36,6 +36,7 @@ export const houseType = [
     chinese: '六'
   }
 ]
+export const oneMouthTimer = 2592000000
 
 export const handleHouseType = (res) => {
   const bedroom = houseType.filter(item => item.num === res.bedroom)[0]
