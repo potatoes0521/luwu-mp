@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 14:51:30
+ * @LastEditTime: 2020-07-02 21:25:42
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -332,7 +332,7 @@ class NotePublish extends Component {
     const fixedTipsTop = system && system.navHeight || 120
     const categoryText = mainCategory && mainCategory.categoryId ? mainCategory.categoryName + ' - ' + childCategory.categoryName : ''
     return (
-      <SaveAreaView title='记笔记' back home>
+      <SaveAreaView title='记笔记' back>
         <View className='page-wrapper'>
           <View className='fixed-top-tips' style={{top: fixedTipsTop + 'rpx'}}>这么多建材怎么选？记到笔记本里慢慢选~</View>
           <View className='goods-image-wrapper'>
