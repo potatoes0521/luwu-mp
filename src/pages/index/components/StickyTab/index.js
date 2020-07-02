@@ -19,7 +19,7 @@ import {
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { connect } from '@tarojs/redux'
-import { getImage } from '@img/cdn'
+import { getImage } from '@assets/cdn'
 import { getSystemInfo } from '@utils/publicWX'
 
 import './index.scss'

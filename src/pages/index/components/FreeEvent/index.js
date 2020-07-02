@@ -14,7 +14,7 @@ import {
   View,
   Image
 } from '@tarojs/components'
-import { getImage } from '@/assets/img/cdn'
+import { getImage } from '@assets/cdn'
 
 import './index.scss'
 

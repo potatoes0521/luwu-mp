@@ -29,5 +29,6 @@ module.exports = {
     '@store': path.resolve(__dirname, '..', 'src/store'),
     '@actions': path.resolve(__dirname, '..', 'src/store/actions'),
     '@config': path.resolve(__dirname, '..', 'src/config'),
+    '@assets': path.resolve(__dirname, '..', 'src/assets'),
   },
 }

@@ -9,7 +9,7 @@ import FormItem from '@components/FormItem'
 import Login from '@utils/login'
 import { uploadImage, uploadFile } from '@components/Upload/utils/upload_type'
 import OfferState from '@config/offerExamineState'
-import { getImage } from '@img/cdn'
+import { getImage } from '@assets/cdn'
 
 import './index.scss'
 

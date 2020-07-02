@@ -22,7 +22,7 @@ import Login from '@utils/login'
 import { publishNote, getNoteDetails, editNote } from '@services/modules/note'
 import { handleMoney } from '@utils/patter'
 import { setStorage, removeStorage } from '@utils/storage'
-import { getImage } from '@img/cdn'
+import { getImage } from '@assets/cdn'
 import goodsState from '@config/noteState'
 import FormItem from '@components/FormItem'
 

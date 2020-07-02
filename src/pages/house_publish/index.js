@@ -17,7 +17,7 @@ import SafeAreaView from '@components/SafeAreaView'
 import FormFroHouse from '@/components_bidding/FormForHouse'
 import Login from '@utils/login'
 import houseState from '@/config/houseState.js'
-import { getImage } from '@img/cdn'
+import { getImage } from '@assets/cdn'
 import { removeStorage } from "@utils/storage"
 
 import './index.scss'

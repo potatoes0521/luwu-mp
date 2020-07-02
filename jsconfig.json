@@ -12,6 +12,7 @@
       "@js/*": ["./src/assets/js/*"],
       "@img/*": ["./src/assets/img/*"],
       "@config/*": ["./src/config/*"],
+      "@assets/*": ["./src/assets/*"],
     }
   },
   "exclude": [

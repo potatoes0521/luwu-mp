@@ -15,7 +15,7 @@ import { connect } from '@tarojs/redux'
 import { publishBidding } from '@services/modules/bidding'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
-import { getImage } from '@img/cdn'
+import { getImage } from '@assets/cdn'
 import { removeStorage } from "@utils/storage"
 import biddingState from '@/config/biddingState'
 import FormForHouse from '@/components_bidding/FormForHouse'

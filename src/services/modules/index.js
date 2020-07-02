@@ -4,12 +4,12 @@
  * @path: '@services/modules/index'
  * @Date: 2020-06-17 10:07:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-19 22:25:28
+ * @LastEditTime: 2020-07-02 18:20:43
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import { defaultResourceConfigURL } from "@config/request_config"
+import { defaultResourceConfigURL } from "@assets/"
 import request from "../request"
 
 /**

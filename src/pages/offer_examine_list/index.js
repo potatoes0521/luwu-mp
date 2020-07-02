@@ -15,7 +15,7 @@ import { connect } from '@tarojs/redux'
 import { getOfferList } from '@services/modules/offer'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
-import { getImage } from '@img/cdn'
+import { getImage } from '@assets/cdn'
 
 import './index.scss'
 

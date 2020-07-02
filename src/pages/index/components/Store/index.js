@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 14:41:33
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-30 11:22:37
+ * @LastEditTime: 2020-07-02 18:19:05
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -24,72 +24,7 @@ export default class Store extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      storeList: [
-        {
-          storeId: 0,
-          storeName: '北四环红星美凯龙店'
-        },
-        {
-          storeId: 1,
-          storeName: '北四环红星美凯龙店'
-        },
-        {
-          storeId: 2,
-          storeName: '北四环红星美凯龙店'
-        },
-        {
-          storeId: 3,
-          storeName: '北四环红星美凯龙店'
-        },
-        {
-          storeId: 4,
-          storeName: '北四环红星美凯龙店'
-        },
-        {
-          storeId: 5,
-          storeName: '北四环红星美凯龙店'
-        },
-        {
-          storeId: 6,
-          storeName: '北四环红星美凯龙店'
-        },
-        {
-          storeId: 7,
-          storeName: '北四环红星美凯龙店'
-        },
-        {
-          storeId: 8,
-          storeName: '北四环红星美凯龙店'
-        },
-        {
-          storeId: 9,
-          storeName: '北四环红星美凯龙店'
-        },
-        {
-          storeId: 10,
-          storeName: '北四环红星美凯龙店'
-        },
-        {
-          storeId: 11,
-          storeName: '北四环红星美凯龙店'
-        },
-        {
-          storeId: 12,
-          storeName: '北四环红星美凯龙店'
-        },
-        {
-          storeId: 13,
-          storeName: '北四环红星美凯龙店'
-        },
-        {
-          storeId: 14,
-          storeName: '北四环红星美凯龙店'
-        },
-        {
-          storeId: 15,
-          storeName: '北四环红星美凯龙店'
-        },
-      ]
+      storeList: []
     }
   }
   

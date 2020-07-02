@@ -19,7 +19,7 @@ import { getOfferDetails } from '@services/modules/offer'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import OfferState from '@config/offerExamineState'
-import { getImage } from '@img/cdn'
+import { getImage } from '@assets/cdn'
 
 import './index.scss'
 

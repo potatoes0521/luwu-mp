@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 10:26:39
+ * @LastEditTime: 2020-07-02 18:21:16
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -20,7 +20,7 @@ import Skeleton from '@components/Skeleton'
 import Login from '@utils/login'
 import classNames from 'classnames'
 import { getNoteDetails } from '@services/modules/note'
-import { getImage } from '@img/cdn'
+import { getImage } from '@assets/cdn'
 import { random } from '@utils/numberToCode'
 import Location from '@components/Location'
 import goodsState from '@config/noteState'
