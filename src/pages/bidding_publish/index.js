@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 14:03:00
+ * @LastEditTime: 2020-07-02 14:06:34
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -14,7 +14,6 @@ import { View, Textarea } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { publishBidding } from '@services/modules/bidding'
 import SafeAreaView from '@components/SafeAreaView'
-// import FormItemPicker from '@components/FormItemPicker'
 import Login from '@utils/login'
 import { getImage } from '@img/cdn'
 import { removeStorage } from "@utils/storage"
@@ -22,7 +21,6 @@ import houseState from '@/config/houseState.js'
 import FormForHouse from '@/components_bidding/FormForHouse'
 import FormForUserInfo from '@/components_bidding/FormForUserInfo'
 import Upload from '@components/Upload'
-// import { getTimeDate, timestampOfDay } from '@utils/timer'
 
 import './index.scss'
 
@@ -47,12 +45,10 @@ class BiddingPublish extends Component {
     this.pageParams = this.$router.params
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
-    if (this.pageParams.pageType === 'edit') {
-      this.setState({
-        formType: 'edit',
-        requireId: this.pageParams.requireId
-      })
-    }
+    this.setState({
+      formType: 'edit',
+      requireId: this.pageParams.requireId
+    })
   }
   componentWillUnmount() { 
     clearTimeout(this.timer)
@@ -65,23 +61,16 @@ class BiddingPublish extends Component {
       remark: value
     })
   }
-  // onChooseTimer(e) { 
-  //   const { target: { value } } = e
-  //   let nowTimer = getTimeDate(timestampOfDay())
-  //   let chooseTimer = getTimeDate(value)
-  //   if (nowTimer > chooseTimer) {
-  //     this.showToast('请选择正确有效期')
-  //     return
-  //   }
-  //   this.setState({})
-  // }
+
   submit() {
-    const { } = this.state
+    const { requireId } = this.state
     const formForHouse = this.formForHouse.judgeAndEmitData()
     if (!formForHouse) return
     const formForUser = this.formForUser.judgeAndEmitData()
     if (!formForUser) return
-    let sendData = Object.assign({}, formForHouse, formForUser)
+    let sendData = Object.assign({}, {
+      requireId
+    }, formForHouse, formForUser)
     publishBidding(sendData, this).then(() => {
       this.showToast('发布成功')
       this.handleClear()
@@ -92,7 +81,9 @@ class BiddingPublish extends Component {
     removeStorage('choose_budget')
     removeStorage('choose_timer')
     this.timer = setTimeout(() => {
-      Taro.navigateBack()
+      Taro.redirectTo({
+        url: `/pages/bidding_details/index?requireId=${this.requireId}`
+      })
     }, 1800)
   }
   /**
@@ -191,18 +182,6 @@ class BiddingPublish extends Component {
             <View className='num-tips'>{300 - remark.length}</View>
           </View>
           <FormForUserInfo res={node => this.formForUser = node} />
-          {/* <View className='form-wrapper'>
-            <FormItemPicker
-              shortUnit
-              langLabel
-              height100
-              important
-              unit='icon'
-              label='有效期限'
-              iconName='iconRectangle rotated'
-              onPickerValueChange={this.onChooseTimer.bind(this)}
-            />
-          </View> */}
           <View className='fixed-bottom-btm'>
             <View className='bottom-tips'>您的联系信息需要您的确认才会提供给装修公司</View>
             <View className='btn-public default-btn submit-btn' onClick={this.submit.bind(this)}>提交</View>
