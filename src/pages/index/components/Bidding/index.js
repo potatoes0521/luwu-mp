@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 11:19:15
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 20:46:53
+ * @LastEditTime: 2020-07-02 21:08:13
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -21,7 +21,7 @@ class Bidding extends Component {
   navigatorTo() { 
     const { userInfo } = this.props
     let url = '/pages/bidding_publish/index'
-    if (!userInfo.phone && !userInfo.isMember) {
+    if (!userInfo.phone || !userInfo.isMember) {
       url = '/pages/vip/index'
     }
     Taro.navigateTo({ url })

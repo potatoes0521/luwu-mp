@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 17:41:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 21:05:21
+ * @LastEditTime: 2020-07-02 21:16:37
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -94,9 +94,9 @@ class Mine extends Component {
     if (!item) return
     
   }
-  navigatorTo() { 
+  navigatorTo(pageName, paramsStr) { 
     Taro.navigateTo({
-      url: '/pages/offer_examine_publish/index'
+      url: `/pages/${pageName}/index?${paramsStr}`
     })
   }
   /**
@@ -158,7 +158,10 @@ class Mine extends Component {
               }
             </View>
           </View>
-          <View className='form-wrapper' onClick={this.navigatorTo.bind(this)}>
+          <View
+            className='form-wrapper'
+            onClick={this.navigatorTo.bind(this, 'offer_examine_publish')}
+          >
             <View className='form-item'>
               <View className='form-label'>
                 <Text className='iconfont icon-public-style iconshenhe'></Text>
@@ -171,7 +174,10 @@ class Mine extends Component {
             </View>
           </View>
           <View className='history-wrapper' >
-            <View className='history-item-public'>
+            <View
+              className='history-item-public'
+              onClick={this.navigatorTo.bind(this, 'note_mine', 'from=mine')}
+            >
               {this.renderTabItem('iconji color1', '建材笔记', '您还未记录')}
             </View>
             <View className='history-item-public'>
