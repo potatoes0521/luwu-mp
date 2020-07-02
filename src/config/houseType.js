@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 13:44:27
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 09:50:13
+ * @LastEditTime: 2020-07-02 12:00:30
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -13,6 +13,10 @@ import { moneyData, timeData } from '@config/chooseOneState'
 import { getTimeDate } from '@utils/timer'
 
 export const houseType = [
+  {
+    num: 0,
+    chinese: '零'
+  },
   {
     num: 1,
     chinese: '一'

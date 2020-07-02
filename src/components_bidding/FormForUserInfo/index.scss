@@ -1,0 +1,34 @@
+@import '../../assets/css/common.scss';
+@import '../../assets/css/theme.scss';
+
+.form-wrapper {
+  width: 100%;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  padding: 0 30px;
+  margin-bottom: 30px;
+}
+
+.get-phone-wrapper {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  font-size: 28px;
+  color: $tips-color;
+  position: relative;
+  @include clear-button-default;
+
+  .get-phone-btn {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+}
+.placeholder-class {
+  color: $placeholder-color;
+}

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 09:41:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 11:22:00
+ * @LastEditTime: 2020-07-02 11:29:20
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -22,7 +22,7 @@ import { getHouseDetails } from '@services/modules/house'
 import FormItem from '@components/FormItem'
 import './index.scss'
 
-export default class index extends Component { 
+export default class FormForHouse extends Component {
   constructor(props) {
     super(props)
     this.state = Object.assign({}, houseState, {
@@ -350,10 +350,10 @@ export default class index extends Component {
 
 }
 
-index.defaultProps = {
+FormForHouse.defaultProps = {
   onClick: () => {console.error('onClick is not defined')}
 }
 
-index.propTypes = {
+FormForHouse.propTypes = {
   onClick: PropTypes.func.isRequired
 }

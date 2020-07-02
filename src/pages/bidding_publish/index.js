@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 11:22:54
+ * @LastEditTime: 2020-07-02 11:32:03
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -14,13 +14,13 @@ import { View, Textarea } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { publishHouse, editHouse } from '@services/modules/house'
 import SafeAreaView from '@components/SafeAreaView'
-import FormItem from '@components/FormItem'
 import FormItemPicker from '@components/FormItemPicker'
 import Login from '@utils/login'
 import houseState from '@/config/houseState.js'
 import { getImage } from '@img/cdn'
 import { removeStorage } from "@utils/storage"
-import FormFroHouse from '@/components_bidding/FormForHouse'
+import FormForHouse from '@/components_bidding/FormForHouse'
+import FormForUserInfo from '@/components_bidding/FormForUserInfo'
 
 import './index.scss'
 
@@ -99,8 +99,7 @@ class BiddingPublish extends Component {
       duration: 2000
     })
   }
-  onInputUserName() { }
-  onInputPhoneNumber() { }
+
   /**
    * 页面内转发
    * @param {Object} res 微信返回参数
@@ -129,6 +128,8 @@ class BiddingPublish extends Component {
       sittingroom,
       cookroom,
       washroom,
+      userName,
+      mobile
     } = this.state
     return (
       <SafeAreaView
@@ -136,7 +137,7 @@ class BiddingPublish extends Component {
         back
       >
         <View className='page-wrapper'>
-          <FormFroHouse
+          <FormForHouse
             type={formType}
             requireId={requireId}
             startTime={startTime}
@@ -165,35 +166,7 @@ class BiddingPublish extends Component {
               onInput={this.onRemarkInput.bind(this)}
             ></Textarea>
           </View>
-          <View className='form-wrapper'>
-            <FormItem
-              line
-              shortUnit
-              langLabel
-              height100
-              important
-              unit='icon'
-              label='联 系 人 '
-              canInput={false}
-              placeholder='请选择'
-              value={budget.moneyText || ''}
-              iconName='iconRectangle rotated'
-              onContentClick={this.onInputUserName.bind(this)}
-            />
-            <FormItem
-              shortUnit
-              langLabel
-              height100
-              important
-              unit='icon'
-              label='手机号码'
-              canInput={false}
-              placeholder='请选择'
-              value={startTime.timeText || ''}
-              iconName='iconRectangle rotated'
-              onContentClick={this.onInputPhoneNumber.bind(this)}
-            />
-          </View>
+          <FormForUserInfo />
           <View className='form-wrapper'>
             <FormItemPicker
               shortUnit
