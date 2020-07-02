@@ -185,7 +185,6 @@ class ChooseCategory extends Component {
       <SaveAreaView
         title='选择品类'
         back
-        home
       >
         <View
           style={{

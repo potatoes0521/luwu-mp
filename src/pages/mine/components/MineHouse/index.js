@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-01 09:55:00
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 14:11:40
+ * @LastEditTime: 2020-07-02 20:41:30
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -24,8 +24,11 @@ export default class MineHouse extends Component {
   }
 
   navigatorToBidding(item) { 
+    const { userInfo } = this.props
     let url = ''
-    if (item.progress === 0 || !item.progress) {
+    if (!userInfo.phone && !userInfo.isMember) {
+      url = '/pages/vip/index'
+    } else if (item.progress === 0 || !item.progress) {
       url = `/pages/bidding_publish/index?requireId=${item.requireId}`
     } else {
       url = `/pages/bidding_details/index?requireId=${item.requireId}`
@@ -34,7 +37,10 @@ export default class MineHouse extends Component {
   }
   navigatorToPublishHouse(type, item) { 
     let url = '/pages/house_publish/index'
-    if (type === 'edit') { 
+    const { userInfo } = this.props
+    if (!userInfo.phone && !userInfo.isMember) {
+      url = '/pages/vip/index'
+    } else if (type === 'edit') { 
       url += `?pageType=edit&requireId=${item.requireId}`
     }
     Taro.navigateTo({ url })

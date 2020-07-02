@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-23 15:49:04
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 18:24:16
+ * @LastEditTime: 2020-07-02 20:41:49
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -145,7 +145,6 @@ class ChooseBrand extends Component {
       <SafeAreaView
         title='选择品牌'
         back
-        home
       >
         <View
           style={{

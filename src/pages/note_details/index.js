@@ -142,7 +142,6 @@ class NoteDetails extends Component {
       <SafeAreaView
         title={mainCategory.categoryName || '录屋'}
         back={!isShare}
-        home
       >
         <View className={pageWrapperClassName}>
           <View

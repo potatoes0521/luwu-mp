@@ -165,7 +165,6 @@ class NoteMine extends Component {
       <SaveAreaView
         title={navTitle}
         back
-        home
       >
         <View className='page-wrapper skeleton'>
           <NoteSelect

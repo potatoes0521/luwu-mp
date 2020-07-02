@@ -173,7 +173,6 @@ class OfferExamineDetails extends Component {
       <SafeAreaView
         title='我的报价'
         back
-        home
       >
         <View className='page-wrapper skeleton'>
           {

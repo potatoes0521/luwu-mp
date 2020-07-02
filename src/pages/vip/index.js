@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 20:01:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 20:18:44
+ * @LastEditTime: 2020-07-02 20:42:27
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -63,7 +63,6 @@ class Vip extends Component {
       <SafeAreaView
         title='会员'
         back
-        home
       >
         <View className='page-wrapper'>
           <View className='top'>

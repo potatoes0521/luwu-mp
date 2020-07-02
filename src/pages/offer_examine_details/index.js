@@ -96,7 +96,6 @@ class OfferExamineDetails extends Component {
       <SafeAreaView
         title='免费帮您审报价'
         back
-        home
       >
         <View className='page-wrapper'>
           <View className='success-icon-wrapper'>
