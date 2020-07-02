@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 17:55:16
+ * @LastEditTime: 2020-07-02 17:57:51
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -111,7 +111,7 @@ class BiddingDetails extends Component {
   onPullDownRefresh() {
     // 显示顶部刷新图标
     Taro.showNavigationBarLoading()
-    this.getNoteDetails()
+    this.getHouseData()
     // 隐藏导航栏加载框
     Taro.hideNavigationBarLoading();
     // 停止下拉动作
@@ -123,11 +123,11 @@ class BiddingDetails extends Component {
    * @return void
    */
   onShareAppMessage() {
-    const {userInfo} = this.props
+    const { userInfo } = this.props
     return {
-      title: `${userInfo.nickName || '好友'}给你分享了他的建材笔记`,
-      path: `/pages/bidding_details/index?shareType=1&userId=${userInfo.userId}`,
-      imageUrl: getImage('share/share_bidding_details.png')
+      title: `录屋,和监理一起开启装修之旅吧~`,
+      path: `/pages/index/index?shareType=1&userId=${userInfo.userId}`,
+      imageUrl: getImage('share/share_index.png')
     }
   }
   

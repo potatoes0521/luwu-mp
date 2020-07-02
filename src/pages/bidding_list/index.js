@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 16:50:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 17:34:51
+ * @LastEditTime: 2020-07-02 17:57:41
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -17,6 +17,7 @@ import { connect } from '@tarojs/redux'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getHouseList } from '@services/modules/house'
+import { getImage } from '@img/cdn'
 import ListItem from './components/listItem'
 
 import './index.scss'
@@ -41,6 +42,32 @@ class BiddingList extends Component {
         biddingList: res
       })
     })
+  }
+  /**
+   * 下拉刷新
+   * @return void
+   */
+  onPullDownRefresh() {
+    // 显示顶部刷新图标
+    Taro.showNavigationBarLoading()
+    this.getBiddingList()
+    // 隐藏导航栏加载框
+    Taro.hideNavigationBarLoading();
+    // 停止下拉动作
+    Taro.stopPullDownRefresh();
+  }
+  /**
+   * 页面内转发
+   * @param {Object} res 微信返回参数
+   * @return void
+   */
+  onShareAppMessage() {
+    const { userInfo } = this.props
+    return {
+      title: `录屋,和监理一起开启装修之旅吧~`,
+      path: `/pages/index/index?shareType=1&userId=${userInfo.userId}`,
+      imageUrl: getImage('share/share_index.png')
+    }
   }
   config = {
     navigationBarTitleText: '',
