@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 11:32:03
+ * @LastEditTime: 2020-07-02 14:03:00
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -12,15 +12,17 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Textarea } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { publishHouse, editHouse } from '@services/modules/house'
+import { publishBidding } from '@services/modules/bidding'
 import SafeAreaView from '@components/SafeAreaView'
-import FormItemPicker from '@components/FormItemPicker'
+// import FormItemPicker from '@components/FormItemPicker'
 import Login from '@utils/login'
-import houseState from '@/config/houseState.js'
 import { getImage } from '@img/cdn'
 import { removeStorage } from "@utils/storage"
+import houseState from '@/config/houseState.js'
 import FormForHouse from '@/components_bidding/FormForHouse'
 import FormForUserInfo from '@/components_bidding/FormForUserInfo'
+import Upload from '@components/Upload'
+// import { getTimeDate, timestampOfDay } from '@utils/timer'
 
 import './index.scss'
 
@@ -32,11 +34,13 @@ class BiddingPublish extends Component {
       // 除去公共key以外的字段定在这里
       remark: '',
       formType: 'publish',
-      requireId: ''
+      requireId: '',
+      images: []
     })
     this.pageParams = {}
     this.timer = null
     this.formForHouse = null
+    this.formForUser = null
   }
 
   async componentDidMount() {
@@ -54,32 +58,36 @@ class BiddingPublish extends Component {
     clearTimeout(this.timer)
     this.timer = null
   }
-  onRemarkInput() { 
-    
+
+  onRemarkInput(e) { 
+    const { target: {value} } = e
+    this.setState({
+      remark: value
+    })
   }
-  
+  // onChooseTimer(e) { 
+  //   const { target: { value } } = e
+  //   let nowTimer = getTimeDate(timestampOfDay())
+  //   let chooseTimer = getTimeDate(value)
+  //   if (nowTimer > chooseTimer) {
+  //     this.showToast('请选择正确有效期')
+  //     return
+  //   }
+  //   this.setState({})
+  // }
   submit() {
     const { } = this.state
     const formForHouse = this.formForHouse.judgeAndEmitData()
-    console.log('formForHouse', formForHouse)
-    if (!formForHouse) {
-      return
-    }
-    console.log('formForHouse', formForHouse)
-    let sendData = Object.assign({}, formForHouse, {})
-    // this.handleRequest(sendData)
+    if (!formForHouse) return
+    const formForUser = this.formForUser.judgeAndEmitData()
+    if (!formForUser) return
+    let sendData = Object.assign({}, formForHouse, formForUser)
+    publishBidding(sendData, this).then(() => {
+      this.showToast('发布成功')
+      this.handleClear()
+    })
   }
-  handleRequest(sendData) {
-    if (this.pageParams.pageType === 'edit') { 
-      sendData.requireId = this.state.requireId
-      editHouse(sendData).then(() => {
-        this.showToast('编辑成功')
-      })
-    } else {
-      publishHouse(sendData).then(() => {
-        this.showToast('完善成功')
-      })
-    }
+  handleClear() {
     removeStorage('choose_house_type')
     removeStorage('choose_budget')
     removeStorage('choose_timer')
@@ -99,7 +107,12 @@ class BiddingPublish extends Component {
       duration: 2000
     })
   }
-
+  onImageUpload(imageList) { 
+    const { images } = this.state
+    this.setState({
+      images: [...images, imageList]
+    })
+  }
   /**
    * 页面内转发
    * @param {Object} res 微信返回参数
@@ -128,8 +141,7 @@ class BiddingPublish extends Component {
       sittingroom,
       cookroom,
       washroom,
-      userName,
-      mobile
+      images
     } = this.state
     return (
       <SafeAreaView
@@ -153,7 +165,17 @@ class BiddingPublish extends Component {
           />
           <View className='form-wrapper upload-wrapper'>
             <View className='form-label-title'>上传图片</View>
-            
+            <View className='upload-view'>
+              <Upload
+                imageList={images}
+                autoChoose
+                imageSize={96}
+                addBtnSizeType={96}
+                showAddBtn
+                onUploadOK={this.onImageUpload.bind(this)}
+              />
+            </View>
+            <View className='upload-tips'>请保持图片清晰</View>
           </View>
           <View className='form-wrapper textarea-wrapper'>
             <View className='form-label-title'>补充信息</View>
@@ -164,10 +186,12 @@ class BiddingPublish extends Component {
               className='textarea'
               placeholderClass='placeholder-class'
               onInput={this.onRemarkInput.bind(this)}
+              placeholder='请补充您对房屋的个性化需求，更方便装修公司投标'
             ></Textarea>
+            <View className='num-tips'>{300 - remark.length}</View>
           </View>
-          <FormForUserInfo />
-          <View className='form-wrapper'>
+          <FormForUserInfo res={node => this.formForUser = node} />
+          {/* <View className='form-wrapper'>
             <FormItemPicker
               shortUnit
               langLabel
@@ -176,10 +200,11 @@ class BiddingPublish extends Component {
               unit='icon'
               label='有效期限'
               iconName='iconRectangle rotated'
+              onPickerValueChange={this.onChooseTimer.bind(this)}
             />
-          </View>
-          <View className='bottom-tips'>添加房屋后，您将获得免费招标和3次免费建材比价的机会</View>
+          </View> */}
           <View className='fixed-bottom-btm'>
+            <View className='bottom-tips'>您的联系信息需要您的确认才会提供给装修公司</View>
             <View className='btn-public default-btn submit-btn' onClick={this.submit.bind(this)}>提交</View>
           </View>
         </View>

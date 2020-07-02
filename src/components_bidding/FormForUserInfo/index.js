@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 11:28:35
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 13:21:52
+ * @LastEditTime: 2020-07-02 13:41:34
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -38,7 +38,6 @@ class FormForUserInfo extends Component {
   }
   
   componentWillReceiveProps(nextProps) { 
-    console.log('nextProps', nextProps)
     const { phone } = this.state
     if (nextProps.userInfo.phone && nextProps.userInfo.phone !== phone) {
       this.setState({
