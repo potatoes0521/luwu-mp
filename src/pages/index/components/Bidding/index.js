@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 11:19:15
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 21:08:13
+ * @LastEditTime: 2020-07-02 21:58:02
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -108,11 +108,11 @@ class Bidding extends Component {
         </View>
         <View className='bottom-btn-wrapper'>
           <View className='btn' onClick={this.navigatorBiddingList.bind(this)}>
-            <View>大家的招标</View>
+            <View>大家的装修招标</View>
             {/* <Text className='iconlujing iconfont bottom-icon'></Text> */}
           </View>
           <View className='btn' onClick={this.navigatorTo.bind(this)}>
-            <View>我也要招标</View>
+            <View>我也要装修招标</View>
             <Text className='iconlujing iconfont bottom-icon'></Text>
           </View>
         </View>

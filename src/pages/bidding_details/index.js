@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 17:57:51
+ * @LastEditTime: 2020-07-02 22:04:42
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -30,6 +30,8 @@ import FromMain from './components/FormMain'
 import ImageSwiper from './components/Swiper'
 
 import './index.scss'
+
+const defaultImage = [getImage('bidding/swiper_default.png')]
 
 class BiddingDetails extends Component { 
 
@@ -75,7 +77,8 @@ class BiddingDetails extends Component {
     const { progress } = this.state
     switch (progress) {
       case 0:
-        return '未招标';
+        // return '未招标';
+        return '招标中';
       case 1:
         return '招标中';
       case 2:
@@ -155,7 +158,7 @@ class BiddingDetails extends Component {
       >
         <View className='page-wrapper skeleton' >
           <View className='details-swiper-wrapper skeleton-square' >
-            <ImageSwiper imageList={Array.isArray(images) ? images : []} />
+            <ImageSwiper imageList={Array.isArray(images) && images.length ? images : defaultImage} />
           </View>
           <View className='details-main-wrapper'>
             <View className='form-wrapper'>

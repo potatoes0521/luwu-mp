@@ -4,11 +4,11 @@
  * @path: 引入路径
  * @Date: 2020-06-28 14:49:24
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 16:21:28
+ * @LastEditTime: 2020-07-02 22:17:17
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
- */ 
+ */
 /**
   * 获取当天时分秒的时间戳
   * @param {Number} hours 时
@@ -60,3 +60,34 @@ export const getDateTime = times => {
   let s = getBYT(date.getSeconds());
   return Y + M + D + h + m + s;
 };
+
+export const formatArticleTime = (timestamp) => {
+  let t = parseInt((new Date().getTime() - timestamp) / 1000);
+  if (t < 0) {
+    return '1小时前';
+  }
+  if (t < 60) {
+    return '刚刚';
+  }
+  t = parseInt(t / 60);
+  if (t < 60) {
+    return `${t}分钟前`;
+  }
+  t = parseInt(t / 60);
+  if (t < 24) {
+    return `${t}小时前`;
+  }
+  t = parseInt(t / 24);
+  if (t == 1) {
+    return '昨天';
+  } else if (t == 2) {
+    return '前天';
+  } else if (t < 10 && t > 2) {
+    return `${t}天前`;
+  }
+  const d = new Date(+timestamp);
+  const year = d.getFullYear();
+  const month = d.getMonth() + 1;
+  const day = d.getDate();
+  return `${year}.${month}.${day}`;
+}
