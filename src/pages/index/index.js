@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 17:09:15
+ * @LastEditTime: 2020-07-02 18:52:08
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -38,7 +38,8 @@ class Index extends Component {
       fixed: false,
       tabActiveIndex: 0
     }
-    this.stickyScrollData = {}
+    this.stickyScrollTop = {}
+
   }
   componentDidMount() { 
     this.login()

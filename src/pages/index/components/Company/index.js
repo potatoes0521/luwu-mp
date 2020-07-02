@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 13:20:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 14:07:52
+ * @LastEditTime: 2020-07-02 18:50:55
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -17,6 +17,8 @@ import {
 } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { getCompanyData } from '@services/modules/index'
+import { getImage } from '@assets/cdn'
 
 import './index.scss'
 
@@ -24,43 +26,22 @@ export default class Company extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      companyList: [{
-        companyId: 0,
-        companyLogo: ''
-      }, {
-        companyId: 1,
-        companyLogo: ''
-      }, {
-        companyId: 2,
-        companyLogo: ''
-      }, {
-        companyId: 3,
-        companyLogo: ''
-      }, {
-        companyId: 4,
-        companyLogo: ''
-      }, {
-        companyId: 5,
-        companyLogo: ''
-      }, {
-        companyId: 6,
-        companyLogo: ''
-      }, {
-        companyId: 7,
-        companyLogo: ''
-      }, {
-        companyId: 8,
-        companyLogo: ''
-      }, {
-        companyId: 9,
-        companyLogo: ''
-      }]
+      companyList: []
     }
+  }
+  componentDidMount() { 
+    this.getCompanyData()
   }
   static options = {
     addGlobalClass: true // 允许外部样式修改组件样式
   }
-
+  getCompanyData() { 
+    getCompanyData().then(res => {
+      this.setState({
+        companyList: res
+      })
+    })
+  }
   
   render() {
     const { companyList } = this.state
@@ -79,7 +60,7 @@ export default class Company extends Component {
                     className={itemClassName}
                     key={key}
                   >
-                    <Image className='item-image' src={item.companyLogo}></Image>
+                    <Image className='item-image' src={getImage(item.companyLogo)}></Image>
                   </View>
                 )
               })

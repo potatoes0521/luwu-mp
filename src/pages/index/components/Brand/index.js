@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 13:56:20
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 16:26:11
+ * @LastEditTime: 2020-07-02 18:42:28
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -17,15 +17,32 @@ import {
 } from '@tarojs/components'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import { getBrandData } from '@services/modules/index'
+import { getImage } from '@assets/cdn'
 
 import './index.scss'
 
 export default class Brand extends Component { 
+  constructor() { 
+    this.state = {
+      brandList: []
+    }
+  }
+  componentDidMount() { 
+    this.getBrandData()
+  }
+  getBrandData() { 
+    getBrandData().then(res => {
+      this.setState({
+        brandList: res
+      })
+    })
+  }
   static options = {
     addGlobalClass: true
   }
   render() {
-    const { brandList } = this.props
+    const { brandList } = this.state
     return (
       <View className='card-wrapper brand'>
         <View className='card-plain'>
@@ -42,11 +59,11 @@ export default class Brand extends Component {
                     key={key}
                   >
                     <View className='image-wrapper'>
-                      <Image className='item-image' src={item.brandLogo}></Image>
+                      <Image lazyLoad className='item-image' src={getImage(item.brandUrl)}></Image>
                     </View>
                     <View className='text-main'>
-                      <View className='text-title'>马可波罗-瓷砖</View>
-                      <View className='text-tips'>共有38家建材商店报价</View>
+                      <View className='text-title'>{item.brandName}</View>
+                      <View className='text-tips'>共有{item.num}家建材商店报价</View>
                     </View>
                   </View>
                 )
@@ -72,24 +89,6 @@ export default class Brand extends Component {
 }
 
 Brand.defaultProps = {
-  brandList: [
-    {
-      brandId: 1,
-      brandLogo: ''
-    },
-    {
-      brandId: 2,
-      brandLogo: ''
-    },
-    {
-      brandId: 3,
-      brandLogo: ''
-    },
-    {
-      brandId: 4,
-      brandLogo: ''
-    }
-  ],
   onClick: () => {console.error('onClick is not defined')}
 }
 

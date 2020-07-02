@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 14:41:33
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 18:19:05
+ * @LastEditTime: 2020-07-02 18:29:33
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -15,6 +15,7 @@ import {
   Text
 } from '@tarojs/components'
 import PropTypes from 'prop-types'
+import { getStoreData } from '@services/modules/index'
 
 import './index.scss'
 
@@ -27,7 +28,21 @@ export default class Store extends Component {
       storeList: []
     }
   }
-  
+  componentDidMount() { 
+    this.getStoreData()
+  }
+  getStoreData() { 
+    getStoreData().then(res => {
+      this.setState({
+        storeList: res
+      })
+    })
+  }
+  navigator() { 
+    Taro.navigateTo({
+      url: '/pages/note_publish/index'
+    })
+  }
   static options = {
     addGlobalClass: true // 允许外部样式修改组件样式
   }
@@ -89,7 +104,7 @@ export default class Store extends Component {
             <View>建材商店</View>
             {/* <Text className='iconlujing iconfont bottom-icon'></Text> */}
           </View>
-          <View className='btn'>
+          <View className='btn' onClick={this.navigator.bind(this)}>
             <View>我要记笔记</View>
             <Text className='iconlujing iconfont bottom-icon'></Text>
           </View>
