@@ -146,7 +146,7 @@ class OfferExaminePublish extends Component {
         this.showToast('发布失败')
         return
       }
-      this.showToast('发布成功')
+      this.showToast('发布成功', 'success')
       this.timer = setTimeout(() => {
         Taro.redirectTo({
           url: `/pages/offer_examine_details/index?quotationId=${res.quotationId}`
@@ -154,9 +154,10 @@ class OfferExaminePublish extends Component {
       }, 1800)
     })
   }
-  showToast(msg) { 
+  showToast(msg, icon='none') { 
     Taro.showToast({
-      title: msg
+      title: msg,
+      icon
     })
   }
   /**
