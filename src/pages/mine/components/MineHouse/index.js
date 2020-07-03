@@ -159,7 +159,7 @@ class MineHouse extends Component {
           <View className='house-wrapper'>
             <View className='form-label house-label'>
               <View className='house-title'>添加房屋信息</View>
-              <View className='house-tips'>添加房屋后，您将获得免费招标和3次免费建材比价机会</View>
+              <View className='house-tips'>添加房屋后，您将获得免费招标和2次免费建材比价机会</View>
             </View>
             <View className='from-content'>
               <View className='iconfont iconRectangle rotated right-icon'></View>
