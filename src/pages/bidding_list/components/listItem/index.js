@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 16:52:33
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 22:15:23
+ * @LastEditTime: 2020-07-02 22:35:43
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -78,7 +78,7 @@ export default class ListItem extends Component {
             <View className='item-form'>
               <View className='form-item'>类型：{decorateType ? '毛坯房' : '旧房翻新'}</View>
               <View className='form-item'>面积：{area + '㎡'}</View>
-              <View className='form-item'>预算：{budget.moneyText}</View>
+              <View className='form-item'>预算：{budget.moneyText || `${item.budgetMin || ''}-${item.budgetMax || ''}万`}</View>
             </View>
           </View>
         </View>

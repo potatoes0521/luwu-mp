@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-01 09:55:00
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 21:10:33
+ * @LastEditTime: 2020-07-02 22:35:53
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -103,7 +103,7 @@ class MineHouse extends Component {
             </View>
               <View className='house-form-item'>
               <View className='house-form-content'>面积: {item.area}㎡</View>
-              <View className='house-form-content margin-left30'>装修预算: {budget.moneyText}</View>
+              <View className='house-form-content margin-left30'>装修预算: {budget.moneyText || `${item.budgetMin || ''}-${item.budgetMax || ''}万`}</View>
             </View>
             <View className='house-form-item'>
               <View className='house-form-content'>{item.address}</View>

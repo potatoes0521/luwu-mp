@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-21 09:58:20
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 20:30:57
+ * @LastEditTime: 2020-07-02 22:35:34
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -39,11 +39,13 @@ export default class FormMain extends Component {
       decorateTimeBefore,
       remark,
       area,
+      budgetMin,
+      budgetMax
     } = this.props
     const houseType = (bedroom.chinese || '-') + '室' + (sittingroom.chinese || '-') + '厅' + (cookroom.chinese || '-') + '厨' + (washroom.chinese || '-') + '卫'
     const areaText = area + '㎡'
     const decorateTypeText = decorateType ? '毛坯房' : '旧房翻新'
-    const budgetText = budget.moneyText
+    const budgetText = budget.moneyText || `${budgetMin || ''}-${budgetMax || ''}万`
     const addressText = address.address || ''
     const time = decorateTimeBefore.substr(0, 7).replace('-', '年') + '月'
     return (
