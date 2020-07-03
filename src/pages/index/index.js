@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 20:25:15
+ * @LastEditTime: 2020-07-03 18:45:09
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -21,6 +21,7 @@ import Login from '@utils/login'
 import { getImage } from '@assets/cdn'
 import Auth from '@components/auth'
 import { getHouseList } from '@services/modules/house'
+import { getOfferList } from '@services/modules/offer'
 import StickyTab from './components/StickyTab'
 import FreeEvent from './components/FreeEvent'
 import Bidding from './components/Bidding'
@@ -38,21 +39,36 @@ class Index extends Component {
       loading: false,
       fixed: false,
       tabActiveIndex: 0,
-      biddingList: []
+      biddingList: [],
+      offerData: {}
     }
     this.stickyScrollTop = {}
 
   }
-  componentDidMount() { 
-    this.login()
+  async componentDidMount() { 
+    await Login.login()
+    this.getHouseList()
+    this.getOfferList()
+  }
+  getHouseList() { 
     getHouseList().then(res => {
       this.setState({
         biddingList: res.splice(0, 5)
       })
     })
   }
-  login() { 
-    Login.login()
+  getOfferList() { 
+    if (this.flag) return
+    const { userInfo } = this.props
+    getOfferList({
+      userId: userInfo.userId,
+      current: 1,
+      pageSize: 1
+    }).then(res => {
+      this.setState({
+        offerData: res.data[0] || {}
+      })
+    })
   }
   /**
    * 当计算出滚动区域高度
@@ -124,7 +140,8 @@ class Index extends Component {
       loading,
       fixed,
       tabActiveIndex,
-      biddingList
+      biddingList,
+      offerData
     } = this.state
     return (
       <View className='page-wrapper skeleton' id='sticky'>
@@ -136,7 +153,7 @@ class Index extends Component {
           activeIndex={tabActiveIndex}
           onComputedScrollTop={this.onComputedScrollTop.bind(this)}
         />
-        <FreeEvent />
+        <FreeEvent offerData={offerData} />
         <Bidding biddingList={biddingList} />
         <Company />
         <Brand />

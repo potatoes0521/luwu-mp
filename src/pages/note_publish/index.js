@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 14:09:48
+ * @LastEditTime: 2020-07-03 18:44:49
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -41,10 +41,8 @@ class NotePublish extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount')
     this.pageParams = this.$router.params
     this.login()
-    console.log('this.pageParams', this.pageParams)
     if (this.pageParams && this.pageParams.pageType === 'edit' ) {
       this.getNoteDetails()
     }

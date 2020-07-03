@@ -24,7 +24,6 @@ export const publishNote = (data, that) => {
  * @return void
  */
 export const getNoteDetails = (data, that) => {
-  console.log('data', data, data.noteId)
   return request.get(`materials/v1/note/${data.noteId}`, data, that, false)
 }
 

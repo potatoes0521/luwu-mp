@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 10:42:14
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 11:18:31
+ * @LastEditTime: 2020-07-03 18:42:34
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -22,8 +22,11 @@ const titleTextImage = getImage(`index/freeEvent/title.png?${Math.random()}`)
 
 export default class FreeEvent extends Component {
   navigator() { 
+    const { offerData } = this.props
+    const pageName = offerData && offerData.quotationId ? 'offer_examine_details' : 'offer_examine_publish'
+    const url = `/pages/${pageName}/index?quotationId=${offerData.quotationId || ''}`
     Taro.navigateTo({
-      url: '/pages/offer_examine_publish/index'
+      url
     })
   }
   render() {

@@ -49,7 +49,6 @@ class OfferExamineDetails extends Component {
       quotationId: this.pageParams.quotationId
     }).then(res => {
       if (!res || !res.data) return
-      console.log('res.createAt', res.createAt)
       const roomData = handleRequestData(res.data)
       const data = Object.assign({}, roomData, res)
       this.setState(data)

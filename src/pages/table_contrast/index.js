@@ -5,7 +5,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 10:29:30
+ * @LastEditTime: 2020-07-03 18:44:12
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -65,7 +65,6 @@ class TableContrast extends Component {
    * @return void
    */
   handleMockData(showAll) {
-    console.log('newMock', newMock)
     const handleEndMockData = handleNewData(newMock)
     if (showAll) { // 如果是二次显示  没必要处理一下施工区域
       this.setState({
