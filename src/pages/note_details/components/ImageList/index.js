@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-21 10:40:32
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 16:25:23
+ * @LastEditTime: 2020-07-03 16:33:19
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -33,10 +33,10 @@ export default class ImageList extends Component {
     const imageListRender = imageList.map((item, index) => {
       const itemTitle = title ? (imageList.length > 1 ? title + SectionToChinese(index + 1) : title) : ''
       return (
-        <View className='image-item skeleton-square'
+        <View className='image-item'
           key={item}
         >
-          <View className='image-wrapper'>
+          <View className='image-wrapper skeleton-square' >
             <Image
               lazy-load
               onClick={this.onItemClick.bind(this, item)}
@@ -45,7 +45,7 @@ export default class ImageList extends Component {
               className='image'
             ></Image>
           </View>
-          <View className='title'>{itemTitle || ''}</View>
+          <View className='title skeleton-cylinder'>{itemTitle || ''}</View>
         </View>
       )
     })

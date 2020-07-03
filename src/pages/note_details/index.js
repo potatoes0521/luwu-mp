@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 16:24:26
+ * @LastEditTime: 2020-07-03 16:37:05
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -23,7 +23,7 @@ import { getNoteDetails } from '@services/modules/note'
 import { getImage } from '@assets/cdn'
 import { random } from '@utils/numberToCode'
 import Location from '@components/Location'
-import goodsState from '@config/noteState'
+import noteState from '@config/noteState'
 import BottomBtn from '@/components_note/BottomBtn'
 import ImageSwiper from './components/Swiper'
 import ImageList from './components/ImageList'
@@ -34,12 +34,10 @@ class NoteDetails extends Component {
 
   constructor(props) {
     super(props)
-    this.state = Object.assign({}, goodsState, {
+    this.state = Object.assign({}, noteState, {
       // 除去公共key以外的字段定在这里
       distributorCount: 0,
       loading: true,
-      idCardImageList: [''], // 名片
-      priceTagImageList: [''], // 价签图片
       isShare: false
     })
     this.pageParams = {}
@@ -86,7 +84,7 @@ class NoteDetails extends Component {
   }
   renderFormItem(label, content) { 
     return (
-      <View className='form-item'>
+      <View className='form-item skeleton-cylinder' >
         <View className='form-label'>{label}</View>
         <View className='form-content'>{content}</View>
       </View>
@@ -158,13 +156,13 @@ class NoteDetails extends Component {
       >
         <View className={pageWrapperClassName}>
           <ImageSwiper imageList={goodsImageList} />
-          <View className='form-wrapper'>
+          <View className='form-wrapper padding-bottom20' >
             <View className='title-wrapper'>
               <View className='note-msg-title skeleton-cylinder'>{brand.brandName} {childCategory.categoryName || mainCategory.categoryName || ''}</View>
               {
                 !isShare && (
                   <View className='tips'>
-                    <Text className='tips-text' onClick={this.handleEditData.bind(this)}>编辑</Text>
+                    <Text className='tips-text skeleton-cylinder' onClick={this.handleEditData.bind(this)}>编辑</Text>
                   </View>
                 )
               }

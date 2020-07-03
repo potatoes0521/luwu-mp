@@ -26,13 +26,12 @@ page {
       font-size: 28px;
       color: $tips-color;
       border-bottom: 2px solid $background-color;
-      margin-bottom: 20px;
     }
 
     .form-item-line {
       width: 100%;
       padding: 0 32px;
-      padding-bottom: 20px;
+      margin-top: 20px;
       box-sizing: border-box;
       display: flex;
       align-items: center;
@@ -160,4 +159,8 @@ page {
 
 .bottom-padding160 {
   padding-bottom: 160px;
+}
+
+.padding-bottom20{
+  padding-bottom: 20px;
 }
