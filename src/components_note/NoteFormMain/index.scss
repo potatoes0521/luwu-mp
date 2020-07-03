@@ -14,7 +14,6 @@
   padding: 0 32px 20px;
   font-size: 28px;
   color: $tips-color;
-  border-bottom: 2px solid $background-color;
 }
 
 .form-item-line {
@@ -40,5 +39,21 @@
       flex: 1;
       color: $tips-color;
     }
+  }
+}
+
+.border-bottom {
+  border-bottom: 2px solid $background-color;
+}
+
+.tips {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 28px;
+  color: $link-color;
+
+  .tips-text {
+    font-size: 28px;
   }
 }

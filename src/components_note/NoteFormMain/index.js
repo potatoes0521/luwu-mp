@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-21 09:58:20
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 17:01:58
+ * @LastEditTime: 2020-07-03 17:09:08
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,10 +16,17 @@ import {
   Text
 } from '@tarojs/components'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 import './index.scss'
 
 export default class NoteFormMain extends Component {
+  handleEditData() {
+    const { noteId } = this.props
+    Taro.navigateTo({
+      url: `/pages/note_publish/index?pageType=edit&noteId=${noteId}`
+    })
+  }
   renderFormItem(label, content) { 
     return (
       <View className='form-item skeleton-cylinder' >
@@ -30,15 +37,19 @@ export default class NoteFormMain extends Component {
   }
   render() {
     const {
+      line,
       brand,
+      model,
+      price,
       isShare,
+      updateAt,
+      priceUnit,
       mainCategory,
       childCategory,
-      price,
-      priceUnit,
-      updateAt,
-      model,
     } = this.props
+    const timerClassName = classNames('time', {
+      'border-bottom': line
+    })
     const categoryName = (mainCategory.categoryName ? mainCategory.categoryName : '') + (childCategory.categoryName ? ` | ${childCategory.categoryName}` : '')
     return (
       <Block>
@@ -52,7 +63,7 @@ export default class NoteFormMain extends Component {
             )
           }
         </View>
-        <View className='time'>{updateAt}</View>
+        <View className={timerClassName}>{updateAt}</View>
         <View className='form-item-line'>
           {this.renderFormItem('品类', categoryName)}
         </View>

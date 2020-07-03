@@ -4,16 +4,13 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 16:37:05
+ * @LastEditTime: 2020-07-03 17:12:06
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
 import Taro, { Component } from '@tarojs/taro'
-import {
-  View,
-  Text
-} from '@tarojs/components'
+import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import SafeAreaView from '@components/SafeAreaView'
 import Skeleton from '@components/Skeleton'
@@ -25,6 +22,7 @@ import { random } from '@utils/numberToCode'
 import Location from '@components/Location'
 import noteState from '@config/noteState'
 import BottomBtn from '@/components_note/BottomBtn'
+import NoteFormMain from '@/components_note/NoteFormMain'
 import ImageSwiper from './components/Swiper'
 import ImageList from './components/ImageList'
 
@@ -62,14 +60,9 @@ class NoteDetails extends Component {
       }
       const data = Object.assign({}, res, json, {
         loading: false,
-        isShare: this.pageParams.shareType
+        isShare: !!this.pageParams.shareType
       })
       this.setState(data)
-    })
-  }
-  handleEditData() { 
-    Taro.navigateTo({
-      url: `/pages/note_publish/index?pageType=edit&noteId=${this.pageParams.noteId}`
     })
   }
   handleOnRightBtnClick() {
@@ -81,14 +74,6 @@ class NoteDetails extends Component {
     Taro.showToast({
       title: '比价成功'
     })
-  }
-  renderFormItem(label, content) { 
-    return (
-      <View className='form-item skeleton-cylinder' >
-        <View className='form-label'>{label}</View>
-        <View className='form-content'>{content}</View>
-      </View>
-    )
   }
   /**
    * 下拉刷新
@@ -124,21 +109,21 @@ class NoteDetails extends Component {
 
   render() {
     const {
-      address,
-      goodsImageList,
-      priceTagImageList,
-      idCardImageList,
-      distributorCount,
-      mainCategory,
+      model,
+      price,
       brand,
+      remark,
+      address,
       loading,
       isShare,
-      childCategory,
-      price,
-      priceUnit,
       updateAt,
-      model,
-      remark
+      priceUnit,
+      mainCategory,
+      childCategory,
+      goodsImageList,
+      idCardImageList,
+      distributorCount,
+      priceTagImageList,
     } = this.state
     const bottomFixedButtonClassName = classNames({
       'bottom-fixed-wrapper': !isShare,
@@ -147,7 +132,6 @@ class NoteDetails extends Component {
     const pageWrapperClassName = classNames('page-wrapper skeleton', {
       'bottom-padding160': isShare
     })
-    const categoryName = (mainCategory.categoryName ? mainCategory.categoryName : '') + (childCategory.categoryName ? ` | ${childCategory.categoryName}` : '')
     return (
       <SafeAreaView
         title='记笔记'
@@ -157,24 +141,17 @@ class NoteDetails extends Component {
         <View className={pageWrapperClassName}>
           <ImageSwiper imageList={goodsImageList} />
           <View className='form-wrapper padding-bottom20' >
-            <View className='title-wrapper'>
-              <View className='note-msg-title skeleton-cylinder'>{brand.brandName} {childCategory.categoryName || mainCategory.categoryName || ''}</View>
-              {
-                !isShare && (
-                  <View className='tips'>
-                    <Text className='tips-text skeleton-cylinder' onClick={this.handleEditData.bind(this)}>编辑</Text>
-                  </View>
-                )
-              }
-            </View>
-            <View className='time'>{updateAt}</View>
-            <View className='form-item-line'>
-              {this.renderFormItem('品类', categoryName)}
-            </View>
-            <View className='form-item-line'>
-              {this.renderFormItem('价格', price + priceUnit ? ' -' : '' + priceUnit)}
-              {this.renderFormItem('型号', model || '无')}
-            </View>
+            <NoteFormMain
+              line
+              brand={brand}
+              model={model}
+              price={price}
+              isShare={isShare}
+              updateAt={updateAt}
+              priceUnit={priceUnit}
+              mainCategory={mainCategory}
+              childCategory={childCategory}
+            />
           </View>
           {
             remark && (
