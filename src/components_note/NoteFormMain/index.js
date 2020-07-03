@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-21 09:58:20
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 17:20:10
+ * @LastEditTime: 2020-07-03 17:31:08
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -17,6 +17,7 @@ import {
 } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { formatTimeToChinese } from '@/utils/timer'
 
 import './index.scss'
 
@@ -44,6 +45,7 @@ export default class NoteFormMain extends Component {
       isShare,
       updateAt,
       priceUnit,
+      rightType,
       mainCategory,
       childCategory,
     } = this.props
@@ -51,15 +53,21 @@ export default class NoteFormMain extends Component {
       'little-title': !time
     })
     const categoryName = (mainCategory.categoryName ? mainCategory.categoryName : '') + (childCategory.categoryName ? ` | ${childCategory.categoryName}` : '')
+    const timeText = formatTimeToChinese(updateAt)
     return (
       <Block>
         <View className={titleClassName}>
           <View className='note-msg-title skeleton-cylinder'>{brand.brandName} {childCategory.categoryName || mainCategory.categoryName || ''}</View>
           {
-            !isShare && (
+            !isShare && rightType === 'edit' && (
               <View className='tips'>
                 <Text className='tips-text skeleton-cylinder' onClick={this.handleEditData.bind(this)}>编辑</Text>
               </View>
+            )
+          }
+          {
+            rightType === 'time' && (
+              <Text className='time-text'>{timeText}</Text>
             )
           }
         </View>
