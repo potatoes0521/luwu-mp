@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-19 10:17:37
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 18:04:17
+ * @LastEditTime: 2020-07-03 18:14:18
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -53,7 +53,10 @@ class NoteSelect extends Component {
    */
   getAllCategoryData() {
     getCategory(this).then(res => {
-      if (!res || res.length < 1) return
+      if (!res || res.length < 1) {
+        this.props.onLoadEnd()
+        return
+      }
       res.forEach(item => {
         item.checked = false
       })
