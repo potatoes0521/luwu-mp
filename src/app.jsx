@@ -71,7 +71,6 @@ class App extends Component {
       // 审报价
       'pages/offer_examine_details/index',
       'pages/offer_examine_publish/index',
-      'pages/offer_examine_list/index',
       // 招标
       'pages/bidding_publish/index',
       'pages/bidding_details/index',
