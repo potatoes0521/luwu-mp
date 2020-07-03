@@ -4,13 +4,16 @@
  * @path: 引入路径
  * @Date: 2020-06-19 09:47:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 17:28:21
+ * @LastEditTime: 2020-07-03 17:50:27
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
 import Taro, { Component } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import {
+  View,
+  Text
+} from '@tarojs/components'
 import PropTypes from 'prop-types'
 import Upload from '@components/Upload'
 import Location from '@components/Location'
@@ -23,6 +26,11 @@ export default class NoteItem extends Component {
   componentWillUnmount() { 
     removeStorage('note_details')
   }
+
+  static options = {
+    addGlobalClass: true // 允许外部样式修改组件样式
+  }
+  
   HandleEditData(e) { 
     e && e.stopPropagation();
     const { item } = this.props
@@ -39,7 +47,7 @@ export default class NoteItem extends Component {
   }
   submitOffer() {
     Taro.showToast({
-      title: '比价成功'
+      title: '询底价成功'
     })
   }
   render() {
@@ -76,6 +84,16 @@ export default class NoteItem extends Component {
             ></Upload>
           </View>
           <Location onlyShow address={item.address} />
+        </View>
+        <View className='handle-wrapper'>
+          <View className='handle-item' onClick={this.HandleEditData.bind(this)}>
+            <Text className='iconfont iconjiahao handle-icon-style'></Text>
+            <Text>编辑</Text>
+          </View>
+          <View className='handle-item' onClick={this.submitOffer.bind(this)}>
+            <Text className='iconfont iconjiahao handle-icon-style'></Text>
+            <Text>询底价</Text>
+          </View>
         </View>
       </View>
     )
