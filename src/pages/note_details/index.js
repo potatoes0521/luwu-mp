@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 18:21:16
+ * @LastEditTime: 2020-07-03 09:23:43
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -142,6 +142,7 @@ class NoteDetails extends Component {
       <SafeAreaView
         title={mainCategory.categoryName || '录屋'}
         back={!isShare}
+        home={isShare}
       >
         <View className={pageWrapperClassName}>
           <View
