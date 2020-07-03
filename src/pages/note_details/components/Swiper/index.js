@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-21 10:11:53
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 10:29:19
+ * @LastEditTime: 2020-07-03 15:42:55
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -48,7 +48,7 @@ export default class ImageSwiper extends Component {
       const key = item
       return (
         <SwiperItem key={key}>
-          <View className='swiper-item'>
+          <View className='swiper-item skeleton-square'>
             <Image
               lazyLoad
               className='swiper-item-image'
@@ -85,7 +85,7 @@ export default class ImageSwiper extends Component {
 }
 
 ImageSwiper.defaultProps = {
-  imageList: [],
+  imageList: [1],
   onSwiperItemClick: () => {
     console.error('onSwiperItemClick is not defined in note_details/components/Swiper')
   }

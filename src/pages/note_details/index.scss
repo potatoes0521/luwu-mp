@@ -1,53 +1,87 @@
 @import '../../assets/css/theme.scss';
-page{
+
+page {
   background-color: $background-color;
 }
+
 .page-wrapper {
   padding-bottom: 290px;
-  padding-top: 90px;
 
-  .note-details-location-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    height: 90px;
-    border-bottom: 2px solid $background-color;
-    z-index: 5;
-
-    .location-icon {
-      color: $font-color !important;
-    }
-  }
-  .offer-price-wrapper,
-  .note-details-location-wrapper{
-    .tips {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      font-size: 28px;
-      color: $link-color;
-    }
-  }
-
-  .details-main-wrapper {
-    padding: 0 30px;
-    border-top: 2px solid $background-color;
+  .form-wrapper {
+    margin-bottom: 30px;
     background-color: #ffffff;
 
-    .details-swiper-wrapper {
-      margin-top: 20px;
-      margin-bottom: 14px;
+    .title-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 30px 32px 16px;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 42px;
     }
-    .form-wrapper{
-      padding-bottom: 30px;
+
+    .time {
+      padding: 0 32px 20px;
+      font-size: 28px;
+      color: $tips-color;
+      border-bottom: 2px solid $background-color;
+      margin-bottom: 20px;
     }
-    .image-list-wrapper {
-      padding-top: 44px;
-      padding-bottom: 30px;
+
+    .form-item-line {
+      width: 100%;
+      padding: 0 32px;
+      padding-bottom: 20px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+
+      .form-item {
+        display: flex;
+        font-size: 28px;
+        flex: 1;
+
+        .form-label {
+          width: 76px;
+          color: $font-color;
+          font-weight: 700;
+        }
+
+        .form-content {
+          flex: 1;
+          color: $tips-color;
+        }
+      }
     }
   }
+
+  .remark-wrapper {
+    padding: 30px;
+
+    .remark-title {
+      width: 100%;
+      font-size: 28px;
+      line-height: 40px;
+      color: $font-color;
+      font-weight: 700;
+    }
+
+    .remark-main {
+      padding-top: 20px;
+      font-size: 28px;
+      line-height: 40px;
+      color: $tips-color;
+      text-align: justify;
+    }
+  }
+
+  .image-list-wrapper {
+    padding-top: 44px;
+    padding-bottom: 30px;
+  }
+
+
   .share-bottom-fixed-wrapper,
   .bottom-fixed-wrapper {
     width: 100vw;
@@ -59,14 +93,15 @@ page{
     margin: 0 auto;
   }
 
-  .share-bottom-fixed-wrapper{
+  .share-bottom-fixed-wrapper {
     height: 140px;
   }
+
   .bottom-fixed-wrapper {
     height: 260px;
   }
 
-  .bottom-fixed-wrapper{
+  .bottom-fixed-wrapper {
     width: 100vw;
     height: 260px;
     background-color: $background-color;
@@ -76,7 +111,8 @@ page{
     right: 0;
     margin: 0 auto;
   }
-  .offer-price-wrapper{
+
+  .offer-price-wrapper {
     width: 100%;
     height: 92px;
     box-sizing: border-box;
@@ -86,11 +122,25 @@ page{
     justify-content: space-between;
     background-color: #ffffff;
     border-top: 2px solid $background-color;
-    .left-text{
+
+    .left-text {
       color: $font-color;
       font-size: 28px;
     }
   }
+
+  .tips {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 28px;
+    color: $link-color;
+
+    .tips-text {
+      font-size: 28px;
+    }
+  }
+
   // 指示点样式写在子组件不会生效
   .swiper .wx-swiper-dot {
     width: 8px;
@@ -108,6 +158,6 @@ page{
   }
 }
 
-.bottom-padding160{
+.bottom-padding160 {
   padding-bottom: 160px;
 }

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 09:23:43
+ * @LastEditTime: 2020-07-03 16:12:39
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -24,7 +24,6 @@ import { getImage } from '@assets/cdn'
 import { random } from '@utils/numberToCode'
 import Location from '@components/Location'
 import goodsState from '@config/noteState'
-import NoteFromMain from '@/components_note/NoteFormMain'
 import BottomBtn from '@/components_note/BottomBtn'
 import ImageSwiper from './components/Swiper'
 import ImageVerticalList from './components/ImageVerticalList'
@@ -85,6 +84,14 @@ class NoteDetails extends Component {
       title: '比价成功'
     })
   }
+  renderFormItem(label, content) { 
+    return (
+      <View className='form-item'>
+        <View className='form-label'>{label}</View>
+        <View className='form-content'>{content}</View>
+      </View>
+    )
+  }
   /**
    * 下拉刷新
    * @return void
@@ -127,10 +134,14 @@ class NoteDetails extends Component {
       mainCategory,
       brand,
       loading,
-      isShare
+      isShare,
+      childCategory,
+      price,
+      priceUnit,
+      updateAt,
+      model,
+      remark
     } = this.state
-    const {system} = this.props
-    const navHeight = ((system && system.navHeight) || 120)
     const bottomFixedButtonClassName = classNames({
       'bottom-fixed-wrapper': !isShare,
       'share-bottom-fixed-wrapper': isShare
@@ -138,18 +149,19 @@ class NoteDetails extends Component {
     const pageWrapperClassName = classNames('page-wrapper skeleton', {
       'bottom-padding160': isShare
     })
+    const categoryName = (mainCategory.categoryName ? mainCategory.categoryName : '') + (childCategory.categoryName ? ` | ${childCategory.categoryName}` : '')
     return (
       <SafeAreaView
-        title={mainCategory.categoryName || '录屋'}
+        title='记笔记'
         back={!isShare}
         home={isShare}
       >
         <View className={pageWrapperClassName}>
-          <View
-            style={{top:navHeight + 'rpx'}}
-            className='note-details-location-wrapper'
-          >
-            <Location onlyShow address={address} >
+          
+          <ImageSwiper imageList={goodsImageList} />
+          <View className='form-wrapper'>
+            <View className='title-wrapper'>
+              <View className='note-msg-title skeleton-cylinder'>{brand.brandName} {childCategory.categoryName || mainCategory.categoryName || ''}</View>
               {
                 !isShare && (
                   <View className='tips'>
@@ -157,58 +169,65 @@ class NoteDetails extends Component {
                   </View>
                 )
               }
-              
-            </Location>
+            </View>
+            <View className='time'>{updateAt}</View>
+            <View className='form-item-line'>
+              {this.renderFormItem('品类', categoryName)}
+            </View>
+            <View className='form-item-line'>
+              {this.renderFormItem('价格', price + priceUnit ? ' -' : '' + priceUnit)}
+              {this.renderFormItem('型号', model || '无')}
+            </View>
           </View>
-          <View className='details-main-wrapper'>
-            <View className='details-swiper-wrapper skeleton-square' >
-              <ImageSwiper imageList={goodsImageList} />
-            </View>
-            <View className='form-wrapper'>
-              <NoteFromMain
-                showRemark
-                item={this.state}
-              />
-            </View>
+          {
+            remark && (
+              <View className='form-wrapper remark-wrapper'>
+                <View className='remark-title'>笔记备注</View>
+                <View className='remark-main'>{remark}</View>
+              </View>
+            )
+          }
+          <View className='form-wrapper'>
+            <Location onlyShow address={address} />
+          </View>
+          {
+            ((priceTagImageList && priceTagImageList.length) || (idCardImageList && idCardImageList.length)) && (
+              <View className='image-list-wrapper'>
+                {
+                  priceTagImageList && (
+                    <ImageVerticalList
+                      imageList={priceTagImageList}
+                      title='价签'
+                    />
+                  )
+                }
+                {
+                  idCardImageList && (
+                    <ImageVerticalList
+                      imageList={idCardImageList}
+                      title='名片'
+                    />
+                  )
+                }
+              </View>
+            )
+          }
+          <View className={bottomFixedButtonClassName}>
             {
-              ((priceTagImageList && priceTagImageList.length) || (idCardImageList && idCardImageList.length)) && (
-                <View className='image-list-wrapper'>
-                  {
-                    priceTagImageList && (
-                      <ImageVerticalList
-                        imageList={priceTagImageList}
-                        title='价签'
-                      />
-                    )
-                  }
-                  {
-                    idCardImageList && (
-                      <ImageVerticalList
-                        imageList={idCardImageList}
-                        title='名片'
-                      />
-                    )
-                  }
+              !isShare && (
+                <View className='offer-price-wrapper'>
+                  <View className='left-text'>
+                    全城共有{distributorCount || '99'}家{brand.brandName || ''}{mainCategory.categoryName}商店
+                  </View>
+                  <View className='tips' onClick={this.submitOffer.bind(this)}>一键比价</View>
                 </View>
               )
             }
-            <View className={bottomFixedButtonClassName}>
-              {
-                !isShare && (
-                  <View className='offer-price-wrapper'>
-                    <View className='left-text'>
-                      全城共有{distributorCount || '99'}家{brand.brandName || ''}{mainCategory.categoryName}商店
-                    </View>
-                    <View className='tips' onClick={this.submitOffer.bind(this)}>一键问价</View>
-                  </View>
-                )
-              }
-              <BottomBtn
-                onlyShowShare={isShare}
-                rightBtnText='继续记笔记'
-                onRightBtnClick={this.handleOnRightBtnClick.bind(this)}
-              />
-            </View>
+            <BottomBtn
+              onlyShowShare={isShare}
+              rightBtnText='记笔记'
+              onRightBtnClick={this.handleOnRightBtnClick.bind(this)}
+            />
           </View>
         </View>
         {
@@ -223,7 +242,6 @@ class NoteDetails extends Component {
 const mapStateToProps = (state) => {
   return {
     userInfo: state.user_msg.userInfo,
-    system: state.system.systemInfo
   }
 }
 export default connect(mapStateToProps)(NoteDetails)
