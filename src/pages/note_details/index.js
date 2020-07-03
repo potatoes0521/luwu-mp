@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 17:29:15
+ * @LastEditTime: 2020-07-03 18:09:05
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -36,7 +36,10 @@ class NoteDetails extends Component {
       // 除去公共key以外的字段定在这里
       distributorCount: 0,
       loading: true,
-      isShare: false
+      isShare: false,
+      goodsImageList: [1], // 商品图片
+      idCardImageList: [1, 2, 3], // 名片
+      priceTagImageList: [1, 2, 3], // 价签图片
     })
     this.pageParams = {}
     this.notLogin = true
