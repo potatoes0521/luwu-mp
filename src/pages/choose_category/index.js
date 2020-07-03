@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 13:45:32
+ * @LastEditTime: 2020-07-03 13:51:06
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -133,7 +133,8 @@ class ChooseCategory extends Component {
     prevPage.$component.setState({
       mainCategory: selectMainCategoriesData,
       childCategory: selectChildCategoriesData,
-      priceUnit: selectChildCategoriesData.unit
+      priceUnit: selectChildCategoriesData.unit,
+      brand: {}
     }, () => {
       Taro.navigateBack()
     })
