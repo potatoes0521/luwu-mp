@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:45
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 21:25:42
+ * @LastEditTime: 2020-07-03 14:09:48
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -111,16 +111,6 @@ class NotePublish extends Component {
     this.setState({
       address: data
     })
-  }
-  /**
-   * 公共标题
-   * @param {String} title 标题文字
-   * @return void
-   */
-  renderTitle(title) { 
-    return (
-      <View className='title'>{title}</View>
-    )
   }
   /**
    * 点击了选择类别
@@ -328,65 +318,62 @@ class NotePublish extends Component {
       model,
       canInputBrand
     } = this.state
-    const { system } = this.props
-    const fixedTipsTop = system && system.navHeight || 120
     const categoryText = mainCategory && mainCategory.categoryId ? mainCategory.categoryName + ' - ' + childCategory.categoryName : ''
     return (
       <SaveAreaView title='记笔记' back>
         <View className='page-wrapper'>
-          <View className='fixed-top-tips' style={{top: fixedTipsTop + 'rpx'}}>这么多建材怎么选？记到笔记本里慢慢选~</View>
           <View className='goods-image-wrapper'>
             <View className='goods-image-list-wrapper'>
               <Upload
-                imageList={goodsImageList}
                 autoChoose
+                showAddBtn
                 imageSize={180}
                 addBtnSizeType={86}
-                showAddBtn
+                imageList={goodsImageList}
                 onUploadOK={this.onGoodsImageUpload.bind(this)}
               />
             </View>
-            <View className='goods-image-tips'>瓷砖类商品照片要注意拍摄光线哦~</View>
+            <View className='goods-image-tips'>请上传清晰完整的建材照片，建议上传多张不同角度照片，笔记转发比价时，可以帮助店老板快速识别建材，让您马上就能获得报价。~</View>
           </View>
-          {
-            this.renderTitle('记笔记')
-          }
-          <View className='remark-wrapper'>
-            <Textarea
-              className='textarea'
-              placeholderClass='placeholder-class'
-              autoHeight
-              placeholder='建材信息记录下来不会忘哟~'
-              value={remark}
-              onInput={this.onRemarkInput.bind(this)}
-              maxlength={500}
-            ></Textarea>
+          <View className='card-wrapper form-wrapper'>
+            <View className='form-card-item'>
+              <View className='form-card-label'>价格标签</View>
+              <View className='form-card-content'>
+                <Upload
+                  showAddBtn
+                  imageSize={130}
+                  addBtnSize={130}
+                  computedWidth='280'
+                  imageList={priceTagImageList}
+                  onUploadOK={this.onPriceTagUpload.bind(this)}
+                />
+              </View>
+            </View>
           </View>
-          {
-            this.renderTitle('您看中的产品信息')
-          }
           <View className='form-wrapper'>
             <FormItem
               line
-              label='建材类型'
               unit='icon'
-              iconName='iconRectangle rotated'
-              value={categoryText}
+              label='建材类型'
               canInput={false}
               placeholder='请选择'
+              value={categoryText}
+              iconName='iconRectangle rotated'
+              shortUnit={priceUnit.length < 3}
               onContentClick={this.handleClickChooseCategory.bind(this)}
             />
             <FormItem
               line
               important
-              unit={canInputBrand ? true : 'icon'}
-              iconName='iconRectangle rotated'
               label='建材品牌'
               focus={canInputBrand}
               value={brand.brandName}
               canInput={canInputBrand}
-              placeholder={canInputBrand ? '请输入' : '请选择'}
+              iconName='iconRectangle rotated'
+              shortUnit={priceUnit.length < 3}
+              unit={canInputBrand ? true : 'icon'}
               onInput={this.onBrandInput.bind(this)}
+              placeholder={canInputBrand ? '请输入' : '请选择'}
               onContentClick={this.handleClickChooseBrand.bind(this)}
             />
             <FormItem
@@ -394,52 +381,51 @@ class NotePublish extends Component {
               important
               type='digit'
               unit='text'
-              label='建材价格'
               value={price}
-              unitContent={'/'+ priceUnit}
+              label='建材价格'
               placeholder='请输入'
+              unitContent={'/'+ priceUnit}
+              shortUnit={priceUnit.length < 3}
               onInput={this.onPriceInput.bind(this)}
             />
             <FormItem
               unit='show'
-              label='建材型号'
               value={model}
+              label='建材型号'
               placeholder='请输入'
+              shortUnit={priceUnit.length < 3}
               onInput={this.onModelInput.bind(this)}
             />
           </View>
+          <View className='form-wrapper textarea-wrapper'>
+            <View className='form-label-title'>补充信息</View>
+            <Textarea
+              autoHeight
+              value={remark}
+              maxlength={300}
+              className='textarea'
+              placeholderClass='placeholder-class'
+              placeholder='您可以记下价格范围和价格折扣'
+              onInput={this.onRemarkInput.bind(this)}
+            ></Textarea>
+            <View className='num-tips'>{300 - remark.length}</View>
+          </View>
           <View className='form-wrapper card-wrapper'>
             <View className='form-card-item'>
-              <View className='form-card-label'>价签</View>
+              <View className='form-card-label'>老板名片</View>
               <View className='form-card-content'>
                 <Upload
                   showAddBtn
                   imageSize={130}
                   addBtnSize={130}
-                  computedWidth='148'
-                  imageList={priceTagImageList}
-                  onUploadOK={this.onPriceTagUpload.bind(this)}
-                />
-              </View>
-            </View>
-            <View className='line'></View>
-            <View className='form-card-item'>
-              <View className='form-card-label'>名片</View>
-              <View className='form-card-content'>
-                <Upload
-                  showAddBtn
-                  imageSize={130}
-                  addBtnSize={130}
-                  computedWidth='148'
+                  computedWidth='280'
                   imageList={idCardImageList}
                   onUploadOK={this.onIdCardImageUpload.bind(this)}
                 />
               </View>
             </View>
           </View>
-          {
-            this.renderTitle('门店地址')
-          }
+          <View className='title'>门店地址</View>
           <Location
             address={address || {}}
             onGetLocationData={this.onGetLocationData.bind(this)}
@@ -457,7 +443,6 @@ class NotePublish extends Component {
 const mapStateToProps = (state) => {
   return {
     userInfo: state.user_msg.userInfo,
-    system: state.system.systemInfo
   }
 }
 
