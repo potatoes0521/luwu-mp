@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 16:12:39
+ * @LastEditTime: 2020-07-03 16:24:26
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -26,7 +26,7 @@ import Location from '@components/Location'
 import goodsState from '@config/noteState'
 import BottomBtn from '@/components_note/BottomBtn'
 import ImageSwiper from './components/Swiper'
-import ImageVerticalList from './components/ImageVerticalList'
+import ImageList from './components/ImageList'
 
 import './index.scss'
 
@@ -157,7 +157,6 @@ class NoteDetails extends Component {
         home={isShare}
       >
         <View className={pageWrapperClassName}>
-          
           <ImageSwiper imageList={goodsImageList} />
           <View className='form-wrapper'>
             <View className='title-wrapper'>
@@ -191,24 +190,22 @@ class NoteDetails extends Component {
             <Location onlyShow address={address} />
           </View>
           {
-            ((priceTagImageList && priceTagImageList.length) || (idCardImageList && idCardImageList.length)) && (
-              <View className='image-list-wrapper'>
-                {
-                  priceTagImageList && (
-                    <ImageVerticalList
-                      imageList={priceTagImageList}
-                      title='价签'
-                    />
-                  )
-                }
-                {
-                  idCardImageList && (
-                    <ImageVerticalList
-                      imageList={idCardImageList}
-                      title='名片'
-                    />
-                  )
-                }
+            priceTagImageList && priceTagImageList.length && (
+              <View className='form-wrapper'>
+                <ImageList
+                  imageList={priceTagImageList}
+                  title='价签'
+                />
+              </View>
+            )
+          }
+          {
+            idCardImageList && idCardImageList.length && (
+              <View className='form-wrapper'>
+                <ImageList
+                  imageList={idCardImageList}
+                  title='名片'
+                />
               </View>
             )
           }
