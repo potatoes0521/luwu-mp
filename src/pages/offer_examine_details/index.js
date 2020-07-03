@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-23 10:55:14
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 13:11:06
+ * @LastEditTime: 2020-07-03 18:19:52
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -51,7 +51,7 @@ class OfferExamineDetails extends Component {
       if (!res || !res.data) return
       console.log('res.createAt', res.createAt)
       const roomData = handleRequestData(res.data)
-      const data = Object.assign({}, roomData, {createAt: res.createAt})
+      const data = Object.assign({}, roomData, res)
       this.setState(data)
     })
   }
@@ -63,9 +63,9 @@ class OfferExamineDetails extends Component {
       </View>
     )
   }
-  openFile(file) {
+  handleClickFile(file) {
     Taro.downloadFile({
-      url: file.url,
+      url: file,
       success: ({
         tempFilePath
       }) => {
@@ -104,7 +104,10 @@ class OfferExamineDetails extends Component {
       area,
       fileList,
       userName,
-      phone
+      phone,
+      status,
+      reviewFile,
+      reviewRemark
     } = this.state
     const timeText = formatTimeToChinese(createAt)
     const houseType = (bedroom.chinese || '-') + '室' + (sittingroom.chinese || '-') + '厅' + (cookroom.chinese || '-') + '厨' + (washroom.chinese || '-') + '卫'
@@ -115,7 +118,7 @@ class OfferExamineDetails extends Component {
         <View
           className='file-item-wrapper'
           key={key}
-          onClick={this.handleClickFile.bind(this, file)}
+          onClick={this.handleClickFile.bind(this, file.url)}
         >
           <View className='file-item'>
             <Image className='file-icon' src={fileIcon}></Image>
@@ -151,15 +154,19 @@ class OfferExamineDetails extends Component {
               <View className='msg-tips'>监理已审核，随后会通过电话跟您联系</View>
             </View>
           </View>
-          <View className='feedback-wrapper' >
-            <View className='title'>监理审核回复</View>
-            <View className='textarea'>
-              
-            </View>
-            <View className='download-file'>
-              <Text onClick={this.openFile.bind(this)}>详细审核请下载附件</Text>
-            </View>
-          </View>
+          {
+            status === 1 && (
+              <View className='feedback-wrapper' >
+                <View className='title'>监理审核回复</View>
+                <View className='textarea'>
+                  {reviewRemark}
+                </View>
+                <View className='download-file'>
+                  <Text onClick={this.handleClickFile.bind(this, reviewFile)}>详细审核请下载附件</Text>
+                </View>
+              </View>
+            )
+          }
         </View>
       </SafeAreaView>
     )
