@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 17:41:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 21:34:47
+ * @LastEditTime: 2020-07-03 18:36:56
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -23,8 +23,10 @@ import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getImage } from '@assets/cdn'
 import Auth from '@components/auth'
+import { getOfferList } from '@services/modules/offer'
 import { getNoteList } from '@services/modules/note'
 import MineHouse from './components/MineHouse/index'
+
 import './index.scss'
 
 const headerImage = getImage('mine/default_header.png')
@@ -35,7 +37,8 @@ class Mine extends Component {
     super(props)
     this.state = {
       houseList: [],
-      noteLength: 0
+      noteLength: 0,
+      offerData: {}
     }
     this.errLogin = false
   }
@@ -45,12 +48,14 @@ class Mine extends Component {
     !userInfo.token && await Login.login()
     this.getHouseList()
     this.getNoteList()
+    this.getOfferList()
   }
   componentDidShow() { 
     const { userInfo } = this.props
     if (userInfo.token) {
       this.getHouseList()
       this.getNoteList()
+      this.getOfferList()
     }
   }
   handleLogin() { 
@@ -70,6 +75,19 @@ class Mine extends Component {
     getNoteList({}).then(res => {
       this.setState({
         noteLength: res.length
+      })
+    })
+  }
+  getOfferList() { 
+    if (this.flag) return
+    const { userInfo } = this.props
+    getOfferList({
+      userId: userInfo.userId,
+      current: 1,
+      pageSize: 1
+    }).then(res => {
+      this.setState({
+        offerData: res.data[0] || {}
       })
     })
   }
@@ -105,7 +123,7 @@ class Mine extends Component {
     if (!item) return
     
   }
-  navigatorTo(pageName, paramsStr) { 
+  navigatorTo({pageName, paramsStr}) { 
     Taro.navigateTo({
       url: `/pages/${pageName}/index?${paramsStr}`
     })
@@ -131,9 +149,11 @@ class Mine extends Component {
     const { userInfo } = this.props
     const {
       houseList,
-      noteLength
+      noteLength,
+      offerData
     } = this.state
     const notLogin = !userInfo.token
+    const offerText = offerData.quotationId ? (offerData.status === 1 ? '您的报价监理已审核' : '您的报价监理正在审核中') : '还未提交报价审核'
     return (
       <SafeAreaView
         title='个人中心'
@@ -174,7 +194,12 @@ class Mine extends Component {
           </View>
           <View
             className='form-wrapper'
-            onClick={this.navigatorTo.bind(this, 'offer_examine_publish')}
+            onClick={
+              this.navigatorTo.bind(this, {
+                pageName: offerData && offerData.quotationId ? 'offer_examine_details' : 'offer_examine_publish',
+                paramsStr: `quotationId=${offerData.quotationId}`
+              })
+            }
           >
             <View className='form-item'>
               <View className='form-label'>
@@ -182,7 +207,7 @@ class Mine extends Component {
                 <Text>我的报价审核单</Text>
               </View>
               <View className='form-content'>
-                <View className='form-tips'>还未提交报价审核</View>
+                <View className='form-tips'>{offerText}</View>
                 <View className='iconfont iconRectangle form-right-icon rotated'></View>
               </View>
             </View>
@@ -190,7 +215,9 @@ class Mine extends Component {
           <View className='history-wrapper' >
             <View
               className='history-item-public'
-              onClick={this.navigatorTo.bind(this, noteLength ? 'note_mine' : 'note_publish')}
+              onClick={this.navigatorTo.bind(this, {
+                pageName: noteLength ? 'note_mine' : 'note_publish'
+              })}
             >
               {this.renderTabItem('iconji color1', '建材笔记', noteLength ? `已记录${noteLength}次` : '您还未记录')}
             </View>
