@@ -1,13 +1,18 @@
 /*
  * @Author: liuYang
- * @description: 请填写描述信息
- * @path: 引入路径
+ * @description: 公共form组件 创建招标 / 创建免费审报价都用了
+ * 使用说明
+ *  需定义ref来获取子组件数据
+ *    this.formForUser = null
+ *    this.formForUser.judgeAndEmitData() 返回值如果是false就证明没有用过表单验证 如果正确返回数据
+ * @path: '@/components_bidding/FormForUserInfo'
  * @Date: 2020-07-02 11:28:35
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 10:11:46
+ * @LastEditTime: 2020-07-03 10:19:37
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
+ *  important 必填选项是否展示 这里字段几乎必填 这个只是用来控制
  */ 
 import Taro, { Component } from '@tarojs/taro'
 import { View, Button, Text } from '@tarojs/components'
