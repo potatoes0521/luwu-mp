@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 17:12:06
+ * @LastEditTime: 2020-07-03 17:13:36
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -113,6 +113,7 @@ class NoteDetails extends Component {
       price,
       brand,
       remark,
+      noteId,
       address,
       loading,
       isShare,
@@ -146,6 +147,7 @@ class NoteDetails extends Component {
               brand={brand}
               model={model}
               price={price}
+              noteId={noteId}
               isShare={isShare}
               updateAt={updateAt}
               priceUnit={priceUnit}
