@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 14:49:24
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 22:17:17
+ * @LastEditTime: 2020-07-03 11:21:12
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -61,8 +61,9 @@ export const getDateTime = times => {
   return Y + M + D + h + m + s;
 };
 
-export const formatArticleTime = (timestamp) => {
-  let t = parseInt((new Date().getTime() - timestamp) / 1000);
+export const formatTimeToChinese = (timestamp) => {
+  const beforeTimer = +new Date(timestamp)
+  let t = parseInt((new Date().getTime() - beforeTimer) / 1000);
   if (t < 0) {
     return '1小时前';
   }
@@ -85,7 +86,7 @@ export const formatArticleTime = (timestamp) => {
   } else if (t < 10 && t > 2) {
     return `${t}天前`;
   }
-  const d = new Date(+timestamp);
+  const d = new Date(+beforeTimer);
   const year = d.getFullYear();
   const month = d.getMonth() + 1;
   const day = d.getDate();

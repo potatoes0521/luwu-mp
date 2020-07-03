@@ -18,7 +18,7 @@ import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getImage } from '@assets/cdn'
 import { removeStorage } from "@utils/storage"
-import biddingState from '@/config/biddingState'
+import biddingState from '@config/biddingState'
 import FormForHouse from '@/components_bidding/FormForHouse'
 import FormForUserInfo from '@/components_bidding/FormForUserInfo'
 import Upload from '@components/Upload'

@@ -13,7 +13,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Block } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import { moneyData } from '@config/chooseOneState'
-import { handleHouseType } from '@/config/houseType'
+import { handleHouseType } from '@config/houseType'
 import { connect } from '@tarojs/redux'
 
 import './index.scss'

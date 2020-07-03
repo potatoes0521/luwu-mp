@@ -19,7 +19,7 @@ import { View, Block } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import FormItemCustomContent from '@components/FormItemCustomContent'
 import Location from '@components/Location'
-import houseState from '@/config/houseState.js'
+import houseState from '@config/houseState.js'
 import { handleRequestData, oneMouthTimer } from '@config/houseType'
 import { setStorage, removeStorage } from "@utils/storage"
 import { getDateTime } from '@utils/timer'

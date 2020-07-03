@@ -87,7 +87,12 @@ page {
     box-sizing: border-box;
     background-color: $background-color;
   }
-
+  .form-wrapper{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 30px;
+    background-color: #ffffff;
+  }
   .bottom-tips {
     line-height: 34px;
     color: #999999;

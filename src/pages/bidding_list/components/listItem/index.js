@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 16:52:33
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 22:35:43
+ * @LastEditTime: 2020-07-03 11:21:34
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -14,7 +14,7 @@ import { View, Image, Text, Block } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import { handleRequestData } from '@config/houseType'
 import { getImage } from '@assets/cdn'
-import { formatArticleTime } from '@utils/timer'
+import { formatTimeToChinese } from '@utils/timer'
 
 import './index.scss'
 
@@ -63,7 +63,7 @@ export default class ListItem extends Component {
     } = data
     const progressText = this.handleProgressText(progress)
     const imageUrl = (Array.isArray(item.images) && item.images.length) ? item.images[0] : getImage('bidding/list_item_default.png')
-    const timerText = formatArticleTime(new Date(item.createAt))
+    const timerText = formatTimeToChinese(item.createAt)
     return (
       <View className='item-wrapper' onClick={this.navigatorTo.bind(this)}>
         <View className='item-main'>

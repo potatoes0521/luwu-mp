@@ -9,7 +9,8 @@ import { getImage } from '@assets/cdn'
 import FormForHouse from '@/components_bidding/FormForHouse'
 import FormForUserInfo from '@/components_bidding/FormForUserInfo'
 import { getHouseList, publishHouse } from '@services/modules/house'
-import { publishOffer } from '@/services/modules/offer'
+import { publishOffer } from '@services/modules/offer'
+import FormItem from '@components/FormItem'
 
 import './index.scss'
 
@@ -124,10 +125,15 @@ class OfferExaminePublish extends Component {
   async submit() { 
     const {
       fileList,
-      requireId
+      requireId,
+      companyName
     } = this.state
     if (!fileList || !fileList.length) {
       this.showToast('至少上传一个报价文件/图片')
+      return
+    }
+    if (!companyName) {
+      this.showToast('请输入装修公司名称')
       return
     }
     const formForHouse = this.formForHouse.judgeAndEmitData()
@@ -139,7 +145,7 @@ class OfferExaminePublish extends Component {
       await publishHouse(sendData)
     }
     const sendData = {
-      data: Object.assign({}, { fileList }, formForHouse, formForUser)
+      data: Object.assign({}, { fileList, companyName }, formForHouse, formForUser)
     }
     publishOffer(sendData, this).then(res => {
       if (!res || !res.quotationId) {
@@ -158,6 +164,12 @@ class OfferExaminePublish extends Component {
     Taro.showToast({
       title: msg,
       icon
+    })
+  }
+  onInputCompanyName(e) { 
+    const { target: { value } } = e
+    this.setState({
+      companyName: value
     })
   }
   /**
@@ -187,7 +199,8 @@ class OfferExaminePublish extends Component {
       sittingroom,
       cookroom,
       washroom,
-      userName
+      userName,
+      companyName
     } = this.state
     const fileListRender = fileList.map((file, index) => {
       const key = file.url
@@ -229,6 +242,15 @@ class OfferExaminePublish extends Component {
             }
           </View>
           <View className='title'>请补充您房屋具体信息，方便监理帮您审报价</View>
+          <View className='form-wrapper'>
+            <FormItem
+              line
+              label='装修公司'
+              value={companyName}
+              placeholder='请输入装修公司名称'
+              onInput={this.onInputCompanyName.bind(this)}
+            />
+          </View>
           <FormForHouse
             type='edit'
             budget={budget}

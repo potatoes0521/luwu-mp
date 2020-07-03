@@ -16,7 +16,7 @@ import { publishHouse, editHouse } from '@services/modules/house'
 import SafeAreaView from '@components/SafeAreaView'
 import FormFroHouse from '@/components_bidding/FormForHouse'
 import Login from '@utils/login'
-import houseState from '@/config/houseState.js'
+import houseState from '@config/houseState.js'
 import { getImage } from '@assets/cdn'
 import { removeStorage } from "@utils/storage"
 

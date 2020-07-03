@@ -25,7 +25,7 @@ import { getHouseDetails } from '@services/modules/house'
 import { getBidList } from '@services/modules/bidding'
 import { handleRequestData } from '@config/houseType'
 import { getImage } from '@assets/cdn'
-import biddingState from '@/config/biddingState'
+import biddingState from '@config/biddingState'
 import FromMain from './components/FormMain'
 import ImageSwiper from './components/Swiper'
 
