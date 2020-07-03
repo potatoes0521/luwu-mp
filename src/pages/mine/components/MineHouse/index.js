@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-01 09:55:00
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 22:35:53
+ * @LastEditTime: 2020-07-03 13:37:30
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -23,7 +23,9 @@ class MineHouse extends Component {
     super(props)
     this.state={}
   }
-
+  static options = {
+    addGlobalClass: true // 允许外部样式修改组件样式
+  }
   navigatorToBidding(item) { 
     const { userInfo } = this.props
     let url = ''
@@ -53,7 +55,10 @@ class MineHouse extends Component {
           <View className='renovation-item-box-title'>{title}</View>
           <View className='renovation-item-box-tips'>{tips}</View>
         </View>
-        <View className={`border-dashed border-color${index}`}></View>
+        {/* <View className='iconfont iconzhixian dashed'></View> */}
+        <View className='dashed-wrapper'>
+          <View className={`border-dashed border-color${index}`}></View>
+        </View>
         <View className='renovation-item-bottom-wrapper'>
           <View className={`renovation-item-bottom-line bg-color${index}`}></View>
           <View className={`renovation-item-bottom-circular border-color${index} font-color${index}`}>{index}</View>
