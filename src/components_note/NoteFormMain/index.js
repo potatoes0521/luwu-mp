@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-21 09:58:20
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 21:52:57
+ * @LastEditTime: 2020-07-03 17:01:58
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -12,59 +12,54 @@
 import Taro, { Component } from '@tarojs/taro'
 import {
   View,
-  Block
+  Block,
+  Text
 } from '@tarojs/components'
 import PropTypes from 'prop-types'
 
 import './index.scss'
 
 export default class NoteFormMain extends Component {
-  renderItem(label, content) { 
+  renderFormItem(label, content) { 
     return (
-      <View className='note-detail-item'>
-        <View className='note-detail-item-label'>{label}</View>
-        <View className='note-detail-item-content'>{content}</View>
+      <View className='form-item skeleton-cylinder' >
+        <View className='form-label'>{label}</View>
+        <View className='form-content'>{content}</View>
       </View>
     )
   }
   render() {
-    let { item, showRemark } = this.props
-    const categoryName = item.mainCategory && item.mainCategory.categoryName || '-'
-    const brandName = item.brand && item.brand.brandName || '-'
-    const price = item.price || '-'
-    const priceUnit = item.priceUnit || ''
-    const model = item.model || '-'
-    const time = item.createAt
-    const remark = item.remark
+    const {
+      brand,
+      isShare,
+      mainCategory,
+      childCategory,
+      price,
+      priceUnit,
+      updateAt,
+      model,
+    } = this.props
+    const categoryName = (mainCategory.categoryName ? mainCategory.categoryName : '') + (childCategory.categoryName ? ` | ${childCategory.categoryName}` : '')
     return (
       <Block>
-        <View className='note-line-details skeleton-square'>
-          {this.renderItem('品类', categoryName)}
-          {this.renderItem('品牌', brandName)}
-        </View>
-        <View className='note-line-details skeleton-square'>
-          {this.renderItem('价格', price + priceUnit ? ' -' : '' + priceUnit)}
-          {this.renderItem('型号', model)}
-        </View>
-        <View className='note-line-details skeleton-square'>
-          {this.renderItem('记录时间', time)}
-        </View>
-        {
-          showRemark && remark && (
-            <Block>
-              <View className='note-line-details skeleton-square'>
-                <View className='note-detail-item'>
-                  <View className='note-detail-item-label'>笔记详情:</View>
-                </View>
+        <View className='title-wrapper'>
+          <View className='note-msg-title skeleton-cylinder'>{brand.brandName} {childCategory.categoryName || mainCategory.categoryName || ''}</View>
+          {
+            !isShare && (
+              <View className='tips'>
+                <Text className='tips-text skeleton-cylinder' onClick={this.handleEditData.bind(this)}>编辑</Text>
               </View>
-              <View className='note-form-main-remark' >
-                {
-                  remark
-                }
-              </View>
-            </Block>
-          )
-        }
+            )
+          }
+        </View>
+        <View className='time'>{updateAt}</View>
+        <View className='form-item-line'>
+          {this.renderFormItem('品类', categoryName)}
+        </View>
+        <View className='form-item-line'>
+          {this.renderFormItem('价格', price + priceUnit ? ' -' : '' + priceUnit)}
+          {this.renderFormItem('型号', model || '无')}
+        </View>
       </Block>
     )
   }
@@ -72,10 +67,23 @@ export default class NoteFormMain extends Component {
 }
 
 NoteFormMain.defaultProps = {
-  showRemark: false,
-  item: {},
+  mainCategory: {},
+  childCategory: {},
+  brand: {},
+  isShare: false,
+  price: '',
+  priceUnit: '',
+  updateAt: '',
+  model: '',
 }
 
 NoteFormMain.propTypes = {
-  item: PropTypes.object.isRequired
+  mainCategory: PropTypes.object,
+  childCategory: PropTypes.object,
+  brand: PropTypes.object,
+  isShare: PropTypes.bool,
+  price: PropTypes.string,
+  priceUnit: PropTypes.string,
+  updateAt: PropTypes.string,
+  model: PropTypes.string
 }
