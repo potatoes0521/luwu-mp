@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-01 09:55:00
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 13:37:30
+ * @LastEditTime: 2020-07-03 14:37:14
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -30,7 +30,7 @@ class MineHouse extends Component {
     const { userInfo } = this.props
     let url = ''
     if (!userInfo.phone || !userInfo.isMember) {
-      url = '/pages/vip/index'
+      url = `/pages/vip/index?nextPage=${(item.progress === 0 || !item.progress) ? 'bidding_publish' : 'bidding_details'}requireId=item.requireId`
     } else if (item.progress === 0 || !item.progress) {
       url = `/pages/bidding_publish/index?requireId=${item.requireId}`
     } else {
@@ -42,7 +42,7 @@ class MineHouse extends Component {
     let url = '/pages/house_publish/index'
     const { userInfo } = this.props
     if (!userInfo.phone || !userInfo.isMember) {
-      url = '/pages/vip/index'
+      url = `/pages/vip/index?nextPage=house_publish&pageType=edit&requireId=${item.requireId}`
     } else if (type === 'edit') { 
       url += `?pageType=edit&requireId=${item.requireId}`
     }

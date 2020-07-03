@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-23 18:42:57
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 10:28:32
+ * @LastEditTime: 2020-07-03 13:23:49
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,6 +16,7 @@ import { getOfferList } from '@services/modules/offer'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getImage } from '@assets/cdn'
+import { handleRequestData } from '@config/houseType'
 
 import './index.scss'
 
@@ -137,7 +138,8 @@ class OfferExamineDetails extends Component {
     const { offerList } = this.state
     const offerListRender = offerList.map(item => {
       const itemKey = item.data.quotationId || ''
-      const data = item.data || {}
+      const data = handleRequestData(item.data) || {}
+      
       const fileList = item && item.data && item.data.fileList || []
       const fileListRender = fileList.map((file, index) => {
         const key = file.url
@@ -145,18 +147,33 @@ class OfferExamineDetails extends Component {
           <View className='file-item' onClick={this.handleClickFile.bind(this, file)} key={key}>{`文件${index+1}`}</View>
         )
       })
+      const {
+        bedroom,
+        sittingroom,
+        cookroom,
+        washroom,
+        decorateType,
+        area,
+        budget,
+        phone,
+        userName
+      } = data
+      const time = data.decorateTimeBefore && data.decorateTimeBefore.substr(0, 7).replace('-', '年') + '月' || ''
       return (
         <View className='list-item' onClick={this.navigatorTo.bind(this, itemKey)} key={itemKey}>
           <View className='title'>{item.createAt}</View>
           <View className='list-item-main'>
-            <View className='offer-line-details skeleton-square'>
-              {this.renderItem('房屋类型', data.model && data.model.modelName || '')}
-              {this.renderItem('房屋面积', `${data.area}㎡`)}
+            <View className='offer-line-details skeleton-square' >
+              {this.renderItem('房屋户型', ((bedroom.chinese || '-') + '室' + (sittingroom.chinese || '-') + '厅' + (cookroom.chinese || '-') + '厨' + (washroom.chinese || '-') + '卫' ) || '')}
+              {this.renderItem('房屋类型', decorateType ? '毛坯房' : '旧房翻新')}
             </View>
-            <View className='offer-line-details skeleton-square'>
-              {this.renderItem('量房联系人', data.userName)}
-              {this.renderItem('联系电话', data.mobile)}
+            <View className='offer-line-details skeleton-square' >
+              {this.renderItem('房屋面积', `${area}㎡`)}
+              {this.renderItem('装修预算', budget.moneyText || `${data.budgetMin || ''}-${data.budgetMax || ''}万`)}
             </View>
+            {this.renderItem('装修时间', time)}
+            {this.renderItem('量房联系人', userName)}
+            {this.renderItem('联系电话', phone)}
             <View className='file-wrapper'>
               <View className='file-label'>相关文件</View>
               <View className='file-content'>

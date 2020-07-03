@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 20:01:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 20:42:27
+ * @LastEditTime: 2020-07-03 14:54:37
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,6 +16,7 @@ import { getUserPhone } from '@services/modules/user'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getImage } from '@assets/cdn'
+import Actions from '@store/actions/index.js'
 
 import './index.scss'
 
@@ -25,15 +26,28 @@ class Vip extends Component {
     super(props)
     this.state = {}
     this.timer = null
+    this.pageParams = {}
+    this.code = ''
   }
 
   async componentDidMount() {
+    this.pageParams = this.$router.params
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
+    this.handleCode()
   }
+  
   componentWillUnmount() { 
     clearTimeout(this.timer)
     this.timer = null
+  }
+  async handleCode() {
+    const { userInfo } = this.props
+    try {
+      this.code = (await Taro.login()).code
+    } catch (err) {
+      this.code = userInfo.code
+    }
   }
   onGetPhoneNumber(e) {
     const { detail } = e
@@ -43,10 +57,21 @@ class Vip extends Component {
       code: this.code,
     }
     getUserPhone(sendData, this).then(res => {
-      this.props.onChangeUserInfo(res)
-      this.timer = setTimeout(() => {
+      const data = Object.assign({}, res, {
+        isMember: 1
+      })
+      this.props.onChangeUserInfo(data)
+      let paramsStr = ''
+      for (const key in this.pageParams) {
+        paramsStr += `${key}=${this.pageParams[key]}&`
+      }
+      if (this.pageParams.nextPage) {
+        Taro.redirectTo({
+          url: `/pages/${this.pageParams.nextPage}/index?${paramsStr}`
+        })
+      } else {
         Taro.navigateBack()
-      }, 300)
+      }
     })
   }
   config = {
@@ -90,7 +115,12 @@ class Vip extends Component {
 const mapStateToProps = (state) => {
   return {
     userInfo: state.user_msg.userInfo,
-    system: state.system.systemInfo,
   }
 }
-export default connect(mapStateToProps)(Vip)
+
+const mapDispatchToProps = () => {
+  return {
+    onChangeUserInfo: userInfo => Actions.changeUserInfo(userInfo)
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Vip);
