@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-19 10:17:37
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-21 00:17:03
+ * @LastEditTime: 2020-07-03 18:04:17
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -223,7 +223,7 @@ class NoteSelect extends Component {
       'fadeOut': !showSelectModal,
       'fadeIn': showSelectModal
     })
-    const modalMainClassName = classNames('note-select-modal-main animation', {
+    const modalMainClassName = classNames('animation', {
       'fadeOutUp': !showSelectModal,
       'fadeInDown': showSelectModal
     })
@@ -237,7 +237,7 @@ class NoteSelect extends Component {
           className={titleTextClassName}
           onClick={this.controlSelectModal.bind(this)}
         >
-          <Text>{ titleText || '全部' }</Text>
+          <Text>{ titleText || '筛选' }</Text>
           <Text className={iconRotateClassName}></Text>
         </View>
         <View
@@ -248,15 +248,24 @@ class NoteSelect extends Component {
           onClick={this.controlSelectModal.bind(this)}
         >
           <View className={modalMainClassName}>
-            <View className='note-select-modal-main-list border-right'>
-              {
-                mainCategoryRender
-              }
+            <View
+              className='note-select-category-title-wrapper'
+              onClick={this.stopPropagation.bind(this)}
+            >
+              <View className='category-title'>主品类</View>
+              <View className='category-title'>子品类</View>
             </View>
-            <View className='note-select-modal-main-list'>
-              {
-                childrenCategoryRender
-              }
+            <View className='note-select-modal-main' >
+              <View className='note-select-modal-main-list border-right'>
+                {
+                  mainCategoryRender
+                }
+              </View>
+              <View className='note-select-modal-main-list'>
+                {
+                  childrenCategoryRender
+                }
+              </View>
             </View>
           </View>
         </View>
