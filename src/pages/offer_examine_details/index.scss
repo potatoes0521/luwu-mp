@@ -21,6 +21,10 @@ page {
       height: 72px;
       box-sizing: border-box;
       border-bottom: 2px solid $background-color;
+      .time {
+        font-size: 24px;
+        color: #999999;
+      }
     }
   }
 

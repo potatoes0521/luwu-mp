@@ -270,8 +270,8 @@ class OfferExaminePublish extends Component {
             userName={userName}
             ref={node => this.formForUser = node}
           />
-          <View className='bottom-tips'>监理审完报价后会通过手机跟您联系</View>
-          <View className='fixed-bottom-btm'>
+          <View className='fixed-bottom-btn'>
+            <View className='bottom-tips'>监理审完报价后会通过手机跟您联系</View>
             <View className='btn-public default-btn' onClick={this.submit.bind(this)}>提交</View>
           </View>
         </View>

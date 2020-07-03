@@ -6,7 +6,7 @@ page {
 }
 
 .page-wrapper {
-  padding-bottom: 140px;
+  padding-bottom: 200px;
   position: relative;
 
   .upload-wrapper {
@@ -97,25 +97,23 @@ page {
     line-height: 34px;
     color: #999999;
     font-size: 24px;
-    padding-top: 10px;
-    padding-left: 30px;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
   }
 
-  .fixed-bottom-btm {
+  .fixed-bottom-btn {
     width: 100vw;
-    height: 140px;
+    height: 200px;
     position: fixed;
     bottom: 0px;
     left: 0;
     right: 0;
     margin: 0 auto;
-    background-color: #ffffff;
     z-index: 5;
     display: flex;
     align-items: center;
     justify-content: center;
-
+    flex-direction: column;
+    background-color: $background-color;
     .default-btn {
       width: 686px;
       height: 90px;
