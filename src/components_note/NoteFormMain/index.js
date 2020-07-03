@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-21 09:58:20
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 17:09:08
+ * @LastEditTime: 2020-07-03 17:20:10
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -37,7 +37,7 @@ export default class NoteFormMain extends Component {
   }
   render() {
     const {
-      line,
+      time,
       brand,
       model,
       price,
@@ -47,13 +47,13 @@ export default class NoteFormMain extends Component {
       mainCategory,
       childCategory,
     } = this.props
-    const timerClassName = classNames('time', {
-      'border-bottom': line
+    const titleClassName = classNames('title-wrapper', {
+      'little-title': !time
     })
     const categoryName = (mainCategory.categoryName ? mainCategory.categoryName : '') + (childCategory.categoryName ? ` | ${childCategory.categoryName}` : '')
     return (
       <Block>
-        <View className='title-wrapper'>
+        <View className={titleClassName}>
           <View className='note-msg-title skeleton-cylinder'>{brand.brandName} {childCategory.categoryName || mainCategory.categoryName || ''}</View>
           {
             !isShare && (
@@ -63,7 +63,9 @@ export default class NoteFormMain extends Component {
             )
           }
         </View>
-        <View className={timerClassName}>{updateAt}</View>
+        {
+          time && <View className='time'>{updateAt}</View>
+        }
         <View className='form-item-line'>
           {this.renderFormItem('品类', categoryName)}
         </View>

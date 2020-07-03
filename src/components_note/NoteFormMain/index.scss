@@ -10,10 +10,15 @@
   line-height: 42px;
 }
 
+.little-title {
+  padding-bottom: 10px;
+}
+
 .time {
   padding: 0 32px 20px;
   font-size: 28px;
   color: $tips-color;
+  border-bottom: 2px solid $background-color;
 }
 
 .form-item-line {
@@ -40,10 +45,6 @@
       color: $tips-color;
     }
   }
-}
-
-.border-bottom {
-  border-bottom: 2px solid $background-color;
 }
 
 .tips {
