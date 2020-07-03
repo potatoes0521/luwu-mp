@@ -8,7 +8,9 @@ import OfferState from '@config/offerExamineState'
 import { getImage } from '@assets/cdn'
 import FormForHouse from '@/components_bidding/FormForHouse'
 import FormForUserInfo from '@/components_bidding/FormForUserInfo'
-  
+import { getHouseList, publishHouse } from '@services/modules/house'
+import { publishOffer } from '@/services/modules/offer'
+
 import './index.scss'
 
 const fileIcon = getImage('icon/file_icon.png')
@@ -19,15 +21,38 @@ class OfferExaminePublish extends Component {
     super(props)
     this.state = Object.assign({}, OfferState, {
       // 除去公共key以外的字段定在这里
+      requireId: ''
     })
     this.timer = null
+    this.formForHouse = null
+    this.formForUser = null
   }
 
   async componentDidMount() {
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
+    this.handleOtherHouse()
+  }
+  componentWillUnmount() { 
     clearTimeout(this.timer)
     this.timer = null
+  }
+  /**
+   * 处理其他房屋信息
+   * @return void
+   */
+  handleOtherHouse() {
+    const { userInfo } = this.props
+    // 判断有没有房屋数据  没有就创建一个房屋  然后取ID   有房屋就取最后一个
+    getHouseList({
+      userId: userInfo.userId
+    }).then(res => {
+      if (res && res.length) {
+        this.setState({
+          requireId: res[res.length - 1].requireId
+        })
+      }
+    })
   }
   /**
    * 处理上传文件或图片
@@ -93,23 +118,47 @@ class OfferExaminePublish extends Component {
       })
     }
   }
-  submit() { 
-    
-    // publishOffer(sendData, this).then(res => {
-    //   if (!res || !res.quotationId) {
-    //     return
-    //   }
-    //   Taro.showToast({
-    //     title: '发布成功'
-    //   })
-    //   this.timer = setTimeout(() => {
-    //     Taro.redirectTo({
-    //       url: `/pages/offer_examine_details/index?quotationId=${res.quotationId}`
-    //     })
-    //   }, 1800)
-    // })
+  onUserNameChange(userName) {
+    this.setState({ userName })
   }
-  
+  async submit() { 
+    const {
+      fileList,
+      requireId
+    } = this.state
+    if (!fileList || !fileList.length) {
+      this.showToast('至少上传一个报价文件/图片')
+      return
+    }
+    const formForHouse = this.formForHouse.judgeAndEmitData()
+    if (!formForHouse) return
+    const formForUser = this.formForUser.judgeAndEmitData()
+    if (!formForUser) return
+    if (!requireId) {
+      const sendData = Object.assign({}, formForHouse, formForUser)
+      await publishHouse(sendData)
+    }
+    const sendData = {
+      data: Object.assign({}, { fileList }, formForHouse, formForUser)
+    }
+    publishOffer(sendData, this).then(res => {
+      if (!res || !res.quotationId) {
+        this.showToast('发布失败')
+        return
+      }
+      this.showToast('发布成功')
+      this.timer = setTimeout(() => {
+        Taro.redirectTo({
+          url: `/pages/offer_examine_details/index?quotationId=${res.quotationId}`
+        })
+      }, 1800)
+    })
+  }
+  showToast(msg) { 
+    Taro.showToast({
+      title: msg
+    })
+  }
   /**
    * 页面内转发
    * @param {Object} res 微信返回参数
@@ -127,7 +176,18 @@ class OfferExaminePublish extends Component {
     navigationStyle: 'custom'
   }
   render() {
-    const { fileList } = this.state
+    const {
+      fileList,
+      startTime,
+      budget,
+      requireId,
+      houseType,
+      bedroom,
+      sittingroom,
+      cookroom,
+      washroom,
+      userName
+    } = this.state
     const fileListRender = fileList.map((file, index) => {
       const key = file.url
       const fileName = `文件${index + 1}`
@@ -168,8 +228,25 @@ class OfferExaminePublish extends Component {
             }
           </View>
           <View className='title'>请补充您房屋具体信息，方便监理帮您审报价</View>
-          <FormForHouse important={false} />
-          <FormForUserInfo important={false} />
+          <FormForHouse
+            type='edit'
+            budget={budget}
+            bedroom={bedroom}
+            important={false}
+            cookroom={cookroom}
+            washroom={washroom}
+            requireId={requireId}
+            startTime={startTime}
+            houseType={houseType}
+            sittingroom={sittingroom}
+            ref={node => this.formForHouse = node}
+            onUserNameChange={this.onUserNameChange.bind(this)}
+          />
+          <FormForUserInfo
+            important={false}
+            userName={userName}
+            ref={node => this.formForUser = node}
+          />
           <View className='bottom-tips'>监理审完报价后会通过手机跟您联系</View>
           <View className='fixed-bottom-btm'>
             <View className='btn-public default-btn' onClick={this.submit.bind(this)}>提交</View>
