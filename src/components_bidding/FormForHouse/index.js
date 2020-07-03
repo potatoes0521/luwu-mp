@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 09:41:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 19:44:52
+ * @LastEditTime: 2020-07-03 10:10:59
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -256,12 +256,14 @@ export default class FormForHouse extends Component {
       decorateType,
     } = this.state
     const decorateTypeText = this.decorateTypeText()
+    const { important } = this.props
+    
     return (
       <Block>
         <View className='form-wrapper'>
           <FormItemCustomContent
             line
-            important
+            important={important}
             label='房屋类型'
           >
             <View className='audio-group'>
@@ -282,7 +284,7 @@ export default class FormForHouse extends Component {
           <FormItem
             line
             height100
-            important
+            important={important}
             shortUnit
             unit='icon'
             label='房屋户型'
@@ -298,7 +300,7 @@ export default class FormForHouse extends Component {
             canInput
             height100
             shortUnit
-            important
+            important={important}
             unit='text'
             type='digit'
             value={area}
@@ -309,7 +311,7 @@ export default class FormForHouse extends Component {
           />
           <Location
             height100
-            important
+            important={important}
             style='form'
             label='房屋位置'
             placeholder='请选择'
@@ -323,7 +325,7 @@ export default class FormForHouse extends Component {
             shortUnit
             langLabel
             height100
-            important
+            important={important}
             unit='icon'
             label='装修预算'
             canInput={false}
@@ -358,6 +360,7 @@ FormForHouse.defaultProps = {
   sittingroom: {},
   cookroom: {},
   washroom: {},
+  important: true,
   onUserNameChange: () => {console.log('onUserNameChange is not defined')},
   onClick: () => {console.error('onClick is not defined')}
 }

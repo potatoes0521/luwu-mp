@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 11:28:35
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 21:02:18
+ * @LastEditTime: 2020-07-03 10:11:46
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -132,6 +132,7 @@ class FormForUserInfo extends Component {
   }
   render() {
     const { userName, phone, getPhoneNumberError } = this.state
+    const { important } = this.props
     const phoneNumberClassName = classNames('get-phone-wrapper', {
       'placeholder-class': !phone
     })
@@ -143,7 +144,7 @@ class FormForUserInfo extends Component {
           shortUnit
           langLabel
           height100
-          important
+          important={important}
           type={number}
           label='联 系 人 '
           placeholder='请输入联系人'
@@ -157,18 +158,19 @@ class FormForUserInfo extends Component {
               shortUnit
               langLabel
               height100
-              important
-              focus={getPhoneNumberError}
+              important={important}
               label='手机号码'
-              placeholder='请输入联系人'
+              type='number'
               value={phone || ''}
+              placeholder='请输入联系人'
+              focus={getPhoneNumberError}
               onInput={this.onInputPhone.bind(this)}
             />
           ) : (
             <FormItemCustomContent
               unit
               height100
-              important
+              important={important}
               shortUnit
               label='手机号码'
             >
@@ -190,6 +192,7 @@ class FormForUserInfo extends Component {
 }
 
 FormForUserInfo.defaultProps = {
+  important: true,
   onClick: () => {console.error('onClick is not defined')}
 }
 
