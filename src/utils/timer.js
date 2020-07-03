@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 14:49:24
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 11:21:12
+ * @LastEditTime: 2020-07-03 11:23:20
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -62,6 +62,9 @@ export const getDateTime = times => {
 };
 
 export const formatTimeToChinese = (timestamp) => {
+  if (!timestamp) {
+    timestamp = +new Date()
+  }
   const beforeTimer = +new Date(timestamp)
   let t = parseInt((new Date().getTime() - beforeTimer) / 1000);
   if (t < 0) {
