@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 17:18:08
+ * @LastEditTime: 2020-07-03 17:29:15
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -148,6 +148,7 @@ class NoteDetails extends Component {
               model={model}
               price={price}
               noteId={noteId}
+              rightType='edit'
               isShare={isShare}
               updateAt={updateAt}
               priceUnit={priceUnit}

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:08:36
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 21:34:20
+ * @LastEditTime: 2020-07-03 16:53:07
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -153,17 +153,15 @@ class NoteMine extends Component {
       firstLoading,
       selectTitleText
     } = this.state
-    const { userInfo } = this.props
     const noteListRender = noteList.map(item => {
       const key = item.noteId
       return (
         <NoteItem item={item} key={key} />
       )
     })
-    const navTitle = userInfo.userName ? userInfo.userName + '的笔记' : '笔记'
     return (
       <SaveAreaView
-        title={navTitle}
+        title='我的笔记'
         back
       >
         <View className='page-wrapper skeleton'>

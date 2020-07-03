@@ -2,9 +2,9 @@
 
 .note-item {
   width: 100%;
-  border-top: 24px solid $background-color;
   background-color: #ffffff;
-  
+  margin-bottom: 30px;
+
   .tips {
     display: flex;
     align-items: center;
@@ -22,12 +22,11 @@
 
   .note-main {
     border-top: 2px solid $background-color;
-    height: 374px;
     box-sizing: border-box;
-    padding: 0 30px;
 
     .upload{
       margin-top: 20px;
+      padding: 0 32px;
     }
   }
 }
