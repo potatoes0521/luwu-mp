@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-19 10:17:37
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 18:14:18
+ * @LastEditTime: 2020-07-06 11:21:47
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -234,7 +234,6 @@ class NoteSelect extends Component {
       <View
         className='note-select-wrapper'
         style={{ top: `${navHeight}rpx` }}
-        onTouchMove={this.stopPropagation.bind(this)}
       >
         <View
           className={titleTextClassName}
