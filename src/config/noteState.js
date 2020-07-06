@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-21 09:51:21
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 18:08:48
+ * @LastEditTime: 2020-07-06 09:15:49
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -26,7 +26,7 @@ export default {
   },
   brand: {
     brandId: '',
-    brandName: '录屋-建材品牌'
+    brandName: ''
   },
   price: '',
   priceUnit: '',
