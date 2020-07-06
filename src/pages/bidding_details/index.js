@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 17:37:08
+ * @LastEditTime: 2020-07-06 17:46:59
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -46,28 +46,7 @@ class BiddingDetails extends Component {
       shopList: [],
       userId: '',
       modelViewTop: 0,
-      templateList: [
-        {
-          name: '一室一厅一卫',
-          id: 0
-        },
-        {
-          name: '两室一厅一卫',
-          id: 1
-        },
-        {
-          name: '两室两厅一卫',
-          id: 2
-        },
-        {
-          name: '三室一厅一卫',
-          id: 3
-        },
-        {
-          name: '三室一厅两卫',
-          id: 4
-        }
-      ],
+      templateList: [],
       activeTemplate: {
         name: '一室一厅一卫',
         id: 0
@@ -105,7 +84,11 @@ class BiddingDetails extends Component {
       })
     })
     getOfferCase({}).then(res => {
-      console.log('res', res)
+      const templateList = res.map((item, index) => ({
+        name: item.name,
+        id: index
+      }))
+      this.setState({ templateList })
     })
   }
   handleProgressText() { 
