@@ -1,56 +1,49 @@
 @import '../../../../assets/css/theme.scss';
-$option-color: #4D4D4D;
 
 // 顶部样式
 .house-msg-wrapper {
   width: 100%;
   height: 134px;
   box-sizing: border-box;
-  padding: 20px 0;
+  padding: 26px 36px;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-
+  .tips-line{
+    display: flex;
+    align-items: center;
+  }
   .msg-tips {
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 40px;
-    font-size: 28px;
+    justify-content: space-between;
+    flex-direction: column;
+    font-size: 24px;
+    color: $tips-color;
 
     &-line {
       width: 2px;
       height: 28px;
-      margin: 0 10px;
-      background-color: $font-color;
+      margin-left: 22px;
+      margin-right: 28px;
+      background-color: $tips-color;
     }
   }
 
   .handle-wrapper {
-    width: 100%;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
     box-sizing: border-box;
-    padding-left: 194px;
-    padding-right: 172px;
     font-size: 24px;
 
     .options-wrapper {
       display: flex;
       align-items: center;
-      justify-content: center;
 
-      .circular {
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        border: 2px solid $option-color;
-        margin-right: 8px;
-
-        &-active {
-          background-color: $option-color;
-        }
+      .options-label {
+        margin-left: 20px;
+        color: $tips-color;
       }
     }
   }
