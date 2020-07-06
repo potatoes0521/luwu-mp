@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 11:45:08
+ * @LastEditTime: 2020-07-06 17:37:08
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -21,7 +21,10 @@ import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import classNames from 'classnames'
 import { getHouseDetails } from '@services/modules/house'
-import { getBidList , getBiddingTemplate } from '@services/modules/bidding'
+import {
+  getBidList,
+  getOfferCase
+} from '@services/modules/bidding'
 import { handleRequestData } from '@config/houseType'
 import { getImage } from '@assets/cdn'
 import biddingState from '@config/biddingState'
@@ -101,7 +104,7 @@ class BiddingDetails extends Component {
         shopList: res
       })
     })
-    getBiddingTemplate({}).then(res => {
+    getOfferCase({}).then(res => {
       console.log('res', res)
     })
   }
