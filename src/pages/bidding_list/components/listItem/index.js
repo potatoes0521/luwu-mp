@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 16:52:33
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 11:21:34
+ * @LastEditTime: 2020-07-06 16:11:14
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -59,7 +59,7 @@ export default class ListItem extends Component {
       area,
       budget,
       progress,
-      shopNumber
+      shopNum
     } = data
     const progressText = this.handleProgressText(progress)
     const imageUrl = (Array.isArray(item.images) && item.images.length) ? item.images[0] : getImage('bidding/list_item_default.png')
@@ -85,10 +85,10 @@ export default class ListItem extends Component {
         <View className='bottom-label'>
           <View className='label'>
             {
-              shopNumber ? (
+              shopNum ? (
                 <Block>
                   <Text>共有</Text>
-                  <Text className='hight-light'>{shopNumber}</Text>
+                  <Text className='hight-light'>{shopNum}</Text>
                   <Text>家装修公司投标</Text>
                 </Block>
               ): (

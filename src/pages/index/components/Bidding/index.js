@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 11:19:15
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 14:33:40
+ * @LastEditTime: 2020-07-06 16:16:45
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -36,6 +36,13 @@ class Bidding extends Component {
       url: '/pages/bidding_list/index'
     })
   }
+  renderTips({shopNum}) {
+    return shopNum ? (
+      <View className='big-margin-top small-tips'>共有{shopNum}家装修公司投标</View>
+    ) : (
+      <View className='big-margin-top small-tips'>还没有装修公司投标</View>
+    )
+  }
   static options = {
     addGlobalClass: true // 允许外部样式修改组件样式
   }
@@ -63,9 +70,9 @@ class Bidding extends Component {
               </View>
               <View className='middle-title'>
                 <Text className='label'>预算</Text>
-                <Text>10-15万</Text> 
+                <Text>{data1.budget.moneyText || `${data1.budgetMin || ''}-${data1.budgetMax || ''}万`}</Text> 
               </View>
-              {/* <View className='big-margin-top small-tips'>共有家装修公司投标</View> */}
+              {this.renderTips(data1)}
               <View className='backgroundImage1'></View>
             </View>
             <View className='big-wrapper right-wrapper'>
@@ -74,7 +81,7 @@ class Bidding extends Component {
                 onClick={this.navigatorToDetails.bind(this, data2)}
               >
                 <View className='title'>{data2.text}</View>
-                {/* <View className='big-margin-top small-tips'>共有家装修公司投标</View> */}
+                {this.renderTips(data2)}
                 <View className='backgroundImage2'></View>
               </View>
               <View
@@ -82,7 +89,7 @@ class Bidding extends Component {
                 onClick={this.navigatorToDetails.bind(this, data3)}
               >
                 <View className='title'>{data3.text}</View>
-                {/* <View className='big-margin-top small-tips'>共有家装修公司投标</View> */}
+                {this.renderTips(data3)}
                 <View className='backgroundImage3'></View>
               </View>
             </View>
@@ -93,7 +100,7 @@ class Bidding extends Component {
               onClick={this.navigatorToDetails.bind(this, data4)}
             >
               <View className='title'>{data4.text}</View>
-              {/* <View className='big-margin-top small-tips'>共有家装修公司投标</View> */}
+              {this.renderTips(data4)}
               <View className='backgroundImage4'></View>
             </View>
             <View
@@ -101,7 +108,7 @@ class Bidding extends Component {
               onClick={this.navigatorToDetails.bind(this, data5)}
             >
               <View className='title'>{data5.text}</View>
-              {/* <View className='big-margin-top small-tips'>共有家装修公司投标</View> */}
+              {this.renderTips(data5)}
               <View className='backgroundImage5'></View>
             </View>
           </View>
