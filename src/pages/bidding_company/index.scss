@@ -1,0 +1,46 @@
+@import '../../assets/css/theme.scss';
+
+page {
+  background-color: $background-color;
+}
+
+.page-wrapper {
+  padding-bottom: 140px;
+
+  .bottom-select-wrapper {
+    width: 100%;
+    height: 140px;
+    border-top: 2px solid $background-color;
+    background-color: #ffffff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 30px 46px 30px 50px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .select-num-wrapper{
+      display: flex;
+      align-items: center;
+      .heigh-light{
+        color: $link-color;
+        margin: 0 10px;
+      }
+    }
+    .select-btn{
+      width: 460px;
+      height: 80px;
+      border: 2px solid $link-color;
+      border-radius: 6px;
+      font-size: 30px;
+      color: $link-color;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+}

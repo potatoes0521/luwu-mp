@@ -75,6 +75,7 @@ class App extends Component {
       'pages/bidding_publish/index',
       'pages/bidding_details/index',
       'pages/bidding_list/index',
+      'pages/bidding_company/index',
 
       'pages/house_publish/index',
       'pages/vip/index'
