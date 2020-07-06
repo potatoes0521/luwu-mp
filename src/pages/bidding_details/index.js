@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 17:46:59
+ * @LastEditTime: 2020-07-06 17:50:49
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -61,6 +61,7 @@ class BiddingDetails extends Component {
     this.pageParams = this.$router.params
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
+    this.getViewPosition()
     this.getHouseData()
     this.getBidList()
   }
