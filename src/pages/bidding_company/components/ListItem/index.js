@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 12:03:06
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 13:53:18
+ * @LastEditTime: 2020-07-06 17:12:09
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -77,16 +77,30 @@ export default class ListItem extends Component {
           </View>
         </View>
         <View className='choose-btn' onClick={this.onSelect.bind(this)}>
-          {
-            item.select ? (
-              <Text className='text-active'>加入比价</Text>
-            ): (
-              <Block>
-                <Text className='iconfont iconjiahao add-icon'></Text>
-                <Text>加入比价</Text>
-              </Block>
-            )
-          }
+          <View className='btn-public'>
+            {
+              item.select ? (
+                <Text className='text-active'>加入收藏</Text>
+              ): (
+                <Block>
+                  <Text className='iconfont iconjiahao add-icon'></Text>
+                  <Text>已加入收藏</Text>
+                </Block>
+              )
+            }
+          </View>
+          <View className='btn-public' >
+            {
+              item.select ? (
+                <Text className='text-active'>加入比价</Text>
+              ): (
+                <Block>
+                  <Text className='iconfont iconjiahao add-icon'></Text>
+                  <Text>加入比价</Text>
+                </Block>
+              )
+            }
+          </View>
         </View>
       </View>
     )
