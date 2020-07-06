@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 11:59:55
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 18:11:45
+ * @LastEditTime: 2020-07-06 18:39:55
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -26,7 +26,8 @@ class BiddingCompany extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      shopList: []
+      shopList: [],
+      userId: ''
     }
     this.pageParams = {}
   }
@@ -38,6 +39,9 @@ class BiddingCompany extends Component {
     this.handleRequestData()
   }
   handleRequestData() { 
+    this.setState({
+      userId: this.pageParams.userId
+    })
     getStorage(`bid_list_${this.pageParams.requireId}`).then(res => {
       this.setState({
         shopList: res
@@ -50,12 +54,15 @@ class BiddingCompany extends Component {
   }
 
   render() {
-    const { shopList } = this.state
+    const {
+      shopList,
+      userId
+    } = this.state
     console.log('shopList', shopList)
-    const shopListRender = shopList.map(item => {
+    const shopListRender = shopList.map((item, index) => {
       const key = item.shopId
       return (
-        <ListItem key={key} {...item} />
+        <ListItem key={key} {...item} userId={userId} index={index} />
       )
     })
     return (

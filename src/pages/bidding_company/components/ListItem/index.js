@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 12:03:06
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 18:34:21
+ * @LastEditTime: 2020-07-06 18:42:45
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -14,10 +14,11 @@ import { View, Text, Block } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import Upload from '@/components/Upload'
 import { formatTimeToChinese } from '@utils/timer'
+import { connect } from '@tarojs/redux'
 
 import './index.scss'
 
-export default class ListItem extends Component { 
+class ListItem extends Component { 
 
   static options = {
     addGlobalClass: true // 允许外部样式修改组件样式
@@ -36,11 +37,14 @@ export default class ListItem extends Component {
   }
   render() {
     const { 
+      index,
+      userId,
       remark,
       select,
       address,
       createAt,
       shopName,
+      userInfo,
       captainNum,
       designerNum,
       isDesignFee,
@@ -54,9 +58,8 @@ export default class ListItem extends Component {
     return (
       <View className='item-wrapper'>
         <View className='title-wrapper'>
-          <View className='company-name'>{shopName}</View>
+          <View className='company-name'>{userInfo.userId === userId ? shopName : `${index + 1}号装修公司`}</View>
           <View className='right-tips-wrapper'>
-            {/* <Text>xxxx</Text> */}
             <Text className='time'>{formatTimeToChinese(createAt)}</Text>
           </View>
         </View>
@@ -72,9 +75,13 @@ export default class ListItem extends Component {
           <View className='form-line'>
             {this.renderFormItem('设计师单独收费', isDesignFee ? `${minDesignFee || '-'} - ${maxDesignFee || '-'}元/㎡` : '否')}
           </View>
-          <View className='form-line'>
-            {this.renderFormItem('公司地址', address)}
-          </View>
+          {
+            address && userInfo.userId === userId && (
+              <View className='form-line'>
+                {this.renderFormItem('公司地址', address)}
+              </View>
+            )
+          }
           {
             remark && (
               <View className='form-line form-line-small-margin'>
@@ -109,18 +116,22 @@ export default class ListItem extends Component {
           }
         </View>
         <View className='choose-btn' onClick={this.onSelect.bind(this)}>
-          <View className='btn-public'>
-            {
-              select ? (
-                <Text className='text-active'>加入收藏</Text>
-              ): (
-                <Block>
-                  <Text className='iconfont iconjiahao add-icon'></Text>
-                  <Text>已加入收藏</Text>
-                </Block>
-              )
-            }
-          </View>
+          {
+            userInfo.userId === userId && (
+              <View className='btn-public'>
+                {
+                  select ? (
+                    <Text className='text-active'>加入收藏</Text>
+                  ): (
+                    <Block>
+                      <Text className='iconfont iconjiahao add-icon'></Text>
+                      <Text>已加入收藏</Text>
+                    </Block>
+                  )
+                }
+              </View>
+            )
+          }
           <View className='btn-public' >
             {
               select ? (
@@ -156,3 +167,10 @@ ListItem.defaultProps = {
 ListItem.propTypes = {
   onClick: PropTypes.func.isRequired
 }
+
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.user_msg.userInfo
+  }
+}
+export default connect(mapStateToProps)(ListItem);
