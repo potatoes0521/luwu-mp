@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 22:04:42
+ * @LastEditTime: 2020-07-06 11:45:08
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -19,10 +19,9 @@ import { connect } from '@tarojs/redux'
 import SafeAreaView from '@components/SafeAreaView'
 // import Skeleton from '@components/Skeleton'
 import Login from '@utils/login'
-// import classNames from 'classnames'
-// import { getBiddingTemplate } from '@services/modules/bidding'
+import classNames from 'classnames'
 import { getHouseDetails } from '@services/modules/house'
-import { getBidList } from '@services/modules/bidding'
+import { getBidList , getBiddingTemplate } from '@services/modules/bidding'
 import { handleRequestData } from '@config/houseType'
 import { getImage } from '@assets/cdn'
 import biddingState from '@config/biddingState'
@@ -42,7 +41,35 @@ class BiddingDetails extends Component {
       loading: true,
       isShare: false,
       shopList: [],
-      userId: ''
+      userId: '',
+      modelViewTop: 0,
+      templateList: [
+        {
+          name: '一室一厅一卫',
+          id: 0
+        },
+        {
+          name: '两室一厅一卫',
+          id: 1
+        },
+        {
+          name: '两室两厅一卫',
+          id: 2
+        },
+        {
+          name: '三室一厅一卫',
+          id: 3
+        },
+        {
+          name: '三室一厅两卫',
+          id: 4
+        }
+      ],
+      activeTemplate: {
+        name: '一室一厅一卫',
+        id: 0
+      },
+      showTemplateModel: false
     })
     this.pageParams = {}
     this.notLogin = true
@@ -61,7 +88,9 @@ class BiddingDetails extends Component {
       requireId: this.pageParams.requireId
     }).then(res => {
       const data = handleRequestData(res)
-      this.setState(data)
+      this.setState(data, () => {
+        this.getViewPosition()
+      })
     })
   }
   getBidList() {
@@ -71,6 +100,9 @@ class BiddingDetails extends Component {
       this.setState({
         shopList: res
       })
+    })
+    getBiddingTemplate({}).then(res => {
+      console.log('res', res)
     })
   }
   handleProgressText() { 
@@ -94,6 +126,36 @@ class BiddingDetails extends Component {
       url: '/pages/table_contrast/index'
     })
   }
+  /**
+   * 查询全部样式组件
+   * @param {String} selector 被引用为骨架屏的样式类名
+   * @return void
+   */
+  getViewPosition() { 
+    Taro.createSelectorQuery().select('.hide-line').boundingClientRect().exec(res => {
+      this.setState({
+        modelViewTop: res[0].top * 2
+      })
+    })
+  }
+  stopPropagation(e) { 
+    e && e.stopPropagation()
+  }
+  onChooseTemplate(e) {
+    e && e.stopPropagation()
+    const { showTemplateModel } = this.state
+    this.setState({
+      showTemplateModel: !showTemplateModel
+    })
+  }
+  chooseTemplateItem(item, e) { 
+    e && e.stopPropagation()
+    this.setState({
+      activeTemplate: item,
+      showTemplateModel: false
+    })
+  }
+
   renderProcess(title, content, next) { 
     return (
       <Block>
@@ -107,6 +169,9 @@ class BiddingDetails extends Component {
       </Block>
     )
   }
+  onPageScroll() {
+    this.getViewPosition()
+   }
   /**
    * 下拉刷新
    * @return void
@@ -146,11 +211,28 @@ class BiddingDetails extends Component {
       shopList,
       // loading,
       isShare,
-      userId
+      userId,
+      modelViewTop,
+      templateList,
+      activeTemplate,
+      showTemplateModel
     } = this.state
     const { userInfo } = this.props
     const progressText = this.handleProgressText()
     const title = (userId === userInfo.userId ? '我的' : '业主的') + '装修招标'
+    const templateListRender = templateList.map(item => {
+      const key = item.id
+      const itemClassName = classNames('template-plain-item', {
+        'template-plain-item-active': key === activeTemplate.id
+      })
+      return (
+        <View
+          key={key}
+          className={itemClassName}
+          onClick={this.chooseTemplateItem.bind(this, item)}
+        >{item.name || ''}</View>
+      )
+    })
     return (
       <SafeAreaView
         title={title}
@@ -192,10 +274,39 @@ class BiddingDetails extends Component {
                 {shopList.length ? `共${shopList.length}家装修公司投标` : '还没有装修公司投标'}
               </View>
             </View>
+            <View className='hide-line'></View>
+            {
+              showTemplateModel && (
+                <Block>
+                  <View className='template-wrapper' onTouchMove={this.stopPropagation.bind(this)}></View>
+                  <View
+                    className='template-plain'
+                    style={{
+                      top: modelViewTop + 'rpx',
+                      height: `calc(100vh - ${modelViewTop}rpx)`
+                    }}
+                  >
+                    <View className='template-plain-main'>
+                      <View className='template-plain-item template-plain-item-title' onClick={this.onChooseTemplate.bind(this)}>
+                        <View className='text'>{activeTemplate.name}</View>
+                        <Text className='iconfont iconsanjiaoxing1 rotated icon-template'></Text>
+                      </View>
+                      <View
+                        className='template-plain-main-box'
+                      >
+                        {
+                          templateListRender
+                        }
+                      </View>
+                    </View>
+                  </View>
+                </Block>
+              )
+            }
             <View className='form-item'>
-              <View className='form-item-label'>
-                {/* <View>一室一厅</View>
-                <Text className='iconfont iconsanjiaoxing1 icon-xia'></Text> */}
+              <View className='form-item-label' onClick={this.onChooseTemplate.bind(this)}>
+                <Text>{activeTemplate.name}</Text>
+                <Text className='iconfont iconsanjiaoxing1 icon-xia'></Text>
               </View>
               <View className='form-content' onClick={this.navigator.bind(this)}>招标价格对比</View>
             </View>
@@ -203,7 +314,7 @@ class BiddingDetails extends Component {
               <View>如上房型是本平台根据房型面积测算出的施工量，您可以选择跟您房屋类似的方案，对装修公司进行测比。</View>
               <View className='last'>装修公司的价格是根据您选择的房屋面积，利用装修公司的基础项价格估算的结果，可能会跟实际价格差距较大，仅供参考。</View>
             </View>
-            {/* <View className='basics-wrapper'>
+            <View className='basics-wrapper'>
               <View className='basics-title'>
                 <Text className='iconfont iconjiantou jiantou-icon'></Text>
                 <Text>基础项最低价</Text>
@@ -227,7 +338,7 @@ class BiddingDetails extends Component {
                 <Text>一号装修公司</Text>
                 <Text>一号装修公司</Text>
               </View>
-            </View> */}
+            </View>
             <View className='process-wrapper'>
               {this.renderProcess('方案比价','您还未约量房', true)}
               {this.renderProcess('报价审核','您未提交报价审核', true)}
