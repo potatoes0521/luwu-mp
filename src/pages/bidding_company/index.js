@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 11:59:55
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 14:25:44
+ * @LastEditTime: 2020-07-06 18:02:14
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,6 +16,7 @@ import { connect } from '@tarojs/redux'
 import {} from '@services/modules/index'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
+import { getStorage } from '@utils/storage'
 import ListItem from './components/ListItem'
 
 import './index.scss'
@@ -24,14 +25,22 @@ class BiddingCompany extends Component {
 
   constructor(props) {
     super(props)
-    this.state={}
+    this.state = {
+      shopList: []
+    }
+    this.pageParams = {}
   }
 
   async componentDidMount() {
+    this.pageParams = this.$router.params
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
   }
-
+  handleRequestData() { 
+    getStorage(`bid_list_${this.pageParams.requireId}`).then(res => {
+      
+    })
+  }
   config = {
     navigationBarTitleText: '',
     navigationStyle: 'custom'

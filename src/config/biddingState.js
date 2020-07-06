@@ -18,3 +18,23 @@ export default Object.assign({}, houseState, {
   images: [],
   progress: 0
 })
+
+export const handleProgressText = (progress) => {
+  switch (progress) {
+    case 0:
+      // return '未招标';
+      return '招标方案比价中';
+    case 1:
+      return '招标方案比价中';
+    case 2:
+      return '量房方案比价中';
+    case 3:
+      return '方案报价审批中';
+    case 4:
+      return '签订装修合约中';
+    case 5:
+      return '装修施工监管中';
+    case 6:
+      return '装修竣工';
+  }
+}

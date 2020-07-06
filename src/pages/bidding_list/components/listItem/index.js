@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 16:52:33
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 16:11:14
+ * @LastEditTime: 2020-07-06 18:06:20
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -15,6 +15,7 @@ import PropTypes from 'prop-types'
 import { handleRequestData } from '@config/houseType'
 import { getImage } from '@assets/cdn'
 import { formatTimeToChinese } from '@utils/timer'
+import { handleProgressText } from '@config/biddingState'
 
 import './index.scss'
 
@@ -31,22 +32,6 @@ export default class ListItem extends Component {
     })
   }
 
-  handleProgressText(progress) {
-    switch (progress) {
-      case 0:
-        // return '未招标';
-        return '招标中';
-      case 1:
-        return '招标中';
-      case 2:
-        return '装修比价中';
-      case 3:
-        return '报价审核中';
-      case 4:
-        return '装修施工中';
-    }
-  }
-
   render() {
     const { item } = this.props
     const data = handleRequestData(item)
@@ -61,7 +46,7 @@ export default class ListItem extends Component {
       progress,
       shopNum
     } = data
-    const progressText = this.handleProgressText(progress)
+    const progressText = handleProgressText(progress)
     const imageUrl = (Array.isArray(item.images) && item.images.length) ? item.images[0] : getImage('bidding/list_item_default.png')
     const timerText = formatTimeToChinese(item.createAt)
     return (

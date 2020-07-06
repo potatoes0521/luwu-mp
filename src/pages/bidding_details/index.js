@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 17:50:49
+ * @LastEditTime: 2020-07-06 18:07:43
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -27,7 +27,8 @@ import {
 } from '@services/modules/bidding'
 import { handleRequestData } from '@config/houseType'
 import { getImage } from '@assets/cdn'
-import biddingState from '@config/biddingState'
+import biddingState, { handleProgressText } from '@config/biddingState'
+import { setStorage, removeStorage } from '@utils/storage'
 import FromMain from './components/FormMain'
 import ImageSwiper from './components/Swiper'
 
@@ -57,6 +58,13 @@ class BiddingDetails extends Component {
     this.notLogin = true
   }
 
+  componentDidMount() { 
+    this.getViewPosition()
+  }
+  componentWillUnmount() {
+    removeStorage(`bid_list_${this.pageParams.requireId}`)
+    removeStorage(`active_template_${this.pageParams.requireId}`)
+  }
   async componentDidShow() {
     this.pageParams = this.$router.params
     const {userInfo} = this.props
@@ -65,7 +73,7 @@ class BiddingDetails extends Component {
     this.getHouseData()
     this.getBidList()
   }
-
+  
   getHouseData() {
     getHouseDetails({
       requireId: this.pageParams.requireId
@@ -80,6 +88,7 @@ class BiddingDetails extends Component {
     getBidList({
       requireId: this.pageParams.requireId
     }).then(res => {
+      setStorage(`bid_list_${this.pageParams.requireId}`, res)
       this.setState({
         shopList: res
       })
@@ -92,25 +101,11 @@ class BiddingDetails extends Component {
       this.setState({ templateList })
     })
   }
-  handleProgressText() { 
-    const { progress } = this.state
-    switch (progress) {
-      case 0:
-        // return '未招标';
-        return '招标中';
-      case 1:
-        return '招标中';
-      case 2:
-        return '装修比价中';
-      case 3:
-        return '报价审核中';
-      case 4:
-        return '装修施工中';
-    }
-  }
   navigator() { 
+    const { activeTemplate } = this.state
+    setStorage(`active_template_${this.pageParams.requireId}`, activeTemplate)
     Taro.navigateTo({
-      url: '/pages/table_contrast/index'
+      url: `/pages/bidding_company/index?requireId=${this.pageParams.requireId}`
     })
   }
   /**
@@ -199,13 +194,14 @@ class BiddingDetails extends Component {
       // loading,
       isShare,
       userId,
+      progress,
       modelViewTop,
       templateList,
       activeTemplate,
       showTemplateModel
     } = this.state
     const { userInfo } = this.props
-    const progressText = this.handleProgressText()
+    const progressText = handleProgressText(progress)
     const title = (userId === userInfo.userId ? '我的' : '业主的') + '装修招标'
     const templateListRender = templateList.map(item => {
       const key = item.id
