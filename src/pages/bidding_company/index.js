@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 11:59:55
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 18:02:14
+ * @LastEditTime: 2020-07-06 18:11:45
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -35,10 +35,13 @@ class BiddingCompany extends Component {
     this.pageParams = this.$router.params
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
+    this.handleRequestData()
   }
   handleRequestData() { 
     getStorage(`bid_list_${this.pageParams.requireId}`).then(res => {
-      
+      this.setState({
+        shopList: res
+      })
     })
   }
   config = {
@@ -47,13 +50,23 @@ class BiddingCompany extends Component {
   }
 
   render() {
+    const { shopList } = this.state
+    console.log('shopList', shopList)
+    const shopListRender = shopList.map(item => {
+      const key = item.shopId
+      return (
+        <ListItem key={key} {...item} />
+      )
+    })
     return (
       <SafeAreaView
         title='选择对比装修公司'
         back
       >
         <View className='page-wrapper'>
-          <ListItem />
+          {
+            shopListRender
+          }
           <View className='bottom-select-wrapper'>
             <View className='select-num-wrapper'>
               <Text>选中</Text>
