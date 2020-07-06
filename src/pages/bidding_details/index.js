@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 18:07:43
+ * @LastEditTime: 2020-07-06 18:32:26
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -102,10 +102,13 @@ class BiddingDetails extends Component {
     })
   }
   navigator() { 
-    const { activeTemplate } = this.state
+    const {
+      activeTemplate,
+      userId
+    } = this.state
     setStorage(`active_template_${this.pageParams.requireId}`, activeTemplate)
     Taro.navigateTo({
-      url: `/pages/bidding_company/index?requireId=${this.pageParams.requireId}`
+      url: `/pages/bidding_company/index?requireId=${this.pageParams.requireId}&userId=${userId}`
     })
   }
   /**
