@@ -20,10 +20,11 @@ class OfferExaminePublish extends Component {
 
   constructor(props) {
     super(props)
-    this.state = Object.assign({}, OfferState, {
+    this.state = {
+      ...OfferState,
       // 除去公共key以外的字段定在这里
       requireId: ''
-    })
+    }
     this.timer = null
     this.formForHouse = null
     this.formForUser = null

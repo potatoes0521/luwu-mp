@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 13:44:27
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 17:40:15
+ * @LastEditTime: 2020-07-10 09:26:49
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -67,10 +67,12 @@ export const handleRequestData = (res) => {
     longitude: res.longitude,
     latitude: res.latitude
   }
-  const data = Object.assign({}, res, {
+  const data = {
+    ...res,
     startTime: startTime[0] || {},
     budget,
-    address
-  }, roomData)
+    address,
+    ...roomData
+  }
   return data
 }

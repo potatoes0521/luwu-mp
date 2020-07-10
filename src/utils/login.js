@@ -4,7 +4,7 @@
  * @path: "@utils/login"
  * @Date: 2020-06-17 16:04:08
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 18:17:48
+ * @LastEditTime: 2020-07-10 09:25:55
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -31,13 +31,12 @@ export default {
         iv,
         encryptedData,
       } = params
-      Actions.changeUserInfo(
-        Object.assign({}, userInfo, {
+      Actions.changeUserInfo({
+          ...userInfo,
           signature,
           iv,
           encryptedData
-        })
-      )
+      })
       let sendData = {
         appId: "wx08071be1bdb33e0c",
         code: wxCode,
@@ -46,9 +45,7 @@ export default {
         signature,
       }
       userLogin(sendData).then(data => {
-        Actions.changeUserInfo(
-          Object.assign({}, data)
-        )
+        Actions.changeUserInfo(data)
         resolve(data)
       })
     })

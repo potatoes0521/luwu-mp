@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 12:03:06
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 18:42:45
+ * @LastEditTime: 2020-07-10 09:18:22
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -23,9 +23,13 @@ class ListItem extends Component {
   static options = {
     addGlobalClass: true // 允许外部样式修改组件样式
   }
-  onSelect() { 
-    const { item } = this.props
-    this.props.onSelect(item)
+  onSelectContrast() {
+    const { shopId, selectContrast } = this.props
+    if(selectContrast) return
+    this.props.onSelectContrast(shopId)
+  }
+  onSelectCollection() { 
+
   }
   renderFormItem(label, content) { 
     return (
@@ -51,6 +55,7 @@ class ListItem extends Component {
       minDesignFee,
       maxDesignFee,
       concurrentNum,
+      selectContrast,
       renovationImage,
       renovationStyle,
       renovationPropose,
@@ -115,7 +120,7 @@ class ListItem extends Component {
             )
           }
         </View>
-        <View className='choose-btn' onClick={this.onSelect.bind(this)}>
+        <View className='choose-btn' onClick={this.onSelectCollection.bind(this)}>
           {
             userInfo.userId === userId && (
               <View className='btn-public'>
@@ -132,10 +137,10 @@ class ListItem extends Component {
               </View>
             )
           }
-          <View className='btn-public' >
+          <View className='btn-public' onClick={this.onSelectContrast.bind(this)}>
             {
-              select ? (
-                <Text className='text-active'>加入比价</Text>
+              selectContrast ? (
+                <Text className='text-active'>已选中</Text>
               ): (
                 <Block>
                   <Text className='iconfont iconjiahao add-icon'></Text>
@@ -161,11 +166,13 @@ ListItem.defaultProps = {
   select: false,
   images: [],
   shopName: '',
-  onSelect: () => {console.error('onSelect is not defined in bidding_company/components/ListItem')}
+  onSelectContrast: () => {
+    console.error('onSelectContrast is not defined in bidding_company/components/ListItem')
+  }
 }
 
 ListItem.propTypes = {
-  onClick: PropTypes.func.isRequired
+  onSelectContrast: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {

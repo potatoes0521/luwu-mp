@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-19 15:04:28
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-22 16:10:50
+ * @LastEditTime: 2020-07-10 09:27:58
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -101,7 +101,8 @@ export const handleNewData = (mock) => {
       const minPriceNum = findMinNum(priceArr)
       const maxAreaNum = findMaxNum(areaArr)
       const minAreaNum = findMinNum(areaArr)
-      return Object.assign({}, ite, {
+      return {
+        ...ite,
         projectId: num,
         priceArr,
         areaArr,
@@ -110,11 +111,12 @@ export const handleNewData = (mock) => {
         minPriceNum,
         maxAreaNum,
         minAreaNum
-      })
+      }
     })
-    return Object.assign({}, item, {
+    return {
+      ...item,
       items: arr
-    })
+    }
   })
   const deepArr = deepFoolData(data)
   return {

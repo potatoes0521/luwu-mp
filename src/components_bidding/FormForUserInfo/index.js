@@ -8,7 +8,7 @@
  * @path: '@/components_bidding/FormForUserInfo'
  * @Date: 2020-07-02 11:28:35
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 14:54:01
+ * @LastEditTime: 2020-07-10 09:25:06
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -96,9 +96,10 @@ class FormForUserInfo extends Component {
         code: this.code,
       }
       getUserPhone(sendData, this).then(res => {
-        const data = Object.assign({}, res, {
+        const data = {
+          ...res,
           isMember: 1
-        })
+        }
         this.props.onChangeUserInfo(data)
         this.setState({
           phone: res.phone

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 11:59:55
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 18:39:55
+ * @LastEditTime: 2020-07-10 09:23:16
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -38,15 +38,32 @@ class BiddingCompany extends Component {
     !userInfo.token && await Login.login()
     this.handleRequestData()
   }
+  /**
+   * 请求公司数据
+   * @return void
+   */
   handleRequestData() { 
     this.setState({
       userId: this.pageParams.userId
     })
     getStorage(`bid_list_${this.pageParams.requireId}`).then(res => {
+      const data = res.map(item => {
+        return {...item, selectContrast: false, selectCollection: false}
+      })
+      let obj = {
+        a: 1,
+        b:2
+      }
+      let obj1 = { ...obj, c: 1 }
+      obj1.a = 2
+      console.log('obj1, obj', obj1, obj)
       this.setState({
-        shopList: res
+        shopList: data
       })
     })
+  }
+  handleContrast(item) { 
+    console.log('item', item)
   }
   config = {
     navigationBarTitleText: '',
@@ -62,7 +79,13 @@ class BiddingCompany extends Component {
     const shopListRender = shopList.map((item, index) => {
       const key = item.shopId
       return (
-        <ListItem key={key} {...item} userId={userId} index={index} />
+        <ListItem
+          key={key}
+          {...item}
+          userId={userId}
+          index={index}
+          onSelectContrast={this.handleContrast.bind(this)}
+        />
       )
     })
     return (

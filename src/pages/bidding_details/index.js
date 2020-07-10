@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 18:32:26
+ * @LastEditTime: 2020-07-10 09:27:43
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -40,7 +40,8 @@ class BiddingDetails extends Component {
 
   constructor(props) {
     super(props)
-    this.state = Object.assign({}, biddingState, {
+    this.state = {
+      ...biddingState,
       // 除去公共key以外的字段定在这里
       loading: true,
       isShare: false,
@@ -53,7 +54,7 @@ class BiddingDetails extends Component {
         id: 0
       },
       showTemplateModel: false
-    })
+    }
     this.pageParams = {}
     this.notLogin = true
   }

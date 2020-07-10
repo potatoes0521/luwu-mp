@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 16:13:36
+ * @LastEditTime: 2020-07-10 09:29:06
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -26,11 +26,12 @@ class HousePublish extends Component {
 
   constructor(props) {
     super(props)
-    this.state = Object.assign({}, houseState, {
+    this.state = {
+      ...houseState,
       // 除去公共key以外的字段定在这里
       formType: 'publish',
       requireId: ''
-    })
+    }
     this.pageParams = {}
     this.timer = null
     this.formForHouse = null
@@ -56,8 +57,7 @@ class HousePublish extends Component {
     if (!formForHouse) {
       return
     }
-    const sendData = Object.assign({}, formForHouse)
-    this.handleRequest(sendData)
+    this.handleRequest(formForHouse)
   }
   handleRequest(sendData) {
     if (this.pageParams.pageType === 'edit') { 

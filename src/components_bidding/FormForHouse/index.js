@@ -8,7 +8,7 @@
  * @path: '@/components_bidding/FormForHouse'
  * @Date: 2020-07-02 09:41:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 10:19:48
+ * @LastEditTime: 2020-07-10 09:24:51
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  important 必填选项是否展示    这里字段几乎必填  这个只是用来控制
@@ -30,9 +30,10 @@ import './index.scss'
 export default class FormForHouse extends Component {
   constructor(props) {
     super(props)
-    this.state = Object.assign({}, houseState, {
+    this.state = {
+      ...houseState,
       // 除去公共key以外的字段定在这里
-    })
+    }
     this.firstLoading = false
   }
   componentDidMount() { 

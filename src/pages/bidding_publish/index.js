@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 20:54:51
+ * @LastEditTime: 2020-07-10 09:28:37
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -29,9 +29,10 @@ class BiddingPublish extends Component {
 
   constructor(props) {
     super(props)
-    this.state = Object.assign({}, biddingState, {
+    this.state = {
+      ...biddingState,
       // 除去公共key以外的字段定在这里
-    })
+    }
     this.pageParams = {}
     this.timer = null
     this.formForHouse = null
@@ -94,11 +95,13 @@ class BiddingPublish extends Component {
       this.showToast('至少上传一张户型图')
       return
     }
-    let sendData = Object.assign({}, {
+    let sendData = {
       requireId,
       images,
-      remark
-    }, formForHouse, formForUser)
+      remark,
+      ...formForHouse,
+      ...formForUser,
+    }
     publishBidding(sendData, this).then(() => {
       this.showToast('发布成功')
       removeStorage('choose_house_type')
