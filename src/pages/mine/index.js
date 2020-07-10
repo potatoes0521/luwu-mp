@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 17:41:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 18:36:56
+ * @LastEditTime: 2020-07-10 15:32:19
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -44,15 +44,9 @@ class Mine extends Component {
     this.errLogin = false
   }
 
-  async componentDidMount() {
-    const {userInfo} = this.props
-    !userInfo.token && await Login.login()
-    this.getHouseList()
-    this.getNoteList()
-    this.getOfferList()
-  }
-  componentDidShow() { 
+  async componentDidShow() {
     const { userInfo } = this.props
+    !userInfo.token && await Login.login()
     if (userInfo.token) {
       this.getHouseList()
       this.getNoteList()
@@ -141,11 +135,6 @@ class Mine extends Component {
       imageUrl: getImage('share/share_index.png')
     }
   }
-  config = {
-    navigationBarTitleText: '个人中心',
-    navigationStyle: 'custom'
-  }
-
   render() {
     const { userInfo } = this.props
     const {
@@ -174,7 +163,7 @@ class Mine extends Component {
                       <View className='login-msg-name'>{userInfo.nickName || ''}</View>
                         <View className='login-msg-vip-wrapper'>
                           {
-                            userInfo.isMember && (<Text className='iconfont iconhuiyuan vip-icon'></Text>)
+                            userInfo.isMember ? (<Text className='iconfont iconhuiyuan vip-icon'></Text>) : null
                           }
                         <Text>{userInfo.isMember ? '录屋会员' : '登录用户' }</Text>
                       </View>

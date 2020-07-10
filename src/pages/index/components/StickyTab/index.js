@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 17:13:53
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 14:43:16
+ * @LastEditTime: 2020-07-10 15:27:30
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -55,7 +55,7 @@ class StickyTab extends Component {
   componentDidMount() {
     this.getStatusBarHeight()
   }
-  componentDidUpdate() { 
+  UNSAFE_componentWillUpdate() { 
     const { system } = this.props
     if (system && system.statusBarHeight && !this.loading) {
       this.getStickyScrollTop()
@@ -146,7 +146,7 @@ class StickyTab extends Component {
       const itemClassName = classNames('sticky-list-item', {
         'sticky-list-item-active': index === activeIndex
       })
-      const key = item.text
+      const key = item.text + 'stickTab'
       return (
         <View
           key={key}

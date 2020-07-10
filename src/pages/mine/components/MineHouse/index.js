@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-01 09:55:00
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 14:21:21
+ * @LastEditTime: 2020-07-10 15:06:11
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -75,7 +75,7 @@ class MineHouse extends Component {
   render() {
     const { houseList } = this.props
     const houseListRender = houseList.map(item => {
-      const key = item.requireId
+      const key = item.requireId + 'bidding'
       const roomData = handleHouseType(item)
       const {
         bedroom,

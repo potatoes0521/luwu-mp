@@ -9,7 +9,7 @@
  * @path: @components/Skeleton
  * @Date: 2020-06-15 18:07:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 13:07:48
+ * @LastEditTime: 2020-07-10 15:10:11
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -108,7 +108,7 @@ class Skeleton extends Component {
     const skeletonStyle = { backgroundColor }
     return (
       <View
-        className='skeleton'
+        className='skeleton-wrapper'
         style={skeletonStyle}
       >
         {darks.map(dark => (

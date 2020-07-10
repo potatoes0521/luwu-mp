@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 14:41:33
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 14:43:23
+ * @LastEditTime: 2020-07-10 15:03:44
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -71,7 +71,7 @@ export default class Store extends Component {
           <View className='store-list'>
             {
               newArray.map((item, index) => {
-                const key = index
+                const key = index + 'store'
                 let arr = [1, 2, 3, 4, 5, 6, 7]
                 arr.sort(() => Math.random() - 0.5)
                 const itemRender = item && item.map((ite, idx) => {

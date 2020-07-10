@@ -4,12 +4,12 @@
  * @path: 引入路径
  * @Date: 2020-07-02 20:01:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 14:22:19
+ * @LastEditTime: 2020-07-10 15:37:51
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro from '@tarojs/taro'
+import Taro, { getCurrentInstance } from '@tarojs/taro'
 import React, { Component } from 'react'
 import { View, Image, Button } from '@tarojs/components'
 import { connect } from 'react-redux'
@@ -18,7 +18,6 @@ import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getImage } from '@assets/cdn'
 import Actions from '@store/actions/index.js'
-
 import './index.scss'
 
 class Vip extends Component { 
@@ -32,8 +31,8 @@ class Vip extends Component {
   }
 
   async componentDidMount() {
-    this.pageParams = this.$router.params
-    const {userInfo} = this.props
+    this.pageParams = getCurrentInstance().router.params
+    const { userInfo } = this.props
     !userInfo.token && await Login.login()
     this.handleCode()
   }
@@ -52,6 +51,7 @@ class Vip extends Component {
   }
   onGetPhoneNumber(e) {
     const { detail } = e
+    if (!detail.iv || !detail.encryptedData) return
     const sendData = {
       iv: detail.iv,
       encryptedData: detail.encryptedData,
@@ -74,10 +74,6 @@ class Vip extends Component {
         Taro.navigateBack()
       }
     })
-  }
-  config = {
-    navigationBarTitleText: '',
-    navigationStyle: 'custom'
   }
 
   render() {

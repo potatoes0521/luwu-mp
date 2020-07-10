@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 10:42:14
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 14:43:06
+ * @LastEditTime: 2020-07-10 15:07:01
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -45,7 +45,10 @@ export default class FreeEvent extends Component {
             <View className='header-image-list'>
               {
                 headerList.map(item => (
-                  <View key='item' className='image-item'>
+                  <View
+                    key={item}
+                    className='image-item'
+                  >
                     <Image src={item} className='item-image'></Image>
                   </View>
                 ))

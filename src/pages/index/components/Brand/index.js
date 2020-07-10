@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 13:56:20
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 14:42:39
+ * @LastEditTime: 2020-07-10 15:02:53
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -56,7 +56,7 @@ export default class Brand extends Component {
           <View className='list-wrapper'>
             {
               brandList.map((item, index) => {
-                const key = item.brandId
+                const key = item.brandId + 'brand'
                 const itemClassName = classNames('list-item', {
                   'margin-right': (index + 1) % 3 !== 0,
                 })

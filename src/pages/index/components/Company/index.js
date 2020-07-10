@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 13:20:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 14:42:47
+ * @LastEditTime: 2020-07-10 15:03:06
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -51,7 +51,7 @@ export default class Company extends Component {
           <View className='list-wrapper'>
             {
               companyList.map((item, index) => {
-                const key = item.companyId
+                const key = item.companyId + 'company'
                 const itemClassName = classNames('list-item', {
                   'margin-right': (index + 1) % 4 !== 0,
                 })
