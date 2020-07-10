@@ -8,7 +8,7 @@
  * @path: '@/components_bidding/FormForUserInfo'
  * @Date: 2020-07-02 11:28:35
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 09:25:06
+ * @LastEditTime: 2020-07-10 14:20:13
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -29,8 +29,8 @@ import { phoneNumberPatter, realNamePatter } from '@utils/patter'
 import './index.scss'
 
 class FormForUserInfo extends Component {
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state = {
       userName: '',
       phone: '',

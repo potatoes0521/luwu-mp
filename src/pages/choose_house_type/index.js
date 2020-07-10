@@ -23,8 +23,8 @@ import './index.scss'
 
 class ChooseHouseType extends Component { 
 
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state = {
       roomList: houseType, // 房屋
       livingRoomList: [], // 客厅

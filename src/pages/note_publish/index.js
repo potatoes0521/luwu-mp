@@ -31,8 +31,8 @@ import './index.scss'
 
 class NotePublish extends Component { 
 
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state = Object.assign({}, goodsState, {
       // 除去公共key以外的字段定在这里
       canInputBrand: false

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 11:59:12
+ * @LastEditTime: 2020-07-10 14:21:01
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -25,8 +25,8 @@ import './index.scss'
 
 class HousePublish extends Component {
 
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state = {
       ...houseState,
       // 除去公共key以外的字段定在这里

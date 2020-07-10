@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-01 09:55:00
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 14:37:14
+ * @LastEditTime: 2020-07-10 14:21:21
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -20,8 +20,8 @@ import { connect } from 'react-redux'
 import './index.scss'
 
 class MineHouse extends Component { 
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state={}
   }
   static options = {

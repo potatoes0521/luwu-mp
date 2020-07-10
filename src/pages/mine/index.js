@@ -34,8 +34,8 @@ const headerImage = getImage('mine/default_header.png')
 
 class Mine extends Component {
 
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state = {
       houseList: [],
       noteLength: 0,

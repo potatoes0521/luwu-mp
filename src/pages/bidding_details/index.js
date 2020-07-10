@@ -39,8 +39,8 @@ const defaultImage = [getImage('bidding/swiper_default.png')]
 
 class BiddingDetails extends Component { 
 
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state = {
       ...biddingState,
       // 除去公共key以外的字段定在这里

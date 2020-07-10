@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-23 10:55:14
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 09:29:35
+ * @LastEditTime: 2020-07-10 14:21:45
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -31,8 +31,8 @@ const fileIcon = getImage('icon/file_icon.png')
 
 class OfferExamineDetails extends Component { 
 
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state = {
       ...OfferState,
       createAt: ''

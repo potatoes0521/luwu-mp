@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 16:50:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 17:57:41
+ * @LastEditTime: 2020-07-10 14:20:39
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -25,8 +25,8 @@ import './index.scss'
 
 class BiddingList extends Component {
 
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state = {
       biddingList: []
     }

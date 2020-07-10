@@ -23,8 +23,8 @@ import './index.scss'
 export default class Store extends Component { 
 
 
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state = {
       storeList: []
     }

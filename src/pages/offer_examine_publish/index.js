@@ -19,8 +19,8 @@ const fileIcon = getImage('icon/file_icon.png')
 
 class OfferExaminePublish extends Component {
 
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state = {
       ...OfferState,
       // 除去公共key以外的字段定在这里

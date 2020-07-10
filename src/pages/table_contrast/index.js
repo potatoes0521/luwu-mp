@@ -30,8 +30,8 @@ import './index.scss'
 
 class TableContrast extends Component {
 
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state = {
       companyTableList: [...companyData],
       hiddenRemark: true,

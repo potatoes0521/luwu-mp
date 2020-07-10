@@ -22,8 +22,8 @@ import PropTypes from 'prop-types'
 import './index.scss'
 
 export default class ImageSwiper extends Component {
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state = {}
   }
 

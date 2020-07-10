@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-02 20:01:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 14:54:37
+ * @LastEditTime: 2020-07-10 14:22:19
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -23,8 +23,8 @@ import './index.scss'
 
 class Vip extends Component { 
 
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state = {}
     this.timer = null
     this.pageParams = {}

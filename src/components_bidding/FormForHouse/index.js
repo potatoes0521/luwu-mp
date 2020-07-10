@@ -29,8 +29,8 @@ import FormItem from '@components/FormItem'
 import './index.scss'
 
 export default class FormForHouse extends Component {
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state = {
       ...houseState,
       // 除去公共key以外的字段定在这里

@@ -16,7 +16,8 @@ import ComponentsInput from '../Input'
 import './index.module.scss'
 
 export default class SearchInput extends Component { 
-  constructor() { 
+  constructor(props) {
+    super(props) 
     this.state = {
       value: ''
     }

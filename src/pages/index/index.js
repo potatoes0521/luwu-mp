@@ -33,7 +33,8 @@ import './index.scss'
 const bannerBigImg = getImage(`index/bannerBig.png?${Math.random()}`)
 
 class Index extends Component {
-  constructor() { 
+  constructor(props) {
+    super(props) 
     this.state = {
       loading: false,
       fixed: false,

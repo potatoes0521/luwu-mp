@@ -21,8 +21,8 @@ import { handleProgressText } from '@config/biddingState'
 import './index.scss'
 
 export default class ListItem extends Component { 
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state={}
   }
 

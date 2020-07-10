@@ -23,7 +23,8 @@ import './index.scss'
 
 class BiddingCompany extends Component { 
 
-  constructor() {
+  constructor(props) {
+    super(props)
     this.state = {
       shopList: [],
       userId: '',

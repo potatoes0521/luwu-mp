@@ -31,8 +31,8 @@ import './index.scss'
 
 class NoteDetails extends Component { 
 
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state = Object.assign({}, noteState, {
       // 除去公共key以外的字段定在这里
       distributorCount: 0,

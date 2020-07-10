@@ -48,8 +48,8 @@ const Mock = [
 ]
 class NoteMine extends Component { 
 
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state = {
       loading: true,
       noteList: Mock, // 给骨架屏提供一个mock\数据

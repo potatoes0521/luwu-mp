@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 18:29:25
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 13:06:25
+ * @LastEditTime: 2020-07-10 14:19:36
  * @mustParam: 必传参数
  *  address 地理位置数据  有经纬度和地址
  * @optionalParam: 选传参数
@@ -33,8 +33,8 @@ import { getUserLocation, chooseLocation } from './utils/location'
 import './index.module.scss'
 
 export default class Location extends Component {
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state={}
   }
 

@@ -23,8 +23,8 @@ import './index.scss'
 
 class ChooseCategory extends Component { 
 
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state = {
       title: '录屋',
       data: [],

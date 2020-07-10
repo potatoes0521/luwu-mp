@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-19 10:17:37
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 11:22:56
+ * @LastEditTime: 2020-07-10 14:21:38
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -24,8 +24,8 @@ import './index.scss'
 
 class NoteSelect extends Component {
 
-  constructor() {
-    
+  constructor(props) {
+    super(props)
     this.state = {
       showSelectModal: false,
       mainCategoriesList: [],
