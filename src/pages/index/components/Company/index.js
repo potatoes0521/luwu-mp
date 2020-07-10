@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 13:20:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 18:50:55
+ * @LastEditTime: 2020-07-10 14:42:47
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -20,7 +20,7 @@ import classNames from 'classnames'
 import { getCompanyData } from '@services/modules/index'
 import { getImage } from '@assets/cdn'
 
-import './index.scss'
+import './index.module.scss'
 
 export default class Company extends Component { 
   constructor(props) {

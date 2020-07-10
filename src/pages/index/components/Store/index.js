@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 14:41:33
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 18:29:33
+ * @LastEditTime: 2020-07-10 14:43:23
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -18,7 +18,7 @@ import {
 import PropTypes from 'prop-types'
 import { getStoreData } from '@services/modules/index'
 
-import './index.scss'
+import './index.module.scss'
 
 export default class Store extends Component { 
 

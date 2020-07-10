@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 10:42:14
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 18:42:34
+ * @LastEditTime: 2020-07-10 14:43:06
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -17,11 +17,15 @@ import {
 } from '@tarojs/components'
 import { getImage } from '@assets/cdn'
 
-import './index.scss'
+import './index.module.scss'
 
 const titleTextImage = getImage(`index/freeEvent/title.png?${Math.random()}`)
 
 export default class FreeEvent extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
   navigator() { 
     const { offerData } = this.props
     const pageName = offerData && offerData.quotationId ? 'offer_examine_details' : 'offer_examine_publish'

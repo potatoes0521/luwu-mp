@@ -4,30 +4,30 @@ export default {
     'pages/index/index',
     // 我的
     'pages/mine/index',
-    // 笔记模块
-    'pages/note_mine/index', // 我的笔记
-    'pages/note_publish/index', // 发布笔记
-    'pages/note_details/index', // 发布的笔记详情
-    // 权限鉴权
-    'pages/auth/index',
-    // 选择品类
-    'pages/choose_category/index',
-    'pages/choose_brand/index',
-    'pages/choose_house_type/index',
-    'pages/choose_one_item/index',
-    // 表格
-    'pages/table_contrast/index',
-    // 审报价
-    'pages/offer_examine_details/index',
-    'pages/offer_examine_publish/index',
-    // 招标
-    'pages/bidding_publish/index',
-    'pages/bidding_details/index',
-    'pages/bidding_list/index',
-    'pages/bidding_company/index',
+    // // 笔记模块
+    // 'pages/note_mine/index', // 我的笔记
+    // 'pages/note_publish/index', // 发布笔记
+    // 'pages/note_details/index', // 发布的笔记详情
+    // // 权限鉴权
+    // 'pages/auth/index',
+    // // 选择品类
+    // 'pages/choose_category/index',
+    // 'pages/choose_brand/index',
+    // 'pages/choose_house_type/index',
+    // 'pages/choose_one_item/index',
+    // // 表格
+    // 'pages/table_contrast/index',
+    // // 审报价
+    // 'pages/offer_examine_details/index',
+    // 'pages/offer_examine_publish/index',
+    // // 招标
+    // 'pages/bidding_publish/index',
+    // 'pages/bidding_details/index',
+    // 'pages/bidding_list/index',
+    // 'pages/bidding_company/index',
 
-    'pages/house_publish/index',
-    'pages/vip/index'
+    // 'pages/house_publish/index',
+    // 'pages/vip/index'
   ],
   tabBar: {
     color: "#D8D8D8",

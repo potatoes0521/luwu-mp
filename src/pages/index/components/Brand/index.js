@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 13:56:20
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 22:06:57
+ * @LastEditTime: 2020-07-10 14:42:39
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -21,7 +21,7 @@ import PropTypes from 'prop-types'
 import { getBrandData } from '@services/modules/index'
 import { getImage } from '@assets/cdn'
 
-import './index.scss'
+import './index.module.scss'
 
 export default class Brand extends Component { 
   constructor(props) {

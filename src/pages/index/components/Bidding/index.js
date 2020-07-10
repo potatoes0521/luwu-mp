@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 11:19:15
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 16:16:45
+ * @LastEditTime: 2020-07-10 14:42:25
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,9 +16,13 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { handleRequestData } from '@config/houseType'
 
-import './index.scss'
+import './index.module.scss'
 
 class Bidding extends Component { 
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
   navigatorTo() { 
     const { userInfo } = this.props
     let url = '/pages/bidding_publish/index'
@@ -54,7 +58,11 @@ class Bidding extends Component {
       const text = (obj.bedroom.chinese || '-') + '室' + (obj.sittingroom.chinese || '-') + '厅' + (obj.cookroom.chinese || '-') + '厨' + (obj.washroom.chinese || '-') + '卫'
       return Object.assign({}, obj, {text})
     })
-    const [data1 = {}, data2 = {}, data3 = {}, data4 = {}, data5 = {}] = array
+    const [data1 = {
+      budget: {
+        moneyText: ''
+      }
+    }, data2 = {}, data3 = {}, data4 = {}, data5 = {}] = array
     return (
       <View className='card-wrapper bidding'>
         <View className='card-plain'>
