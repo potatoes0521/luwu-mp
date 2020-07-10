@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 12:03:06
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 09:18:22
+ * @LastEditTime: 2020-07-10 09:59:12
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -23,10 +23,16 @@ class ListItem extends Component {
   static options = {
     addGlobalClass: true // 允许外部样式修改组件样式
   }
-  onSelectContrast() {
-    const { shopId, selectContrast } = this.props
+  onSelectContrast(shopName) {
+    const {
+      shopId,
+      selectContrast,
+    } = this.props
     if(selectContrast) return
-    this.props.onSelectContrast(shopId)
+    this.props.onSelectContrast({
+      shopId,
+      shopName
+    })
   }
   onSelectCollection() { 
 
@@ -60,10 +66,11 @@ class ListItem extends Component {
       renovationStyle,
       renovationPropose,
     } = this.props
+    const showNameText = userInfo.userId === userId ? shopName : `${index + 1}号装修公司`
     return (
       <View className='item-wrapper'>
         <View className='title-wrapper'>
-          <View className='company-name'>{userInfo.userId === userId ? shopName : `${index + 1}号装修公司`}</View>
+          <View className='company-name'>{showNameText}</View>
           <View className='right-tips-wrapper'>
             <Text className='time'>{formatTimeToChinese(createAt)}</Text>
           </View>
@@ -137,7 +144,10 @@ class ListItem extends Component {
               </View>
             )
           }
-          <View className='btn-public' onClick={this.onSelectContrast.bind(this)}>
+          <View
+            className='btn-public'
+            onClick={this.onSelectContrast.bind(this, showNameText)}
+          >
             {
               selectContrast ? (
                 <Text className='text-active'>已选中</Text>

@@ -4,13 +4,13 @@
  * @path: 引入路径
  * @Date: 2020-07-06 11:59:55
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 09:23:16
+ * @LastEditTime: 2020-07-10 10:06:22
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View, Text, Block } from '@tarojs/components'
 // import classNames from 'classnames'
 import { connect } from '@tarojs/redux'
 import {} from '@services/modules/index'
@@ -27,7 +27,9 @@ class BiddingCompany extends Component {
     super(props)
     this.state = {
       shopList: [],
-      userId: ''
+      userId: '',
+      selectContrastList: [],
+      showSelectContrastModal: false
     }
     this.pageParams = {}
   }
@@ -50,20 +52,31 @@ class BiddingCompany extends Component {
       const data = res.map(item => {
         return {...item, selectContrast: false, selectCollection: false}
       })
-      let obj = {
-        a: 1,
-        b:2
-      }
-      let obj1 = { ...obj, c: 1 }
-      obj1.a = 2
-      console.log('obj1, obj', obj1, obj)
       this.setState({
         shopList: data
       })
     })
   }
-  handleContrast(item) { 
-    console.log('item', item)
+  handleContrast(shopMsg) {
+    let { shopList, selectContrastList } = this.state
+    shopList.forEach(item => {
+      if (shopMsg.shopId === item.shopId) {
+        item.selectContrast = true
+      }
+    })
+    selectContrastList.push({shopMsg})
+    this.setState({
+      shopList,
+      selectContrastList
+    })
+  }
+  handleShowSelectModal() { 
+    const { selectContrastList } = this.state
+    if (!selectContrastList.length) return
+
+  }
+  stopPropagation(e) {
+    e.stopPropagation()
   }
   config = {
     navigationBarTitleText: '',
@@ -72,8 +85,10 @@ class BiddingCompany extends Component {
 
   render() {
     const {
+      userId,
       shopList,
-      userId
+      selectContrastList,
+      showSelectContrastModal
     } = this.state
     console.log('shopList', shopList)
     const shopListRender = shopList.map((item, index) => {
@@ -98,10 +113,36 @@ class BiddingCompany extends Component {
             shopListRender
           }
           <View className='bottom-select-wrapper'>
-            <View className='select-num-wrapper'>
-              <Text>选中</Text>
-              <Text className='heigh-light'>5</Text>
-              <Text>家</Text>
+            {
+              showSelectContrastModal && selectContrastList.length && (
+                <View className='modal-select-wrapper'>
+                  <View className='modal-bg' onTouchMove={this.stopPropagation.bind(this)}></View>
+                  <View className='select-list-wrapper'>
+                    {
+                      selectContrastList.map(item => {
+                        const key = item.shopId
+                        return (
+                          <View key={key} className='select-list-item'>
+                            <Text className='shop-name'>{item.shopName}</Text>
+                            <Text className='shop-delete'>删除</Text>
+                          </View>
+                        )
+                      })
+                    }
+                  </View>
+                </View>
+              )
+            }
+            <View className='select-num-wrapper' onClick={this.handleShowSelectModal.bind(this)}>
+              {
+                selectContrastList && selectContrastList.length && (
+                  <Block>
+                    <Text>选中</Text>
+                    <Text className='heigh-light'>{selectContrastList.length}</Text>
+                    <Text>家</Text>
+                  </Block>
+                )
+              }
             </View>
             <View className='select-btn'>开始对比</View>
           </View>
