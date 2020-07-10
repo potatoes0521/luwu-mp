@@ -9,19 +9,19 @@
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import React, { Component } from 'react'
 import { View, Text, Block } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import Upload from '@/components/Upload'
 import { formatTimeToChinese } from '@utils/timer'
-import { connect } from '@tarojs/redux'
+import { connect } from 'react-redux'
 
 import './index.scss'
 
 class ListItem extends Component { 
 
   static options = {
-    addGlobalClass: true // 允许外部样式修改组件样式
+    // addGlobalClass: true // 允许外部样式修改组件样式
   }
   onSelectContrast(shopName) {
     const {

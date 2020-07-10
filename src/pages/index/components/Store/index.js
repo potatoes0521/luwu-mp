@@ -9,7 +9,8 @@
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import {
   View,
   Text
@@ -22,8 +23,8 @@ import './index.scss'
 export default class Store extends Component { 
 
 
-  constructor(props) {
-    super(props)
+  constructor() {
+    
     this.state = {
       storeList: []
     }
@@ -44,7 +45,7 @@ export default class Store extends Component {
     })
   }
   static options = {
-    addGlobalClass: true // 允许外部样式修改组件样式
+    // addGlobalClass: true // 允许外部样式修改组件样式
   }
   
   render() {

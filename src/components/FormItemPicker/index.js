@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 14:20:27
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 15:33:22
+ * @LastEditTime: 2020-07-10 13:05:59
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  封装了Picker样式 文档参照 https://developers.weixin.qq.com/miniprogram/dev/component/picker.html
@@ -20,7 +20,8 @@
  *  langLabel 长label 可容纳7个字的
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import {
   View,
   Text,
@@ -32,11 +33,11 @@ import {
   getTimeDate,
   timestampOfDay,
 } from '@utils/timer'
-import './index.scss'
+import './index.module.scss'
 
 export default class FormItem extends Component { 
   static options = {
-    addGlobalClass: true // 允许外部样式修改组件样式
+    // addGlobalClass: true // 允许外部样式修改组件样式
   }
   onPickerValueChange(e) {
     e.stopPropagation();

@@ -61,8 +61,8 @@ npm manifest:
       "@tarojs/async-await": "1.3.13",
       "@tarojs/components": "1.3.13",
       "@tarojs/components-qa": "1.3.13",
-      "@tarojs/redux": "1.3.13",
-      "@tarojs/redux-h5": "1.3.13",
+      "react-redux": "1.3.13",
+      "react-redux-h5": "1.3.13",
       "@tarojs/router": "1.3.13",
       "@tarojs/taro": "1.3.13",
       "@tarojs/taro-alipay": "1.3.13",
@@ -1190,9 +1190,9 @@ Lockfile:
     dependencies:
       uglify-js "^3.3.24"
   
-  "@tarojs/redux-h5@1.3.13":
+  "react-redux-h5@1.3.13":
     version "1.3.13"
-    resolved "https://registry.npm.taobao.org/@tarojs/redux-h5/download/@tarojs/redux-h5-1.3.13.tgz#fdb04f88cc64dcadfb58dcacc59ce0a19d5ddcb6"
+    resolved "https://registry.npm.taobao.org/react-redux-h5/download/react-redux-h5-1.3.13.tgz#fdb04f88cc64dcadfb58dcacc59ce0a19d5ddcb6"
     integrity sha1-/bBPiMxk3K37WNysxZzgoZ1d3LY=
     dependencies:
       hoist-non-react-statics "^2.5.0"
@@ -1200,9 +1200,9 @@ Lockfile:
       loose-envify "^1.1.0"
       prop-types "^15.6.1"
   
-  "@tarojs/redux@1.3.13":
+  "react-redux@1.3.13":
     version "1.3.13"
-    resolved "https://registry.npm.taobao.org/@tarojs/redux/download/@tarojs/redux-1.3.13.tgz#ab88d1fea45a131935dd3f8b060c87483a597aff"
+    resolved "https://registry.npm.taobao.org/react-redux/download/react-redux-1.3.13.tgz#ab88d1fea45a131935dd3f8b060c87483a597aff"
     integrity sha1-q4jR/qRaExk13T+LBgyHSDpZev8=
     dependencies:
       "@tarojs/taro" "1.3.13"

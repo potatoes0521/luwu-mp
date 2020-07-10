@@ -9,10 +9,11 @@
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import { View, Text } from '@tarojs/components'
 import PropTypes from 'prop-types'
-import { connect } from '@tarojs/redux'
+import { connect } from 'react-redux'
 import { handleRequestData } from '@config/houseType'
 
 import './index.scss'
@@ -44,7 +45,7 @@ class Bidding extends Component {
     )
   }
   static options = {
-    addGlobalClass: true // 允许外部样式修改组件样式
+    // addGlobalClass: true // 允许外部样式修改组件样式
   }
   render() {  
     const { biddingList } = this.props

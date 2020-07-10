@@ -9,9 +9,10 @@
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import { View } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
+import { connect } from 'react-redux'
 import SaveAreaView from '@components/SafeAreaView'
 import Skeleton from '@components/Skeleton'
 import { getNoteList } from '@services/modules/note'
@@ -47,8 +48,8 @@ const Mock = [
 ]
 class NoteMine extends Component { 
 
-  constructor(props) {
-    super(props)
+  constructor() {
+    
     this.state = {
       loading: true,
       noteList: Mock, // 给骨架屏提供一个mock\数据

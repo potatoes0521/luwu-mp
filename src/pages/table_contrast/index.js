@@ -5,14 +5,14 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 14:31:02
+ * @LastEditTime: 2020-07-10 11:59:50
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import React, { Component } from 'react'
 import { View } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
+import { connect } from 'react-redux'
 // import {} from '@services/modules'
 import SaveAreaView from '@components/SafeAreaView'
 import { getImage } from '@assets/cdn'
@@ -30,8 +30,8 @@ import './index.scss'
 
 class TableContrast extends Component {
 
-  constructor(props) {
-    super(props)
+  constructor() {
+    
     this.state = {
       companyTableList: [...companyData],
       hiddenRemark: true,

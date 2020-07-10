@@ -4,19 +4,19 @@
  * @path: 引入路径
  * @Date: 2020-06-20 13:44:04
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 12:07:22
+ * @LastEditTime: 2020-07-10 12:04:20
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 
 import './index.scss'
 
-export default class ListItem extends Taro.Component {
+export default class ListItem extends Component {
   handleClickItem(item) { 
     this.props.onClickItem(item)
   }

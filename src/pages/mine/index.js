@@ -9,7 +9,8 @@
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import {
   View,
   Image,
@@ -17,7 +18,7 @@ import {
   Block
 } from '@tarojs/components'
 // import classNames from 'classnames'
-import { connect } from '@tarojs/redux'
+import { connect } from 'react-redux'
 import { getHouseList } from '@services/modules/house'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
@@ -33,8 +34,8 @@ const headerImage = getImage('mine/default_header.png')
 
 class Mine extends Component {
 
-  constructor(props) {
-    super(props)
+  constructor() {
+    
     this.state = {
       houseList: [],
       noteLength: 0,

@@ -9,7 +9,8 @@
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import {
   View,
   Swiper,
@@ -21,8 +22,8 @@ import PropTypes from 'prop-types'
 import './index.scss'
 
 export default class ImageSwiper extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    
     this.state = {}
   }
 
@@ -30,7 +31,7 @@ export default class ImageSwiper extends Component {
   // 因为自定组件模式下Swiper指示点的样式写在子组件会不生效 
   // 所以指示点的样式在父组件
   static options = {
-    addGlobalClass: true // 允许外部样式修改组件样式
+    // addGlobalClass: true // 允许外部样式修改组件样式
   }
 
   

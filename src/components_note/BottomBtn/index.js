@@ -9,7 +9,8 @@
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+
+import React, { Component } from 'react'
 import {
   View,
   Button

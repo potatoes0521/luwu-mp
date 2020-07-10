@@ -9,7 +9,8 @@
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import {
   View,
   Text,
@@ -18,15 +19,15 @@ import {
 } from '@tarojs/components'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import { connect } from '@tarojs/redux'
+import { connect } from 'react-redux'
 import { getImage } from '@assets/cdn'
 import { getSystemInfo } from '@utils/publicWX'
 
 import './index.scss'
 
 class StickyTab extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    
     this.state = {
       list: [
         {

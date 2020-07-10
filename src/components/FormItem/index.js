@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 15:17:57
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 11:29:04
+ * @LastEditTime: 2020-07-10 13:04:52
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  封装了Input样式 文档参照 https: //developers.weixin.qq.com/miniprogram/dev/component/input.html
@@ -21,17 +21,17 @@
  *  langLabel 长label 可容纳7个字的
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import React, { Component } from 'react'
 import { View, Text } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import ComponentInput from '@components/Input'
 import classNames from 'classnames'
 
-import './index.scss'
+import './index.module.scss'
 
 export default class FormItem extends Component { 
   static options = {
-    addGlobalClass: true // 允许外部样式修改组件样式
+    // addGlobalClass: true // 允许外部样式修改组件样式
   }
   handleContentClick(e) {
     e.stopPropagation();

@@ -9,7 +9,7 @@
  * @path: @components/Skeleton
  * @Date: 2020-06-15 18:07:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-19 13:17:09
+ * @LastEditTime: 2020-07-10 13:07:48
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -24,14 +24,15 @@
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 import PropsType from 'prop-types'
-import './index.scss'
+import './index.module.scss'
 
 class Skeleton extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    
     this.state = {
       lights: [],
       darks: [],

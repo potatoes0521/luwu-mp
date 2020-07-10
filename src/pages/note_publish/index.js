@@ -9,12 +9,13 @@
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import {
   View,
   Textarea
 } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
+import { connect } from 'react-redux'
 import Upload from '@components/Upload'
 import Location from '@components/Location'
 import SaveAreaView from '@components/SafeAreaView'
@@ -30,8 +31,8 @@ import './index.scss'
 
 class NotePublish extends Component { 
 
-  constructor(props) {
-    super(props)
+  constructor() {
+    
     this.state = Object.assign({}, goodsState, {
       // 除去公共key以外的字段定在这里
       canInputBrand: false

@@ -4,20 +4,20 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:03:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 18:20:27
+ * @LastEditTime: 2020-07-10 13:05:27
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import React, { Component } from 'react'
 import {
   View,
   Button
 } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
+import { connect } from 'react-redux'
 import Login from '@utils/login'
 
-import './index.scss'
+import './index.module.scss'
 
 class Auth extends Component {
   /**

@@ -9,7 +9,7 @@
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */
-import Taro, { Component } from '@tarojs/taro'
+import React, { Component } from 'react'
 import {
   View,
   Text,
@@ -23,8 +23,8 @@ import { getImage } from '@assets/cdn'
 import './index.scss'
 
 export default class Company extends Component { 
-  constructor(props) {
-    super(props)
+  constructor() {
+    
     this.state = {
       companyList: []
     }
@@ -33,7 +33,7 @@ export default class Company extends Component {
     this.getCompanyData()
   }
   static options = {
-    addGlobalClass: true // 允许外部样式修改组件样式
+    // addGlobalClass: true // 允许外部样式修改组件样式
   }
   getCompanyData() { 
     getCompanyData().then(res => {

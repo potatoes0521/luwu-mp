@@ -9,10 +9,11 @@
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 // import classNames from 'classnames'
-import { connect } from '@tarojs/redux'
+import { connect } from 'react-redux'
 // import {} from '@services/modules/index'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
@@ -24,8 +25,8 @@ import './index.scss'
 
 class BiddingList extends Component {
 
-  constructor(props) {
-    super(props)
+  constructor() {
+    
     this.state = {
       biddingList: []
     }

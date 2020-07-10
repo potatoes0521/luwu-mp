@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 18:29:25
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 11:30:36
+ * @LastEditTime: 2020-07-10 13:06:25
  * @mustParam: 必传参数
  *  address 地理位置数据  有经纬度和地址
  * @optionalParam: 选传参数
@@ -18,6 +18,7 @@
  *  onGetLocationData
  */ 
 import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import {
   View,
   Text,
@@ -28,11 +29,12 @@ import PropTypes from 'prop-types'
 import { getSetting, openSetting } from '@utils/publicWX.js'
 import { getStorage, setStorage } from '@utils/storage'
 import { getUserLocation, chooseLocation } from './utils/location'
-import './index.scss'
 
-export default class Location extends Taro.Component {
-  constructor(props) {
-    super(props)
+import './index.module.scss'
+
+export default class Location extends Component {
+  constructor() {
+    
     this.state={}
   }
 
@@ -45,7 +47,7 @@ export default class Location extends Taro.Component {
     this.handleGetLocation()
   }
   static options = {
-    addGlobalClass: true // 允许外部样式修改组件样式
+    // addGlobalClass: true // 允许外部样式修改组件样式
   }
 
   /**

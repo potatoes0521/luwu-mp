@@ -1,6 +1,7 @@
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import { View, Text, Image } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
+import { connect } from 'react-redux'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { uploadImage, uploadFile } from '@components/Upload/utils/upload_type'
@@ -18,8 +19,8 @@ const fileIcon = getImage('icon/file_icon.png')
 
 class OfferExaminePublish extends Component {
 
-  constructor(props) {
-    super(props)
+  constructor() {
+    
     this.state = {
       ...OfferState,
       // 除去公共key以外的字段定在这里

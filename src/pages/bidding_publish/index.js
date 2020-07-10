@@ -9,9 +9,10 @@
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import { View, Textarea } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
+import { connect } from 'react-redux'
 import { publishBidding } from '@services/modules/bidding'
 import { getHouseList, publishHouse } from '@services/modules/house'
 import SafeAreaView from '@components/SafeAreaView'
@@ -27,8 +28,8 @@ import './index.scss'
 
 class BiddingPublish extends Component {
 
-  constructor(props) {
-    super(props)
+  constructor() {
+    
     this.state = {
       ...biddingState,
       // 除去公共key以外的字段定在这里

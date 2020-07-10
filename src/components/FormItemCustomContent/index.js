@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 15:17:57
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 20:58:54
+ * @LastEditTime: 2020-07-10 13:05:44
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  没有封装进去的方法请自行拓展
@@ -18,16 +18,17 @@
  *  important 是否是必填项
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+
+import React, { Component } from 'react'
 import { View, Text } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import './index.scss'
+import './index.module.scss'
 
 export default class FormItemCustomContent extends Component {
   static options = {
-    addGlobalClass: true // 允许外部样式修改组件样式
+    // addGlobalClass: true // 允许外部样式修改组件样式
   }
   handleContentClick(e) {
     e.stopPropagation();

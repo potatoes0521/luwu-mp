@@ -9,7 +9,8 @@
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import { View, Image, Text, Block } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import { handleRequestData } from '@config/houseType'
@@ -20,8 +21,8 @@ import { handleProgressText } from '@config/biddingState'
 import './index.scss'
 
 export default class ListItem extends Component { 
-  constructor(props) {
-    super(props)
+  constructor() {
+    
     this.state={}
   }
 

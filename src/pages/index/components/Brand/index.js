@@ -9,7 +9,8 @@
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import {
   View,
   Text,
@@ -44,7 +45,7 @@ export default class Brand extends Component {
     })
   }
   static options = {
-    addGlobalClass: true
+    // addGlobalClass: true
   }
   render() {
     const { brandList } = this.state

@@ -14,11 +14,12 @@
  * @emitFunction: 函数
  *  important 必填选项是否展示 这里字段几乎必填 这个只是用来控制
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import { View, Button, Text } from '@tarojs/components'
 import PropTypes, { number } from 'prop-types'
 import classNames from 'classnames'
-import { connect } from '@tarojs/redux'
+import { connect } from 'react-redux'
 import Actions from '@store/actions/index.js'
 import FormItem from '@components/FormItem'
 import FormItemCustomContent from '@components/FormItemCustomContent'
@@ -28,8 +29,8 @@ import { phoneNumberPatter, realNamePatter } from '@utils/patter'
 import './index.scss'
 
 class FormForUserInfo extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    
     this.state = {
       userName: '',
       phone: '',

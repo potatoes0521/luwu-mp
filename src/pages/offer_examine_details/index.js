@@ -9,13 +9,14 @@
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import {
   View,
   Text,
   Image
 } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
+import { connect } from 'react-redux'
 import { getOfferDetails } from '@services/modules/offer'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
@@ -30,8 +31,8 @@ const fileIcon = getImage('icon/file_icon.png')
 
 class OfferExamineDetails extends Component { 
 
-  constructor(props) {
-    super(props)
+  constructor() {
+    
     this.state = {
       ...OfferState,
       createAt: ''

@@ -8,13 +8,14 @@
  * @path: '@/components_bidding/FormForHouse'
  * @Date: 2020-07-02 09:41:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 09:24:51
+ * @LastEditTime: 2020-07-10 11:58:27
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  important 必填选项是否展示    这里字段几乎必填  这个只是用来控制
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import { View, Block } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import FormItemCustomContent from '@components/FormItemCustomContent'
@@ -28,8 +29,8 @@ import FormItem from '@components/FormItem'
 import './index.scss'
 
 export default class FormForHouse extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    
     this.state = {
       ...houseState,
       // 除去公共key以外的字段定在这里

@@ -4,16 +4,16 @@
  * @path: 引入路径
  * @Date: 2020-06-23 15:56:27
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 08:50:14
+ * @LastEditTime: 2020-07-10 13:07:33
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import ComponentsInput from '../Input'
-import './index.scss'
+import './index.module.scss'
 
 export default class SearchInput extends Component { 
   constructor() { 
@@ -26,7 +26,7 @@ export default class SearchInput extends Component {
     this.timer = null
   }
   static options = {
-    addGlobalClass: true // 允许外部样式修改组件样式
+    // addGlobalClass: true // 允许外部样式修改组件样式
   }
   timer = null
   /**

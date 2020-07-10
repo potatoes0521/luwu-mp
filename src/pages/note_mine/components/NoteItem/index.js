@@ -4,12 +4,13 @@
  * @path: 引入路径
  * @Date: 2020-06-19 09:47:09
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 17:50:27
+ * @LastEditTime: 2020-07-10 12:02:02
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import {
   View,
   Text
@@ -28,7 +29,7 @@ export default class NoteItem extends Component {
   }
 
   static options = {
-    addGlobalClass: true // 允许外部样式修改组件样式
+    // addGlobalClass: true // 允许外部样式修改组件样式
   }
   
   HandleEditData(e) { 

@@ -4,17 +4,18 @@
  * @path: 引入路径
  * @Date: 2020-07-06 14:47:02
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 16:10:20
+ * @LastEditTime: 2020-07-10 13:07:58
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+
+import React, { Component } from 'react'
 import { View, Input } from '@tarojs/components'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 
-import './index.scss'
+import './index.module.scss'
 
 export default class SwitchBtn extends Component {
   handleClick() { 

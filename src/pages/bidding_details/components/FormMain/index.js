@@ -4,12 +4,12 @@
  * @path: 引入路径
  * @Date: 2020-06-21 09:58:20
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 22:35:34
+ * @LastEditTime: 2020-07-10 11:58:50
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import React, { Component } from 'react'
 import {
   View,
   Block

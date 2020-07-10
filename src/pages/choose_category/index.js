@@ -4,14 +4,15 @@
  * @path: 引入路径
  * @Date: 2020-06-18 18:18:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 13:51:06
+ * @LastEditTime: 2020-07-10 11:59:03
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import { View } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
+import { connect } from 'react-redux'
 import { getCategory } from '@services/modules/category'
 import SaveAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
@@ -21,8 +22,8 @@ import './index.scss'
 
 class ChooseCategory extends Component { 
 
-  constructor(props) {
-    super(props)
+  constructor() {
+    
     this.state = {
       mainCategoriesList: [], // 主品类
       childCategoriesList: [], // 子品类

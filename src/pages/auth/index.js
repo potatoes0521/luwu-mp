@@ -4,15 +4,16 @@
  * @path: 引入路径
  * @Date: 2020-06-17 13:32:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-28 11:59:42
+ * @LastEditTime: 2020-07-10 11:51:03
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+
+import React, { Component } from 'react'
 import { View, Button } from '@tarojs/components'
 import PropTypes from 'prop-types'
-import { connect } from '@tarojs/redux'
+import { connect } from 'react-redux'
 import Login from '@utils/login'
 import './index.scss'
 

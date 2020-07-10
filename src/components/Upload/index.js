@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 17:35:56
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 08:58:41
+ * @LastEditTime: 2020-07-10 13:08:19
  * @mustParam: 必传参数
  *  imageList 要展示的图片
  * @optionalParam: 选传参数
@@ -14,7 +14,8 @@
  * @emitFunction: 函数
  *  onUploadOK 图片上传完毕
  */ 
-import Taro, {Component} from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import {
   View,
   Text,
@@ -24,7 +25,7 @@ import {
 import PropTypes from 'prop-types'
 import { uploadImage } from './utils/upload_type'
 
-import './index.scss'
+import './index.module.scss'
 
 export default class Upload extends Component { 
   componentDidMount() {
@@ -34,7 +35,7 @@ export default class Upload extends Component {
   }
 
   static options = {
-    addGlobalClass: true // 允许外部样式修改组件样式
+    // addGlobalClass: true // 允许外部样式修改组件样式
   }
 
   /**

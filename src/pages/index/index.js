@@ -4,24 +4,23 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 18:45:09
+ * @LastEditTime: 2020-07-10 12:33:50
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import React, { Component } from 'react'
 import {
   View,
   Image,
 } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
-// import { getIndexListData } from '@services/modules/index'
-import Skeleton from '@components/Skeleton'
+import { connect } from 'react-redux'
 import Login from '@utils/login'
 import { getImage } from '@assets/cdn'
-import Auth from '@components/auth'
 import { getHouseList } from '@services/modules/house'
 import { getOfferList } from '@services/modules/offer'
+import Auth from '@components/auth'
+import Skeleton from '@components/Skeleton'
 import StickyTab from './components/StickyTab'
 import FreeEvent from './components/FreeEvent'
 import Bidding from './components/Bidding'
@@ -128,11 +127,6 @@ class Index extends Component {
     this.setState({
       tabActiveIndex: nextTab
     })
-  }
-  
-  config = {
-    navigationBarTitleText: '首页',
-    navigationStyle: 'custom'
   }
 
   render() {

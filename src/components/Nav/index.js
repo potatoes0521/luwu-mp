@@ -4,20 +4,21 @@
  * @path: 引入路径
  * @Date: 2020-06-18 16:25:43
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-29 10:11:13
+ * @LastEditTime: 2020-07-10 13:07:19
  *  title 标题用作导航标题
  * @optionalParam: 选传参数
  *  back 导航是否显示返回
  *  home 导航是否显示home
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import { View } from '@tarojs/components'
 import PropTypes from 'prop-types'
-import { connect } from '@tarojs/redux'
+import { connect } from 'react-redux'
 import {getSystemInfo} from '@utils/publicWX'
 
-import './index.scss'
+import './index.module.scss'
 
 class Nav extends Component { 
 
@@ -26,7 +27,7 @@ class Nav extends Component {
   }
   
   static options = {
-    addGlobalClass: true // 允许外部样式修改组件样式
+    // addGlobalClass: true // 允许外部样式修改组件样式
   }
 
   getStatusBarHeight() { 

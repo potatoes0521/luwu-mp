@@ -9,9 +9,10 @@
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
-import Taro, { Component } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import React, { Component } from 'react'
 import { View, Text } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
+import { connect } from 'react-redux'
 import { getBrandList } from '@services/modules/category'
 import SafeAreaView from '@components/SafeAreaView'
 import classNames from 'classnames'
@@ -23,8 +24,8 @@ import './index.scss'
 
 class ChooseBrand extends Component { 
 
-  constructor(props) {
-    super(props)
+  constructor() {
+    
     this.state = {
       brandList: [],
       selectData: {},
