@@ -4,15 +4,18 @@
  * @path: 引入路径
  * @Date: 2020-06-24 10:03:17
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 09:27:05
+ * @LastEditTime: 2020-07-10 16:46:13
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */
-import houseState from './houseState'
 
 export default {
-  ...houseState,
+  phone: '',
+  address: {
+    address: ''
+  },
   fileList: [],
-  companyName: ''
+  decorateType: -1,
+  fileList: [],
 }

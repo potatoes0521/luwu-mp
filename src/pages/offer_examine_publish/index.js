@@ -1,16 +1,18 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text, Image } from '@tarojs/components'
+import { View, Text, Image, Button } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import SafeAreaView from '@components/SafeAreaView'
+import classNames from 'classnames'
 import Login from '@utils/login'
 import { uploadImage, uploadFile } from '@components/Upload/utils/upload_type'
 import OfferState from '@config/offerExamineState'
 import { getImage } from '@assets/cdn'
-import FormForHouse from '@/components_bidding/FormForHouse'
-import FormForUserInfo from '@/components_bidding/FormForUserInfo'
-import { getHouseList, publishHouse } from '@services/modules/house'
+import { getUserPhone } from '@services/modules/user'
 import { publishOffer } from '@services/modules/offer'
+import { phoneNumberPatter } from '@utils/patter'
+import Location from '@components/Location'
 import FormItem from '@components/FormItem'
+import SafeAreaView from '@components/SafeAreaView'
+import FormItemCustomContent from '@components/FormItemCustomContent'
 
 import './index.scss'
 
@@ -23,38 +25,37 @@ class OfferExaminePublish extends Component {
     this.state = {
       ...OfferState,
       // 除去公共key以外的字段定在这里
-      requireId: ''
     }
     this.timer = null
     this.formForHouse = null
     this.formForUser = null
+    this.code = ''
   }
 
   async componentDidMount() {
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
-    this.handleOtherHouse()
+    this.handleCode()
   }
   componentWillUnmount() { 
     clearTimeout(this.timer)
     this.timer = null
   }
-  /**
-   * 处理其他房屋信息
-   * @return void
-   */
-  handleOtherHouse() {
-    const { userInfo } = this.props
-    // 判断有没有房屋数据  没有就创建一个房屋  然后取ID   有房屋就取最后一个
-    getHouseList({
-      userId: userInfo.userId
-    }).then(res => {
-      if (res && res.length) {
-        this.setState({
-          requireId: res[res.length - 1].requireId
-        })
+  async handleCode() {
+    const {
+      userInfo
+    } = this.props
+    if (!userInfo.phone) {
+      try {
+        this.code = (await Taro.login()).code
+      } catch (err) {
+        this.code = userInfo.code
       }
-    })
+    } else {
+      this.setState({
+        phone: userInfo.phone
+      })
+    }
   }
   /**
    * 处理上传文件或图片
@@ -77,8 +78,6 @@ class OfferExaminePublish extends Component {
             })
             this.setState({
               fileList: [...fileList, ...fileData]
-            }, () => {
-                this.getHideLineTop()
             })
           })
         } else {
@@ -120,33 +119,39 @@ class OfferExaminePublish extends Component {
       })
     }
   }
-  onUserNameChange(userName) {
-    this.setState({ userName })
-  }
+  // onUserNameChange(userName) {
+  //   this.setState({ userName })
+  // }
   async submit() { 
     const {
       fileList,
-      requireId,
-      companyName
+      phone,
+      address,
+      decorateType,
     } = this.state
     if (!fileList || !fileList.length) {
       this.showToast('至少上传一个报价文件/图片')
       return
     }
-    if (!companyName) {
-      this.showToast('请输入装修公司名称')
+    if (decorateType === -1) {
+      this.showToast('请选择房屋类型')
       return
     }
-    const formForHouse = this.formForHouse.judgeAndEmitData()
-    if (!formForHouse) return
-    const formForUser = this.formForUser.judgeAndEmitData()
-    if (!formForUser) return
-    if (!requireId) {
-      const sendData = Object.assign({}, formForHouse, formForUser)
-      await publishHouse(sendData)
+    if (!address || !address.address) {
+      this.showToast('请完善所在地址')
+      return
+    }
+    if (!phoneNumberPatter.test(phone)) {
+      this.showToast('请输入正确的联系方式')
+      return
     }
     const sendData = {
-      data: Object.assign({}, { fileList, companyName }, formForHouse, formForUser)
+      data: {
+        fileList,
+        phone,
+        address,
+        decorateType,
+      }
     }
     publishOffer(sendData, this).then(res => {
       if (!res || !res.quotationId) {
@@ -167,10 +172,49 @@ class OfferExaminePublish extends Component {
       icon
     })
   }
-  onInputCompanyName(e) { 
-    const { target: { value } } = e
+  /**
+   * 当获取到位置数据
+   * @param {Object} data 获取到的数据
+   * @return void
+   */
+  onGetLocationData(data) {
     this.setState({
-      companyName: value
+      address: data
+    })
+  }
+  onInputPhone(e) { 
+    const { target: {value} } = e
+    this.setState({
+      phone: value
+    })
+  }
+  onGetPhoneNumber(e) {
+    const { detail } = e
+    if (detail.errMsg.startsWith('getPhoneNumber:fail')) {
+      this.setState({
+        getPhoneNumberError: true
+      })
+    } else {
+      const sendData = {
+        iv: detail.iv,
+        encryptedData: detail.encryptedData,
+        code: this.code,
+      }
+      getUserPhone(sendData, this).then(res => {
+        const data = {
+          ...res,
+          isMember: 1
+        }
+        this.props.onChangeUserInfo(data)
+        this.setState({
+          phone: res.phone
+        })
+      })
+    }
+  }
+  chooseAudio(type) {
+    this.setState({
+      decorateType: type
     })
   }
   /**
@@ -191,17 +235,11 @@ class OfferExaminePublish extends Component {
   }
   render() {
     const {
+      phone,
+      address,
       fileList,
-      startTime,
-      budget,
-      requireId,
-      houseType,
-      bedroom,
-      sittingroom,
-      cookroom,
-      washroom,
-      userName,
-      companyName
+      decorateType,
+      getPhoneNumberError
     } = this.state
     const fileListRender = fileList.map((file, index) => {
       const key = file.url
@@ -218,6 +256,9 @@ class OfferExaminePublish extends Component {
           </View>
         </View>
       )
+    })
+    const phoneNumberClassName = classNames('get-phone-wrapper', {
+      'placeholder-class': !phone
     })
     return (
       <SafeAreaView
@@ -244,35 +285,71 @@ class OfferExaminePublish extends Component {
           </View>
           <View className='title'>请补充您房屋具体信息，方便监理帮您审报价</View>
           <View className='form-wrapper'>
-            <FormItem
+            <FormItemCustomContent
               line
-              label='装修公司'
-              value={companyName}
-              placeholder='请输入装修公司名称'
-              onInput={this.onInputCompanyName.bind(this)}
+              height100
+              label='房屋类型'
+            >
+              <View className='audio-group'>
+                <View className='option' onClick={this.chooseAudio.bind(this, 0)}>
+                  <View className='circular'>
+                    {decorateType === 0 && <View className='circular-active'></View>}
+                  </View>
+                  <View className='option-title'>毛坯房</View>
+                </View>
+                <View className='option' onClick={this.chooseAudio.bind(this, 1)}>
+                  <View className='circular'>
+                    {decorateType === 1 && <View className='circular-active'></View>}
+                  </View>
+                  <View className='option-title'>旧房翻新</View>
+                </View>
+              </View>
+            </FormItemCustomContent>
+            <Location
+              line
+              height100
+              style='form'
+              label='所在城市'
+              placeholder='请选择'
+              address={address || {}}
+              onGetLocationData={this.onGetLocationData.bind(this)}
             />
+            {
+              getPhoneNumberError || phone ? (
+                <FormItem
+                  unit
+                  shortUnit
+                  langLabel
+                  height100
+                  type='number'
+                  maxlength={11}
+                  label='手机号码'
+                  value={phone || ''}
+                  placeholder='请输入手机号'
+                  focus={getPhoneNumberError}
+                  onInput={this.onInputPhone.bind(this)}
+                />
+              ) : (
+                <FormItemCustomContent
+                  unit
+                  height100
+                  shortUnit
+                  label='手机号码'
+                >
+                  <View className={phoneNumberClassName}>
+                    <Text>{phone || '请输入手机号'}</Text>
+                    <Button
+                      openType='getPhoneNumber'
+                      className='get-phone-btn'
+                      onGetPhoneNumber={this.onGetPhoneNumber.bind(this)}
+                    ></Button>
+                  </View>
+                </FormItemCustomContent>
+              )
+            }
           </View>
-          <FormForHouse
-            type='edit'
-            budget={budget}
-            bedroom={bedroom}
-            important={false}
-            cookroom={cookroom}
-            washroom={washroom}
-            requireId={requireId}
-            startTime={startTime}
-            houseType={houseType}
-            sittingroom={sittingroom}
-            ref={node => this.formForHouse = node}
-            onUserNameChange={this.onUserNameChange.bind(this)}
-          />
-          <FormForUserInfo
-            important={false}
-            userName={userName}
-            ref={node => this.formForUser = node}
-          />
+          <View className='bottom-tips'>监理审完报价后会通过手机跟您联系</View>
           <View className='fixed-bottom-btn'>
-            <View className='bottom-tips'>监理审完报价后会通过手机跟您联系</View>
             <View className='btn-public default-btn' onClick={this.submit.bind(this)}>提交</View>
           </View>
         </View>

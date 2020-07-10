@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-23 10:55:14
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 09:29:35
+ * @LastEditTime: 2020-07-10 16:55:54
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -21,8 +21,6 @@ import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import OfferState from '@config/offerExamineState'
 import { getImage } from '@assets/cdn'
-import { formatTimeToChinese } from '@utils/timer'
-import { handleRequestData } from '@config/houseType'
 
 import './index.scss'
 
@@ -34,7 +32,7 @@ class OfferExamineDetails extends Component {
     super(props)
     this.state = {
       ...OfferState,
-      createAt: ''
+      // createAt: ''
     }
     this.pageParams = {}
   }
@@ -50,9 +48,7 @@ class OfferExamineDetails extends Component {
       quotationId: this.pageParams.quotationId
     }).then(res => {
       if (!res || !res.data) return
-      const roomData = handleRequestData(res.data)
-      const data = Object.assign({}, roomData, res)
-      this.setState(data)
+      this.setState(res.data)
     })
   }
   renderFormUser(label, content) { 
@@ -94,23 +90,23 @@ class OfferExamineDetails extends Component {
 
   render() {
     const {
-      companyName,
-      createAt,
-      bedroom,
-      sittingroom,
-      cookroom,
-      washroom,
+      // companyName,
+      // createAt,
+      // bedroom,
+      // sittingroom,
+      // cookroom,
+      // washroom,
       address,
-      area,
+      // area,
       fileList,
-      userName,
+      // userName,
       phone,
       status,
       reviewFile,
       reviewRemark
     } = this.state
-    const timeText = formatTimeToChinese(createAt)
-    const houseType = (bedroom.chinese || '-') + '室' + (sittingroom.chinese || '-') + '厅' + (cookroom.chinese || '-') + '厨' + (washroom.chinese || '-') + '卫'
+    // const timeText = formatTimeToChinese(createAt)
+    // const houseType = (bedroom.chinese || '-') + '室' + (sittingroom.chinese || '-') + '厅' + (cookroom.chinese || '-') + '厨' + (washroom.chinese || '-') + '卫'
     const fileListRender = fileList.map((file, index) => {
       const key = file.url
       const fileName = `文件${index + 1}`
@@ -134,22 +130,22 @@ class OfferExamineDetails extends Component {
       >
         <View className='page-wrapper'>
           <View className='msg-wrapper'>
-            <View className='msg-title-wrapper'>
+            {/* <View className='msg-title-wrapper'>
               <Text>{companyName || '装修公司'}</Text>
               <Text className='time'>{timeText}</Text>
-            </View>
+            </View> */}
             <View className='form-msg-wrapper'>
-              <View className='form-title form-item'>{houseType}</View>
+              {/* <View className='form-title form-item'>{houseType}</View> */}
               <View className='form-item'>
                 <Text>{address.address || ''}</Text>
-                <Text className='area'>面积 {area}㎡</Text>
+                {/* <Text className='area'>面积 {area}㎡</Text> */}
               </View>
               <View className='upload-file-list'>
                 {
                   fileListRender
                 }
               </View>
-              {this.renderFormUser('联 系 人', userName)}
+              {/* {this.renderFormUser('联 系 人', userName)} */}
               {this.renderFormUser('手机号码', phone)}
               <View className='msg-tips'>监理已审核，随后会通过电话跟您联系</View>
             </View>
