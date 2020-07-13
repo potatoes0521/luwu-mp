@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 12:03:06
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 09:59:12
+ * @LastEditTime: 2020-07-13 15:27:40
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -12,7 +12,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Block } from '@tarojs/components'
 import PropTypes from 'prop-types'
-import Upload from '@/components/Upload'
+import Upload from '@components/Upload'
 import { formatTimeToChinese } from '@utils/timer'
 import { connect } from '@tarojs/redux'
 

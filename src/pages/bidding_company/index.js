@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 11:59:55
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-13 15:19:36
+ * @LastEditTime: 2020-07-13 15:27:27
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -13,7 +13,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Block } from '@tarojs/components'
 // import classNames from 'classnames'
 import { connect } from '@tarojs/redux'
-import { getBiddingTemplate } from '@/services/modules/bidding'
+import { getBiddingTemplate } from '@services/modules/bidding'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getStorage, setStorage } from '@utils/storage'

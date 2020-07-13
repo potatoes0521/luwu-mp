@@ -17,7 +17,7 @@ import {
 } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { formatTimeToChinese } from '@/utils/timer'
+import { formatTimeToChinese } from '@utils/timer'
 
 import './index.scss'
 
