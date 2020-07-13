@@ -5,7 +5,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-13 16:31:33
+ * @LastEditTime: 2020-07-13 16:48:10
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -80,10 +80,12 @@ class TableContrast extends Component {
     templateData,
   }) {
     const shopList = await getStorage(`bidding_shop_price_${this.pageParams.requireId}`)
+    console.log('shopList', shopList)
     const companyData = shopList.map(item => ({
       shopId: item.shopId,
       shopName: item.shopName
     }))
+    console.log('companyData', companyData)
     this.setState({
       companyTableList: companyData,
     })
@@ -189,6 +191,7 @@ class TableContrast extends Component {
       // isShare
     } = this.state
     // 公司列表
+    console.log('companyTableList', companyTableList)
     const companyListRender = companyTableList.map((item, index) => {
       const key = item.shopId
       return (
@@ -255,16 +258,14 @@ class TableContrast extends Component {
                   companyListRender
                 }
               </View>
-              <View className='company-list-wrapper' >
+              <View className='company-list-wrapper'>
                 {
                   companyTotalPriceListRender
                 }
               </View>
-              <View className='company-list-wrapper'>
-                <TableMain
-                  {...this.state}
-                />
-              </View>
+              <TableMain
+                {...this.state}
+              />
             </View>
           </View>
         </View>
