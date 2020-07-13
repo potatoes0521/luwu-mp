@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 11:59:55
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-13 15:04:49
+ * @LastEditTime: 2020-07-13 15:14:36
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,7 +16,7 @@ import { connect } from '@tarojs/redux'
 import { getBiddingTemplate } from '@/services/modules/bidding'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
-import { getStorage } from '@utils/storage'
+import { getStorage, setStorage } from '@utils/storage'
 import ListItem from './components/ListItem'
 
 import './index.scss'
@@ -93,6 +93,13 @@ class BiddingCompany extends Component {
       showSelectContrastModal
     } = this.state
     if (!selectContrastList.length || showSelectContrastModal) return
+    if (selectContrastList.length >= 15) {
+      Taro.showToast({
+        icon: 'none',
+        title: '最多选择十五家进行对比哦~',
+      })
+      return
+    }
     this.setState({
       showSelectContrastModal: true
     })
@@ -110,6 +117,23 @@ class BiddingCompany extends Component {
       selectContrastList: data
     })
   }
+  navigatorToTable() { 
+    const {
+      selectContrastList,
+      userId
+    } = this.state
+    if (!selectContrastList || !selectContrastList.length) {
+      Taro.showToast({
+        icon: 'none',
+        title: '至少选择两家公司进行对比哦~',
+      })
+      return
+    }
+    setStorage('bidding_shop_price', this.selectContrastList)
+    Taro.navigateTo({
+      url: `/pages/table_contrast/index?requireId=${this.pageParams.requireId}&userId=${userId}`
+    })
+  }
   stopPropagation(e) {
     e.stopPropagation()
   }
@@ -125,7 +149,6 @@ class BiddingCompany extends Component {
       selectContrastList,
       showSelectContrastModal
     } = this.state
-    console.log('shopList', shopList)
     const shopListRender = shopList.map((item, index) => {
       const key = item.shopId
       return (
@@ -188,7 +211,7 @@ class BiddingCompany extends Component {
                 )
               }
             </View>
-            <View className='select-btn'>开始对比</View>
+            <View className='select-btn' onClick={this.navigatorToTable.bind(this)}>开始对比</View>
           </View>
         </View>
       </SafeAreaView>
