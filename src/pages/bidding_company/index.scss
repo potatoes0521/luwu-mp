@@ -80,11 +80,15 @@ page {
     .select-num-wrapper {
       display: flex;
       align-items: center;
-
+      font-size: 30px;
+      color: $tips-color;
       .heigh-light {
         color: $link-color;
         margin: 0 10px;
       }
+      // .select-num-no{
+        // font-size: 24px;
+      // }
     }
 
     .select-btn {
