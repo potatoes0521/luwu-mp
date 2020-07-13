@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 11:59:55
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-13 15:14:36
+ * @LastEditTime: 2020-07-13 15:19:36
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -78,6 +78,11 @@ class BiddingCompany extends Component {
       selectContrastList
     })
   }
+  /**
+   * 获取要比价的公司的数据
+   * @param {Object} shopId 解构出来商铺ID
+   * @return void
+   */
   getShopOfferPrice({ shopId }) { 
     getBiddingTemplate({ shopId }).then(res => {
       this.selectContrastList.forEach(item => {
@@ -129,6 +134,7 @@ class BiddingCompany extends Component {
       })
       return
     }
+    // 选中的数据   顺便吧价格也放在里面了防止进去比价界面循环请求N多公司加载慢
     setStorage('bidding_shop_price', this.selectContrastList)
     Taro.navigateTo({
       url: `/pages/table_contrast/index?requireId=${this.pageParams.requireId}&userId=${userId}`
