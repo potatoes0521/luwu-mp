@@ -5,7 +5,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 14:31:02
+ * @LastEditTime: 2020-07-13 14:30:36
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -22,10 +22,12 @@ import TableMain from './components/TableMain'
 
 import {
   companyData,
-  handleNewData
+  handleTemplateData,
+  handleTemplatePrice
 } from '../../mock/table'
-import newMock from '../../mock/table_new.json'
-
+import templateMock from '../../mock/muban.json'
+import companyPrice from '../../mock/price.json'
+  
 import './index.scss'
 
 class TableContrast extends Component {
@@ -49,6 +51,10 @@ class TableContrast extends Component {
       companyData8: null,
       companyData9: null,
       companyData10: null,
+      companyData11: null,
+      companyData12: null,
+      companyData13: null,
+      companyData14: null,
     }
     this.mockData = []
   }
@@ -58,32 +64,32 @@ class TableContrast extends Component {
     this.setState({
       isShare: params && params.shareType === '1'
     })
-    this.handleMockData()
+    this.handleMockData(false, {name: '三室两厅一卫'})
   }
   /**
    * 处理模拟数据源
    * @return void
    */
-  handleMockData(showAll) {
-    const handleEndMockData = handleNewData(newMock)
+  handleMockData(showAll, params) {
+    const templateData = handleTemplateData(templateMock, params)
+    console.log('companyPrice', companyPrice)
     if (showAll) { // 如果是二次显示  没必要处理一下施工区域
       this.setState({
         companyTableList: [...companyData],
       })
     } else {
       // 取出来工艺列表
-      const handleData = handleEndMockData.data
+      const handleData = templateData.data.data
       const projectAreaList = handleData.map((item, index) => {
         return {
-          projectAreaList: item.items.map(ite => {
+          projectAreaList: item.projectList.map(ite => {
             return {
               projectName: ite.projectName,
-              projectId: ite.projectId,
-              special: ite.special,
-              unit: ite.unit
+              unit: ite.units
             }
           }),
-          projectArea: item.projectArea,
+          projectArea: item.spaceName,
+          projectAreaId: item.spaceId,
           index
         }
       }).filter(item => !!item)
@@ -96,23 +102,10 @@ class TableContrast extends Component {
     for (let i = 0; i < companyData.length; i++) {
       // 如果是二次渲染全部  并且  数值不是null 
       if (showAll && createCompanyStateData[`companyData${i}`]) {
-        continue
+        break
       }
-      const data = handleEndMockData.deepArr.map(item => {
-        return {
-          projectId: item.projectId,
-          projectName: item.projectName,
-          remark: item.remark,
-          price: item.priceArr[i] || '-',
-          num: item.areaArr[i] || '-',
-          totalPrice: item.totalPriceArr[i] || '-',
-          special: item.special,
-          maxPriceNum: item.maxPriceNum,
-          minPriceNum: item.minPriceNum,
-          maxAreaNum: item.maxAreaNum,
-          minAreaNum: item.minAreaNum
-        }
-      })
+      const data = handleTemplatePrice(templateData.deepArr, companyPrice)
+      console.log('data', data)
       createCompanyStateData[`companyData${i}`] = {
         data,
         companyId: companyData[i].companyId,

@@ -1,0 +1,3061 @@
+[
+  {
+    "data": [
+      {
+        "spaceName": "卧室",
+        "projectList": [
+          {
+            "count": 50.44,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 50.44,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 50.44,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 50.44,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 21.33,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 21.33,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 21.33,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 21.33,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 21.33,
+            "units": "m2",
+            "projectName": "地面水泥砂浆找平"
+          },
+          {
+            "count": 21.33,
+            "units": "m2",
+            "projectName": "刷地锢"
+          },
+          {
+            "count": 19.4,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "IeDhQ4F_gXM"
+      },
+      {
+        "spaceName": "厨房",
+        "projectList": [
+          {
+            "count": 25.68,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 25.68,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 25.68,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 5.92,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 5.92,
+            "units": "m2",
+            "projectName": "防水石膏板吊顶"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "P83JYGJIRM9"
+      },
+      {
+        "spaceName": "卫生间",
+        "projectList": [
+          {
+            "count": 22.77,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 22.77,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 22.77,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 5.28,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 9.3,
+            "units": "m2",
+            "projectName": "做防水"
+          },
+          {
+            "count": 2.6,
+            "units": "m",
+            "projectName": "包立管"
+          },
+          {
+            "count": 3,
+            "units": "m",
+            "projectName": "下水管隔音处理"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "tqAQkb5U683"
+      }
+    ],
+    "name": "一室一卫"
+  },
+  {
+    "data": [
+      {
+        "spaceName": "卧室",
+        "projectList": [
+          {
+            "count": 53.36,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 53.36,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 53.36,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 53.36,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 18.62,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 18.62,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 18.62,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 18.62,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 18.62,
+            "units": "m2",
+            "projectName": "地面铺砖"
+          },
+          {
+            "count": 15.9,
+            "units": "m",
+            "projectName": "瓷砖踢脚线"
+          },
+          {
+            "count": 15.9,
+            "units": "m",
+            "projectName": "石膏线"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "jyyJkaVwMr_"
+      },
+      {
+        "spaceName": "客厅",
+        "projectList": [
+          {
+            "count": 24.38,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 24.38,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 24.38,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 24.38,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 5.55,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 5.55,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 5.55,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 5.55,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 5.55,
+            "units": "m2",
+            "projectName": "地面铺砖"
+          },
+          {
+            "count": 11.3,
+            "units": "m",
+            "projectName": "瓷砖踢脚线"
+          },
+          {
+            "count": 11.3,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "SEqjKOsA0Xp"
+      },
+      {
+        "spaceName": "厨房",
+        "projectList": [
+          {
+            "count": 18,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 18,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 18,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 3.39,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "MfRyIKxHfPz"
+      },
+      {
+        "spaceName": "卫生间",
+        "projectList": [
+          {
+            "count": 14,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 14,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 14,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 2.49,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 4.44,
+            "units": "m2",
+            "projectName": "做防水"
+          },
+          {
+            "count": 2.6,
+            "units": "m",
+            "projectName": "包立管"
+          },
+          {
+            "count": 3,
+            "units": "m",
+            "projectName": "下水管隔音处理"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "Kwv8OmRS2DS"
+      }
+    ],
+    "name": "一室一厅一卫"
+  },
+  {
+    "data": [
+      {
+        "spaceName": "主卧",
+        "projectList": [
+          {
+            "count": 35.88,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 35.88,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 35.88,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 35.88,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 11.9,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 11.9,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 11.9,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 11.9,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 11.9,
+            "units": "m2",
+            "projectName": "地面铺砖"
+          },
+          {
+            "count": 13.8,
+            "units": "m",
+            "projectName": "瓷砖踢脚线"
+          },
+          {
+            "count": 13.8,
+            "units": "m",
+            "projectName": "石膏线"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "eW_FBMaO2e6"
+      },
+      {
+        "spaceName": "次卧",
+        "projectList": [
+          {
+            "count": 31.98,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 31.98,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 31.98,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 31.98,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 8.7,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 8.7,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 8.7,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 8.7,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 8.7,
+            "units": "m2",
+            "projectName": "地面铺砖"
+          },
+          {
+            "count": 12.3,
+            "units": "m",
+            "projectName": "瓷砖踢脚线"
+          },
+          {
+            "count": 12.3,
+            "units": "m",
+            "projectName": "石膏线"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "dKFQaV2xijC"
+      },
+      {
+        "spaceName": "客厅",
+        "projectList": [
+          {
+            "count": 40.56,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 40.56,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 40.56,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 40.56,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 12.12,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 12.12,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 12.12,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 12.12,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 12.12,
+            "units": "m2",
+            "projectName": "地面铺砖"
+          },
+          {
+            "count": 15.6,
+            "units": "m",
+            "projectName": "瓷砖踢脚线"
+          },
+          {
+            "count": 15.6,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "WWI0ZfR74sV"
+      },
+      {
+        "spaceName": "厨房",
+        "projectList": [
+          {
+            "count": 20.16,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 20.16,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 20.16,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 3.8,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "w_hXjCJGaGO"
+      },
+      {
+        "spaceName": "卫生间",
+        "projectList": [
+          {
+            "count": 12.72,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 12.72,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 12.72,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 1.74,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 3.33,
+            "units": "m2",
+            "projectName": "做防水"
+          },
+          {
+            "count": 2.6,
+            "units": "m",
+            "projectName": "包立管"
+          },
+          {
+            "count": 3.3,
+            "units": "m",
+            "projectName": "下水管隔音处理"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "OzdyOAXWvFt"
+      }
+    ],
+    "name": "两室一厅一卫"
+  },
+  {
+    "data": [
+      {
+        "spaceName": "主卧",
+        "projectList": [
+          {
+            "count": 33.38,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 33.38,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 33.38,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 33.38,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 10.14,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 10.14,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 10.14,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 10.14,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 10.14,
+            "units": "m2",
+            "projectName": "地面水泥砂浆找平"
+          },
+          {
+            "count": 10.14,
+            "units": "m2",
+            "projectName": "刷地锢"
+          },
+          {
+            "count": 12.84,
+            "units": "m",
+            "projectName": "石膏线"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "nDonwOWXk0U"
+      },
+      {
+        "spaceName": "次卧",
+        "projectList": [
+          {
+            "count": 33.8,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 33.8,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 33.8,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 33.8,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 10.5,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 10.5,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 10.5,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 10.5,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 10.5,
+            "units": "m2",
+            "projectName": "地面水泥砂浆找平"
+          },
+          {
+            "count": 10.5,
+            "units": "m2",
+            "projectName": "刷地锢"
+          },
+          {
+            "count": 13,
+            "units": "m",
+            "projectName": "石膏线"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "Z7LRTcD0q2M"
+      },
+      {
+        "spaceName": "客厅",
+        "projectList": [
+          {
+            "count": 32.56,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 32.56,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 32.56,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 32.56,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 14.66,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 14.66,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 14.66,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 14.66,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 14.66,
+            "units": "m2",
+            "projectName": "地面铺砖"
+          },
+          {
+            "count": 15.6,
+            "units": "m",
+            "projectName": "瓷砖踢脚线"
+          },
+          {
+            "count": 15.6,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "o0VVgiydLUR"
+      },
+      {
+        "spaceName": "餐厅",
+        "projectList": [
+          {
+            "count": 37.18,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 37.18,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 37.18,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 37.18,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 10.7,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 10.7,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 10.7,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 10.7,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 10.7,
+            "units": "m2",
+            "projectName": "地面铺砖"
+          },
+          {
+            "count": 14.3,
+            "units": "m",
+            "projectName": "瓷砖踢脚线"
+          },
+          {
+            "count": 14.3,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "zrLnZpe-ZTI"
+      },
+      {
+        "spaceName": "厨房",
+        "projectList": [
+          {
+            "count": 22.56,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 22.56,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 22.56,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 5,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "PqqxXdYRYLT"
+      },
+      {
+        "spaceName": "卫生间",
+        "projectList": [
+          {
+            "count": 18,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 18,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 18,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 3.41,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 5.65,
+            "units": "m2",
+            "projectName": "做防水"
+          },
+          {
+            "count": 2.6,
+            "units": "m",
+            "projectName": "包立管"
+          },
+          {
+            "count": 3.5,
+            "units": "m",
+            "projectName": "下水管隔音处理"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "fwrXMN4GZqY"
+      }
+    ],
+    "name": "两室两厅一卫"
+  },
+  {
+    "data": [
+      {
+        "spaceName": "主卧",
+        "projectList": [
+          {
+            "count": 31.98,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 31.98,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 31.98,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 31.98,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 9.38,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 9.38,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 9.38,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 9.38,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 9.38,
+            "units": "m2",
+            "projectName": "地面水泥砂浆找平"
+          },
+          {
+            "count": 9.38,
+            "units": "m2",
+            "projectName": "刷地锢"
+          },
+          {
+            "count": 12.3,
+            "units": "m",
+            "projectName": "石膏线"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "WLBUG2Y7Y72"
+      },
+      {
+        "spaceName": "次卧1",
+        "projectList": [
+          {
+            "count": 33.28,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 33.28,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 33.28,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 33.28,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 10.24,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 10.24,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 10.24,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 10.24,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 10.24,
+            "units": "m2",
+            "projectName": "地面水泥砂浆找平"
+          },
+          {
+            "count": 10.24,
+            "units": "m2",
+            "projectName": "刷地锢"
+          },
+          {
+            "count": 12.8,
+            "units": "m",
+            "projectName": "石膏线"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "NrY1WWRk2eP"
+      },
+      {
+        "spaceName": "次卧2",
+        "projectList": [
+          {
+            "count": 28.34,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 28.34,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 28.34,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 28.34,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 7.5,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 7.5,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 7.5,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 7.5,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 7.5,
+            "units": "m2",
+            "projectName": "地面水泥砂浆找平"
+          },
+          {
+            "count": 7.5,
+            "units": "m2",
+            "projectName": "刷地锢"
+          },
+          {
+            "count": 10.9,
+            "units": "m",
+            "projectName": "石膏线"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "Jc_AykddWnm"
+      },
+      {
+        "spaceName": "客厅",
+        "projectList": [
+          {
+            "count": 47.7,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 47.7,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 47.7,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 47.7,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 18.49,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 18.49,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 18.49,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 18.49,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 18.49,
+            "units": "m2",
+            "projectName": "地面铺砖"
+          },
+          {
+            "count": 18.38,
+            "units": "m",
+            "projectName": "瓷砖踢脚线"
+          },
+          {
+            "count": 18.38,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "DyqToY99cRY"
+      },
+      {
+        "spaceName": "厨房",
+        "projectList": [
+          {
+            "count": 22.4,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 22.4,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 22.4,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 6.89,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 6.89,
+            "units": "m2",
+            "projectName": "防水石膏板吊顶"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "IFeJ9Jqms4z"
+      },
+      {
+        "spaceName": "卫生间",
+        "projectList": [
+          {
+            "count": 17.52,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 17.52,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 17.52,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 3.23,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 5.42,
+            "units": "m2",
+            "projectName": "做防水"
+          },
+          {
+            "count": 3.23,
+            "units": "m2",
+            "projectName": "防水石膏板吊顶"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          },
+          {
+            "count": 2.6,
+            "units": "m",
+            "projectName": "包立管"
+          },
+          {
+            "count": 3,
+            "units": "m",
+            "projectName": "下水管隔音处理"
+          }
+        ],
+        "spaceId": "shhkPkWNnf5"
+      }
+    ],
+    "name": "三室一厅一卫"
+  },
+  {
+    "data": [
+      {
+        "spaceName": "主卧",
+        "projectList": [
+          {
+            "count": 35.62,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 35.62,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 35.62,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 35.62,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 10.8,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 10.8,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 10.8,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 10.8,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 10.8,
+            "units": "m2",
+            "projectName": "地面水泥砂浆找平"
+          },
+          {
+            "count": 10.8,
+            "units": "m2",
+            "projectName": "刷地锢"
+          },
+          {
+            "count": 13.7,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "lrF1eq7yrs6"
+      },
+      {
+        "spaceName": "次卧1",
+        "projectList": [
+          {
+            "count": 32.5,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 32.5,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 32.5,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 32.5,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 8.99,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 8.99,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 8.99,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 8.99,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 8.99,
+            "units": "m2",
+            "projectName": "地面水泥砂浆找平"
+          },
+          {
+            "count": 8.99,
+            "units": "m2",
+            "projectName": "刷地锢"
+          },
+          {
+            "count": 12.5,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "H58HYqTGJY_"
+      },
+      {
+        "spaceName": "次卧2",
+        "projectList": [
+          {
+            "count": 24.96,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 24.96,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 24.96,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 24.96,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 5.82,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 5.82,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 5.82,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 5.82,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 5.82,
+            "units": "m2",
+            "projectName": "地面水泥砂浆找平"
+          },
+          {
+            "count": 5.82,
+            "units": "m2",
+            "projectName": "刷地锢"
+          },
+          {
+            "count": 9.6,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "hyGkKeQYMZ8"
+      },
+      {
+        "spaceName": "客厅",
+        "projectList": [
+          {
+            "count": 50.18,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 50.18,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 50.18,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 50.18,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 20.13,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 20.13,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 20.13,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 20.13,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 20.13,
+            "units": "m2",
+            "projectName": "地面水泥砂浆找平"
+          },
+          {
+            "count": 20.13,
+            "units": "m2",
+            "projectName": "刷地锢"
+          },
+          {
+            "count": 19.3,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "o0MB7iHhA36"
+      },
+      {
+        "spaceName": "厨房",
+        "projectList": [
+          {
+            "count": 9.9,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 9.9,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 9.9,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 4.13,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 4.13,
+            "units": "m2",
+            "projectName": "防水石膏板吊顶"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "hUgVfAJA2Pn"
+      },
+      {
+        "spaceName": "主卫",
+        "projectList": [
+          {
+            "count": 18.5,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 18.5,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 18.5,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 3.98,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 6.5,
+            "units": "m2",
+            "projectName": "做防水"
+          },
+          {
+            "count": 3.98,
+            "units": "m2",
+            "projectName": "防水石膏板吊顶"
+          },
+          {
+            "count": 2.6,
+            "units": "m",
+            "projectName": "包立管"
+          },
+          {
+            "count": 3,
+            "units": "m",
+            "projectName": "下水管隔音处理"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "hA_BP9Tkrvp"
+      },
+      {
+        "spaceName": "次卫",
+        "projectList": [
+          {
+            "count": 10.5,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 10.5,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 10.5,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 1.54,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 3.04,
+            "units": "m2",
+            "projectName": "做防水"
+          },
+          {
+            "count": 1.54,
+            "units": "m2",
+            "projectName": "防水石膏板吊顶"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          },
+          {
+            "count": 2.6,
+            "units": "m",
+            "projectName": "包立管"
+          },
+          {
+            "count": 3.3,
+            "units": "m",
+            "projectName": "下水管隔音处理"
+          }
+        ],
+        "spaceId": "TXV7WLotw0Q"
+      }
+    ],
+    "name": "三室一厅两卫"
+  },
+  {
+    "data": [
+      {
+        "spaceName": "主卧",
+        "projectList": [
+          {
+            "count": 28.9,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 28.9,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 28.9,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 28.9,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 9.3,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 9.3,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 9.3,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 9.3,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 9.3,
+            "units": "m2",
+            "projectName": "地面铺砖"
+          },
+          {
+            "count": 12.3,
+            "units": "m",
+            "projectName": "石膏线"
+          },
+          {
+            "count": 12.3,
+            "units": "m",
+            "projectName": "瓷砖踢脚线"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "kNAPfajNj6U"
+      },
+      {
+        "spaceName": "次卧1",
+        "projectList": [
+          {
+            "count": 27.9,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 27.9,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 27.9,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 27.9,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 8.7,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 8.7,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 8.7,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 8.7,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 8.7,
+            "units": "m2",
+            "projectName": "地面铺砖"
+          },
+          {
+            "count": 11.9,
+            "units": "m",
+            "projectName": "瓷砖踢脚线"
+          },
+          {
+            "count": 11.9,
+            "units": "m",
+            "projectName": "石膏线"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "LhrjLriBhb3"
+      },
+      {
+        "spaceName": "次卧2",
+        "projectList": [
+          {
+            "count": 25.06,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 25.06,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 25.06,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 25.06,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 7.2,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 7.2,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 7.2,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 7.2,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 7.2,
+            "units": "m2",
+            "projectName": "地面铺砖"
+          },
+          {
+            "count": 10.7,
+            "units": "m",
+            "projectName": "瓷砖踢脚线"
+          },
+          {
+            "count": 10.7,
+            "units": "m",
+            "projectName": "石膏线"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "_MmOcWGP9Rl"
+      },
+      {
+        "spaceName": "客厅",
+        "projectList": [
+          {
+            "count": 46.15,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 46.15,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 46.15,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 46.15,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 21.3,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 21.3,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 21.3,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 21.3,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 21.3,
+            "units": "m2",
+            "projectName": "地面铺砖"
+          },
+          {
+            "count": 20.6,
+            "units": "m",
+            "projectName": "瓷砖踢脚线"
+          },
+          {
+            "count": 20.6,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "J_KyNAQKk56"
+      },
+      {
+        "spaceName": "餐厅",
+        "projectList": [
+          {
+            "count": 27.7,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 27.7,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 27.7,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 27.7,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 6.1,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 6.1,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 6.1,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 6.1,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 6.1,
+            "units": "m2",
+            "projectName": "地面铺砖"
+          },
+          {
+            "count": 12.8,
+            "units": "m",
+            "projectName": "瓷砖踢脚线"
+          },
+          {
+            "count": 12.8,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "_yohz20Cxgz"
+      },
+      {
+        "spaceName": "厨房",
+        "projectList": [
+          {
+            "count": 18.4,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 18.4,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 18.4,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 4.1,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 4.1,
+            "units": "m2",
+            "projectName": "防水石膏板吊顶"
+          },
+          {
+            "count": 2.6,
+            "units": "m",
+            "projectName": "包立管"
+          },
+          {
+            "count": 3.3,
+            "units": "m",
+            "projectName": "下水管隔音处理"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "cdspE0Ga14A"
+      },
+      {
+        "spaceName": "卫生间",
+        "projectList": [
+          {
+            "count": 18.5,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 18.5,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 18.5,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 3.6,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 5.91,
+            "units": "m2",
+            "projectName": "做防水"
+          },
+          {
+            "count": 3.6,
+            "units": "m2",
+            "projectName": "防水石膏板吊顶"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          },
+          {
+            "count": 2.6,
+            "units": "m",
+            "projectName": "包立管"
+          },
+          {
+            "count": 3.3,
+            "units": "m",
+            "projectName": "下水管隔音处理"
+          }
+        ],
+        "spaceId": "vkXDEUqX2Oo"
+      }
+    ],
+    "name": "三室两厅一卫"
+  },
+  {
+    "data": [
+      {
+        "spaceName": "主卧",
+        "projectList": [
+          {
+            "count": 28.9,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 28.9,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 28.9,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 28.9,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 9.3,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 9.3,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 9.3,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 9.3,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 9.3,
+            "units": "m2",
+            "projectName": "地面铺砖"
+          },
+          {
+            "count": 12.3,
+            "units": "m",
+            "projectName": "石膏线"
+          },
+          {
+            "count": 12.3,
+            "units": "m",
+            "projectName": "瓷砖踢脚线"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "kNAPfajNj6U"
+      },
+      {
+        "spaceName": "次卧1",
+        "projectList": [
+          {
+            "count": 27.9,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 27.9,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 27.9,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 27.9,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 8.7,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 8.7,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 8.7,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 8.7,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 8.7,
+            "units": "m2",
+            "projectName": "地面铺砖"
+          },
+          {
+            "count": 11.9,
+            "units": "m",
+            "projectName": "瓷砖踢脚线"
+          },
+          {
+            "count": 11.9,
+            "units": "m",
+            "projectName": "石膏线"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "LhrjLriBhb3"
+      },
+      {
+        "spaceName": "次卧2",
+        "projectList": [
+          {
+            "count": 25.06,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 25.06,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 25.06,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 25.06,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 7.2,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 7.2,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 7.2,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 7.2,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 7.2,
+            "units": "m2",
+            "projectName": "地面铺砖"
+          },
+          {
+            "count": 10.7,
+            "units": "m",
+            "projectName": "瓷砖踢脚线"
+          },
+          {
+            "count": 10.7,
+            "units": "m",
+            "projectName": "石膏线"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "_MmOcWGP9Rl"
+      },
+      {
+        "spaceName": "客厅",
+        "projectList": [
+          {
+            "count": 46.15,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 46.15,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 46.15,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 46.15,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 21.3,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 21.3,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 21.3,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 21.3,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 21.3,
+            "units": "m2",
+            "projectName": "地面铺砖"
+          },
+          {
+            "count": 20.6,
+            "units": "m",
+            "projectName": "瓷砖踢脚线"
+          },
+          {
+            "count": 20.6,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "J_KyNAQKk56"
+      },
+      {
+        "spaceName": "餐厅",
+        "projectList": [
+          {
+            "count": 27.7,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 27.7,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 27.7,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 27.7,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 6.1,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 6.1,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 6.1,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 6.1,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 6.1,
+            "units": "m2",
+            "projectName": "地面铺砖"
+          },
+          {
+            "count": 12.8,
+            "units": "m",
+            "projectName": "瓷砖踢脚线"
+          },
+          {
+            "count": 12.8,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "_yohz20Cxgz"
+      },
+      {
+        "spaceName": "厨房",
+        "projectList": [
+          {
+            "count": 18.4,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 18.4,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 18.4,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 4.1,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 4.1,
+            "units": "m2",
+            "projectName": "防水石膏板吊顶"
+          },
+          {
+            "count": 2.6,
+            "units": "m",
+            "projectName": "包立管"
+          },
+          {
+            "count": 3.3,
+            "units": "m",
+            "projectName": "下水管隔音处理"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "cdspE0Ga14A"
+      },
+      {
+        "spaceName": "卫生间",
+        "projectList": [
+          {
+            "count": 18.5,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 18.5,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 18.5,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 3.6,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 5.91,
+            "units": "m2",
+            "projectName": "做防水"
+          },
+          {
+            "count": 3.6,
+            "units": "m2",
+            "projectName": "防水石膏板吊顶"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          },
+          {
+            "count": 2.6,
+            "units": "m",
+            "projectName": "包立管"
+          },
+          {
+            "count": 3.3,
+            "units": "m",
+            "projectName": "下水管隔音处理"
+          }
+        ],
+        "spaceId": "vkXDEUqX2Oo"
+      }
+    ],
+    "name": "三室两厅两卫"
+  },
+  {
+    "data": [
+      {
+        "spaceName": "主卧",
+        "projectList": [
+          {
+            "count": 48.1,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 48.1,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 48.1,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 48.1,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 19.8,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 19.8,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 19.8,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 19.8,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 19.8,
+            "units": "m2",
+            "projectName": "地面水泥砂浆找平"
+          },
+          {
+            "count": 19.8,
+            "units": "m2",
+            "projectName": "刷地锢"
+          },
+          {
+            "count": 18.5,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "FeUsnE1aW88"
+      },
+      {
+        "spaceName": "次卧1",
+        "projectList": [
+          {
+            "count": 45.76,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 45.76,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 45.76,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 45.76,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 14,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 14,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 14,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 14,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 14,
+            "units": "m2",
+            "projectName": "地面水泥砂浆找平"
+          },
+          {
+            "count": 14,
+            "units": "m2",
+            "projectName": "刷地锢"
+          },
+          {
+            "count": 17.6,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "ZIJK9n9qwpI"
+      },
+      {
+        "spaceName": "次卧2",
+        "projectList": [
+          {
+            "count": 40,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 40,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 40,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 40,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 12.7,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 12.7,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 12.7,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 12.7,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 12.7,
+            "units": "m2",
+            "projectName": "地面水泥砂浆找平"
+          },
+          {
+            "count": 12.7,
+            "units": "m2",
+            "projectName": "刷地锢"
+          },
+          {
+            "count": 15.4,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "pZ8yP_AeOWx"
+      },
+      {
+        "spaceName": "次卧3",
+        "projectList": [
+          {
+            "count": 36.92,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 36.92,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 36.92,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 36.92,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 12.1,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 12.1,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 12.1,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 12.1,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 12.1,
+            "units": "m2",
+            "projectName": "地面水泥砂浆找平"
+          },
+          {
+            "count": 12.1,
+            "units": "m2",
+            "projectName": "刷地锢"
+          },
+          {
+            "count": 14.2,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "aCA4hJVvr9X"
+      },
+      {
+        "spaceName": "客厅",
+        "projectList": [
+          {
+            "count": 48.88,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 48.88,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 48.88,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 48.88,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 20.8,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 20.8,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 20.8,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 20.8,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 20.8,
+            "units": "m2",
+            "projectName": "地面水泥砂浆找平"
+          },
+          {
+            "count": 20.8,
+            "units": "m2",
+            "projectName": "刷地锢"
+          },
+          {
+            "count": 18.8,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "7GonLLG4DuG"
+      },
+      {
+        "spaceName": "餐厅",
+        "projectList": [
+          {
+            "count": 40.82,
+            "units": "m2",
+            "projectName": "墙面刷墙锢"
+          },
+          {
+            "count": 40.82,
+            "units": "m2",
+            "projectName": "墙面石膏找平"
+          },
+          {
+            "count": 40.82,
+            "units": "m2",
+            "projectName": "墙面刮腻子"
+          },
+          {
+            "count": 40.82,
+            "units": "m2",
+            "projectName": "墙面刷乳胶漆"
+          },
+          {
+            "count": 14.1,
+            "units": "m2",
+            "projectName": "顶面刷墙锢"
+          },
+          {
+            "count": 14.1,
+            "units": "m2",
+            "projectName": "顶面石膏找平"
+          },
+          {
+            "count": 14.1,
+            "units": "m2",
+            "projectName": "顶面刮腻子"
+          },
+          {
+            "count": 14.1,
+            "units": "m2",
+            "projectName": "顶面刷乳胶漆"
+          },
+          {
+            "count": 14.1,
+            "units": "m2",
+            "projectName": "地面水泥砂浆找平"
+          },
+          {
+            "count": 14.1,
+            "units": "m2",
+            "projectName": "刷地锢"
+          },
+          {
+            "count": 15.7,
+            "units": "m",
+            "projectName": "石膏线"
+          }
+        ],
+        "spaceId": "LKb90wjFD-9"
+      },
+      {
+        "spaceName": "厨房",
+        "projectList": [
+          {
+            "count": 28.56,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 28.56,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 28.56,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 9,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 9,
+            "units": "m2",
+            "projectName": "防水石膏板吊顶"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "p105moEzSFv"
+      },
+      {
+        "spaceName": "主卫",
+        "projectList": [
+          {
+            "count": 19.92,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 19.92,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 19.92,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 4.3,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 6.79,
+            "units": "m2",
+            "projectName": "做防水"
+          },
+          {
+            "count": 4.3,
+            "units": "m2",
+            "projectName": "防水石膏板吊顶"
+          },
+          {
+            "count": 2.6,
+            "units": "m",
+            "projectName": "包立管"
+          },
+          {
+            "count": 3.3,
+            "units": "m",
+            "projectName": "下水管隔音处理"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          }
+        ],
+        "spaceId": "i9zeegPWhRP"
+      },
+      {
+        "spaceName": "次卫",
+        "projectList": [
+          {
+            "count": 16.08,
+            "units": "m2",
+            "projectName": "墙面拉毛"
+          },
+          {
+            "count": 16.08,
+            "units": "m2",
+            "projectName": "墙面水泥砂浆找平"
+          },
+          {
+            "count": 16.08,
+            "units": "m2",
+            "projectName": "墙面贴砖"
+          },
+          {
+            "count": 2.83,
+            "units": "m2",
+            "projectName": "地面贴砖"
+          },
+          {
+            "count": 4.84,
+            "units": "m2",
+            "projectName": "做防水"
+          },
+          {
+            "count": 2.83,
+            "units": "m2",
+            "projectName": "防水石膏板吊顶"
+          },
+          {
+            "count": 1,
+            "units": "块",
+            "projectName": "过门石安装"
+          },
+          {
+            "count": 2.6,
+            "units": "m",
+            "projectName": "包立管"
+          },
+          {
+            "count": 3.3,
+            "units": "m",
+            "projectName": "下水管隔音处理"
+          }
+        ],
+        "spaceId": "m7vxzq5nz3w"
+      }
+    ],
+    "name": "四室两厅两卫"
+  }
+]

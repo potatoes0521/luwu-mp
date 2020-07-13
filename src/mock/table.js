@@ -4,11 +4,12 @@
  * @path: 引入路径
  * @Date: 2020-06-19 15:04:28
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 09:27:58
+ * @LastEditTime: 2020-07-13 14:23:31
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */
+import computedHandle from '@utils/computedPrice'
 
 export const companyData = [
   {
@@ -16,117 +17,44 @@ export const companyData = [
     companyName: '尚雅建筑',
     totalPrice: 22470.35,
   },
-  {
-    companyId: 2,
-    companyName: '金科天籁',
-    totalPrice: 22727.49,
-  },
-  {
-    companyId: 3,
-    companyName: '苗圃东里',
-    totalPrice: 20736.60,
-  },
-  {
-    companyId: 4,
-    companyName: '生活家',
-    totalPrice: 21350.97,
-  },
-  {
-    companyId: 5,
-    companyName: '佳时特',
-    totalPrice: 22379.80,
-  },
-  {
-    companyId: 6,
-    companyName: '建华',
-    totalPrice: 27966.90,
-  },
-  {
-    companyId: 7,
-    companyName: '名都',
-    totalPrice: 22823.82,
-  },
-  {
-    companyId: 8,
-    companyName: '天鹏',
-    totalPrice: 21136.84,
-  },
-  {
-    companyId: 9,
-    companyName: '装术',
-    totalPrice: 23686.93,
-  },
-  {
-    companyId: 10,
-    companyName: '美家',
-    totalPrice: 21766.11,
-  }
 ]
 
-export const canqiangpiData = {
-  projectName: '墙顶面基层处理',
-  data: [
-    {
-      companyId: 1,
-      price: '尚雅建筑',
-      total: 100,
-      remark: ''
-    }, {
-      companyId: 2,
-      price: '尚雅建筑',
-      total: 100,
-      remark: ''
-    }, {
-      companyId: 3,
-      price: '尚雅建筑',
-      total: 100,
-      remark: ''
-    }, {
-      companyId: 4,
-      price: '尚雅建筑',
-      total: 100,
-      remark: ''
-    }
-  ]
-}
-
-export const handleNewData = (mock) => {
-  const data = mock.map(item => {
-    const arr = item.items.map(ite => {
-      const num = item.projectAreaId * 1000 + ite.projectId
-      const priceArr = ite.shops.map(it => parseFloat(it[0]))
-      const areaArr = ite.shops.map(it => parseFloat(it[1]))
-      const totalPriceArr = ite.shops.map(it => parseFloat(it[2]))
-      const maxPriceNum = findMaxNum(priceArr)
-      const minPriceNum = findMinNum(priceArr)
-      const maxAreaNum = findMaxNum(areaArr)
-      const minAreaNum = findMinNum(areaArr)
-      return {
-        ...ite,
-        projectId: num,
-        priceArr,
-        areaArr,
-        totalPriceArr,
-        maxPriceNum,
-        minPriceNum,
-        maxAreaNum,
-        minAreaNum
-      }
-    })
-    return {
-      ...item,
-      items: arr
-    }
-  })
-  const deepArr = deepFoolData(data)
+export const handleTemplateData = (data, params) => {
+  const templateData = data.filter(item => item.name === params.name)[0] || {}
+  const deepArr = deepFoolData(templateData.data)
   return {
-    data,
+    data: templateData,
     deepArr
   }
 }
+export const handleTemplatePrice = (dataArr, priceData) => {
+  const data = dataArr.map(item => {
+    const priceItem = priceData.filter(ite => ite.projectName === item.projectName)[0]
+    const price = computedHandle.multiply((item.count || 0), (priceItem.price || 0))
+    return {
+      projectId: item.projectId,
+      projectName: item.projectName,
+      remark: priceItem.remark,
+      price: price || '-',
+      num: item.count || '-',
+      // totalPrice: totalPrice || '-',
+      special: item.special,
+      maxPriceNum: item.maxPriceNum,
+      minPriceNum: item.minPriceNum,
+      maxAreaNum: item.maxAreaNum,
+      minAreaNum: item.minAreaNum
+    }
+  })
+  return data
+}
 
 const deepFoolData = (mock) => {
-  const data = mock.map(item => item.items)
+  const data = mock.map((item, index) => {
+    return item['projectList'].map((ite,idx) => {
+      return {...ite, projectId: (index + 1) * 1000 + idx}
+    })
+  })
+  console.log('datadatadatadata', data)
   let arr = []
   for (const i of data){
     arr = [...arr, ...i]
@@ -145,78 +73,4 @@ const findMinNum = (arr) => {
   arr.sort((a, b) => a - b)
   arr = arr.filter(item => !!item)
   return arr[0]
-}
-export const tableDataM = (mock) => {
-  mock.forEach((item) => {
-    item.priceList = []
-    item.areaList = []
-    item.remarkList = []
-    if (item.jinchun && typeof item.jinchun === 'string') {
-      handleTData(item, 'jinchun')
-    }
-    if (item.shenghuo && typeof item.shenghuo === 'string') {
-      handleTData(item, 'shenghuo')
-    }
-    if (item.jiashite && typeof item.jiashite === 'string') {
-      handleTData(item, 'jiashite')
-    }
-    if (item.jianhua && typeof item.jianhua === 'string') {
-      handleTData(item, 'jianhua')
-    }
-    if (item.mingdu && typeof item.mingdu === 'string') {
-      handleTData(item, 'mingdu')
-    }
-    if (item.tianpeng && typeof item.tianpeng === 'string') {
-      handleTData(item, 'tianpeng')
-    }
-    if (item.zhuangshu && typeof item.zhuangshu === 'string') {
-      handleTData(item, 'zhuangshu')
-    }
-    if (item.chengmei && typeof item.chengmei === 'string') {
-      handleTData(item, 'chengmei')
-    }
-    if (item.zhujia && typeof item.zhujia === 'string') {
-      handleTData(item, 'zhujia')
-    }
-    if (item.meijia && typeof item.meijia === 'string') {
-      handleTData(item, 'meijia')
-    }
-  })
-}
-
-const handleTData = (item, key) => {
-  item[key] = item[key].split('&')
-  item[key] = item[key].slice(0, 10)
-  item[key] = handleData(item[key])
-  if (!item.hide) { 
-    item.hide = handleHide(item, item[key])
-  }
-  item.priceList.push(item[key][0])
-  item.areaList.push(item[key][1])
-  item.remarkList.push(item[key][2])
-}
-
-const handleData = (data) => {
-  if (Array.isArray(data)) { 
-    const newData = data.map(item => {
-      return item.split("：")[1]
-    })
-    return newData
-  } else {
-    return data
-  }
-}
-
-const handleHide = (item, data) => {
-  if (item.hide) return
-  if (Array.isArray(data)) {
-    let arr = data.slice(0,3)
-    for (let i of arr) {
-      if (!i) {
-        return true
-      }
-    }
-  } else {
-    return data
-  }
 }

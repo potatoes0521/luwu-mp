@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-22 09:30:13
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 16:47:21
+ * @LastEditTime: 2020-07-13 14:24:57
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -33,7 +33,7 @@ export default class HouseMsg extends Component {
             <View className='options-label'>隐藏相同项</View>
           </View>
           <View className='options-wrapper'>
-            <SwitchBtn checked={hiddenRemark} onSwitchChange={this.onClickRemarkBtn.bind(this)} />
+            <SwitchBtn checked={!hiddenRemark} onSwitchChange={this.onClickRemarkBtn.bind(this)} />
             <View className='options-label'>显示工艺说明</View>
           </View>
         </View>
