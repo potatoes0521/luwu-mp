@@ -56,7 +56,7 @@ class Vip extends Component {
       encryptedData: detail.encryptedData,
       code: this.code,
     }
-    getUserPhone(sendData, this).then(res => {
+    getUserPhone(sendData).then(res => {
       const data = Object.assign({}, res, {
         isMember: 1
       })

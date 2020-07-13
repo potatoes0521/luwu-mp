@@ -153,7 +153,7 @@ class OfferExaminePublish extends Component {
         decorateType,
       }
     }
-    publishOffer(sendData, this).then(res => {
+    publishOffer(sendData).then(res => {
       if (!res || !res.quotationId) {
         this.showToast('发布失败')
         return
@@ -200,7 +200,7 @@ class OfferExaminePublish extends Component {
         encryptedData: detail.encryptedData,
         code: this.code,
       }
-      getUserPhone(sendData, this).then(res => {
+      getUserPhone(sendData).then(res => {
         const data = {
           ...res,
           isMember: 1

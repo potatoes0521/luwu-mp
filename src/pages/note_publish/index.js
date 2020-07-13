@@ -250,7 +250,7 @@ class NotePublish extends Component {
     }
     if (this.pageParams.pageType === 'edit') { 
       sendData.noteId = this.pageParams.noteId
-      editNote(sendData, this).then(() => {
+      editNote(sendData).then(() => {
         Taro.showToast({
           title: '编辑成功',
         })
@@ -259,7 +259,7 @@ class NotePublish extends Component {
         Taro.navigateBack()
       }, 1800)
     } else {
-      publishNote(sendData, this).then(res => {
+      publishNote(sendData).then(res => {
         if (!res || !res.noteId) {
           Taro.showToast({
             title: '添加失败',

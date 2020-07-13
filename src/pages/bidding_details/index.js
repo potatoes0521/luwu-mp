@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 09:27:43
+ * @LastEditTime: 2020-07-13 15:35:18
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -89,7 +89,6 @@ class BiddingDetails extends Component {
     getBidList({
       requireId: this.pageParams.requireId
     }).then(res => {
-      setStorage(`bid_list_${this.pageParams.requireId}`, res)
       this.setState({
         shopList: res
       })

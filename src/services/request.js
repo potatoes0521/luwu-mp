@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 10:13:50
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-02 22:29:44
+ * @LastEditTime: 2020-07-13 15:49:09
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,6 +16,7 @@ import {
   defaultApiURL
 } from '@config/request_config'
 import store from '@store/index'
+import { getStorage, setStorage } from '@utils/storage'
 
 let token = ''
 store.subscribe(() => {
@@ -30,7 +31,7 @@ const contentType = 'application/json;charset=UTF-8'
 export const appVersion = '1.0.1'
 
 export default {
-  baseOptions(url, data, that, loadingTitle, method) {
+  baseOptions(url, data, loadingTitle, method) {
     let loadingTimer = null
     for (const i in data) {
       if (data[i] === '' && i !== 'locationId') {
@@ -140,13 +141,46 @@ export default {
       })
     })
   },
-  get(url, data, that, loadingTitle = '加载中...') {
-    return this.baseOptions(url, data, that, loadingTitle, 'GET')
+  get(url, data, loadingTitle = '加载中...') {
+    return this.baseOptions(url, data, loadingTitle, 'GET')
   },
-  post(url, data, that, loadingTitle = '提交中...') {
-    return this.baseOptions(url, data, that, loadingTitle, 'POST')
+  post(url, data, loadingTitle = '提交中...') {
+    return this.baseOptions(url, data, loadingTitle, 'POST')
   },
-  put(url, data, that, loadingTitle = '提交中...') {
-    return this.baseOptions(url, data, that, loadingTitle, 'PUT')
+  put(url, data, loadingTitle = '提交中...') {
+    return this.baseOptions(url, data, loadingTitle, 'PUT')
+  },
+  /**
+   * 处理缓存的
+   * @param {String} url 要请求的URL
+   * @param {Object} data 参数
+   * @param {Sting || Boolean} loadingTitle='加载中...' loading
+   * @param {String} storageKey 缓存名字
+   * @param {Boolean} paramsBool 额外参数
+   * @param {Number} timer 缓存是几分钟
+   * @param {Number} notStorage 这次请求是否不走缓存  如果是true就直接去请求
+   * @return void
+   */
+  async storageGet({
+      url,
+      data,
+      loadingTitle = '加载中...',
+      storageKey,
+      paramsBool,
+      timer = 5,
+      notStorage = false
+    }) {
+    const storageData = await getStorage(storageKey)
+    let dataArr = []
+    if (!notStorage && paramsBool && storageData && +storageData.timer && +storageData.timer - (+new Date) < timer * 60000) {
+      dataArr = storageData.data
+    } else {
+      dataArr = await this.get(url, data, loadingTitle)
+      setStorage(storageKey, {
+        timer: +new Date(),
+        data: dataArr
+      })
+    }
+    return dataArr
   }
 }

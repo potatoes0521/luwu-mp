@@ -94,7 +94,7 @@ class FormForUserInfo extends Component {
         encryptedData: detail.encryptedData,
         code: this.code,
       }
-      getUserPhone(sendData, this).then(res => {
+      getUserPhone(sendData).then(res => {
         const data = {
           ...res,
           isMember: 1

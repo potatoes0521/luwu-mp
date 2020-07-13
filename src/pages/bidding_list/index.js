@@ -37,7 +37,7 @@ class BiddingList extends Component {
     this.getBiddingList()
   }
   getBiddingList() { 
-    getHouseList({}, this).then(res => {
+    getHouseList({}).then(res => {
       this.setState({
         biddingList: res
       })

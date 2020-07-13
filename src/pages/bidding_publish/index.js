@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 09:28:37
+ * @LastEditTime: 2020-07-13 15:54:26
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -102,7 +102,7 @@ class BiddingPublish extends Component {
       ...formForHouse,
       ...formForUser,
     }
-    publishBidding(sendData, this).then(() => {
+    publishBidding(sendData).then(() => {
       this.showToast('发布成功')
       removeStorage('choose_house_type')
       removeStorage('choose_budget')
