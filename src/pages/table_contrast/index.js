@@ -5,7 +5,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-13 14:30:36
+ * @LastEditTime: 2020-07-13 16:31:33
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -13,20 +13,18 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-// import {} from '@services/modules'
+import { getOfferCase } from '@services/modules/bidding'
 import SaveAreaView from '@components/SafeAreaView'
 import { getImage } from '@assets/cdn'
+import { getStorage } from '@utils/storage'
 import HouseMsg from './components/HouseMsg'
 import TableLeftHead from './components/TableLeftHead'
 import TableMain from './components/TableMain'
 
 import {
-  companyData,
   handleTemplateData,
   handleTemplatePrice
 } from '../../mock/table'
-import templateMock from '../../mock/muban.json'
-import companyPrice from '../../mock/price.json'
   
 import './index.scss'
 
@@ -35,11 +33,11 @@ class TableContrast extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      companyTableList: [...companyData],
+      companyTableList: [],
       hiddenRemark: true,
       hiddenIdentical: false,
       projectAreaList: [],
-      isShare: false,
+      // isShare: false,
       companyData0: null,
       companyData1: null,
       companyData2: null,
@@ -57,27 +55,39 @@ class TableContrast extends Component {
       companyData14: null,
     }
     this.mockData = []
+    this.pageParams = {}
   }
 
   componentDidMount() {
-    const params = this.$router.params
-    this.setState({
-      isShare: params && params.shareType === '1'
-    })
-    this.handleMockData(false, {name: '三室两厅一卫'})
+    this.pageParams = this.$router.params
+    // this.setState({
+    //   isShare: params && params.shareType === '1'
+    // })
+    this.handleGetStorageData(this.pageParams)
+  }
+  async handleGetStorageData(params) {
+    const activeTemplate = await getStorage(`active_template_${params.requireId}`)
+    const offerCase = await getOfferCase({})
+    const templateData = handleTemplateData(offerCase, activeTemplate)
+    this.handleMockData({ templateData })
   }
   /**
    * 处理模拟数据源
    * @return void
    */
-  handleMockData(showAll, params) {
-    const templateData = handleTemplateData(templateMock, params)
-    console.log('companyPrice', companyPrice)
-    if (showAll) { // 如果是二次显示  没必要处理一下施工区域
-      this.setState({
-        companyTableList: [...companyData],
-      })
-    } else {
+  async handleMockData({
+    showAll = false,
+    templateData,
+  }) {
+    const shopList = await getStorage(`bidding_shop_price_${this.pageParams.requireId}`)
+    const companyData = shopList.map(item => ({
+      shopId: item.shopId,
+      shopName: item.shopName
+    }))
+    this.setState({
+      companyTableList: companyData,
+    })
+    if (!showAll) {
       // 取出来工艺列表
       const handleData = templateData.data.data
       const projectAreaList = handleData.map((item, index) => {
@@ -104,8 +114,7 @@ class TableContrast extends Component {
       if (showAll && createCompanyStateData[`companyData${i}`]) {
         break
       }
-      const data = handleTemplatePrice(templateData.deepArr, companyPrice)
-      console.log('data', data)
+      const data = handleTemplatePrice(templateData.deepArr, shopList[i].templateData)
       createCompanyStateData[`companyData${i}`] = {
         data,
         companyId: companyData[i].companyId,
@@ -149,7 +158,9 @@ class TableContrast extends Component {
   }
 
   showAllData() { 
-    this.handleMockData(true)
+    this.handleMockData({
+      showAll: true
+    })
   }
   /**
    * 页面内转发
@@ -175,24 +186,24 @@ class TableContrast extends Component {
       hiddenRemark,
       projectAreaList,
       hiddenIdentical,
-      isShare
+      // isShare
     } = this.state
     // 公司列表
     const companyListRender = companyTableList.map((item, index) => {
-      const key = item.companyId
+      const key = item.shopId
       return (
         <View
-          className='head-background left-table-item-90 width196 border-right border-bottom'
           key={key}
+          className='head-background left-table-item-90 width196 border-right border-bottom'
         >
-          <View className='company-title padding-top10'>{item.companyName}</View>
+          <View className='company-title padding-top10'>{item.shopName}</View>
           <View className='company-handle' onClick={this.hiddenCompany.bind(this, index, key)}>隐藏</View>
         </View>
       )
     })
     // 总价列表
     const companyTotalPriceListRender = companyTableList.map(item => {
-      const key = item.companyId
+      const key = item.shopId
       return (
         <View
           className='left-table-item-90 border-right font26 width196'
@@ -216,7 +227,7 @@ class TableContrast extends Component {
     return (
       <SaveAreaView
         title='TA家的比价'
-        back={!isShare}
+        // back={!isShare}
       >
         <View className='page-wrapper'>
           <HouseMsg

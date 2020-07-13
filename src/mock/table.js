@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-19 15:04:28
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-13 14:23:31
+ * @LastEditTime: 2020-07-13 16:22:30
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -20,7 +20,9 @@ export const companyData = [
 ]
 
 export const handleTemplateData = (data, params) => {
+  console.log('object', params)
   const templateData = data.filter(item => item.name === params.name)[0] || {}
+  console.log('templateData', templateData)
   const deepArr = deepFoolData(templateData.data)
   return {
     data: templateData,
@@ -48,15 +50,14 @@ export const handleTemplatePrice = (dataArr, priceData) => {
   return data
 }
 
-const deepFoolData = (mock) => {
-  const data = mock.map((item, index) => {
+const deepFoolData = (data) => {
+  const newData = data.map((item, index) => {
     return item['projectList'].map((ite,idx) => {
       return {...ite, projectId: (index + 1) * 1000 + idx}
     })
   })
-  console.log('datadatadatadata', data)
   let arr = []
-  for (const i of data){
+  for (const i of newData) {
     arr = [...arr, ...i]
   }
   return arr

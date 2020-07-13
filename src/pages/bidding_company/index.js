@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 11:59:55
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-13 15:27:27
+ * @LastEditTime: 2020-07-13 16:12:05
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -13,10 +13,10 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Block } from '@tarojs/components'
 // import classNames from 'classnames'
 import { connect } from '@tarojs/redux'
-import { getBiddingTemplate } from '@services/modules/bidding'
+import { getBiddingTemplate, getBidList } from '@services/modules/bidding'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
-import { getStorage, setStorage } from '@utils/storage'
+import { setStorage } from '@utils/storage'
 import ListItem from './components/ListItem'
 
 import './index.scss'
@@ -49,7 +49,7 @@ class BiddingCompany extends Component {
     this.setState({
       userId: this.pageParams.userId
     })
-    getStorage(`bid_list_${this.pageParams.requireId}`).then(res => {
+    getBidList({ requireId: this.pageParams.requireId }).then(res => {
       const data = res.map(item => {
         return {...item, selectContrast: false, selectCollection: false}
       })
@@ -127,7 +127,7 @@ class BiddingCompany extends Component {
       selectContrastList,
       userId
     } = this.state
-    if (!selectContrastList || !selectContrastList.length) {
+    if (!selectContrastList || !selectContrastList.length || selectContrastList.length < 2) {
       Taro.showToast({
         icon: 'none',
         title: '至少选择两家公司进行对比哦~',
@@ -135,7 +135,7 @@ class BiddingCompany extends Component {
       return
     }
     // 选中的数据   顺便吧价格也放在里面了防止进去比价界面循环请求N多公司加载慢
-    setStorage('bidding_shop_price', this.selectContrastList)
+    setStorage(`bidding_shop_price_${this.pageParams.requireId}`, this.selectContrastList)
     Taro.navigateTo({
       url: `/pages/table_contrast/index?requireId=${this.pageParams.requireId}&userId=${userId}`
     })

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 10:13:50
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-13 15:49:09
+ * @LastEditTime: 2020-07-13 16:07:22
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -171,7 +171,7 @@ export default {
       notStorage = false
     }) {
     const storageData = await getStorage(storageKey)
-    let dataArr = []
+    let dataArr = null
     if (!notStorage && paramsBool && storageData && +storageData.timer && +storageData.timer - (+new Date) < timer * 60000) {
       dataArr = storageData.data
     } else {
