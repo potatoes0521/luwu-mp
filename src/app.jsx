@@ -77,7 +77,7 @@ class App extends Component {
       'pages/bidding_list/index',
       'pages/bidding_company/index',
 
-      'pages/house_publish/index',
+      // 'pages/house_publish/index',
       'pages/vip/index'
     ],
     tabBar: {

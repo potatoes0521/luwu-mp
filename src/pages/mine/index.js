@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 17:41:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 18:36:56
+ * @LastEditTime: 2020-07-14 17:21:23
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,17 +16,12 @@ import {
   Text,
   Block
 } from '@tarojs/components'
-// import classNames from 'classnames'
 import { connect } from '@tarojs/redux'
-import { getHouseList } from '@services/modules/house'
 import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { getImage } from '@assets/cdn'
 import Auth from '@components/auth'
 import { getOfferList } from '@services/modules/offer'
-import { getNoteList } from '@services/modules/note'
-import MineHouse from './components/MineHouse/index'
-
 import './index.scss'
 
 const headerImage = getImage('mine/default_header.png')
@@ -36,8 +31,6 @@ class Mine extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      houseList: [],
-      noteLength: 0,
       offerData: {}
     }
     this.errLogin = false
@@ -46,37 +39,13 @@ class Mine extends Component {
   async componentDidMount() {
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
-    this.getHouseList()
-    this.getNoteList()
     this.getOfferList()
   }
   componentDidShow() { 
     const { userInfo } = this.props
     if (userInfo.token) {
-      this.getHouseList()
-      this.getNoteList()
       this.getOfferList()
     }
-  }
-  handleLogin() { 
-    this.getHouseList()
-  }
-  getHouseList() { 
-    const { userInfo } = this.props
-    getHouseList({
-      userId: userInfo.userId
-    }).then(res => {
-      this.setState({
-        houseList: res
-      })
-    })
-  }
-  getNoteList() { 
-    getNoteList({}).then(res => {
-      this.setState({
-        noteLength: res.length
-      })
-    })
   }
   getOfferList() { 
     if (this.flag) return
@@ -91,21 +60,15 @@ class Mine extends Component {
       })
     })
   }
+  handleLogin() { 
+    this.getOfferList()
+  }
   goToVip() {
     Taro.navigateTo({
       url: '/pages/vip/index'
     })
   }
-  renderTabItem(iconName, title, tips) { 
-    return (
-      <Block>
-        <Text className={`iconfont history-icon ${iconName}`}></Text>
-        <View className='history-title'>{title}</View>
-        <View className='history-tips'>{tips}</View>
-      </Block>
-    )
-  }
-  renderFormItem(iconName, label, item) {
+  renderFormItem(iconName, label, offerText, item) {
     return (
       <View className='form-item' data-item={item}>
         <View className='form-label' data-item={item}>
@@ -113,6 +76,7 @@ class Mine extends Component {
           <Text data-item={item}>{label}</Text>
         </View>
         <View className='form-content' data-item={item}>
+          <View className='form-tips'>{offerText}</View>
           <View className='iconfont iconRectangle form-right-icon rotated' data-item={item}></View>
         </View>
       </View>
@@ -147,13 +111,9 @@ class Mine extends Component {
 
   render() {
     const { userInfo } = this.props
-    const {
-      houseList,
-      noteLength,
-      offerData
-    } = this.state
+    const { offerData } = this.state
     const notLogin = !userInfo.token
-    const offerText = offerData.quotationId ? (offerData.status === 1 ? '您的报价监理已审核' : '您的报价监理正在审核中') : '还未提交报价审核'
+    const offerText = notLogin ? '登录后可见' : (offerData.quotationId ? (offerData.status === 1 ? '您的报价监理已审核' : '您的报价监理正在审核中') : '免费赠送1次')
     return (
       <SafeAreaView
         title='个人中心'
@@ -201,42 +161,13 @@ class Mine extends Component {
               })
             }
           >
-            <View className='form-item'>
-              <View className='form-label'>
-                <Text className='iconfont icon-public-style iconshenhe'></Text>
-                <Text>我的报价审核单</Text>
-              </View>
-              <View className='form-content'>
-                <View className='form-tips'>{offerText}</View>
-                <View className='iconfont iconRectangle form-right-icon rotated'></View>
-              </View>
-            </View>
+            {this.renderFormItem('iconshenhe','我的装修招标', offerText, '')}
           </View>
-          <View className='history-wrapper' >
-            <View
-              className='history-item-public'
-              onClick={this.navigatorTo.bind(this, {
-                pageName: noteLength ? 'note_mine' : 'note_publish'
-              })}
-            >
-              {this.renderTabItem('iconji color1', '建材笔记', noteLength ? `已记录${noteLength}次` : '您还未记录')}
-            </View>
-            <View className='history-item-public'>
-              {this.renderTabItem('iconbi color2', '建材比价', '您还未发起比价')}
-            </View>
-          </View>
-          <MineHouse houseList={houseList} />
           <View className='form-wrapper' onClick={this.handleClickItem.bind(this)}>
-            {
-              !notLogin && (
-                <Block>
-                  {this.renderFormItem('icondingdan','支付订单', 'pay_order')}
-                  {this.renderFormItem('icondianping','我的点评', 'comment')}
-                </Block>
-              )
-            }
-            {this.renderFormItem('iconjubao','我的举报', 'report')}
-            {this.renderFormItem('iconkefu','联系客服', 'service')}
+            {this.renderFormItem('icondingdan','外部报价审核', offerText,'pay_order')}
+            {this.renderFormItem('icondianping','在线报价审核', offerText,'comment')}
+            {this.renderFormItem('iconjubao','在线图纸审核', offerText,'report')}
+            {this.renderFormItem('iconkefu','在线施工咨询', offerText,'service')}
           </View>
           <Auth onLogin={this.handleLogin.bind(this)} />
         </View>
