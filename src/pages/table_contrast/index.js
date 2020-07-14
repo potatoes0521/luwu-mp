@@ -5,7 +5,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-13 16:48:10
+ * @LastEditTime: 2020-07-14 09:29:28
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -20,11 +20,7 @@ import { getStorage } from '@utils/storage'
 import HouseMsg from './components/HouseMsg'
 import TableLeftHead from './components/TableLeftHead'
 import TableMain from './components/TableMain'
-
-import {
-  handleTemplateData,
-  handleTemplatePrice
-} from '../../mock/table'
+import { handleTemplateData,  handleTemplatePrice } from './utils/table'
   
 import './index.scss'
 
@@ -80,12 +76,10 @@ class TableContrast extends Component {
     templateData,
   }) {
     const shopList = await getStorage(`bidding_shop_price_${this.pageParams.requireId}`)
-    console.log('shopList', shopList)
     const companyData = shopList.map(item => ({
       shopId: item.shopId,
       shopName: item.shopName
     }))
-    console.log('companyData', companyData)
     this.setState({
       companyTableList: companyData,
     })
