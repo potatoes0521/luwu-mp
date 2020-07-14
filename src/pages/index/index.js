@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 18:45:09
+ * @LastEditTime: 2020-07-14 14:47:29
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -20,25 +20,20 @@ import Skeleton from '@components/Skeleton'
 import Login from '@utils/login'
 import { getImage } from '@assets/cdn'
 import Auth from '@components/auth'
+import SafeAreaView from '@components/SafeAreaView'
 import { getHouseList } from '@services/modules/house'
 import { getOfferList } from '@services/modules/offer'
-import StickyTab from './components/StickyTab'
 import FreeEvent from './components/FreeEvent'
 import Bidding from './components/Bidding'
-import Company from './components/Company'
-import Brand from './components/Brand'
-import Store from './components/Store'
-  
+
 import './index.scss'
 
-const bannerBigImg = getImage(`index/bannerBig.png?${Math.random()}`)
+const bannerBigImg = getImage(`index/bannerNew.png?${Math.random()}`)
 
 class Index extends Component {
   constructor() { 
     this.state = {
       loading: false,
-      fixed: false,
-      tabActiveIndex: 0,
       biddingList: [],
       offerData: {}
     }
@@ -71,14 +66,6 @@ class Index extends Component {
     })
   }
   /**
-   * 当计算出滚动区域高度
-   * @param {Number} stickyScrollTop 粘性需要滚动的高度
-   * @return void
-   */
-  onComputedScrollTop(data) {
-    this.stickyScrollTop = data
-  }
-  /**
    * 页面内转发
    * @param {Object} res 微信返回参数
    * @return void
@@ -91,44 +78,6 @@ class Index extends Component {
       imageUrl: getImage('share/share_index.png')
     }
   }
-  onPageScroll(e) { 
-    const { scrollTop } = e
-    const { fixed, tabActiveIndex } = this.state
-    const {
-      stickyScrollTop,
-      biddingScrollTop,
-      companyScrollTop,
-      brandScrollTop,
-      storeScrollTop,
-      screenHalf
-    } = this.stickyScrollTop
-    // 计算要不要固定
-    if (scrollTop > stickyScrollTop && !fixed) {
-      this.setState({
-        fixed: true
-      })
-    } else if (scrollTop < stickyScrollTop && fixed) {
-      this.setState({
-        fixed: false
-      })
-    }
-    // 屏幕中键那个线应该滚动的位置
-    const screenHalfLine = screenHalf + scrollTop
-    let nextTab = ''
-    if (screenHalfLine >= storeScrollTop) {
-      nextTab = 3
-    } else if (screenHalfLine >= brandScrollTop) {
-      nextTab = 2
-    } else if (screenHalfLine >= companyScrollTop) {
-      nextTab = 1
-    } else if (screenHalfLine >= biddingScrollTop) {
-      nextTab = 0
-    }
-    if (nextTab === tabActiveIndex) return
-    this.setState({
-      tabActiveIndex: nextTab
-    })
-  }
   
   config = {
     navigationBarTitleText: '首页',
@@ -138,31 +87,23 @@ class Index extends Component {
   render() {
     const {
       loading,
-      fixed,
-      tabActiveIndex,
       biddingList,
       offerData
     } = this.state
     return (
-      <View className='page-wrapper skeleton' id='sticky'>
-        <View className='banner-wrapper skeleton-square'>
-          <Image className='banner-image' src={bannerBigImg}></Image>
+      <SafeAreaView title='录屋'>
+        <View className='page-wrapper skeleton' id='sticky'>
+          <View className='banner-wrapper skeleton-square'>
+            <Image className='banner-image' src={bannerBigImg}></Image>
+          </View>
+          <FreeEvent offerData={offerData} />
+          <Bidding biddingList={biddingList} />
+          {
+            loading && <Skeleton />
+          }
+          <Auth />
         </View>
-        <StickyTab
-          fixed={fixed}
-          activeIndex={tabActiveIndex}
-          onComputedScrollTop={this.onComputedScrollTop.bind(this)}
-        />
-        <FreeEvent offerData={offerData} />
-        <Bidding biddingList={biddingList} />
-        <Company />
-        <Brand />
-        <Store />
-        {
-          loading && <Skeleton />
-        }
-        <Auth />
-      </View>
+      </SafeAreaView>
     )
   }
 }

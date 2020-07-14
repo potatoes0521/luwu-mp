@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 10:42:14
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-03 18:42:34
+ * @LastEditTime: 2020-07-14 14:48:55
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -18,7 +18,7 @@ import { getImage } from '@assets/cdn'
 
 import './index.scss'
 
-const titleTextImage = getImage(`index/freeEvent/title.png?${Math.random()}`)
+const titleTextImage = getImage(`index/freeEvent/ad.png?${Math.random()}`)
 
 export default class FreeEvent extends Component {
   navigator() { 
@@ -30,7 +30,6 @@ export default class FreeEvent extends Component {
     })
   }
   render() {
-    const { headerList } = this.props
     return (
       <View className='free-event-wrapper'>
         <View className='btn-wrapper' onClick={this.navigator.bind(this)}>
@@ -38,13 +37,6 @@ export default class FreeEvent extends Component {
           <View className='center-text'>看不懂装修报价嘛？让监理给您审审~</View>
           <View className='bottom-wrapper'>
             <View className='header-image-list'>
-              {
-                headerList.map(item => (
-                  <View key='item' className='image-item'>
-                    <Image src={item} className='item-image'></Image>
-                  </View>
-                ))
-              }
             </View>
             <View className='text'>12.3万人参与</View>
           </View>
@@ -58,10 +50,4 @@ export default class FreeEvent extends Component {
   }
 }
 
-FreeEvent.defaultProps = {
-  headerList: [
-    getImage('index/freeEvent/mock1.png'),
-    getImage('index/freeEvent/mock2.png'),
-    getImage('index/freeEvent/mock3.png')
-  ]
-}
+FreeEvent.defaultProps = {}
