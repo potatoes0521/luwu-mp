@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 11:19:15
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-14 16:39:05
+ * @LastEditTime: 2020-07-14 17:04:07
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -55,7 +55,6 @@ class Bidding extends Component {
     })
     const biddingListRender = array.map(item => {
       const key = item.requireId
-      console.log('item', item)
       return (
         <View
           key={key}
