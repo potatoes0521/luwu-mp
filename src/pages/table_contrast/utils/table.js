@@ -4,25 +4,15 @@
  * @path: 引入路径
  * @Date: 2020-06-19 15:04:28
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-13 16:22:30
+ * @LastEditTime: 2020-07-14 09:28:11
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */
 import computedHandle from '@utils/computedPrice'
 
-export const companyData = [
-  {
-    companyId: 1,
-    companyName: '尚雅建筑',
-    totalPrice: 22470.35,
-  },
-]
-
 export const handleTemplateData = (data, params) => {
-  console.log('object', params)
   const templateData = data.filter(item => item.name === params.name)[0] || {}
-  console.log('templateData', templateData)
   const deepArr = deepFoolData(templateData.data)
   return {
     data: templateData,
