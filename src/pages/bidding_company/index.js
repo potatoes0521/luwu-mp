@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 11:59:55
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-14 09:05:02
+ * @LastEditTime: 2020-07-14 09:09:18
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -65,6 +65,13 @@ class BiddingCompany extends Component {
    */
   handleContrast(shopMsg) {
     let { shopList, selectContrastList } = this.state
+    if (selectContrastList.length >= 15) {
+      Taro.showToast({
+        icon: 'none',
+        title: '最多选择十五家进行对比哦~',
+      })
+      return
+    }
     this.getShopOfferPrice(shopMsg)
     shopList.forEach(item => {
       if (shopMsg.shopId === item.shopId) {
@@ -92,28 +99,34 @@ class BiddingCompany extends Component {
       })
     })
   }
+  /**
+   * 处理打开选中项
+   * @return void
+   */
   handleShowSelectModal() { 
     const {
       selectContrastList,
       showSelectContrastModal
     } = this.state
     if (!selectContrastList.length || showSelectContrastModal) return
-    if (selectContrastList.length >= 15) {
-      Taro.showToast({
-        icon: 'none',
-        title: '最多选择十五家进行对比哦~',
-      })
-      return
-    }
     this.setState({
       showSelectContrastModal: true
     })
   }
+  /**
+   * 处理关闭选中项
+   * @return void
+   */
   handleCloseModal() { 
     this.setState({
       showSelectContrastModal: false
     })
   }
+  /**
+   * 处理删除
+   * @param {Object} item 点击删除的那一项
+   * @return void
+   */
   handleDelete(item) { 
     const {
       selectContrastList,
@@ -131,6 +144,10 @@ class BiddingCompany extends Component {
       shopList
     })
   }
+  /**
+   * 导航到去表格比价
+   * @return void
+   */
   navigatorToTable() { 
     const {
       selectContrastList,
