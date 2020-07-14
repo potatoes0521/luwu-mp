@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-14 14:52:08
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-14 15:18:15
+ * @LastEditTime: 2020-07-14 15:42:59
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -12,7 +12,7 @@
 import Taro, { useEffect, useState }  from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
 import { getNewsData } from '@services/modules/index'
-import { getImage } from '@/assets/cdn'
+import { getImage } from '@assets/cdn'
 
 import './index.scss'
   
