@@ -4,13 +4,13 @@
  * @path: 引入路径
  * @Date: 2020-06-29 11:19:15
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 16:16:45
+ * @LastEditTime: 2020-07-14 16:39:05
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */ 
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View, Image, Text } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import { connect } from '@tarojs/redux'
 import { handleRequestData } from '@config/houseType'
@@ -51,78 +51,53 @@ class Bidding extends Component {
     const array = biddingList.map(item => {
       const obj = handleRequestData(item)
       const text = (obj.bedroom.chinese || '-') + '室' + (obj.sittingroom.chinese || '-') + '厅' + (obj.cookroom.chinese || '-') + '厨' + (obj.washroom.chinese || '-') + '卫'
-      return Object.assign({}, obj, {text})
+      return {...obj, text}
     })
-    const [data1 = {}, data2 = {}, data3 = {}, data4 = {}, data5 = {}] = array
+    const biddingListRender = array.map(item => {
+      const key = item.requireId
+      console.log('item', item)
+      return (
+        <View
+          key={key}
+          className='bidding-item-wrapper'
+        >
+          <View className='user-msg-wrapper'>
+            <View className='user-msg'>
+              <View className='user-icon'>
+                <Image className='user-icon' src='https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/index/freeEvent/mock1.png'></Image>
+              </View>
+              <View className='userText'>{item.userName}</View>
+            </View>
+            <View className='status'>
+              成功招标
+            </View>
+          </View>
+          <View className='item-main'>
+            <View className='form-item'>
+              <View className='form-label'>
+                <Text>田园风光雅苑</Text>
+                <Text className='line'></Text>
+                <Text>田园风光雅苑</Text>
+              </View>
+              <View className='form-content'>111KM</View>
+            </View>
+            <View className='form-item'>
+              <View>{item.text}</View>
+              <View>{item.area}㎡</View>
+              <View>预算{item.budget.moneyText || `${item.budgetMin || ''}-${item.budgetMax || ''}万`}</View>
+            </View>
+            <View className='form-item'>
+              <View>计划于{item.decorateTimeBefore.substr(0, 7).replace('-', '年') + '月'}装修</View>
+            </View>
+          </View>
+        </View>
+      )
+    })
     return (
-      <View className='card-wrapper bidding'>
-        <View className='card-plain'>
-          <View className='plain-wrapper'>
-            <View className='big-wrapper big-item color1' onClick={this.navigatorToDetails.bind(this, data1)}>
-              <View className='title big-margin-bottom'>{data1.text}</View>
-              <View className='middle-title'>
-                <Text className='label'>类型</Text>
-                <Text>{data1.decorateType ? '毛坯房' : '旧房翻新'}</Text> 
-              </View>
-              <View className='middle-title'>
-                <Text className='label'>面积</Text>
-                <Text>{data1.area}㎡</Text> 
-              </View>
-              <View className='middle-title'>
-                <Text className='label'>预算</Text>
-                <Text>{data1.budget.moneyText || `${data1.budgetMin || ''}-${data1.budgetMax || ''}万`}</Text> 
-              </View>
-              {this.renderTips(data1)}
-              <View className='backgroundImage1'></View>
-            </View>
-            <View className='big-wrapper right-wrapper'>
-              <View
-                className='small-item color2'
-                onClick={this.navigatorToDetails.bind(this, data2)}
-              >
-                <View className='title'>{data2.text}</View>
-                {this.renderTips(data2)}
-                <View className='backgroundImage2'></View>
-              </View>
-              <View
-                className='small-item color3'
-                onClick={this.navigatorToDetails.bind(this, data3)}
-              >
-                <View className='title'>{data3.text}</View>
-                {this.renderTips(data3)}
-                <View className='backgroundImage3'></View>
-              </View>
-            </View>
-          </View>
-          <View className='plain-wrapper margin-bottom'>
-            <View
-              className='big-item color4'
-              onClick={this.navigatorToDetails.bind(this, data4)}
-            >
-              <View className='title'>{data4.text}</View>
-              {this.renderTips(data4)}
-              <View className='backgroundImage4'></View>
-            </View>
-            <View
-              className='small-item right-item color5'
-              onClick={this.navigatorToDetails.bind(this, data5)}
-            >
-              <View className='title'>{data5.text}</View>
-              {this.renderTips(data5)}
-              <View className='backgroundImage5'></View>
-            </View>
-          </View>
-        </View>
-        <View className='bottom-btn-wrapper'>
-          <View className='btn' onClick={this.navigatorBiddingList.bind(this)}>
-            <View>大家的装修招标</View>
-            {/* <Text className='iconlujing iconfont bottom-icon'></Text> */}
-          </View>
-          <View className='btn' onClick={this.navigatorTo.bind(this)}>
-            <View>我也要装修招标</View>
-            <Text className='iconlujing iconfont bottom-icon'></Text>
-          </View>
-        </View>
+      <View className='bidding'>
+        {
+          biddingListRender
+        }
       </View>
     )
   }

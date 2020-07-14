@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-14 14:53:28
+ * @LastEditTime: 2020-07-14 16:04:23
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -66,6 +66,14 @@ class Index extends Component {
       })
     })
   }
+  renderTitle(title) { 
+    return (
+      <View className='index-title-wrapper'>
+        <View className='index-title-line'></View>
+        <View className='index-title'>{title}</View>
+      </View>
+    )
+  }
   /**
    * 页面内转发
    * @param {Object} res 微信返回参数
@@ -99,6 +107,7 @@ class Index extends Component {
           </View>
           <News />
           <FreeEvent offerData={offerData} />
+          {this.renderTitle('招标示例')}
           <Bidding biddingList={biddingList} />
           {
             loading && <Skeleton />

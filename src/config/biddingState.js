@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 15:49:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 09:26:10
+ * @LastEditTime: 2020-07-14 16:42:11
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -24,18 +24,12 @@ export const handleProgressText = (progress) => {
   switch (progress) {
     case 0:
       // return '未招标';
-      return '招标方案比价中';
+      return '审核中';
     case 1:
-      return '招标方案比价中';
+      return '招标中';
     case 2:
-      return '量房方案比价中';
-    case 3:
-      return '方案报价审批中';
-    case 4:
-      return '签订装修合约中';
-    case 5:
-      return '装修施工监管中';
-    case 6:
-      return '装修竣工';
+      return '招标成功';
+    default:
+      return '招标中';
   }
 }

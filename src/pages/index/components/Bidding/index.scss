@@ -1,152 +1,80 @@
-@import '../../../../assets/css/common.scss';
-@import '../../css/common.scss';
+@import '../../../../assets/css/theme.scss';
 
-$backgroundImage1: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/index/bidding/bg1.png';
-$backgroundImage2: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/index/bidding/bg2.png';
-$backgroundImage3: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/index/bidding/bg3.png';
-$backgroundImage4: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/index/bidding/bg4.png';
-$backgroundImage5: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/index/bidding/bg5.png';
+.bidding {
+  padding: 0 20px;
 
-.plain-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-
-  .big-wrapper {
+  &-item-wrapper {
     width: 100%;
-    height: 200px;
+    height: 290px;
+    margin: 30px auto;
     border-radius: 8px;
-    margin-bottom: 10px;
-  }
-
-  .big-item {
-    position: relative;
-    width: 356px;
     box-sizing: border-box;
-    padding-left: 20px;
-    padding-top: 20px;
-    border-radius: 8px;
-  }
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.09);
 
-  .small-item {
-    position: relative;
-    width: 100%;
-    height: 95px;
-    box-sizing: border-box;
-    padding-left: 20px;
-    padding-top: 20px;
-    border-radius: 8px;
-  }
+    .user-msg-wrapper {
+      width: 100%;
+      height: 102px;
+      display: flex;
+      padding-left: 20px;
+      align-items: center;
+      box-sizing: border-box;
+      justify-content: space-between;
+      border-bottom: 2px solid #F5F7F9;
 
-  .right-wrapper {
-    width: 324px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+      .user-msg {
+        display: flex;
+        align-items: center;
 
-  .right-item{
-    width: 324px;
-  }
+        .user-icon {
+          width: 64px;
+          height: 64px;
+        }
 
-  .title {
-    font-size: 22px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    color: $font-color;
-    font-weight: 700;
-  }
+        .userText {
+          margin-left: 20px;
+          font-size: 24px;
+          color: $tips-color;
+        }
+      }
 
-  .middle-title {
-    margin: 5px 0;
-    font-size: 20px;
-    line-height: 28px;
-    color: $tips-color;
-  }
+      .status {
+        width: 116px;
+        height: 44px;
+        display: flex;
+        font-size: 24px;
+        font-weight: 700;
+        color: $link-color;
+        background: #CAE0FF;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px 0px 0px 20px;
+      }
+    }
 
-  .small-tips {
-    margin: 5px 0;
-    font-size: 16px;
-    line-height: 22px;
-    color: #999999;
-  }
+    .item-main {
+      padding: 20px;
+      box-sizing: border-box;
 
-  .label{
-    margin-right: 16px;
-  }
+      .form-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: $tips-color;
+        font-size: 26px;
+        margin-bottom: 20px;
+        
+        .line {
+          width: 2px;
+          height: 28px;
+          margin: 0 16px;
+          background-color: $font-color;
+        }
 
-  .big-margin-bottom{
-    margin-bottom: 8px;
+        .form-label {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
   }
-  .big-margin-top {
-    margin-top: 8px;
-  }
-
-  .color1 {
-    background-color: #D8E9FF;
-  }
-  .color2 {
-    background-color: #FDEED5;
-  }
-  .color3 {
-    background-color: #FDDEDB;
-  }
-  .color4 {
-    background-color: #E3EBFF;
-  }
-  .color5 {
-    background-color: #FFDFCC;
-  }
-  .bg1{
-    position: absolute;
-    right: 20px;
-    bottom: 0;
-    width: 56px;
-    height: 56px;
-  }
-  .backgroundImage1 {
-    position: absolute;
-    right: 20px;
-    bottom: 0;
-    width: 56px;
-    height: 56px;
-    @include backgroundImage($backgroundImage1)
-  }
-  .backgroundImage2 {
-    position: absolute;
-    right: 20px;
-    bottom: 0;
-    width: 52px;
-    height: 52px;
-    @include backgroundImage($backgroundImage2)
-  }
-  .backgroundImage3 {
-    position: absolute;
-    right: 20px;
-    bottom: 0;
-    width: 56px;
-    height: 56px;
-    @include backgroundImage($backgroundImage3)
-  }
-  .backgroundImage4 {
-    position: absolute;
-    right: 20px;
-    bottom: 0;
-    width: 54px;
-    height: 54px;
-    @include backgroundImage($backgroundImage4)
-  }
-  .backgroundImage5 {
-    position: absolute;
-    right: 20px;
-    bottom: 0;
-    width: 54px;
-    height: 54px;
-    @include backgroundImage($backgroundImage5)
-  }
-}
-
-.margin-bottom {
-  margin-bottom: 20px;
 }
