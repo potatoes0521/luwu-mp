@@ -1,10 +1,10 @@
 /*
  * @Author: liuYang
- * @description: 请填写描述信息
+ * @description: 处理收藏和选择对比
  * @path: 引入路径
  * @Date: 2020-07-06 11:59:55
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-14 09:09:18
+ * @LastEditTime: 2020-07-14 09:19:32
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -100,6 +100,21 @@ class BiddingCompany extends Component {
     })
   }
   /**
+   * 处理收藏
+   * @param {String} shopId 商铺数据子组件传递过来的
+   * @return void
+   */
+  onSelectCollection(shopId) {
+    let { shopList } = this.state
+    // 请求收藏接口
+    shopList.forEach(item => {
+      if (shopId === item.shopId) {
+        item.selectCollection = true
+      }
+    })
+    this.setState({ shopList })
+  }
+  /**
    * 处理打开选中项
    * @return void
    */
@@ -190,6 +205,7 @@ class BiddingCompany extends Component {
           userId={userId}
           index={index}
           onSelectContrast={this.handleContrast.bind(this)}
+          onSelectCollection={this.onSelectCollection.bind(this)}
         />
       )
     })

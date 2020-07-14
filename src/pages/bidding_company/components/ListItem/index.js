@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 12:03:06
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-13 15:27:40
+ * @LastEditTime: 2020-07-14 09:18:51
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -34,8 +34,13 @@ class ListItem extends Component {
       shopName
     })
   }
-  onSelectCollection() { 
-
+  onSelectCollection() {
+    const {
+      shopId,
+      selectCollection,
+    } = this.props
+    if (selectCollection) return
+    this.props.onSelectCollection(shopId)
   }
   renderFormItem(label, content) { 
     return (
@@ -50,7 +55,6 @@ class ListItem extends Component {
       index,
       userId,
       remark,
-      select,
       address,
       createAt,
       shopName,
@@ -64,6 +68,7 @@ class ListItem extends Component {
       selectContrast,
       renovationImage,
       renovationStyle,
+      selectCollection,
       renovationPropose,
     } = this.props
     const showNameText = userInfo.userId === userId ? shopName : `${index + 1}号装修公司`
@@ -132,12 +137,12 @@ class ListItem extends Component {
             userInfo.userId === userId && (
               <View className='btn-public'>
                 {
-                  select ? (
-                    <Text className='text-active'>加入收藏</Text>
+                  selectCollection ? (
+                    <Text className='text-active'>已加入收藏</Text>
                   ): (
                     <Block>
                       <Text className='iconfont iconjiahao add-icon'></Text>
-                      <Text>已加入收藏</Text>
+                      <Text>加入收藏</Text>
                     </Block>
                   )
                 }
