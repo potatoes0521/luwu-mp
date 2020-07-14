@@ -4,18 +4,18 @@
  * @path: 引入路径
  * @Date: 2020-06-19 15:04:28
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-14 13:20:41
+ * @LastEditTime: 2020-07-14 14:25:39
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */
 import computedHandle from '@utils/computedPrice'
- /**
-  * 根据用户选择的户型处理模板工艺
-  * @param {Array} data 全部户型模板数据
-  * @param {Object} params 使用参数里的name对应模板里的name
-  * @return {Array} 全部户型区域  区域内包含工艺
-  */
+/**
+* 根据用户选择的户型处理模板工艺
+* @param {Array} data 全部户型模板数据
+* @param {Object} params 使用参数里的name对应模板里的name
+* @return {Array} 全部户型区域  区域内包含工艺
+*/
 export const handleTemplateData = (data, params) => {
   const templateData = data.filter(item => item.name === params.name)[0] || {}
   return templateData.data
