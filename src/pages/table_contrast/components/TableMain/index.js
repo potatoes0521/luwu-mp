@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-22 14:31:15
  * @LastEditors: liuYang
- * @LastEditTime: 2020-06-23 09:39:29
+ * @LastEditTime: 2020-07-14 11:13:29
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -81,6 +81,10 @@ export default class TableMain extends Component {
       companyData8,
       companyData9,
       companyData10,
+      companyData11,
+      companyData12,
+      companyData13,
+      companyData14,
     } = this.props
     const companyData0Render = companyData0 ? this._renderCell(companyData0) : null
     const companyData1Render = companyData1 ? this._renderCell(companyData1) : null
@@ -93,6 +97,10 @@ export default class TableMain extends Component {
     const companyData8Render = companyData8 ? this._renderCell(companyData8) : null
     const companyData9Render = companyData9 ? this._renderCell(companyData9) : null
     const companyData10Render = companyData10 ? this._renderCell(companyData10) : null
+    const companyData11Render = companyData11 ? this._renderCell(companyData11) : null
+    const companyData12Render = companyData12 ? this._renderCell(companyData12) : null
+    const companyData13Render = companyData13 ? this._renderCell(companyData13) : null
+    const companyData14Render = companyData14 ? this._renderCell(companyData14) : null
     return (
       <View className='table-main-wrapper'>
         {
@@ -127,6 +135,18 @@ export default class TableMain extends Component {
         }
         {
           companyData10 && <View className='right-table-item-wrapper'>{companyData10Render}</View>
+        }
+        {
+          companyData11 && <View className='right-table-item-wrapper'>{companyData11Render}</View>
+        }
+        {
+          companyData12 && <View className='right-table-item-wrapper'>{companyData12Render}</View>
+        }
+        {
+          companyData13 && <View className='right-table-item-wrapper'>{companyData13Render}</View>
+        }
+        {
+          companyData14 && <View className='right-table-item-wrapper'>{companyData14Render}</View>
         }
       </View>
     )

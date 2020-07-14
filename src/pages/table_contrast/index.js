@@ -5,7 +5,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-14 09:29:28
+ * @LastEditTime: 2020-07-14 12:17:08
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -20,7 +20,12 @@ import { getStorage } from '@utils/storage'
 import HouseMsg from './components/HouseMsg'
 import TableLeftHead from './components/TableLeftHead'
 import TableMain from './components/TableMain'
-import { handleTemplateData,  handleTemplatePrice } from './utils/table'
+import {
+  handleTemplateData,
+  handleProjectArea,
+  handleCompanyData,
+  handleAllDataMaxData
+} from './utils/table'
   
 import './index.scss'
 
@@ -52,6 +57,7 @@ class TableContrast extends Component {
     }
     this.mockData = []
     this.pageParams = {}
+    this.templateData = []
   }
 
   componentDidMount() {
@@ -64,8 +70,10 @@ class TableContrast extends Component {
   async handleGetStorageData(params) {
     const activeTemplate = await getStorage(`active_template_${params.requireId}`)
     const offerCase = await getOfferCase({})
-    const templateData = handleTemplateData(offerCase, activeTemplate)
-    this.handleMockData({ templateData })
+    this.templateData = handleTemplateData(offerCase, activeTemplate)
+    this.handleMockData({
+      templateData: this.templateData
+    })
   }
   /**
    * 处理模拟数据源
@@ -73,50 +81,34 @@ class TableContrast extends Component {
    */
   async handleMockData({
     showAll = false,
-    templateData,
+    templateData = this.templateData,
   }) {
     const shopList = await getStorage(`bidding_shop_price_${this.pageParams.requireId}`)
-    const companyData = shopList.map(item => ({
+    const companyTableList = shopList.map(item => ({
       shopId: item.shopId,
       shopName: item.shopName
     }))
-    this.setState({
-      companyTableList: companyData,
-    })
+    this.setState({ companyTableList })
+    let projectAreaList = []
+    // 如果是展示相同项  数据没有必要再处理一次
     if (!showAll) {
       // 取出来工艺列表
-      const handleData = templateData.data.data
-      const projectAreaList = handleData.map((item, index) => {
-        return {
-          projectAreaList: item.projectList.map(ite => {
-            return {
-              projectName: ite.projectName,
-              unit: ite.units
-            }
-          }),
-          projectArea: item.spaceName,
-          projectAreaId: item.spaceId,
-          index
-        }
-      }).filter(item => !!item)
+      projectAreaList = handleProjectArea(templateData)
       this.setState({
-        projectAreaList: projectAreaList
+        projectAreaList
       })
     }
     // 处理每个公司的数据
-    let createCompanyStateData = {}
-    for (let i = 0; i < companyData.length; i++) {
-      // 如果是二次渲染全部  并且  数值不是null 
-      if (showAll && createCompanyStateData[`companyData${i}`]) {
-        break
-      }
-      const data = handleTemplatePrice(templateData.deepArr, shopList[i].templateData)
-      createCompanyStateData[`companyData${i}`] = {
-        data,
-        companyId: companyData[i].companyId,
-      }
-    }
+    let createCompanyStateData = handleCompanyData(templateData, shopList, this.state)
     this.setState(createCompanyStateData)
+    this.handleMaxData(createCompanyStateData, projectAreaList)
+  }
+  handleMaxData(companyData, projectAreaList) {
+    const data = handleAllDataMaxData(companyData, projectAreaList)
+    this.setState({
+      ...data.companyData,
+      projectAreaList: data.projectAreaList
+    })
   }
   /**
    * 处理切换显示工艺说明
@@ -146,7 +138,7 @@ class TableContrast extends Component {
       companyTableList,
     }
     for (const key in this.state) {
-      if (key.indexOf('companyData') !== -1 && this.state[key] && this.state[key].companyId === +companyId) {
+      if (key.indexOf('companyData') !== -1 && this.state[key] && this.state[key].companyId === companyId) {
         state[key] = null
       }
     }
@@ -185,7 +177,6 @@ class TableContrast extends Component {
       // isShare
     } = this.state
     // 公司列表
-    console.log('companyTableList', companyTableList)
     const companyListRender = companyTableList.map((item, index) => {
       const key = item.shopId
       return (
@@ -224,7 +215,7 @@ class TableContrast extends Component {
     return (
       <SaveAreaView
         title='TA家的比价'
-        // back={!isShare}
+        back
       >
         <View className='page-wrapper'>
           <HouseMsg
