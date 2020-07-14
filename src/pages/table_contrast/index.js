@@ -5,7 +5,7 @@
  * @path: 引入路径
  * @Date: 2020-06-18 19:38:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-14 12:17:08
+ * @LastEditTime: 2020-07-14 13:36:13
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -54,6 +54,7 @@ class TableContrast extends Component {
       companyData12: null,
       companyData13: null,
       companyData14: null,
+      shopListLength: -1,
     }
     this.mockData = []
     this.pageParams = {}
@@ -88,7 +89,10 @@ class TableContrast extends Component {
       shopId: item.shopId,
       shopName: item.shopName
     }))
-    this.setState({ companyTableList })
+    this.setState({
+      companyTableList,
+      shopListLength: shopList.length
+    })
     let projectAreaList = []
     // 如果是展示相同项  数据没有必要再处理一次
     if (!showAll) {
@@ -97,13 +101,21 @@ class TableContrast extends Component {
       this.setState({
         projectAreaList
       })
+    } else {
+      projectAreaList = this.state.projectAreaList
     }
     // 处理每个公司的数据
     let createCompanyStateData = handleCompanyData(templateData, shopList, this.state)
     this.setState(createCompanyStateData)
     this.handleMaxData(createCompanyStateData, projectAreaList)
   }
-  handleMaxData(companyData, projectAreaList) {
+  /**
+   * 处理公司数据里的最大值/最小值/增漏项
+   * @param {Object} companyData 要处理的公司的数据
+   * @param {Array} projectAreaList 工艺
+   * @return void
+   */
+  handleMaxData(companyData, projectAreaList = this.state.projectAreaList) {
     const data = handleAllDataMaxData(companyData, projectAreaList)
     this.setState({
       ...data.companyData,
@@ -131,6 +143,12 @@ class TableContrast extends Component {
     })
   }
   
+  /**
+   * 隐藏一个公司
+   * @param {Number} index 要隐藏的下标
+   * @param {Sting} companyId 公司Id
+   * @return void
+   */
   hiddenCompany(index, companyId) {
     let { companyTableList } = this.state
     companyTableList.splice(index, 1)
@@ -142,13 +160,30 @@ class TableContrast extends Component {
         state[key] = null
       }
     }
-    this.setState(state)
-  }
-
-  showAllData() { 
-    this.handleMockData({
-      showAll: true
+    this.setState(state, () => {
+      const data = this.getNowHasDataState()
+      this.handleMaxData(data, handleProjectArea(this.templateData))
     })
+  }
+  /**
+   * 获取现在有数据的state里的companyDataX
+   * @return void
+   */
+  getNowHasDataState() { 
+    let data = {}
+    for (const key in this.state) {
+      if (key.indexOf('companyData') !== -1 && this.state[key]) {
+        data[key] = this.state[key]
+      }
+    }
+    return data
+  }
+  /**
+   * 展示全部公司
+   * @return void
+   */
+  showAllData() { 
+    this.handleMockData({ showAll: true })
   }
   /**
    * 页面内转发
@@ -174,6 +209,7 @@ class TableContrast extends Component {
       hiddenRemark,
       projectAreaList,
       hiddenIdentical,
+      shopListLength
       // isShare
     } = this.state
     // 公司列表
@@ -226,9 +262,13 @@ class TableContrast extends Component {
           />
           <View className='table-wrapper'>
             <View className='table-left border-bottom border-right'>
-              <View className='border-bottom left-table-item-90 head-background'>
+              <View className='border-bottom head-background company-title-all'>
                 <View className='company-title padding-top10'>公 司</View>
-                <View className='company-handle' onClick={this.showAllData.bind(this)}>全部展开</View>
+                {
+                  shopListLength !== companyTableList.length && (
+                    <View className='company-handle' onClick={this.showAllData.bind(this)}>全部展开</View>
+                  )
+                }
               </View>
               <View className='head-background left-table-item-90'>总价 (元)</View>
               <View className='head-list-wrapper'>

@@ -26,6 +26,14 @@ $table-background-color: #FCFCFC;
     font-size: 28px;
     color: $font-color;
     box-sizing: border-box;
+    .company-title-all{
+      width: 168px;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
   }
 
   // 90高度的样式
