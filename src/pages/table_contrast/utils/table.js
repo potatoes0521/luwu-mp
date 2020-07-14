@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-19 15:04:28
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-14 12:21:36
+ * @LastEditTime: 2020-07-14 12:23:13
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -130,6 +130,7 @@ export const handleAllDataMaxData = (companyData, projectAreaList) => {
     companyDataToContrast.push(arr)
   }
   for (let i = 0; i < companyDataToContrast.length; i++) {
+    // 处理最大值最小值
     const priceArr = companyDataToContrast[i].map(item => item.price)
     const maxPriceNum = findMaxNum(priceArr)
     const minPriceNum = findMinNum(priceArr)
@@ -137,6 +138,7 @@ export const handleAllDataMaxData = (companyData, projectAreaList) => {
     const numArr = companyDataToContrast[i].map(item => item.num)
     const maxAreaNum = findMaxNum(numArr)
     const minAreaNum = findMinNum(numArr)
+    // 判断如果有漏项就给标题那边着色
     if (priceSpecial) {
       const specialData = companyDataToContrast[i][0]
       const index = Math.floor(specialData.projectId / 1000)
@@ -156,6 +158,7 @@ export const handleAllDataMaxData = (companyData, projectAreaList) => {
   for (let i = 0; i < companyDataArr.length; i++) {
     let arr = []
     for (let j = 0; j < companyDataToContrast.length; j++) {
+      // 把所有相同公司的数据取出来
       const arrData = companyDataToContrast[j].filter(item => item.companyId === companyDataArr[i].companyId)[0]
       arr.push(arrData)
     }
@@ -163,6 +166,7 @@ export const handleAllDataMaxData = (companyData, projectAreaList) => {
   }
   for (let i = 0; i < handleOverCompanyData.length; i++) {
     for (const j in companyData) {
+      // 对应公司ID去把工艺项目放过去
       if (companyData[j].companyId === handleOverCompanyData[i][0].companyId) {
         companyData[j].data = handleOverCompanyData[i]
       }
