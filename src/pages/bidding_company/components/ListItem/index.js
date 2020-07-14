@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 12:03:06
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-14 09:18:51
+ * @LastEditTime: 2020-07-14 09:25:52
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -132,10 +132,13 @@ class ListItem extends Component {
             )
           }
         </View>
-        <View className='choose-btn' onClick={this.onSelectCollection.bind(this)}>
+        <View className='choose-btn'>
           {
             userInfo.userId === userId && (
-              <View className='btn-public'>
+              <View
+                className='btn-public'
+                onClick={this.onSelectCollection.bind(this)}
+              >
                 {
                   selectCollection ? (
                     <Text className='text-active'>已加入收藏</Text>
