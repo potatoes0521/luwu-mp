@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 17:41:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-14 17:21:23
+ * @LastEditTime: 2020-07-14 17:29:48
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -14,7 +14,6 @@ import {
   View,
   Image,
   Text,
-  Block
 } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import SafeAreaView from '@components/SafeAreaView'
