@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 11:59:55
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-13 16:12:05
+ * @LastEditTime: 2020-07-14 09:05:02
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -115,11 +115,20 @@ class BiddingCompany extends Component {
     })
   }
   handleDelete(item) { 
-    const { selectContrastList } = this.state
+    const {
+      selectContrastList,
+      shopList
+    } = this.state
     const data = selectContrastList.filter(ite => ite.shopId !== item.shopId)
     this.selectContrastList = this.selectContrastList.filter(ite => ite.shopId !== item.shopId)
+    shopList.forEach(ite => {
+      if (item.shopId === ite.shopId) {
+        ite.selectContrast = false
+      }
+    })
     this.setState({
-      selectContrastList: data
+      selectContrastList: data,
+      shopList
     })
   }
   navigatorToTable() { 
