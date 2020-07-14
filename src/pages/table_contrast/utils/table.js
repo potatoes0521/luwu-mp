@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-19 15:04:28
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-14 12:17:43
+ * @LastEditTime: 2020-07-14 12:21:36
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -114,36 +114,36 @@ const deepFoolData = (data) => {
 }
 
 export const handleAllDataMaxData = (companyData, projectAreaList) => {
-  let arr = []
+  let companyDataArr = [] // 吧对象转换为数组用
   for (const i in companyData) {
-    arr.push(companyData[i])
+    companyDataArr.push(companyData[i])
   }
-  let arr2 = []
-  for (let i = 0; i < arr[0].data.length; i++) {
-    const ar = []
-    for (let j = 0; j < arr.length; j++) {
-      ar.push({
-        ...arr[j].data[i],
-        companyId: arr[j].companyId
+  let companyDataToContrast = [] // 把数据转换成对应工艺的二维数组 主要用来做数据对比的处理用
+  for (let i = 0; i < companyDataArr[0].data.length; i++) {
+    const arr = []
+    for (let j = 0; j < companyDataArr.length; j++) {
+      arr.push({
+        ...companyDataArr[j].data[i],
+        companyId: companyDataArr[j].companyId
       })
     }
-    arr2.push(ar)
+    companyDataToContrast.push(arr)
   }
-  for (let i = 0; i < arr2.length; i++) {
-    const priceArr = arr2[i].map(item => item.price)
+  for (let i = 0; i < companyDataToContrast.length; i++) {
+    const priceArr = companyDataToContrast[i].map(item => item.price)
     const maxPriceNum = findMaxNum(priceArr)
     const minPriceNum = findMinNum(priceArr)
     const priceSpecial = findUndefined(priceArr)
-    const numArr = arr2[i].map(item => item.num)
+    const numArr = companyDataToContrast[i].map(item => item.num)
     const maxAreaNum = findMaxNum(numArr)
     const minAreaNum = findMinNum(numArr)
     if (priceSpecial) {
-      const specialData = arr2[i][0]
+      const specialData = companyDataToContrast[i][0]
       const index = Math.floor(specialData.projectId / 1000)
       const projectIndex = specialData.projectId - index * 1000
       projectAreaList[index - 1].projectAreaList[projectIndex].special = true
     }
-    arr2[i] = arr2[i].map(item => ({
+    companyDataToContrast[i] = companyDataToContrast[i].map(item => ({
       ...item,
       minAreaNum,
       maxAreaNum,
@@ -152,19 +152,19 @@ export const handleAllDataMaxData = (companyData, projectAreaList) => {
       special: priceSpecial
     }))
   }
-  let arr3 = []
-  for (let i = 0; i < arr.length; i++) { 
-    let ar = []
-    for (let j = 0; j < arr2.length; j++) { 
-      const arrData = arr2[j].filter(item => item.companyId === arr[i].companyId)[0]
-      ar.push(arrData)
+  let handleOverCompanyData = [] // 对比完之后的数据
+  for (let i = 0; i < companyDataArr.length; i++) {
+    let arr = []
+    for (let j = 0; j < companyDataToContrast.length; j++) {
+      const arrData = companyDataToContrast[j].filter(item => item.companyId === companyDataArr[i].companyId)[0]
+      arr.push(arrData)
     }
-    arr3.push(ar)
+    handleOverCompanyData.push(arr)
   }
-  for (let i = 0; i < arr3.length; i++) { 
+  for (let i = 0; i < handleOverCompanyData.length; i++) {
     for (const j in companyData) {
-      if (companyData[j].companyId === arr3[i][0].companyId) {
-        companyData[j].data = arr3[i]
+      if (companyData[j].companyId === handleOverCompanyData[i][0].companyId) {
+        companyData[j].data = handleOverCompanyData[i]
       }
     }
   }
