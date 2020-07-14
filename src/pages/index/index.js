@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-14 14:47:29
+ * @LastEditTime: 2020-07-14 14:53:28
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -23,6 +23,7 @@ import Auth from '@components/auth'
 import SafeAreaView from '@components/SafeAreaView'
 import { getHouseList } from '@services/modules/house'
 import { getOfferList } from '@services/modules/offer'
+import News from './components/News'
 import FreeEvent from './components/FreeEvent'
 import Bidding from './components/Bidding'
 
@@ -96,6 +97,7 @@ class Index extends Component {
           <View className='banner-wrapper skeleton-square'>
             <Image className='banner-image' src={bannerBigImg}></Image>
           </View>
+          <News />
           <FreeEvent offerData={offerData} />
           <Bidding biddingList={biddingList} />
           {
