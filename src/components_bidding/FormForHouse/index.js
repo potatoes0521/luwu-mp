@@ -8,7 +8,7 @@
  * @path: '@/components_bidding/FormForHouse'
  * @Date: 2020-07-02 09:41:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 11:42:06
+ * @LastEditTime: 2020-07-15 11:58:47
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  important 必填选项是否展示    这里字段几乎必填  这个只是用来控制
@@ -138,6 +138,12 @@ export default class FormForHouse extends Component {
       address
     })
   }
+  onInputXiaoQu(e) { 
+    const { target: { value } } = e
+    this.setState({
+      xiaoqu: value
+    })
+  }
   /**
    * 判断并传递数据  主要是父组件调用
    * @return void
@@ -153,6 +159,7 @@ export default class FormForHouse extends Component {
       sittingroom,
       cookroom,
       washroom,
+      xiaoqu
     } = this.state
     if (decorateType < 0) {
       this.showToast('请选择房屋类型')
@@ -181,7 +188,7 @@ export default class FormForHouse extends Component {
       address: address.address,
       longitude,
       latitude,
-      decorateType,
+      xiaoqu,
       bedroom: bedroom.num,
       sittingroom: sittingroom.num,
       cookroom: cookroom.num,
@@ -257,6 +264,15 @@ export default class FormForHouse extends Component {
           important={important}
           address={address || {}}
           onGetLocationData={this.getLocationData.bind(this)}
+        />
+        <FormItem
+          line
+          label='小区名称'
+          placeholder='请选择'
+          important={important}
+          value={decorateTypeText || ''}
+          iconName='iconRectangle rotated'
+          onInput={this.onInputXiaoQu.bind(this)}
         />
         <FormItem
           line

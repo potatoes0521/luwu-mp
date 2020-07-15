@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 11:52:49
+ * @LastEditTime: 2020-07-15 13:36:33
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -20,7 +20,8 @@ import { removeStorage } from "@utils/storage"
 import biddingState from '@config/biddingState'
 import FormForHouse from '@/components_bidding/FormForHouse'
 import FormForUserInfo from '@/components_bidding/FormForUserInfo'
-
+import ActivityCard from './components/ActivityCard'
+  
 import './index.scss'
 
 class BiddingPublish extends Component {
@@ -126,12 +127,19 @@ class BiddingPublish extends Component {
       washroom,
       userName
     } = this.state
+    const { system } = this.props
+    const navHeight = system && system.navHeight || 120
     return (
       <SafeAreaView
         title='发布装修招标'
         back
       >
-        <View className='page-wrapper'>
+        <View
+          className='page-wrapper'
+          style={{
+            height: `calc(100vh - ${navHeight}rpx)`
+          }}
+        >
           <View className='position-tips'>完善装修需求，便于更精准的选择装修公司</View>
           <View className='page-main'>
             {this.renderTitle('房屋信息')}
@@ -153,9 +161,8 @@ class BiddingPublish extends Component {
               userName={userName}
               ref={node => this.formForUser = node}
             />
-            <View className='fixed-bottom-btm'>
-              <View className='btn-public default-btn submit-btn' onClick={this.submit.bind(this)}>提交</View>
-            </View>
+            <View className='submit-btn' onClick={this.submit.bind(this)}>一键招标</View>
+            <ActivityCard />
           </View>
         </View>
       </SafeAreaView>

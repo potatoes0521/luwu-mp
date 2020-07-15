@@ -4,11 +4,12 @@
  * @path: 引入路径
  * @Date: 2020-06-29 18:12:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 09:30:53
+ * @LastEditTime: 2020-07-15 14:19:10
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */
+import { getFile } from "@assets/cdn"
 import request from "../request"
 /**
  * 查看招标信息
@@ -65,3 +66,7 @@ export const getOfferCase = async (data) => {
     paramsBool: true
   })
 }
+
+export const getBiddingActive = () => {
+  return request.get(getFile(`bidding/biddingActivity.json?a=${Math.random()}`))
+} 

@@ -8,7 +8,7 @@
  * @path: '@/components_bidding/FormForUserInfo'
  * @Date: 2020-07-02 11:28:35
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 11:16:58
+ * @LastEditTime: 2020-07-15 11:56:38
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -222,7 +222,7 @@ class FormForUserInfo extends Component {
 }
 
 FormForUserInfo.defaultProps = {
-  important: true,
+  important: false,
   onClick: () => {console.error('onClick is not defined')}
 }
 
