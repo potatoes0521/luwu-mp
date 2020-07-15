@@ -8,7 +8,7 @@
  * @path: '@/components_bidding/FormForHouse'
  * @Date: 2020-07-02 09:41:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 09:24:51
+ * @LastEditTime: 2020-07-15 10:43:26
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  important 必填选项是否展示    这里字段几乎必填  这个只是用来控制
@@ -20,10 +20,9 @@ import PropTypes from 'prop-types'
 import FormItemCustomContent from '@components/FormItemCustomContent'
 import Location from '@components/Location'
 import houseState from '@config/houseState.js'
-import { handleRequestData, oneMouthTimer } from '@config/houseType'
+import { oneMouthTimer } from '@config/houseType'
 import { setStorage, removeStorage } from "@utils/storage"
 import { getDateTime } from '@utils/timer'
-import { getHouseDetails } from '@services/modules/house'
 import FormItem from '@components/FormItem'
 import './index.scss'
 
@@ -78,23 +77,13 @@ export default class FormForHouse extends Component {
       })
     }
     if (!this.firstLoading && nextProps.type === 'edit' && nextProps.requireId) {
-      this.getHouseData(nextProps)
+      
     }
   }
   componentWillUnmount() {
     removeStorage('choose_house_type')
     removeStorage('choose_budget')
     removeStorage('choose_timer')
-  }
-  getHouseData(props) { 
-    getHouseDetails({
-      requireId: props.requireId
-    }).then(res => {
-      this.firstLoading = true
-      const data = handleRequestData(res)
-      this.props.onUserNameChange(res.userName || '')
-      this.setState(data)
-    })
   }
   /**
    * 点了房屋户型
@@ -366,7 +355,7 @@ FormForHouse.defaultProps = {
   sittingroom: {},
   cookroom: {},
   washroom: {},
-  important: true,
+  important: false,
   onUserNameChange: () => {console.log('onUserNameChange is not defined')},
   onClick: () => {console.error('onClick is not defined')}
 }
