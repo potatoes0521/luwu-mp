@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 15:49:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-14 16:42:11
+ * @LastEditTime: 2020-07-15 11:14:23
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -33,3 +33,14 @@ export const handleProgressText = (progress) => {
       return '招标中';
   }
 }
+
+export const RadioOptions = [
+  {
+    id: 0,
+    text: '先生'
+  },
+  {
+    id: 1,
+    text: '女士'
+  },
+]

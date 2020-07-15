@@ -8,16 +8,15 @@
  * @path: '@/components_bidding/FormForHouse'
  * @Date: 2020-07-02 09:41:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 10:50:18
+ * @LastEditTime: 2020-07-15 11:42:06
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  important 必填选项是否展示    这里字段几乎必填  这个只是用来控制
  * @emitFunction: 函数
  */ 
 import Taro, { Component } from '@tarojs/taro'
-import { View, Block } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import PropTypes from 'prop-types'
-import FormItemCustomContent from '@components/FormItemCustomContent'
 import Location from '@components/Location'
 import houseState from '@config/houseState.js'
 import { oneMouthTimer } from '@config/houseType'
@@ -133,11 +132,7 @@ export default class FormForHouse extends Component {
     }
     Taro.navigateTo({ url })
   }
-  chooseAudio(type) {
-    this.setState({
-      decorateType: type
-    })
-  }
+  
   getLocationData(address) {
     this.setState({
       address
@@ -248,96 +243,73 @@ export default class FormForHouse extends Component {
       startTime,
       budget,
       address,
-      decorateType,
     } = this.state
     const decorateTypeText = this.decorateTypeText()
     const { important } = this.props
     
     return (
-      <Block>
-        <View className='form-house-msg-components-wrapper'>
-          <FormItemCustomContent
-            line
-            important={important}
-            label='房屋类型'
-          >
-            <View className='audio-group'>
-              <View className='option' onClick={this.chooseAudio.bind(this, 0)}>
-                <View className='circular'>
-                  {decorateType === 0 && <View className='circular-active'></View>}
-                </View>
-                <View className='option-title'>毛坯房</View>
-              </View>
-              <View className='option' onClick={this.chooseAudio.bind(this, 1)}>
-                <View className='circular'>
-                  {decorateType === 1 && <View className='circular-active'></View>}
-                </View>
-                <View className='option-title'>旧房翻新</View>
-              </View>
-            </View>
-          </FormItemCustomContent>
-          <FormItem
-            line
-            shortUnit
-            unit='icon'
-            label='房屋户型'
-            canInput={false}
-            placeholder='请选择'
-            important={important}
-            value={decorateTypeText || ''}
-            iconName='iconRectangle rotated'
-            onContentClick={this.handleClickHouseType.bind(this)}
-          />
-          <FormItem
-            line
-            unitNum
-            canInput
-            shortUnit
-            unit='text'
-            type='digit'
-            value={area}
-            label='房屋面积'
-            unitContent='㎡'
-            important={important}
-            placeholder='请输入房屋面积'
-            onInput={this.onAreaInput.bind(this)}
-          />
-          <Location
-            style='form'
-            label='房屋位置'
-            placeholder='请选择'
-            important={important}
-            address={address || {}}
-            onGetLocationData={this.getLocationData.bind(this)}
-          />
-        </View>
-        <View className='form-wrapper'>
-          <FormItem
-            line
-            shortUnit
-            langLabel
-            unit='icon'
-            label='装修预算'
-            canInput={false}
-            placeholder='请选择'
-            important={important}
-            value={budget.moneyText || ''}
-            iconName='iconRectangle rotated'
-            onContentClick={this.onChooseBudget.bind(this)}
-          />
-          <FormItem
-            shortUnit
-            langLabel
-            unit='icon'
-            label='装修时间'
-            canInput={false}
-            placeholder='请选择'
-            value={startTime.timeText || ''}
-            iconName='iconRectangle rotated'
-            onContentClick={this.onChooseStartTime.bind(this)}
-          />
-        </View>
-      </Block>
+      <View className='form-house-msg-components-wrapper'>
+        <Location
+          line
+          style='form'
+          label='房屋位置'
+          placeholder='请选择'
+          important={important}
+          address={address || {}}
+          onGetLocationData={this.getLocationData.bind(this)}
+        />
+        <FormItem
+          line
+          shortUnit
+          unit='icon'
+          label='房屋户型'
+          canInput={false}
+          placeholder='请选择'
+          important={important}
+          value={decorateTypeText || ''}
+          iconName='iconRectangle rotated'
+          onContentClick={this.handleClickHouseType.bind(this)}
+        />
+        <FormItem
+          line
+          unitNum
+          canInput
+          shortUnit
+          unit='text'
+          type='digit'
+          value={area}
+          label='房屋面积'
+          unitContent='㎡'
+          important={important}
+          placeholder='请输入房屋面积'
+          onInput={this.onAreaInput.bind(this)}
+        />
+        
+        <FormItem
+          line
+          shortUnit
+          langLabel
+          unit='icon'
+          label='装修预算'
+          canInput={false}
+          placeholder='请选择'
+          important={important}
+          value={budget.moneyText || ''}
+          iconName='iconRectangle rotated'
+          onContentClick={this.onChooseBudget.bind(this)}
+        />
+        <FormItem
+          shortUnit
+          langLabel
+          unit='icon'
+          label='装修时间'
+          canInput={false}
+          placeholder='请选择'
+          value={startTime.timeText || ''}
+          iconName='iconRectangle rotated'
+          onContentClick={this.onChooseStartTime.bind(this)}
+        />
+      </View>
     )
   }
 

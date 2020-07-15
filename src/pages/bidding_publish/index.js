@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 10:45:14
+ * @LastEditTime: 2020-07-15 11:52:49
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -92,6 +92,11 @@ class BiddingPublish extends Component {
       userName
     })
   }
+  renderTitle(title) { 
+    return (
+      <View className='page-title'>{title}</View>
+    )
+  }
   /**
    * 页面内转发
    * @param {Object} res 微信返回参数
@@ -123,29 +128,34 @@ class BiddingPublish extends Component {
     } = this.state
     return (
       <SafeAreaView
-        title='发布招标信息'
+        title='发布装修招标'
         back
       >
         <View className='page-wrapper'>
-          <FormForHouse
-            type={formType}
-            budget={budget}
-            bedroom={bedroom}
-            cookroom={cookroom}
-            washroom={washroom}
-            requireId={requireId}
-            startTime={startTime}
-            houseType={houseType}
-            sittingroom={sittingroom}
-            ref={node => this.formForHouse = node}
-            onUserNameChange={this.onUserNameChange.bind(this)}
-          />
-          <FormForUserInfo
-            userName={userName}
-            ref={node => this.formForUser = node}
-          />
-          <View className='fixed-bottom-btm'>
-            <View className='btn-public default-btn submit-btn' onClick={this.submit.bind(this)}>提交</View>
+          <View className='position-tips'>完善装修需求，便于更精准的选择装修公司</View>
+          <View className='page-main'>
+            {this.renderTitle('房屋信息')}
+            <FormForHouse
+              type={formType}
+              budget={budget}
+              bedroom={bedroom}
+              cookroom={cookroom}
+              washroom={washroom}
+              requireId={requireId}
+              startTime={startTime}
+              houseType={houseType}
+              sittingroom={sittingroom}
+              ref={node => this.formForHouse = node}
+              onUserNameChange={this.onUserNameChange.bind(this)}
+            />
+            {this.renderTitle('个人信息')}
+            <FormForUserInfo
+              userName={userName}
+              ref={node => this.formForUser = node}
+            />
+            <View className='fixed-bottom-btm'>
+              <View className='btn-public default-btn submit-btn' onClick={this.submit.bind(this)}>提交</View>
+            </View>
           </View>
         </View>
       </SafeAreaView>

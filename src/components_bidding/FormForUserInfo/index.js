@@ -8,7 +8,7 @@
  * @path: '@/components_bidding/FormForUserInfo'
  * @Date: 2020-07-02 11:28:35
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 10:52:42
+ * @LastEditTime: 2020-07-15 11:16:58
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -24,7 +24,9 @@ import FormItem from '@components/FormItem'
 import FormItemCustomContent from '@components/FormItemCustomContent'
 import { getUserPhone } from '@services/modules/user'
 import { phoneNumberPatter, realNamePatter } from '@utils/patter'
-  
+import RadioGroups from '@components/RadioGroup'
+import { RadioOptions } from '@config/biddingState'
+
 import './index.scss'
 
 class FormForUserInfo extends Component {
@@ -33,7 +35,8 @@ class FormForUserInfo extends Component {
     this.state = {
       userName: '',
       phone: '',
-      getPhoneNumberError: false
+      getPhoneNumberError: false,
+      activeIndex: 0
     }
     this.code = ''
   }
@@ -138,14 +141,36 @@ class FormForUserInfo extends Component {
       duration: 2000
     })
   }
+  chooseAudio(item) {
+    console.log('item', item)
+    this.setState({
+      activeIndex: item.id
+    })
+  }
   render() {
-    const { userName, phone, getPhoneNumberError } = this.state
+    const {
+      userName,
+      phone,
+      getPhoneNumberError,
+      activeIndex
+    } = this.state
     const { important } = this.props
     const phoneNumberClassName = classNames('get-phone-wrapper', {
       'placeholder-class': !phone
     })
     return (
       <View className='form-user-info-components'>
+        <FormItemCustomContent
+          line
+          important={important}
+          label='您的称呼'
+        >
+          <RadioGroups
+            activeIndex={activeIndex}
+            optionsList={RadioOptions}
+            onChooseAudio={this.chooseAudio.bind(this)}
+          />
+        </FormItemCustomContent>
         <FormItem
           unit
           line
