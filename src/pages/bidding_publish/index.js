@@ -4,13 +4,13 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 10:38:04
+ * @LastEditTime: 2020-07-15 10:45:14
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  */
 import Taro, { Component } from '@tarojs/taro'
-import { View, Textarea } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { publishBidding } from '@services/modules/bidding'
 import SafeAreaView from '@components/SafeAreaView'
@@ -20,7 +20,6 @@ import { removeStorage } from "@utils/storage"
 import biddingState from '@config/biddingState'
 import FormForHouse from '@/components_bidding/FormForHouse'
 import FormForUserInfo from '@/components_bidding/FormForUserInfo'
-import Upload from '@components/Upload'
 
 import './index.scss'
 
@@ -53,31 +52,14 @@ class BiddingPublish extends Component {
     clearTimeout(this.timer)
     this.timer = null
   }
-  onRemarkInput(e) { 
-    const { target: {value} } = e
-    this.setState({
-      remark: value
-    })
-  }
-
   async submit() {
-    const {
-      images,
-      remark
-    } = this.state
     let { requireId } = this.state
     const formForHouse = this.formForHouse.judgeAndEmitData()
     if (!formForHouse) return
     const formForUser = this.formForUser.judgeAndEmitData()
     if (!formForUser) return
-    if (!images || !images.length) {
-      this.showToast('至少上传一张户型图')
-      return
-    }
     let sendData = {
       requireId,
-      images,
-      remark,
       ...formForHouse,
       ...formForUser,
     }
@@ -105,12 +87,6 @@ class BiddingPublish extends Component {
       duration: 2000
     })
   }
-  onImageUpload(imageList) { 
-    const { images } = this.state
-    this.setState({
-      images: [...images, ...imageList]
-    })
-  }
   onUserNameChange(userName) {
     this.setState({
       userName
@@ -136,7 +112,6 @@ class BiddingPublish extends Component {
     const {
       startTime,
       budget,
-      remark,
       formType,
       requireId,
       houseType,
@@ -144,7 +119,6 @@ class BiddingPublish extends Component {
       sittingroom,
       cookroom,
       washroom,
-      images,
       userName
     } = this.state
     return (
@@ -166,33 +140,6 @@ class BiddingPublish extends Component {
             ref={node => this.formForHouse = node}
             onUserNameChange={this.onUserNameChange.bind(this)}
           />
-          <View className='form-wrapper upload-wrapper'>
-            <View className='form-label-title'>上传图片</View>
-            <View className='upload-view'>
-              <Upload
-                autoChoose
-                showAddBtn
-                imageSize={96}
-                imageList={images}
-                addBtnSizeType={96}
-                onUploadOK={this.onImageUpload.bind(this)}
-              />
-            </View>
-            <View className='upload-tips'>请上传清晰完整的户型图片</View>
-          </View>
-          <View className='form-wrapper textarea-wrapper'>
-            <View className='form-label-title'>补充信息</View>
-            <Textarea
-              autoHeight
-              value={remark}
-              maxlength={300}
-              className='textarea'
-              placeholderClass='placeholder-class'
-              onInput={this.onRemarkInput.bind(this)}
-              placeholder='请补充您对房屋的个性化需求，更方便装修公司投标'
-            ></Textarea>
-            <View className='num-tips'>{300 - remark.length}</View>
-          </View>
           <FormForUserInfo
             userName={userName}
             ref={node => this.formForUser = node}

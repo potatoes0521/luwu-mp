@@ -8,7 +8,7 @@
  * @path: '@/components_bidding/FormForHouse'
  * @Date: 2020-07-02 09:41:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 10:43:26
+ * @LastEditTime: 2020-07-15 10:50:18
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  important 必填选项是否展示    这里字段几乎必填  这个只是用来控制
@@ -255,7 +255,7 @@ export default class FormForHouse extends Component {
     
     return (
       <Block>
-        <View className='form-wrapper'>
+        <View className='form-house-msg-components-wrapper'>
           <FormItemCustomContent
             line
             important={important}
@@ -278,13 +278,12 @@ export default class FormForHouse extends Component {
           </FormItemCustomContent>
           <FormItem
             line
-            height100
-            important={important}
             shortUnit
             unit='icon'
             label='房屋户型'
             canInput={false}
             placeholder='请选择'
+            important={important}
             value={decorateTypeText || ''}
             iconName='iconRectangle rotated'
             onContentClick={this.handleClickHouseType.bind(this)}
@@ -293,23 +292,21 @@ export default class FormForHouse extends Component {
             line
             unitNum
             canInput
-            height100
             shortUnit
-            important={important}
             unit='text'
             type='digit'
             value={area}
             label='房屋面积'
             unitContent='㎡'
+            important={important}
             placeholder='请输入房屋面积'
             onInput={this.onAreaInput.bind(this)}
           />
           <Location
-            height100
-            important={important}
             style='form'
             label='房屋位置'
             placeholder='请选择'
+            important={important}
             address={address || {}}
             onGetLocationData={this.getLocationData.bind(this)}
           />
@@ -319,12 +316,11 @@ export default class FormForHouse extends Component {
             line
             shortUnit
             langLabel
-            height100
-            important={important}
             unit='icon'
             label='装修预算'
             canInput={false}
             placeholder='请选择'
+            important={important}
             value={budget.moneyText || ''}
             iconName='iconRectangle rotated'
             onContentClick={this.onChooseBudget.bind(this)}
@@ -332,7 +328,6 @@ export default class FormForHouse extends Component {
           <FormItem
             shortUnit
             langLabel
-            height100
             unit='icon'
             label='装修时间'
             canInput={false}

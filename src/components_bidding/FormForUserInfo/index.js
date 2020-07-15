@@ -8,7 +8,7 @@
  * @path: '@/components_bidding/FormForUserInfo'
  * @Date: 2020-07-02 11:28:35
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 16:42:21
+ * @LastEditTime: 2020-07-15 10:52:42
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -145,18 +145,17 @@ class FormForUserInfo extends Component {
       'placeholder-class': !phone
     })
     return (
-      <View className='form-wrapper'>
+      <View className='form-user-info-components'>
         <FormItem
           unit
           line
           shortUnit
           langLabel
-          height100
-          important={important}
           type={number}
           label='联 系 人 '
-          placeholder='请输入联系人'
+          important={important}
           value={userName || ''}
+          placeholder='请输入联系人'
           onInput={this.onInputUserName.bind(this)}
         />
         {
@@ -165,11 +164,10 @@ class FormForUserInfo extends Component {
               unit
               shortUnit
               langLabel
-              height100
-              important={important}
               label='手机号码'
               type='number'
               value={phone || ''}
+              important={important}
               placeholder='请输入手机号'
               focus={getPhoneNumberError}
               onInput={this.onInputPhone.bind(this)}
@@ -177,10 +175,9 @@ class FormForUserInfo extends Component {
           ) : (
             <FormItemCustomContent
               unit
-              height100
-              important={important}
               shortUnit
               label='手机号码'
+              important={important}
             >
               <View className={phoneNumberClassName}>
                 <Text>{phone || '请输入手机号'}</Text>
