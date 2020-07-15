@@ -8,15 +8,15 @@
  * @path: '@/components_bidding/FormForUserInfo'
  * @Date: 2020-07-02 11:28:35
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 11:56:38
+ * @LastEditTime: 2020-07-15 14:37:08
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
  *  important 必填选项是否展示 这里字段几乎必填 这个只是用来控制
  */ 
 import Taro, { Component } from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
-import PropTypes, { number } from 'prop-types'
+import { View, Button, Text, Input } from '@tarojs/components'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { connect } from '@tarojs/redux'
 import Actions from '@store/actions/index.js'
@@ -165,29 +165,25 @@ class FormForUserInfo extends Component {
           important={important}
           label='您的称呼'
         >
-          <RadioGroups
-            activeIndex={activeIndex}
-            optionsList={RadioOptions}
-            onChooseAudio={this.chooseAudio.bind(this)}
-          />
+          <View className='input-wrapper'>
+            <Input
+              maxLength={6}
+              value={userName}
+              className='input'
+              placeholder='请输入'
+              onInput={this.onInputUserName.bind(this)}
+              placeholderClass='placeholder-class'
+            />
+            <RadioGroups
+              activeIndex={activeIndex}
+              optionsList={RadioOptions}
+              onChooseAudio={this.chooseAudio.bind(this)}
+            />
+          </View>
         </FormItemCustomContent>
-        <FormItem
-          unit
-          line
-          shortUnit
-          langLabel
-          type={number}
-          label='联 系 人 '
-          important={important}
-          value={userName || ''}
-          placeholder='请输入联系人'
-          onInput={this.onInputUserName.bind(this)}
-        />
         {
           getPhoneNumberError || phone ? (
             <FormItem
-              unit
-              shortUnit
               langLabel
               label='手机号码'
               type='number'
@@ -199,8 +195,6 @@ class FormForUserInfo extends Component {
             />
           ) : (
             <FormItemCustomContent
-              unit
-              shortUnit
               label='手机号码'
               important={important}
             >
