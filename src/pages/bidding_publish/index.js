@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 16:54:48
+ * @LastEditTime: 2020-07-15 18:09:41
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -23,8 +23,9 @@ import FormForHouse from '@/components_bidding/FormForHouse'
 import FormForUserInfo from '@/components_bidding/FormForUserInfo'
 import ChooseHouseType from './components/ChooseHouseType'
 import ChooseBudget from './components/ChooseBudget'
+import ChooseTime from './components/ChooseTime'
 import ActivityCard from './components/ActivityCard'
-  
+
 import './index.scss'
 
 class BiddingPublish extends Component {
@@ -36,6 +37,7 @@ class BiddingPublish extends Component {
       // 除去公共key以外的字段定在这里
       showChooseBudget: false,
       showChooseHouseType: false,
+      showChooseTime: false
     }
     this.pageParams = {}
     this.timer = null
@@ -141,12 +143,24 @@ class BiddingPublish extends Component {
       showChooseBudget: !showChooseBudget
     })
   }
-  onChooseBudgetSubmit(item) { 
-    console.log('item', item)
+  onChooseBudgetSubmit(item) {
     this.setState({
       budget: item
     }, () => {
         this.onChooseBudget()
+    })
+  }
+  onChooseTime() { 
+    const { showChooseTime } = this.state
+    this.setState({
+      showChooseTime: !showChooseTime
+    })
+  }
+  onSelectTime(value) {
+    this.setState({
+      startTime: `${value.year}-${value.mouth}`
+    }, () => {
+        this.onChooseTime()
     })
   }
   /**
@@ -176,6 +190,7 @@ class BiddingPublish extends Component {
       startTime,
       requireId,
       sittingroom,
+      showChooseTime,
       decorateTypeText,
       showChooseBudget,
       showChooseHouseType
@@ -201,6 +216,7 @@ class BiddingPublish extends Component {
               decorateTypeText={decorateTypeText}
               ref={node => this.formForHouse = node}
               onChooseBudget={this.onChooseBudget.bind(this)}
+              onChooseStartTime={this.onChooseTime.bind(this)}
               onChooseHouseType={this.onChooseHouseType.bind(this)}
             />
             {this.renderTitle('个人信息')}
@@ -229,6 +245,12 @@ class BiddingPublish extends Component {
             visit={showChooseBudget}
             onCancel={this.onChooseBudget.bind(this)}
             onSubmit={this.onChooseBudgetSubmit.bind(this)}
+          />
+          <ChooseTime
+            visit={showChooseTime}
+            startTime={startTime}
+            onSubmit={this.onSelectTime.bind(this)}
+            onCancel={this.onChooseTime.bind(this)}
           />
         </View>
       </SafeAreaView>

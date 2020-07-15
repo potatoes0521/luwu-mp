@@ -1,0 +1,34 @@
+@import '../../css/common.scss';
+
+.choose-time {
+  .form-wrapper {
+    padding-top: 18px;
+    padding-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .pick-view {
+      width: 140px;
+      height: 180px;
+
+      .pick-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        color: $font-color;
+      }
+    }
+
+    .time-view{
+      width: 72px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: $font-color;
+    }
+  }
+}

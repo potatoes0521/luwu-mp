@@ -8,7 +8,7 @@
  * @path: '@/components_bidding/FormForHouse'
  * @Date: 2020-07-02 09:41:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 16:52:07
+ * @LastEditTime: 2020-07-15 18:15:10
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  important 必填选项是否展示    这里字段几乎必填  这个只是用来控制
@@ -47,7 +47,7 @@ export default class FormForHouse extends Component {
     })
   }
   onChooseStartTime() {
-    console.log('1', 1)
+    this.props.onChooseStartTime()
   }
 
   onChooseBudget() {
@@ -70,16 +70,13 @@ export default class FormForHouse extends Component {
   judgeAndEmitData() {
     const {
       area,
-      startTime,
       address,
-      decorateType,
       xiaoqu
     } = this.state
-    const { budget } = this.props
-    if (decorateType < 0) {
-      this.showToast('请选择房屋类型')
-      return false
-    }
+    const {
+      budget,
+      startTime
+    } = this.props
     if (!area) {
       this.showToast('请填写房屋面积')
       return false
@@ -93,7 +90,6 @@ export default class FormForHouse extends Component {
       return false
     }
     const { latitude, longitude } = address
-    const date = this.handleTimer(startTime)
     const sendData = {
       area,
       address: address.address,
@@ -102,8 +98,7 @@ export default class FormForHouse extends Component {
       xiaoqu,
       budgetMin: budget.min,
       budgetMax: budget.max,
-      decorateTimeBefore: date.decorateTimeBefore,
-      decorateTimeAfter: date.decorateTimeAfter
+      decorateTimeBefore: startTime + '-01 00:00:00',
     }
     return sendData
   }
@@ -139,11 +134,11 @@ export default class FormForHouse extends Component {
     const {
       area,
       address,
-      startTime,
     } = this.state
     const {
-      important,
       budget,
+      startTime,      
+      important,
       decorateTypeText
     } = this.props
     return (
@@ -213,7 +208,7 @@ export default class FormForHouse extends Component {
           label='装修时间'
           canInput={false}
           placeholder='请选择'
-          value={startTime.timeText || ''}
+          value={startTime && startTime || ''}
           iconName='iconRectangle rotated'
           onContentClick={this.onChooseStartTime.bind(this)}
         />
