@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 11:12:51
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-14 16:04:23
+ * @LastEditTime: 2020-07-15 10:30:29
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -26,6 +26,7 @@ import { getOfferList } from '@services/modules/offer'
 import News from './components/News'
 import FreeEvent from './components/FreeEvent'
 import Bidding from './components/Bidding'
+import FloatBtn from './components/FloatBtn'
 
 import './index.scss'
 
@@ -109,6 +110,7 @@ class Index extends Component {
           <FreeEvent offerData={offerData} />
           {this.renderTitle('招标示例')}
           <Bidding biddingList={biddingList} />
+          <FloatBtn />
           {
             loading && <Skeleton />
           }
