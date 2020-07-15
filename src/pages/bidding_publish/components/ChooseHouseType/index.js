@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-15 14:50:44
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 16:11:40
+ * @LastEditTime: 2020-07-15 16:54:11
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -53,7 +53,7 @@ export default class ChooseHouseType extends Component {
     } = this.props
     return visit ? (
       <View className='modal-wrapper choose-house-type'>
-        <View className='modal-bg'></View>
+        <View className='modal-bg' onClick={this.props.onCancel}></View>
         <View className='model-main'>
           <View className='title'>选择户型</View>
           <View className='form-wrapper'>

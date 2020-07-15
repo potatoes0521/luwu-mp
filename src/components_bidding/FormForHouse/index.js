@@ -8,7 +8,7 @@
  * @path: '@/components_bidding/FormForHouse'
  * @Date: 2020-07-02 09:41:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 16:06:48
+ * @LastEditTime: 2020-07-15 16:52:07
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  important 必填选项是否展示    这里字段几乎必填  这个只是用来控制
@@ -51,7 +51,7 @@ export default class FormForHouse extends Component {
   }
 
   onChooseBudget() {
-    console.log('2', 2)
+    this.props.onChooseBudget()
   }
   
   getLocationData(address) {
@@ -71,11 +71,11 @@ export default class FormForHouse extends Component {
     const {
       area,
       startTime,
-      budget,
       address,
       decorateType,
       xiaoqu
     } = this.state
+    const { budget } = this.props
     if (decorateType < 0) {
       this.showToast('请选择房屋类型')
       return false
@@ -138,12 +138,12 @@ export default class FormForHouse extends Component {
   render() {
     const {
       area,
-      budget,
       address,
       startTime,
     } = this.state
     const {
       important,
+      budget,
       decorateTypeText
     } = this.props
     return (

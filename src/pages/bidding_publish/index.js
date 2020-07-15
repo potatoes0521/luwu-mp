@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 16:07:02
+ * @LastEditTime: 2020-07-15 16:54:48
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -22,6 +22,7 @@ import { houseType } from '@config/houseType'
 import FormForHouse from '@/components_bidding/FormForHouse'
 import FormForUserInfo from '@/components_bidding/FormForUserInfo'
 import ChooseHouseType from './components/ChooseHouseType'
+import ChooseBudget from './components/ChooseBudget'
 import ActivityCard from './components/ActivityCard'
   
 import './index.scss'
@@ -33,7 +34,8 @@ class BiddingPublish extends Component {
     this.state = {
       ...biddingState,
       // 除去公共key以外的字段定在这里
-      showChooseHouseType: false
+      showChooseBudget: false,
+      showChooseHouseType: false,
     }
     this.pageParams = {}
     this.timer = null
@@ -133,7 +135,20 @@ class BiddingPublish extends Component {
       washroom: data
     })
   }
-  
+  onChooseBudget() { 
+    const { showChooseBudget } = this.state
+    this.setState({
+      showChooseBudget: !showChooseBudget
+    })
+  }
+  onChooseBudgetSubmit(item) { 
+    console.log('item', item)
+    this.setState({
+      budget: item
+    }, () => {
+        this.onChooseBudget()
+    })
+  }
   /**
    * 页面内转发
    * @param {Object} res 微信返回参数
@@ -152,25 +167,23 @@ class BiddingPublish extends Component {
   }
   render() {
     const {
-      startTime,
       budget,
-      formType,
-      requireId,
       bedroom,
-      sittingroom,
       cookroom,
       washroom,
       userName,
+      formType,
+      startTime,
+      requireId,
+      sittingroom,
       decorateTypeText,
+      showChooseBudget,
       showChooseHouseType
     } = this.state
     const { system } = this.props
     const navHeight = system && system.navHeight || 120
     return (
-      <SafeAreaView
-        title='发布装修招标'
-        back
-      >
+      <SafeAreaView title='发布装修招标' back>
         <View
           className='page-wrapper'
           style={{
@@ -187,6 +200,7 @@ class BiddingPublish extends Component {
               startTime={startTime}
               decorateTypeText={decorateTypeText}
               ref={node => this.formForHouse = node}
+              onChooseBudget={this.onChooseBudget.bind(this)}
               onChooseHouseType={this.onChooseHouseType.bind(this)}
             />
             {this.renderTitle('个人信息')}
@@ -198,16 +212,23 @@ class BiddingPublish extends Component {
             <ActivityCard />
           </View>
           <ChooseHouseType
-            visit={showChooseHouseType}
             bedroom={bedroom}
             cookroom={cookroom}
             washroom={washroom}
             sittingroom={sittingroom}
-            onSubmit={this.onChooseHouseTypeSubmit.bind(this)}
+            visit={showChooseHouseType}
+            onCancel={this.onChooseHouseType.bind(this)}
             onBedRoomChange={this.onBedRoomChange.bind(this)}
-            onSittingRoomChange={this.onSittingRoomChange.bind(this)}
+            onSubmit={this.onChooseHouseTypeSubmit.bind(this)}
             onCookRoomChange={this.onCookRoomChange.bind(this)}
             onWashRoomChange={this.onWashRoomChange.bind(this)}
+            onSittingRoomChange={this.onSittingRoomChange.bind(this)}
+          />
+          <ChooseBudget
+            budget={budget}
+            visit={showChooseBudget}
+            onCancel={this.onChooseBudget.bind(this)}
+            onSubmit={this.onChooseBudgetSubmit.bind(this)}
           />
         </View>
       </SafeAreaView>

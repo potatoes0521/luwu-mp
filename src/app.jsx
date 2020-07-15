@@ -64,7 +64,6 @@ class App extends Component {
       // 选择品类
       'pages/choose_category/index',
       'pages/choose_brand/index',
-      'pages/choose_house_type/index',
       'pages/choose_one_item/index',
       // 表格
       'pages/table_contrast/index',
