@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 15:49:34
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 11:14:23
+ * @LastEditTime: 2020-07-15 16:04:09
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -17,7 +17,8 @@ export default {
   formType: 'edit',
   requireId: '',
   images: [],
-  progress: 0
+  progress: 0,
+  decorateTypeText: ''
 }
 
 export const handleProgressText = (progress) => {

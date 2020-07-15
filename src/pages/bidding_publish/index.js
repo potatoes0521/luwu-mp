@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:27:01
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 13:36:33
+ * @LastEditTime: 2020-07-15 16:07:02
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -18,8 +18,10 @@ import Login from '@utils/login'
 import { getImage } from '@assets/cdn'
 import { removeStorage } from "@utils/storage"
 import biddingState from '@config/biddingState'
+import { houseType } from '@config/houseType'
 import FormForHouse from '@/components_bidding/FormForHouse'
 import FormForUserInfo from '@/components_bidding/FormForUserInfo'
+import ChooseHouseType from './components/ChooseHouseType'
 import ActivityCard from './components/ActivityCard'
   
 import './index.scss'
@@ -31,6 +33,7 @@ class BiddingPublish extends Component {
     this.state = {
       ...biddingState,
       // 除去公共key以外的字段定在这里
+      showChooseHouseType: false
     }
     this.pageParams = {}
     this.timer = null
@@ -88,16 +91,49 @@ class BiddingPublish extends Component {
       duration: 2000
     })
   }
-  onUserNameChange(userName) {
-    this.setState({
-      userName
-    })
-  }
   renderTitle(title) { 
     return (
       <View className='page-title'>{title}</View>
     )
   }
+  onChooseHouseType() { 
+    const { showChooseHouseType } = this.state
+    this.setState({
+      showChooseHouseType: !showChooseHouseType
+    })
+  }
+  onChooseHouseTypeSubmit(text) { 
+    this.setState({
+      decorateTypeText: text
+    }, () => {
+        this.onChooseHouseType()
+    })
+  }
+  onBedRoomChange(number) {
+    const data = houseType.filter(item => +item.num === +number)[0]
+    this.setState({
+      bedroom: data
+    })
+  }
+  onSittingRoomChange(number) {
+    const data = houseType.filter(item => +item.num === +number)[0]
+    this.setState({
+      sittingroom: data
+    })
+  }
+  onCookRoomChange(number) {
+    const data = houseType.filter(item => +item.num === +number)[0]
+    this.setState({
+      cookroom: data
+    })
+  }
+  onWashRoomChange(number) {
+    const data = houseType.filter(item => +item.num === +number)[0]
+    this.setState({
+      washroom: data
+    })
+  }
+  
   /**
    * 页面内转发
    * @param {Object} res 微信返回参数
@@ -120,12 +156,13 @@ class BiddingPublish extends Component {
       budget,
       formType,
       requireId,
-      houseType,
       bedroom,
       sittingroom,
       cookroom,
       washroom,
-      userName
+      userName,
+      decorateTypeText,
+      showChooseHouseType
     } = this.state
     const { system } = this.props
     const navHeight = system && system.navHeight || 120
@@ -146,15 +183,11 @@ class BiddingPublish extends Component {
             <FormForHouse
               type={formType}
               budget={budget}
-              bedroom={bedroom}
-              cookroom={cookroom}
-              washroom={washroom}
               requireId={requireId}
               startTime={startTime}
-              houseType={houseType}
-              sittingroom={sittingroom}
+              decorateTypeText={decorateTypeText}
               ref={node => this.formForHouse = node}
-              onUserNameChange={this.onUserNameChange.bind(this)}
+              onChooseHouseType={this.onChooseHouseType.bind(this)}
             />
             {this.renderTitle('个人信息')}
             <FormForUserInfo
@@ -164,6 +197,18 @@ class BiddingPublish extends Component {
             <View className='submit-btn' onClick={this.submit.bind(this)}>一键招标</View>
             <ActivityCard />
           </View>
+          <ChooseHouseType
+            visit={showChooseHouseType}
+            bedroom={bedroom}
+            cookroom={cookroom}
+            washroom={washroom}
+            sittingroom={sittingroom}
+            onSubmit={this.onChooseHouseTypeSubmit.bind(this)}
+            onBedRoomChange={this.onBedRoomChange.bind(this)}
+            onSittingRoomChange={this.onSittingRoomChange.bind(this)}
+            onCookRoomChange={this.onCookRoomChange.bind(this)}
+            onWashRoomChange={this.onWashRoomChange.bind(this)}
+          />
         </View>
       </SafeAreaView>
     )

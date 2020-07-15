@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 13:44:27
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 09:26:49
+ * @LastEditTime: 2020-07-15 15:42:35
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -40,6 +40,22 @@ export const houseType = [
   {
     num: 6,
     chinese: '六'
+  },
+  {
+    num: 7,
+    chinese: '七'
+  },
+  {
+    num: 8,
+    chinese: '八'
+  },
+  {
+    num: 9,
+    chinese: '九'
+  },
+  {
+    num: 10,
+    chinese: '十'
   }
 ]
 export const oneMouthTimer = 2592000000

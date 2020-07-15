@@ -8,7 +8,7 @@
  * @path: '@/components_bidding/FormForHouse'
  * @Date: 2020-07-02 09:41:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 11:58:47
+ * @LastEditTime: 2020-07-15 16:06:48
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  important 必填选项是否展示    这里字段几乎必填  这个只是用来控制
@@ -20,7 +20,6 @@ import PropTypes from 'prop-types'
 import Location from '@components/Location'
 import houseState from '@config/houseState.js'
 import { oneMouthTimer } from '@config/houseType'
-import { setStorage, removeStorage } from "@utils/storage"
 import { getDateTime } from '@utils/timer'
 import FormItem from '@components/FormItem'
 import './index.scss'
@@ -34,78 +33,12 @@ export default class FormForHouse extends Component {
     }
     this.firstLoading = false
   }
-  componentDidMount() { 
-  }
-  componentWillReceiveProps(nextProps) { 
-    const {
-      startTime,
-      budget,
-      bedroom,
-      sittingroom,
-      cookroom,
-      washroom,
-    } = this.state
-    if (nextProps.bedroom && nextProps.bedroom.num && nextProps.bedroom.num !== bedroom.num) {
-      this.setState({
-        bedroom: nextProps.bedroom
-      })
-    }
-    if (nextProps.sittingroom && nextProps.sittingroom.num && nextProps.sittingroom.num !== sittingroom.num) {
-      this.setState({
-        sittingroom: nextProps.sittingroom
-      })
-    }
-    if (nextProps.cookroom && nextProps.cookroom.num && nextProps.cookroom.num !== cookroom.num) {
-      this.setState({
-        cookroom: nextProps.cookroom
-      })
-    }
-    if (nextProps.washroom && nextProps.washroom.num && nextProps.washroom.num !== washroom.num) {
-      this.setState({
-        washroom: nextProps.washroom
-      })
-    }
-    if (nextProps.startTime && nextProps.startTime.timeId !== startTime.timeId) {
-      this.setState({
-        startTime: nextProps.startTime
-      })
-    }
-    if (nextProps.budget && nextProps.budget.moneyId !== budget.moneyId) {
-      this.setState({
-        budget: nextProps.budget
-      })
-    }
-    if (!this.firstLoading && nextProps.type === 'edit' && nextProps.requireId) {
-      
-    }
-  }
-  componentWillUnmount() {
-    removeStorage('choose_house_type')
-    removeStorage('choose_budget')
-    removeStorage('choose_timer')
-  }
   /**
    * 点了房屋户型
    * @return void
    */
   handleClickHouseType() { 
-    const {
-      bedroom,
-      sittingroom,
-      cookroom,
-      washroom,
-    } = this.state
-    let url = '/pages/choose_house_type/index'
-    if (bedroom.chinese || sittingroom.chinese || cookroom.chinese || washroom.chinese) {
-      url += '?pageType=edit'
-      setStorage('choose_house_type', {
-        bedroom,
-        sittingroom,
-        cookroom,
-        washroom,
-      })
-    }
-    Taro.navigateTo({ url })
+    this.props.onChooseHouseType()
   }
   onAreaInput(e) {
     const { target: { value } } = e
@@ -114,29 +47,15 @@ export default class FormForHouse extends Component {
     })
   }
   onChooseStartTime() {
-    const { startTime } = this.state
-    let url = '/pages/choose_one_item/index?chooseType=time'
-    if (startTime.moneyText) {
-      url += '&pageType=edit'
-      setStorage('choose_timer', startTime)
-    }
-    Taro.navigateTo({ url })
+    console.log('1', 1)
   }
 
   onChooseBudget() {
-    const { budget } = this.state
-    let url = '/pages/choose_one_item/index?chooseType=budget'
-    if (budget.moneyText) {
-      url += '&pageType=edit'
-      setStorage('choose_budget', budget)
-    }
-    Taro.navigateTo({ url })
+    console.log('2', 2)
   }
   
   getLocationData(address) {
-    this.setState({
-      address
-    })
+    this.setState({ address })
   }
   onInputXiaoQu(e) { 
     const { target: { value } } = e
@@ -155,18 +74,10 @@ export default class FormForHouse extends Component {
       budget,
       address,
       decorateType,
-      bedroom,
-      sittingroom,
-      cookroom,
-      washroom,
       xiaoqu
     } = this.state
     if (decorateType < 0) {
       this.showToast('请选择房屋类型')
-      return false
-    }
-    if (!bedroom.chinese && !sittingroom.chinese && !cookroom.chinese && !washroom.chinese) {
-      this.showToast('请选择房屋户型')
       return false
     }
     if (!area) {
@@ -189,10 +100,6 @@ export default class FormForHouse extends Component {
       longitude,
       latitude,
       xiaoqu,
-      bedroom: bedroom.num,
-      sittingroom: sittingroom.num,
-      cookroom: cookroom.num,
-      washroom: washroom.num,
       budgetMin: budget.min,
       budgetMax: budget.max,
       decorateTimeBefore: date.decorateTimeBefore,
@@ -227,33 +134,18 @@ export default class FormForHouse extends Component {
       decorateTimeAfter: afterDate
     }
   }
-  /**
-   * 处理房屋户型文字展示
-   * @return void
-   */
-  decorateTypeText() {
-    const {
-      bedroom,
-      sittingroom,
-      cookroom,
-      washroom,
-    } = this.state
-    if (!bedroom.chinese && !sittingroom.chinese && !cookroom.chinese && !washroom.chinese) {
-      return ''
-    }
-    return (bedroom.chinese || '-') + '室' + (sittingroom.chinese || '-') + '厅' + (cookroom.chinese || '-') + '厨' + (washroom.chinese || '-') + '卫'
-  }
 
   render() {
     const {
       area,
-      startTime,
       budget,
       address,
+      startTime,
     } = this.state
-    const decorateTypeText = this.decorateTypeText()
-    const { important } = this.props
-    
+    const {
+      important,
+      decorateTypeText
+    } = this.props
     return (
       <View className='form-house-msg-components-wrapper'>
         <Location
@@ -270,7 +162,7 @@ export default class FormForHouse extends Component {
           label='小区名称'
           placeholder='请选择'
           important={important}
-          value={decorateTypeText || ''}
+          // value={decorateTypeText || ''}
           iconName='iconRectangle rotated'
           onInput={this.onInputXiaoQu.bind(this)}
         />
@@ -339,7 +231,6 @@ FormForHouse.defaultProps = {
   cookroom: {},
   washroom: {},
   important: false,
-  onUserNameChange: () => {console.log('onUserNameChange is not defined')},
   onClick: () => {console.error('onClick is not defined')}
 }
 

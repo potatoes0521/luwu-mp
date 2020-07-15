@@ -1,0 +1,38 @@
+.input-number-wrapper {
+  width: 160px;
+  height: 32px;
+  border-radius: 2px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.input-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 2px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #EFEFEF;
+  color: #999999;
+  font-size: 32px;
+}
+
+.input-add {
+  color: #999999;
+}
+
+.input-number {
+  width: 86px;
+  height: 32px;
+  color: #666666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 26px;
+}
