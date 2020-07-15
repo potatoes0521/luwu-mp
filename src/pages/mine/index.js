@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-15 17:41:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-14 17:29:48
+ * @LastEditTime: 2020-07-15 10:08:01
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -21,6 +21,7 @@ import Login from '@utils/login'
 import { getImage } from '@assets/cdn'
 import Auth from '@components/auth'
 import { getOfferList } from '@services/modules/offer'
+import { getBiddingList } from '@services/modules/bidding'
 import './index.scss'
 
 const headerImage = getImage('mine/default_header.png')
@@ -30,24 +31,33 @@ class Mine extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      offerData: {}
+      offerData: {},
+      biddingList: []
     }
     this.errLogin = false
   }
 
   async componentDidMount() {
     const {userInfo} = this.props
-    !userInfo.token && await Login.login()
-    this.getOfferList()
+    if (!userInfo.token) {
+      await Login.login()
+    } else {
+      this.getOfferList()
+      this.getBiddingList()
+    }
   }
   componentDidShow() { 
     const { userInfo } = this.props
     if (userInfo.token) {
       this.getOfferList()
+      this.getBiddingList()
     }
   }
+  /**
+   * 函数功能描述
+   * @return void
+   */
   getOfferList() { 
-    if (this.flag) return
     const { userInfo } = this.props
     getOfferList({
       userId: userInfo.userId,
@@ -56,6 +66,18 @@ class Mine extends Component {
     }).then(res => {
       this.setState({
         offerData: res.data[0] || {}
+      })
+    })
+  }
+  getBiddingList() { 
+    const { userInfo } = this.props
+    getBiddingList({
+      userId: userInfo.userId,
+      current: 1000,
+      pageSize: 1
+    }).then(res => {
+      this.setState({
+        biddingList: res
       })
     })
   }
@@ -110,13 +132,15 @@ class Mine extends Component {
 
   render() {
     const { userInfo } = this.props
-    const { offerData } = this.state
+    const { offerData, biddingList } = this.state
     const notLogin = !userInfo.token
+    const biddingText = notLogin ? '登录后可见' : biddingList.length ? '招标中' : '一键招标'
     const offerText = notLogin ? '登录后可见' : (offerData.quotationId ? (offerData.status === 1 ? '您的报价监理已审核' : '您的报价监理正在审核中') : '免费赠送1次')
+    const offerLineText = notLogin ? '登录后可见' : biddingList.length ? '' : '招标后可享受'
+    const drawingLineText = notLogin ? '登录后可见' : biddingList.length ? '' : '招标后可享受'
+    const constructionText = notLogin ? '登录后可见' : biddingList.length ? '' : '招标后可享受'
     return (
-      <SafeAreaView
-        title='个人中心'
-      >
+      <SafeAreaView title='个人中心'>
         <View className='page-wrapper'>
           <View className='user-msg-wrapper'>
             <View className='user-head'>
@@ -160,13 +184,13 @@ class Mine extends Component {
               })
             }
           >
-            {this.renderFormItem('iconshenhe','我的装修招标', offerText, '')}
+            {this.renderFormItem('iconshenhe','我的装修招标', biddingText, '')}
           </View>
           <View className='form-wrapper' onClick={this.handleClickItem.bind(this)}>
             {this.renderFormItem('icondingdan','外部报价审核', offerText,'pay_order')}
-            {this.renderFormItem('icondianping','在线报价审核', offerText,'comment')}
-            {this.renderFormItem('iconjubao','在线图纸审核', offerText,'report')}
-            {this.renderFormItem('iconkefu','在线施工咨询', offerText,'service')}
+            {this.renderFormItem('icondianping','在线报价审核', offerLineText,'comment')}
+            {this.renderFormItem('iconjubao','在线图纸审核', drawingLineText,'report')}
+            {this.renderFormItem('iconkefu','在线施工咨询', constructionText,'construction')}
           </View>
           <Auth onLogin={this.handleLogin.bind(this)} />
         </View>
