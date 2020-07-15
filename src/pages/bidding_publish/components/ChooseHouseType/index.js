@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-15 14:50:44
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 16:07:16
+ * @LastEditTime: 2020-07-15 16:11:40
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -17,14 +17,15 @@ import InputNumber from '../InputNumber'
 import './index.scss'
 
 export default class ChooseHouseType extends Component { 
-
-  // static options = {
-    // addGlobalClass: true // 允许外部样式修改组件样式
-  // }
-
   constructor(props) {
     super(props)
     this.state={}
+  }
+  reset() { 
+    this.props.onBedRoomChange(0)
+    this.props.onSittingRoomChange(0)
+    this.props.onCookRoomChange(0)
+    this.props.onWashRoomChange(0)
   }
   /**
    * 处理房屋户型文字展示
@@ -51,7 +52,7 @@ export default class ChooseHouseType extends Component {
       sittingroom,
     } = this.props
     return visit ? (
-      <View className='modal-wrapper'>
+      <View className='modal-wrapper choose-house-type'>
         <View className='modal-bg'></View>
         <View className='model-main'>
           <View className='title'>选择户型</View>
@@ -94,7 +95,7 @@ export default class ChooseHouseType extends Component {
             </View>
           </View>
           <View className='bottom-wrapper'>
-            <View className='btn-public reset'>重置</View>
+            <View className='btn-public reset' onClick={this.reset.bind(this)}>重置</View>
             <View className='line'></View>
             <View className='btn-public submit' onClick={this.submit.bind(this)}>完成</View>
           </View>
