@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-16 10:48:16
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 11:25:56
+ * @LastEditTime: 2020-07-16 11:49:43
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -70,7 +70,8 @@ export default class Offer extends Component {
             ): (
               <Block>
                 <Image className='empty-image' src={emptyData} />
-                <Text className='empty-text'>审核通过后，家装公司即可投标</Text>
+                <View className='empty-text'>使用免费报价系统，报价差异一目了然</View>
+                <View className='empty-text'>招标监理在线审核，增项漏项尽收眼底</View>     
               </Block>
             )
           }
@@ -82,5 +83,5 @@ export default class Offer extends Component {
 }
 
 Offer.defaultProps = {
-  progress: 1,
+  progress: 0,
 }

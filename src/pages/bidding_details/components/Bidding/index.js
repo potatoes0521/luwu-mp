@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-16 10:48:16
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 11:20:54
+ * @LastEditTime: 2020-07-16 11:50:42
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -82,5 +82,5 @@ export default class Bidding extends Component {
 }
 
 Bidding.defaultProps = {
-  progress: 1,
+  progress: 0,
 }

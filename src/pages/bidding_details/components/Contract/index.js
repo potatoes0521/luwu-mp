@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-16 10:48:16
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 11:32:20
+ * @LastEditTime: 2020-07-16 11:47:56
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -58,13 +58,13 @@ export default class Contract extends Component {
             progress ? (
               <Block>
                 <View className='form-item'>
-                  {this.renderFormItem('2室1厅1厨1卫', '')}
+                  {this.renderFormItem('上传文件', '')}
                 </View>
               </Block>
             ): (
               <Block>
                 <Image className='empty-image' src={emptyData} />
-                <Text className='empty-text'>审核通过后，家装公司即可投标</Text>
+                <Text className='empty-text'>线上提交施工图纸合同，招标监理在线审核</Text>
               </Block>
             )
           }
@@ -76,5 +76,5 @@ export default class Contract extends Component {
 }
 
 Contract.defaultProps = {
-  progress: 1,
+  progress: 0,
 }
