@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-15 13:09:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 14:23:49
+ * @LastEditTime: 2020-07-16 09:13:29
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -65,8 +65,8 @@ export default class ActivityCard extends Component {
   }
   render() {
     const { activityData } = this.state
-    
-    return (
+    const HideMain = !activityData.offerOnline && !activityData.drawingOnline && !activityData.supervisorOnline
+    return HideMain ? null : (
       <View className='activity-card-wrapper'>
         <View className='card-top'>
           发布招标后，将有专业监理为您提供在线咨询服务。除免费咨询外，我们还提供以下付费监理服务，您可根据自身需要进行选择。
@@ -80,9 +80,15 @@ export default class ActivityCard extends Component {
             {this.renderTriangle('triangle-right')}
           </View>
           <View className='activity-main'>
-            {this.renderFormItem(activityData.offerOnline, activityData.offerOnlineMoney, activityData.offerOnlineTips)}
-            {this.renderFormItem(activityData.drawingOnline, activityData.drawingOnlineMoney, activityData.drawingOnlineTips)}
-            {this.renderFormItem(activityData.supervisorOnline, activityData.supervisorOnlineMoney, activityData.supervisorOnlineTips)}
+            {
+              activityData.offerOnline ? this.renderFormItem(activityData.offerOnline, activityData.offerOnlineMoney, activityData.offerOnlineTips) : null
+            }
+            {
+              activityData.drawingOnline ? this.renderFormItem(activityData.drawingOnline, activityData.drawingOnlineMoney, activityData.drawingOnlineTips) : null
+            }
+            {
+              activityData.supervisorOnline ? this.renderFormItem(activityData.supervisorOnline, activityData.supervisorOnlineMoney, activityData.supervisorOnlineTips) : null
+            }
           </View>
         </View>
       </View>
