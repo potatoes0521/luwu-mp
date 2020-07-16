@@ -1,4 +1,9 @@
 @import '../../../../assets/css/theme.scss';
+@import '../../../../assets/css/common.scss';
+
+$bidding: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/bidding/bidding.png';
+$offer: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/bidding/offer.png';
+$contract: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/bidding/contract.png';
 
 .explain-wrapper {
   width: 100vw;
@@ -37,6 +42,37 @@
       border-radius: 15px;
       box-sizing: border-box;
       background-color: #ffffff;
+
+      >.image {
+        margin: 0 auto;
+        margin-bottom: 20px;
+      }
+
+      >.bidding {
+        width: 86px;
+        height: 92px;
+        @include backgroundImage($bidding)
+      }
+
+      >.offer {
+        width: 106px;
+        height: 84px;
+        @include backgroundImage($offer)
+      }
+
+      >.contract {
+        width: 126px;
+        height: 126px;
+        @include backgroundImage($contract)
+      }
+
+      .explain-title {
+        font-size: 28px;
+        line-height: 40px;
+        clear: $font-color;
+        text-align: center;
+        margin-bottom: 30px;
+      }
 
       .form-item {
         display: flex;

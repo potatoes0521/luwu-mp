@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 15:15:34
+ * @LastEditTime: 2020-07-16 15:38:49
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -40,10 +40,11 @@ class BiddingDetails extends Component {
     this.state = {
       ...biddingState,
       // 除去公共key以外的字段定在这里
-      isShare: false,
       userId: '',
+      signType: '',
+      signTitle: '',
+      isShare: false,
       showSign: false,
-      signType: ''
     }
     this.pageParams = {}
     this.notLogin = true
@@ -81,9 +82,10 @@ class BiddingDetails extends Component {
       url: `/pages/bidding_company/index?requireId=${this.pageParams.requireId}&userId=${userId}`
     })
   }
-  handleSignShow(signType) {
+  handleSignShow(signType, signTitle) {
     this.setState({
       signType,
+      signTitle,
       showSign: true
     })
   }
@@ -144,6 +146,7 @@ class BiddingDetails extends Component {
       isShare,
       showSign,
       signType,
+      signTitle,
       // progress,
     } = this.state
     // const { userInfo } = this.props
@@ -164,6 +167,7 @@ class BiddingDetails extends Component {
             <Explain
               visit={showSign}
               signType={signType}
+              signTitle={signTitle}
               onClose={this.handleSignClose.bind(this)}
             />
           </View>

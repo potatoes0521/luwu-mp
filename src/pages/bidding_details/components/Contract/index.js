@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-16 10:48:16
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 15:07:45
+ * @LastEditTime: 2020-07-16 15:24:24
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -29,7 +29,7 @@ export default class Contract extends Component {
   }
 
   showSign() {
-    this.props.onClickSign('contract')
+    this.props.onClickSign('contract', '图纸合同审核')
   }
 
   renderFormItem(label, content, icon = true) { 

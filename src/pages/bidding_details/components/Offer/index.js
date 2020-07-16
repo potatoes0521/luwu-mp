@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-16 10:48:16
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 15:07:29
+ * @LastEditTime: 2020-07-16 15:24:37
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -29,7 +29,7 @@ export default class Offer extends Component {
   }
 
   showSign() {
-    this.props.onClickSign('offer')
+    this.props.onClickSign('offer', '报价')
   }
 
   renderFormItem(label, content, icon = true) { 

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-16 13:17:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 15:15:27
+ * @LastEditTime: 2020-07-16 15:38:16
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -46,12 +46,13 @@ export default class Explain extends Component {
     })
   }
 
-  handleClose() {
+  handleClose(e) {
+    e.stopPropagation()
     this.props.onClose()
   }
 
   stop(e) { 
-    e.stopPropagation();
+    e.stopPropagation()
   }
 
   renderFormItem(index, content) { 
@@ -65,7 +66,11 @@ export default class Explain extends Component {
   
   render() {
     const { signList } = this.state
-    const { visit } = this.props
+    const {
+      visit,
+      signType,
+      signTitle,
+    } = this.props
     const formListRender = signList.map((item, index) => {
       const key = item + index
       return (
@@ -83,6 +88,8 @@ export default class Explain extends Component {
         ></View>
         <View className='explain-main'>
           <View className='explain-plain'>
+            <View className={`image ${signType}`}></View>
+            <View className='explain-title'>{signTitle}说明</View>
             {formListRender}
           </View>
           <View
@@ -99,4 +106,5 @@ export default class Explain extends Component {
 Explain.defaultProps = {
   signType: '',
   showSign: false,
+  signTitle: ''
 }
