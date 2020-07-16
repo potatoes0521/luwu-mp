@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 18:12:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 14:19:10
+ * @LastEditTime: 2020-07-16 14:50:02
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -66,7 +66,17 @@ export const getOfferCase = async (data) => {
     paramsBool: true
   })
 }
-
+/**
+* 获取招标活动
+* @return void
+*/
 export const getBiddingActive = () => {
   return request.get(getFile(`bidding/biddingActivity.json?a=${Math.random()}`))
 } 
+/**
+* 获取招标说明
+* @return void
+*/
+export const getBiddingSign = () => {
+  return request.get(getFile(`bidding/sign.json?a=${Math.random()}`))
+}

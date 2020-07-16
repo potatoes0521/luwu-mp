@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 11:44:37
+ * @LastEditTime: 2020-07-16 15:15:34
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -29,7 +29,8 @@ import Bidding from './components/Bidding'
 import Offer from './components/Offer'
 import Contract from './components/Contract'
 import Sign from './components/Sign'
-
+import Explain from './components/Explain'
+  
 import './index.scss'
 
 class BiddingDetails extends Component { 
@@ -41,6 +42,8 @@ class BiddingDetails extends Component {
       // 除去公共key以外的字段定在这里
       isShare: false,
       userId: '',
+      showSign: false,
+      signType: ''
     }
     this.pageParams = {}
     this.notLogin = true
@@ -78,8 +81,16 @@ class BiddingDetails extends Component {
       url: `/pages/bidding_company/index?requireId=${this.pageParams.requireId}&userId=${userId}`
     })
   }
-  stopPropagation(e) { 
-    e && e.stopPropagation()
+  handleSignShow(signType) {
+    this.setState({
+      signType,
+      showSign: true
+    })
+  }
+  handleSignClose() {
+    this.setState({
+      showSign: false
+    })
   }
   renderProcess(title, content, next) { 
     return (
@@ -131,6 +142,8 @@ class BiddingDetails extends Component {
       // shopList,
       // loading,
       isShare,
+      showSign,
+      signType,
       // progress,
     } = this.state
     // const { userInfo } = this.props
@@ -144,10 +157,15 @@ class BiddingDetails extends Component {
           <BiddingMsg />
           <View className='main-wrapper'>
             <Supervisor />
-            <Bidding />
-            <Offer />
-            <Contract />
+            <Bidding onClickSign={this.handleSignShow.bind(this)} />
+            <Offer onClickSign={this.handleSignShow.bind(this)} />
+            <Contract onClickSign={this.handleSignShow.bind(this)} />
             <Sign />
+            <Explain
+              visit={showSign}
+              signType={signType}
+              onClose={this.handleSignClose.bind(this)}
+            />
           </View>
         </View>
       </SafeAreaView>

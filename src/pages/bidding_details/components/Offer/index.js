@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-16 10:48:16
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 11:49:43
+ * @LastEditTime: 2020-07-16 15:07:29
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -26,6 +26,10 @@ export default class Offer extends Component {
   
   static options = {
     addGlobalClass: true // 允许外部样式修改组件样式
+  }
+
+  showSign() {
+    this.props.onClickSign('offer')
   }
 
   renderFormItem(label, content, icon = true) { 
@@ -51,7 +55,7 @@ export default class Offer extends Component {
       <View className='offer-wrapper'>
         <View className='title-wrapper'>
           <Text className='title-text'>报价</Text>
-          <Text className='link-text'>说明</Text>
+          <Text className='link-text' onClick={this.showSign.bind(this)}>说明</Text>
         </View>
         <View className={mainWrapperClassName}>
           {
