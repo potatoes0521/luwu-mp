@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-16 10:16:46
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 10:26:52
+ * @LastEditTime: 2020-07-16 10:34:41
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -29,6 +29,7 @@ function BiddingMsg(props) {
           成功招标
         </View>
       </View>
+      <View className='line'></View>
       <View className='item-main'>
         <View className='form-item'>
           <View className='form-label'>
