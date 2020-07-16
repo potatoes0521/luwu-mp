@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 18:29:25
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 09:56:46
+ * @LastEditTime: 2020-07-16 10:03:00
  * @mustParam: 必传参数
  *  address 地理位置数据  有经纬度和地址
  * @optionalParam: 选传参数
@@ -55,6 +55,7 @@ export default class Location extends Taro.Component {
   async handleGetStorage() {
     try {
       const storageData = await getStorage('user_location')
+      console.log('storageData', storageData)
       this.props.onGetLocationData(storageData)
     } catch (error) { 
       console.error(error)
@@ -86,6 +87,8 @@ export default class Location extends Taro.Component {
     try {
       const chooseLocationData = await chooseLocation(locationData)
       const location = await convertingGPS(chooseLocationData.latitude, chooseLocationData.longitude, 'ad_info')
+      console.log('location', location.city_code)
+      console.log('object', location.city_code)
       const data = { ...location, ...chooseLocationData }
       setStorage('user_location', data)
       this.props.onGetLocationData(chooseLocationData)

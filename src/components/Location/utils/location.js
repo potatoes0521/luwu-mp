@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 18:16:31
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 09:54:08
+ * @LastEditTime: 2020-07-16 10:05:36
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -81,6 +81,7 @@ export const convertingGPS = (latitude, longitude, resultType = 'formatted_addre
               resolve(data.formatted_addresses && data.formatted_addresses.recommend)
               break;
             case 'ad_info':
+              data.ad_info.city_code = data.ad_info.city_code.substr(3, 6)
               resolve(data.ad_info && data.ad_info)
               break;
             case 'address_component':
