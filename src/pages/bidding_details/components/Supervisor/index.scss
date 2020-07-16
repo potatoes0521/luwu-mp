@@ -1,0 +1,52 @@
+@import '../../../../assets/css/theme.scss';
+
+.supervisor {
+  &-wrapper {
+    width: 100%;
+    height: 178px;
+    padding: 20px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+
+    .title-wrapper {
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 42px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid $background-color;
+    }
+
+    .msg-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .msg-left {
+        display: flex;
+        align-items: center;
+
+        .image {
+          width: 64px;
+          height: 64px;
+          margin-right: 20px;
+        }
+
+        .msg-user-name{
+          font-size: 28px;
+          color: $tips-color;
+        }
+      }
+
+      .icon-next {
+        font-size: 26px;
+        color: $placeholder-color;
+      }
+
+      .rotated {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

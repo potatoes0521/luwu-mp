@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 10:24:48
+ * @LastEditTime: 2020-07-16 10:29:24
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -24,6 +24,7 @@ import { getImage } from '@assets/cdn'
 import biddingState from '@config/biddingState'
 import { setStorage, removeStorage } from '@utils/storage'
 import BiddingMsg from './components/BiddingMsg'
+import Supervisor from './components/Supervisor'
 
 import './index.scss'
 
@@ -138,7 +139,7 @@ class BiddingDetails extends Component {
         <View className='page-wrapper'>
           <BiddingMsg />
           <View className='main-wrapper'>
-
+            <Supervisor />
           </View>
         </View>
       </SafeAreaView>
