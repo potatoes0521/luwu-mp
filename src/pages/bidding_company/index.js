@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 11:59:55
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-14 09:19:32
+ * @LastEditTime: 2020-07-16 17:17:21
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -235,9 +235,9 @@ class BiddingCompany extends Component {
                           <View key={key} className='select-list-item'>
                             <Text className='shop-name'>{item.shopName}</Text>
                             <Text
-                              className='shop-delete'
+                              className='shop-delete iconfont iconhuaban'
                               onClick={this.handleDelete.bind(this, item)}
-                            >删除</Text>
+                            ></Text>
                           </View>
                         )
                       })

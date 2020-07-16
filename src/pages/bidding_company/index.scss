@@ -5,103 +5,117 @@ page {
 }
 
 .page-wrapper {
+  padding: 30px 20px;
   padding-bottom: 140px;
 
   .modal-select-wrapper {
-    position: fixed;
-    bottom: 140px;
     left: 0;
     right: 0;
-    margin: 0 auto;
-    height: calc(100vh - 140px);
     z-index: 3;
+    bottom: 140px;
+    margin: 0 auto;
+    position: fixed;
+    height: calc(100vh - 140px);
 
     .modal-bg {
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      bottom: 0;
       left: 0;
       right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
       margin: 0 auto;
       z-index: inherit;
-      background-color: rgba(66, 66, 66, 0.17);
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.5);
     }
 
     .select-list {
-      &-wrapper{
-        width: 100%;
-        position: absolute;
-        bottom: 0;
+      &-wrapper {
         left: 0;
         right: 0;
-        margin: 0 auto;
+        bottom: 0;
         z-index: 4;
+        width: 100%;
+        margin: 0 auto;
+        overflow: hidden;
+        position: absolute;
+        border-radius: 16px 16px 0px 0px;
       }
-      &-item{
+
+      &-item {
         width: 100%;
         height: 88px;
-        border-bottom: 2px solid $background-color;
-        background-color: #ffffff;
         display: flex;
+        font-size: 28px;
+        padding-left: 40px;
+        padding-right: 32px;
         align-items: center;
-        justify-content: space-between;
         box-sizing: border-box;
-        padding-left: 48px;
-        padding-right: 42px;
-        font-size: 26px;
-        .shop-name{
-          color: $tips-color;
+        background-color: #ffffff;
+        justify-content: space-between;
+
+        .shop-name {
+          color: $font-color;
         }
-        .shop-delete{
-          color: #FE4646;
+
+        .shop-delete {
+          width: 38px;
+          height: 38px;
+          display: flex;
+          font-size: 32px;
+          color: #D8D8D8;
+          align-items: center;
+          justify-content: center;
         }
       }
     }
   }
 
   .bottom-select-wrapper {
-    width: 100%;
-    height: 140px;
-    border-top: 2px solid $background-color;
-    background-color: #ffffff;
-    position: fixed;
-    bottom: 0;
     left: 0;
     right: 0;
-    margin: 0 auto;
-    padding: 30px 46px 30px 50px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    bottom: 0;
     z-index: 2;
+    width: 100%;
+    display: flex;
+    height: 140px;
+    margin: 0 auto;
+    position: fixed;
+    padding: 34px 40px;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    justify-content: space-between;
+    border-top: 2px solid $background-color;
 
     .select-num-wrapper {
       display: flex;
-      align-items: center;
       font-size: 30px;
-      color: $tips-color;
+      color: $font-color;
+      align-items: center;
+
       .heigh-light {
-        color: $link-color;
         margin: 0 10px;
+        font-weight: 700;
+        color: $link-color;
       }
+
       // .select-num-no{
-        // font-size: 24px;
+      // font-size: 24px;
       // }
     }
 
     .select-btn {
       width: 460px;
-      height: 80px;
-      border: 2px solid $link-color;
-      border-radius: 6px;
-      font-size: 30px;
-      color: $link-color;
+      height: 70px;
       display: flex;
+      font-size: 30px;
+      color: #ffffff;
+      border-radius: 6px;
       align-items: center;
       justify-content: center;
+      border: 2px solid $link-color;
+      background-color: $link-color;
     }
   }
-
 }

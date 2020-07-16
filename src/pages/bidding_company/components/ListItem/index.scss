@@ -1,14 +1,20 @@
 @import '../../../../assets/css/theme.scss';
+@import '../../../../assets/css/common.scss';
+
+$designer: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/bidding/designer.png';
+$captain: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/bidding/captain.png';
+$site: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/bidding/site.png';
 
 .item-wrapper {
-  background-color: #ffffff;
+  border-radius: 8px;
   margin-bottom: 30px;
+  background-color: #ffffff;
 
   .title-wrapper {
     width: 100%;
     height: 86px;
     box-sizing: border-box;
-    padding: 30px 36px 14px 26px;
+    padding: 30px 20px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -34,64 +40,112 @@
   .item-main {
     padding: 18px 42px 0 32px;
 
-    .total-price {
-      font-size: 26px;
-      line-height: 38px;
-      color: $link-color;
-      font-weight: 700;
-      margin-bottom: 16px;
+    .form-title-wrapper {
+      width: 100%;
+      height: 38px;
+      display: flex;
+      color: $font-color;
+      align-items: center;
+      margin-bottom: 30px;
+      box-sizing: border-box;
+
+      .form-title-left {
+        display: flex;
+        align-items: center;
+
+        .form-title-line {
+          width: 6px;
+          height: 28px;
+          margin-right: 18px;
+          background: #FBC224;
+        }
+
+        .form-title {
+          font-size: 26px;
+          font-weight: 700;
+        }
+      }
+
+      .form-title-content {
+        font-size: 26px;
+        color: $tips-color;
+        padding-left: 20px;
+      }
     }
 
-    .form-line {
+    .form-company {
       width: 100%;
       display: flex;
       align-items: center;
-      margin-bottom: 20px;
+      padding-bottom: 30px;
+      justify-content: space-between;
 
-      .form-item {
+      &-item {
         flex: 1;
         display: flex;
-        align-items: stretch;
-        line-height: 34px;
-        font-size: 24px;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        .image {
+          margin: 0 auto;
+          margin-bottom: 10px;
+        }
+        .designer{
+          width: 48px;
+          height: 56px;
+          @include backgroundImage($designer)
+        }
 
+        .captain{
+          width: 48px;
+          height: 52px;
+          @include backgroundImage($captain)
+        }
+
+        .site{
+          width: 54px;
+          height: 50px;
+          @include backgroundImage($site)
+        }
         .form-label {
-          margin-right: 26px;
+          font-size: 26px;
+          line-height: 38px;
           color: $font-color;
         }
 
         .form-content {
+          font-size: 20px;
+          line-height: 28px;
           color: $tips-color;
-          flex: 1;
         }
       }
-
-      &-small-margin {
-        margin-bottom: 16px;
-      }
-    }
-
-    .upload-wrapper {
-      margin-top: 30px;
-      padding-top: 30px;
     }
   }
 
   .choose-btn {
     width: 100%;
-    height: 94px;
+    height: 122px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    border-top: 2px solid $background-color;
+    font-size: 30px;
+    padding: 0 20px;
+    font-weight: 700;
     color: $link-color;
-    .btn-public{
-      flex: 1;
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: space-between;
+    border-top: 2px solid $background-color;
+
+    .btn-public {
+      width: 43vw;
+      height: 70px;
       display: flex;
+      border-radius: 6px;
       align-items: center;
+      box-sizing: border-box;
       justify-content: center;
+      border:2px solid rgba(34, 124, 249, 1);
     }
+
     .add-icon {
       width: 30px;
       height: 30px;
@@ -101,10 +155,27 @@
       margin-right: 6px;
       color: $link-color;
     }
+
+    .other-btn{
+      width: 100%;
+      height: 70px;
+      color: #ffffff;
+      display: flex;
+      border-radius: 6px;
+      align-items: center;
+      box-sizing: border-box;
+      justify-content: center;
+      background-color: $link-color;
+    }
   }
 
   .text-active {
-    color: $font-color;
+    flex: 1;
+    display: flex;
+    font-size: 30px;
     font-weight: 700;
+    color: $tips-color;
+    align-items: center;
+    justify-content: center;
   }
 }
