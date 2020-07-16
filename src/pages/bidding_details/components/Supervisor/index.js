@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-16 10:28:26
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 11:15:31
+ * @LastEditTime: 2020-07-16 11:37:37
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -30,7 +30,6 @@ export default class Supervisor extends Component {
   static options = {
     addGlobalClass: true // 允许外部样式修改组件样式
   }
-
 
   render() {
     const { item } = this.props

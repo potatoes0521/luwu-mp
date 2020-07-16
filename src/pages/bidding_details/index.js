@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-29 17:51:41
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 11:29:03
+ * @LastEditTime: 2020-07-16 11:44:37
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -28,7 +28,8 @@ import Supervisor from './components/Supervisor'
 import Bidding from './components/Bidding'
 import Offer from './components/Offer'
 import Contract from './components/Contract'
-  
+import Sign from './components/Sign'
+
 import './index.scss'
 
 class BiddingDetails extends Component { 
@@ -146,6 +147,7 @@ class BiddingDetails extends Component {
             <Bidding />
             <Offer />
             <Contract />
+            <Sign />
           </View>
         </View>
       </SafeAreaView>
