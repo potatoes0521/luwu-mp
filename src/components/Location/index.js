@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 18:29:25
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-01 11:30:36
+ * @LastEditTime: 2020-07-16 09:56:46
  * @mustParam: 必传参数
  *  address 地理位置数据  有经纬度和地址
  * @optionalParam: 选传参数
@@ -27,7 +27,7 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { getSetting, openSetting } from '@utils/publicWX.js'
 import { getStorage, setStorage } from '@utils/storage'
-import { getUserLocation, chooseLocation } from './utils/location'
+import { getUserLocation, chooseLocation, convertingGPS } from './utils/location'
 import './index.scss'
 
 export default class Location extends Taro.Component {
@@ -84,9 +84,11 @@ export default class Location extends Taro.Component {
    */
   async handleLocation(locationData) {
     try {
-        const chooseLocationData = await chooseLocation(locationData)
-        setStorage('user_location', chooseLocationData)
-        this.props.onGetLocationData(chooseLocationData)
+      const chooseLocationData = await chooseLocation(locationData)
+      const location = await convertingGPS(chooseLocationData.latitude, chooseLocationData.longitude, 'ad_info')
+      const data = { ...location, ...chooseLocationData }
+      setStorage('user_location', data)
+      this.props.onGetLocationData(chooseLocationData)
     } catch (error) {
       if (error.errMsg === 'getLocation:fail auth deny') {
         console.log('没有授权地理位置')
