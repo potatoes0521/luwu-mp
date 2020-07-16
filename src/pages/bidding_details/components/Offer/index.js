@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-16 10:48:16
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 15:24:37
+ * @LastEditTime: 2020-07-16 15:40:57
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -12,10 +12,11 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Block, Image } from '@tarojs/components'
 import className from 'classnames'
+import { getImage } from '@assets/cdn'
 
 import './index.scss'
 
-const emptyData = ''
+const emptyData = getImage('bidding/offer.png')
 
 export default class Offer extends Component { 
 
