@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 11:59:55
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 17:17:21
+ * @LastEditTime: 2020-07-16 17:59:01
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -18,6 +18,7 @@ import SafeAreaView from '@components/SafeAreaView'
 import Login from '@utils/login'
 import { setStorage } from '@utils/storage'
 import ListItem from './components/ListItem'
+import Explain from './components/Explain'
 
 import './index.scss'
 
@@ -29,10 +30,12 @@ class BiddingCompany extends Component {
       shopList: [],
       userId: '',
       selectContrastList: [],
-      showSelectContrastModal: false
+      showSelectContrastModal: false,
+      showSign: false
     }
     this.selectContrastList = []
     this.pageParams = {}
+    this.shopId = ''
   }
 
   async componentDidMount() {
@@ -98,21 +101,6 @@ class BiddingCompany extends Component {
         }
       })
     })
-  }
-  /**
-   * 处理收藏
-   * @param {String} shopId 商铺数据子组件传递过来的
-   * @return void
-   */
-  onSelectCollection(shopId) {
-    let { shopList } = this.state
-    // 请求收藏接口
-    shopList.forEach(item => {
-      if (shopId === item.shopId) {
-        item.selectCollection = true
-      }
-    })
-    this.setState({ shopList })
   }
   /**
    * 处理打开选中项
@@ -184,6 +172,20 @@ class BiddingCompany extends Component {
   stopPropagation(e) {
     e.stopPropagation()
   }
+  handleSignShow(shopId) {
+    this.shopId = shopId
+    this.setState({
+      showSign: true
+    })
+  }
+  handleSignClose() {
+    this.setState({
+      showSign: false
+    })
+  }
+  handleExamine() { 
+    console.log('this.shopId', this.shopId)
+  }
   config = {
     navigationBarTitleText: '',
     navigationStyle: 'custom'
@@ -193,6 +195,7 @@ class BiddingCompany extends Component {
     const {
       userId,
       shopList,
+      showSign,
       selectContrastList,
       showSelectContrastModal
     } = this.state
@@ -204,8 +207,8 @@ class BiddingCompany extends Component {
           {...item}
           userId={userId}
           index={index}
+          onClickSign={this.handleSignShow.bind(this)}
           onSelectContrast={this.handleContrast.bind(this)}
-          onSelectCollection={this.onSelectCollection.bind(this)}
         />
       )
     })
@@ -262,6 +265,11 @@ class BiddingCompany extends Component {
             <View className='select-btn' onClick={this.navigatorToTable.bind(this)}>开始对比</View>
           </View>
         </View>
+        <Explain
+          visit={showSign}
+          onSubmit={this.handleExamine.bind(this)}
+          onClose={this.handleSignClose.bind(this)}
+        />
       </SafeAreaView>
     )
   }

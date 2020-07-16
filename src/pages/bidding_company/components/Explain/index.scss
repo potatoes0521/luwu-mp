@@ -1,0 +1,132 @@
+@import '../../../../assets/css/theme.scss';
+@import '../../../../assets/css/common.scss';
+
+$bidding: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/bidding/bidding.png';
+$offer: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/bidding/offer.png';
+$contract: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/bidding/contract.png';
+
+.explain-wrapper {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  margin: 0 auto;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+
+  .explain-bg {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 11;
+    margin: 0 auto;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .explain-main {
+    z-index: 12;
+    position: relative;
+
+    .explain-plain {
+      width: 70vw;
+      padding: 30px;
+      border-radius: 15px;
+      box-sizing: border-box;
+      background-color: #ffffff;
+
+      >.image {
+        margin: 0 auto;
+        margin-bottom: 20px;
+      }
+
+      >.bidding {
+        width: 86px;
+        height: 92px;
+        @include backgroundImage($bidding)
+      }
+
+      >.offer {
+        width: 106px;
+        height: 84px;
+        @include backgroundImage($offer)
+      }
+
+      >.contract {
+        width: 126px;
+        height: 126px;
+        @include backgroundImage($contract)
+      }
+
+      .explain-title {
+        font-size: 28px;
+        line-height: 40px;
+        clear: $font-color;
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .form-item {
+        display: flex;
+        font-size: 26px;
+        line-height: 34px;
+        color: $tips-color;
+        align-items: center;
+        margin-bottom: 20px;
+        justify-content: space-between;
+      }
+
+      .form-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .tips{
+        font-size: 22px;
+        color: #F6A731;
+        line-height: 34px;
+        margin-bottom: 36px;
+        text-align: justify;
+      }
+
+      .submit-btn {
+        width: 100%;
+        height: 60px;
+        display: flex;
+        font-size: 24px;
+        color: #ffffff;
+        border-radius: 8px;
+        align-items: center;
+        justify-content: center;
+        background-color: $link-color;
+      }
+
+      .tips-bottom{
+        font-size: 18px;
+        color: #999999;
+        margin-top: 10px;
+        line-height: 26px;
+      }
+    }
+
+    .explain-close {
+      width: 54px;
+      height: 54px;
+      display: flex;
+      font-size: 46px;
+      color: #CDCDCD;
+      margin: 30px auto;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #CDCDCD;
+    }
+  }
+}

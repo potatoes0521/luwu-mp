@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 12:03:06
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 17:11:00
+ * @LastEditTime: 2020-07-16 17:50:36
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -32,13 +32,13 @@ class ListItem extends Component {
       shopName
     })
   }
-  onSelectCollection() {
+  onClickSign() {
     const {
       shopId,
       selectCollection,
     } = this.props
     if (selectCollection) return
-    this.props.onSelectCollection(shopId)
+    this.props.onClickSign(shopId)
   }
   renderTitle(title, content) {
     return (
@@ -114,7 +114,7 @@ class ListItem extends Component {
                   ): (
                     <View
                       className='btn-public'
-                      onClick={this.onSelectCollection.bind(this)}
+                      onClick={this.onClickSign.bind(this)}
                     >人工审核</View>
                   )
                 }
