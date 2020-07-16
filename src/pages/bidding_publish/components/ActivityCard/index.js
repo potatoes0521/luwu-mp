@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-15 13:09:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 09:13:29
+ * @LastEditTime: 2020-07-16 09:21:20
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -76,7 +76,7 @@ export default class ActivityCard extends Component {
           {this.renderSpot('right-btn')}
           <View className='card-plain-title-wrapper'>
             {this.renderTriangle('')}
-            <Text>2020年7月31日前发布招标享受以下福利</Text>
+            <Text>{activityData.date}发布招标享受以下福利</Text>
             {this.renderTriangle('triangle-right')}
           </View>
           <View className='activity-main'>
