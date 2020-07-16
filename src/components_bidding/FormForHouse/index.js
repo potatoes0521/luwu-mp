@@ -8,7 +8,7 @@
  * @path: '@/components_bidding/FormForHouse'
  * @Date: 2020-07-02 09:41:42
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 18:15:10
+ * @LastEditTime: 2020-07-16 09:07:38
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  *  important 必填选项是否展示    这里字段几乎必填  这个只是用来控制
@@ -208,7 +208,7 @@ export default class FormForHouse extends Component {
           label='装修时间'
           canInput={false}
           placeholder='请选择'
-          value={startTime && startTime || ''}
+          value={startTime && startTime.replace('-0', '年') + '月' || ''}
           iconName='iconRectangle rotated'
           onContentClick={this.onChooseStartTime.bind(this)}
         />
@@ -219,7 +219,7 @@ export default class FormForHouse extends Component {
 }
 
 FormForHouse.defaultProps = {
-  startTime: {},
+  startTime: '',
   budget: {},
   bedroom: {},
   sittingroom: {},

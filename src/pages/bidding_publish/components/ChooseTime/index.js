@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-15 14:50:44
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 18:06:31
+ * @LastEditTime: 2020-07-16 09:02:18
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -65,7 +65,7 @@ export default class ChooseTime extends Component {
     this.setState({
       initMouthIndex: [index]
     })
-    this.selectTime.mouth = startTime
+    this.selectTime.mouth = startTime < 10 ? '0' + startTime : startTime
   }
   /**
    * 处理默认份年
@@ -87,7 +87,7 @@ export default class ChooseTime extends Component {
   }
   selectMouthTime(e) { 
     const { target: { value } } = e
-    this.selectTime.mouth = value
+    this.selectTime.mouth = value < 10 ? '0' + value : value
   }
   cancel() {
     this.props.onCancel()
