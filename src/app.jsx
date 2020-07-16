@@ -55,16 +55,11 @@ class App extends Component {
       'pages/index/index',
       // 我的
       'pages/mine/index',
-      // 笔记模块
-      'pages/note_mine/index', // 我的笔记
-      'pages/note_publish/index', // 发布笔记
-      'pages/note_details/index', // 发布的笔记详情
       // 权限鉴权
       'pages/auth/index',
       // 选择品类
       'pages/choose_category/index',
       'pages/choose_brand/index',
-      'pages/choose_one_item/index',
       // 表格
       'pages/table_contrast/index',
       // 审报价
