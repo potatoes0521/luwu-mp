@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-17 18:16:31
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 10:05:36
+ * @LastEditTime: 2020-07-17 15:41:02
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -53,7 +53,7 @@ export const chooseLocation = ({
 var QQMapSDK;
 
 QQMapSDK = new QQMapWX({
-  key: 'MVTBZ-KGHKK-ZCMJP-AFTS5-2NQO2-ZHBMJ'
+  key: 'GMDBZ-JFRCG-DPOQV-ICL7D-B6U3J-YFFD4'
 });
 
 /**
