@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 14:47:02
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-06 16:10:20
+ * @LastEditTime: 2020-07-17 13:58:58
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -23,13 +23,13 @@ export default class SwitchBtn extends Component {
   }
   render() {
     const { checked } = this.props
-    const wrapperClassName = classNames('i-switch', {
-      'i-switch-checked': checked
+    const wrapperClassName = classNames('switch', {
+      'switch-checked': checked
     })
     return (
       <View onClick={this.handleClick.bind(this)} className={wrapperClassName}>
-        <Input className='i-switch-hide-input' value={checked} />
-        <View className='i-switch-inner'></View>
+        <Input className='switch-hide-input' value={checked} />
+        <View className='switch-inner'></View>
       </View >
     )
   }

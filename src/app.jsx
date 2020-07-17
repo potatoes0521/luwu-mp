@@ -73,6 +73,8 @@ class App extends Component {
       'pages/contract_review_details/index',
       // 监理
       'pages/supervision_details/index',
+      'pages/supervision_result_details/index',
+      
       'pages/vip/index'
     ],
     tabBar: {
