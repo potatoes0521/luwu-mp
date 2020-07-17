@@ -1,39 +1,161 @@
 @import '../../assets/css/theme.scss';
 
 .page-wrapper {
-  .title-wrapper{
-    width: 100%;
-    height: 100px;
-    display: flex;
-    padding: 0 22px;
-    align-items: center;
-    box-sizing: border-box;
-    justify-content: space-between;
-    border: 2px solid $background-color;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 
-    .title-left {
+  .table-head-wrapper {
+    height: 192px;
+
+    .title-wrapper {
+      width: 100vw;
+      height: 100px;
       display: flex;
-      font-size: 30px;
-      font-weight: 700;
+      padding: 0 22px;
       align-items: center;
+      box-sizing: border-box;
+      justify-content: space-between;
+      border: 2px solid $background-color;
 
-      .line{
-        width: 10px;
-        height: 28px;
-        margin-right: 16px;
-        background-color: #FBC224;
+      .title-left {
+        display: flex;
+        font-size: 30px;
+        font-weight: 700;
+        align-items: center;
+
+        .line {
+          width: 10px;
+          height: 28px;
+          margin-right: 16px;
+          background-color: #FBC224;
+        }
+      }
+
+      .right-wrapper {
+        height: 50px;
+        display: flex;
+        align-items: center;
+
+        .text {
+          font-size: 24px;
+          margin-left: 16px;
+          color: $tips-color;
+        }
       }
     }
 
-    .right-wrapper{
-      height: 50px;
+  }
+
+  .table-row {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid $background-color;
+  }
+
+  .table-item-public {
+    height: 100%;
+    display: flex;
+    font-size: 26px;
+    color: $font-color;
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: center;
+    border-right: 2px solid $background-color;
+  }
+
+  .table-name-item {
+    width: 36%;
+  }
+
+  .table-item {
+    width: 14%;
+  }
+
+  .table-num-item {
+    width: 18%;
+  }
+
+  .table-total-item {
+    width: 18%;
+  }
+
+  .table-main {
+    flex: 1;
+    width: 100%;
+    overflow-y: auto;
+
+    .table-title {
+      width: 100%;
+      height: 60px;
       display: flex;
+      font-size: 26px;
+      color: $font-color;
+      padding-left: 22px;
       align-items: center;
-      .text {
+      box-sizing: border-box;
+      background-color: #F6FCFF;
+    }
+
+    .table-remark-public {
+      width: 100%;
+      display: flex;
+      line-height: 34px;
+      align-items: center;
+      text-align: justify;
+      border-bottom: 2px solid $background-color;
+
+      .table-remark-left {
+        width: 112px;
+        height: 100%;
+        display: flex;
         font-size: 24px;
-        margin-left: 16px;
-        color: $tips-color;
+        color: $font-color;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
       }
+
+      .table-remark-content {
+        flex: 1;
+        font-size: 24px;
+        color: $tips-color;
+        padding: 12px 16px;
+        border-left: 2px solid $background-color;
+      }
+    }
+
+    .warning {
+      background-color: #FFFAF5;
+      .table-remark-left,
+      .table-remark-content {
+        color: #CC7F31;
+      }
+    }
+
+    .table-total{
+      font-size: 24px;
+      color: #5B7AA0;
+      line-height: 34px;
+      text-align: justify;
+      background-color: #F6FCFF;
+      padding: 20px 20px 20px 30px;
+      .table-total-title{
+        padding-bottom: 10px;
+      }
+    }
+
+    .table-total-price{
+      width: 100%;
+      height: 90px;
+      display: flex;
+      font-size: 26px;
+      color: $font-color;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 2px solid $background-color;
     }
   }
 }
