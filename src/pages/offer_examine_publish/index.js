@@ -264,7 +264,7 @@ class OfferExaminePublish extends Component {
     })
     return (
       <SafeAreaView
-        title='免费帮您审报价'
+        title='免费审装修报价'
         back
       >
         <View className='page-wrapper'>
