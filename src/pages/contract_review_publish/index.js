@@ -14,7 +14,7 @@ import { View , Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import Login from '@utils/login'
 import { getImage } from '@assets/cdn'
-import { } from '@services/modules/index'
+import { } from '@services/modules'
 import SafeAreaView from '@components/SafeAreaView'
 
 import './index.scss'
