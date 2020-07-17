@@ -27,7 +27,7 @@ import BiddingMsg from './components/BiddingMsg'
 import Supervisor from './components/Supervisor'
 import Bidding from './components/Bidding'
 import Offer from './components/Offer'
-import Contract from './components/Contract'
+import ContractReview from './components/ContractReview'
 import Sign from './components/Sign'
 import Explain from './components/Explain'
   
@@ -165,7 +165,7 @@ class BiddingDetails extends Component {
               shopList={shopList}
               onClickSign={this.handleSignShow.bind(this)}
             />
-            <Contract onClickSign={this.handleSignShow.bind(this)} />
+            <ContractReview onClickSign={this.handleSignShow.bind(this)} />
             <Sign />
             <Explain
               visit={showSign}

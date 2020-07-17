@@ -16,9 +16,9 @@ import { getImage } from '@assets/cdn'
 
 import './index.scss'
 
-const emptyData = getImage('bidding/contract.png')
+const emptyData = getImage('bidding/contractreview.png')
 
-export default class Contract extends Component { 
+export default class ContractReview extends Component { 
 
   constructor(props) {
     super(props)
@@ -30,7 +30,7 @@ export default class Contract extends Component {
   }
 
   showSign() {
-    this.props.onClickSign('contract', '图纸合同审核')
+    this.props.onClickSign('contractreview', '图纸合同审核')
   }
 
   renderFormItem(label, content, icon = true) { 
@@ -49,11 +49,11 @@ export default class Contract extends Component {
 
   render() {
     const { progress } = this.props
-    const mainWrapperClassName = className('contract-main-wrapper', {
+    const mainWrapperClassName = className('contractreview-main-wrapper', {
       'empty-wrapper': progress === 0
     })
     return (
-      <View className='contract-wrapper'>
+      <View className='contractreview-wrapper'>
         <View className='title-wrapper'>
           <Text className='title-text'>图纸合同审核</Text>
           <Text className='link-text' onClick={this.showSign.bind(this)}>说明</Text>
@@ -80,6 +80,6 @@ export default class Contract extends Component {
 
 }
 
-Contract.defaultProps = {
+ContractReview.defaultProps = {
   progress: 0,
 }

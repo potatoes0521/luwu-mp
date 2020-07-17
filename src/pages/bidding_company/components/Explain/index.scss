@@ -3,7 +3,7 @@
 
 $bidding: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/bidding/bidding.png';
 $offer: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/bidding/offer.png';
-$contract: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/bidding/contract.png';
+$contractreview: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/bidding/contractreview.png';
 
 .explain-wrapper {
   width: 100vw;
@@ -60,10 +60,10 @@ $contract: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/bidding/contr
         @include backgroundImage($offer)
       }
 
-      >.contract {
+      >.contractreview {
         width: 126px;
         height: 126px;
-        @include backgroundImage($contract)
+        @include backgroundImage($contractreview)
       }
 
       .explain-title {
