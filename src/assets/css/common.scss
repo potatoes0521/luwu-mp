@@ -43,7 +43,7 @@
   }
 }
 // 背景图片
-@mixin  backgroundImage($url, $position: center center, $cover: cover, $repeat: no-repeat){
+@mixin  backgroundImage($url, $position: center center, $cover: 100% 100%, $repeat: no-repeat){
   background-image: url($url);
   background-position: $position;
   background-size: $cover;

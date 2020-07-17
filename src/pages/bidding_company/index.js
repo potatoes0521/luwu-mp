@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 11:59:55
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 17:59:01
+ * @LastEditTime: 2020-07-17 10:09:09
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -27,11 +27,12 @@ class BiddingCompany extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      shopList: [],
       userId: '',
+      shopList: [],
+      pageType: '',
+      showSign: false,
       selectContrastList: [],
       showSelectContrastModal: false,
-      showSign: false
     }
     this.selectContrastList = []
     this.pageParams = {}
@@ -40,6 +41,9 @@ class BiddingCompany extends Component {
 
   async componentDidMount() {
     this.pageParams = this.$router.params
+    this.setState({
+      pageType: this.pageParams.pageType || 'bidding'
+    })
     const {userInfo} = this.props
     !userInfo.token && await Login.login()
     this.handleRequestData()
@@ -54,7 +58,7 @@ class BiddingCompany extends Component {
     })
     getBidList({ requireId: this.pageParams.requireId }).then(res => {
       const data = res.map(item => {
-        return {...item, selectContrast: false, selectCollection: false}
+        return {...item, selectContrast: false, examine: false}
       })
       this.setState({
         shopList: data
@@ -172,7 +176,7 @@ class BiddingCompany extends Component {
   stopPropagation(e) {
     e.stopPropagation()
   }
-  handleSignShow(shopId) {
+  onClickExamine(shopId) {
     this.shopId = shopId
     this.setState({
       showSign: true
@@ -196,6 +200,7 @@ class BiddingCompany extends Component {
       userId,
       shopList,
       showSign,
+      pageType,
       selectContrastList,
       showSelectContrastModal
     } = this.state
@@ -205,9 +210,10 @@ class BiddingCompany extends Component {
         <ListItem
           key={key}
           {...item}
-          userId={userId}
           index={index}
-          onClickSign={this.handleSignShow.bind(this)}
+          userId={userId}
+          listType={pageType}
+          onClickExamine={this.onClickExamine.bind(this)}
           onSelectContrast={this.handleContrast.bind(this)}
         />
       )
