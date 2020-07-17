@@ -1,0 +1,109 @@
+@import '../../assets/css/theme.scss';
+
+page {
+  background-color: $background-color;
+}
+
+.page-wrapper {
+  padding: 30px 20px;
+  padding-bottom: 148px;
+  box-sizing: border-box;
+
+  .form-wrapper {
+    width: 100%;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+
+    .upload-wrapper {
+      padding: 20px;
+      padding-bottom: 30px;
+      border-bottom: 2px solid $background-color;
+
+      .title {
+        font-size: 28px;
+        line-height: 40px;
+        color: $font-color;
+        padding-bottom: 12px;
+      }
+
+      .icon-add {
+        width: 96px;
+        height: 96px;
+        display: flex;
+        margin: 0 auto;
+        font-size: 46px;
+        color: #D8D8D8;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid $line-color;
+      }
+    }
+
+    .file-list-wrapper {
+      padding: 20px;
+      padding-bottom: 0;
+
+      .title {
+        font-size: 28px;
+        line-height: 40px;
+        color: $font-color;
+        padding-bottom: 20px;
+      }
+
+      .file-list {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        .file-item {
+          width: 80px;
+          display: flex;
+          margin-right: 30px;
+          align-items: center;
+          padding-bottom: 30px;
+          flex-direction: column;
+          justify-content: center;
+
+          .file-icon {
+            width: 48px;
+            height: 48px;
+          }
+
+          .file-text {
+            font-size: 22px;
+            margin-top: 16px;
+            color: $tips-color;
+          }
+        }
+      }
+    }
+  }
+
+  .scend-form {
+    margin-top: 70px;
+  }
+
+  .fixed-bottom {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 148px;
+    position: fixed;
+    padding: 34px 20px;
+    box-sizing: border-box;
+
+    .default-btn{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      font-size: 36px;
+      color: #ffffff;
+      border-radius: 8px;
+      align-items: center;
+      justify-content: center;
+      background-color: $link-color;
+    }
+  }
+}

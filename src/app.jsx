@@ -68,7 +68,9 @@ class App extends Component {
       'pages/bidding_details/index',
       'pages/bidding_list/index',
       'pages/bidding_company/index',
-
+      // 免费审图纸
+      'pages/contract_review/index',
+      
       'pages/vip/index'
     ],
     tabBar: {
