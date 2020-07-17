@@ -55,9 +55,6 @@ class App extends Component {
       'pages/index/index',
       // 我的
       'pages/mine/index',
-      // 选择品类
-      'pages/choose_category/index',
-      'pages/choose_brand/index',
       // 表格
       'pages/table_contrast/index',
       // 审报价
@@ -74,7 +71,7 @@ class App extends Component {
       // 监理
       'pages/supervision_details/index',
       'pages/supervision_result_details/index',
-      
+
       'pages/vip/index'
     ],
     tabBar: {
