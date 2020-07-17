@@ -55,8 +55,6 @@ class App extends Component {
       'pages/index/index',
       // 我的
       'pages/mine/index',
-      // 权限鉴权
-      'pages/auth/index',
       // 选择品类
       'pages/choose_category/index',
       'pages/choose_brand/index',
@@ -71,7 +69,6 @@ class App extends Component {
       'pages/bidding_list/index',
       'pages/bidding_company/index',
 
-      // 'pages/house_publish/index',
       'pages/vip/index'
     ],
     tabBar: {
