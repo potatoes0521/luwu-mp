@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-17 11:07:23
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-17 11:47:26
+ * @LastEditTime: 2020-07-17 11:58:58
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -21,7 +21,7 @@ import './index.scss'
 
 const fileIcon = getImage('icon/file_icon.png')
 
-class ContractReview extends Component { 
+class ContractReviewPublish extends Component { 
 
   constructor(props) {
     super(props)
@@ -94,4 +94,4 @@ const mapStateToProps = (state) => {
     userInfo: state.user_msg.userInfo,
   }
 }
-export default connect(mapStateToProps)(ContractReview)
+export default connect(mapStateToProps)(ContractReviewPublish)

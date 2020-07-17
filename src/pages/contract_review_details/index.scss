@@ -1,0 +1,36 @@
+@import '../../assets/css/theme.scss';
+@import '../../assets/css/common.scss';
+
+$successIcon: 'https://luwu.oss-cn-beijing.aliyuncs.com/luwu-mp/image/offer/success.png';
+
+page {
+  background-color: $background-color;
+}
+
+.page-wrapper {
+  padding: 30px 20px;
+
+  .success-wrapper {
+    padding: 50px;
+    display: flex;
+    margin-bottom: 30px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ffffff;
+
+    .success-icon {
+      width: 120px;
+      height: 120px;
+
+      @include backgroundImage($successIcon)
+    }
+
+    .tips {
+      font-size: 26px;
+      margin-top: 36px;
+      line-height: 38px;
+      color: $tips-color;
+    }
+  }
+}
