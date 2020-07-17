@@ -3,17 +3,19 @@ import { View, Text, Image, Button } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import classNames from 'classnames'
 import Login from '@utils/login'
-import { uploadImage, uploadFile } from '@components/Upload/utils/upload_type'
-import OfferState from '@config/offerExamineState'
 import { getImage } from '@assets/cdn'
-import { getUserPhone } from '@services/modules/user'
-import { publishOffer } from '@services/modules/offer'
-import { phoneNumberPatter } from '@utils/patter'
 import Location from '@components/Location'
 import FormItem from '@components/FormItem'
+import RadioGroups from '@components/RadioGroup'
+import { phoneNumberPatter } from '@utils/patter'
+import OfferState from '@config/offerExamineState'
 import SafeAreaView from '@components/SafeAreaView'
+import { getUserPhone } from '@services/modules/user'
+import { publishOffer } from '@services/modules/offer'
+import { houseTypeRadioOptions } from '@config/houseType'
 import FormItemCustomContent from '@components/FormItemCustomContent'
-
+import { uploadImage, uploadFile } from '@components/Upload/utils/upload_type'
+  
 import './index.scss'
 
 const fileIcon = getImage('icon/file_icon.png')
@@ -214,7 +216,7 @@ class OfferExaminePublish extends Component {
   }
   chooseAudio(type) {
     this.setState({
-      decorateType: type
+      decorateType: type.id
     })
   }
   /**
@@ -290,20 +292,11 @@ class OfferExaminePublish extends Component {
               height100
               label='房屋类型'
             >
-              <View className='audio-group'>
-                <View className='option' onClick={this.chooseAudio.bind(this, 0)}>
-                  <View className='circular'>
-                    {decorateType === 0 && <View className='circular-active'></View>}
-                  </View>
-                  <View className='option-title'>毛坯房</View>
-                </View>
-                <View className='option' onClick={this.chooseAudio.bind(this, 1)}>
-                  <View className='circular'>
-                    {decorateType === 1 && <View className='circular-active'></View>}
-                  </View>
-                  <View className='option-title'>旧房翻新</View>
-                </View>
-              </View>
+              <RadioGroups
+                activeIndex={decorateType}
+                optionsList={houseTypeRadioOptions}
+                onChooseAudio={this.chooseAudio.bind(this)}
+              />
             </FormItemCustomContent>
             <Location
               line

@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-28 13:44:27
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-15 15:42:35
+ * @LastEditTime: 2020-07-17 10:43:04
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -92,3 +92,14 @@ export const handleRequestData = (res) => {
   }
   return data
 }
+
+export const houseTypeRadioOptions = [
+  {
+    id: 0,
+    text: '毛坯房'
+  },
+  {
+    id: 1,
+    text: '旧房翻新'
+  },
+]

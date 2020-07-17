@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-06-24 10:03:17
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-10 16:46:13
+ * @LastEditTime: 2020-07-17 10:44:00
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -16,6 +16,6 @@ export default {
     address: ''
   },
   fileList: [],
-  decorateType: -1,
+  decorateType: 0,
   fileList: [],
 }
