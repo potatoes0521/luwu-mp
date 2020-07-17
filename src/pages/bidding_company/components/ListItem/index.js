@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-06 12:03:06
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-17 10:09:40
+ * @LastEditTime: 2020-07-17 10:21:29
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -103,7 +103,6 @@ class ListItem extends Component {
       selectContrast,
     } = this.props
     const showNameText = userInfo.userId === userId ? shopName : `${index + 1}号装修公司`
-    console.log('listType', listType)
     return (
       <View className='item-wrapper'>
         <View className='title-wrapper'>
