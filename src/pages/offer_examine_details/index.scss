@@ -7,19 +7,22 @@ page {
 .page-wrapper {
   width: 100%;
   position: relative;
+  padding: 30px 20px;
+  box-sizing: border-box;
 
   .msg-wrapper {
     width: 100%;
+    border-radius: 8px;
     background-color: #ffffff;
 
     .msg-title-wrapper {
+      height: 72px;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
       padding: 0 32px;
       font-size: 28px;
-      height: 72px;
+      align-items: center;
       box-sizing: border-box;
+      justify-content: space-between;
       border-bottom: 2px solid $background-color;
 
       .time {
@@ -31,14 +34,14 @@ page {
 
   .form-msg-wrapper {
     width: 100%;
+    font-size: 28px;
     box-sizing: border-box;
     padding: 20px 32px 10px;
-    font-size: 28px;
 
     .form-item {
-      margin-bottom: 20px;
       font-size: 24px;
       color: $tips-color;
+      margin-bottom: 20px;
       box-sizing: border-box;
 
       .area {
@@ -54,8 +57,8 @@ page {
 
     .form-user-item {
       display: flex;
-      align-items: center;
       font-size: 22px;
+      align-items: center;
       margin-bottom: 20px;
 
       .form-label {
@@ -72,11 +75,11 @@ page {
 
     .upload-file-list {
       width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
       padding-bottom: 30px;
       box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
 
       .file-item-wrapper {
         width: 102px;
@@ -86,13 +89,13 @@ page {
         .file-item {
           width: 70px;
           height: 90px;
-          border-radius: 4px;
-          font-size: 22px;
           display: flex;
-          align-items: center;
-          justify-content: space-between;
-          flex-direction: column;
+          font-size: 22px;
           color: $tips-color;
+          border-radius: 4px;
+          align-items: center;
+          flex-direction: column;
+          justify-content: space-between;
 
           .file-icon {
             width: 48px;
@@ -104,36 +107,40 @@ page {
     }
 
     .msg-tips {
-      color: $link-color;
       font-size: 22px;
+      color: $link-color;
       margin-bottom: 20px;
     }
   }
 
-  .feedback-wrapper{
+  .feedback-wrapper {
     padding: 30px;
-    background-color: #ffffff;
     margin-top: 30px;
-    .title{
-      padding-bottom: 20px;
+    border-radius: 8px;
+    background-color: #ffffff;
+
+    .title {
       font-size: 28px;
       line-height: 40px;
       color: $font-color;
+      padding-bottom: 20px;
     }
-    .textarea{
-      border: 2px solid #eaeaea;
-      padding: 20px 16px;
-      text-align: justify;
-      line-height: 30px;
+
+    .textarea {
+      font-size: 22px;
       color: #999999;
-      font-size: 22px;
+      line-height: 30px;
       border-radius: 8px;
+      padding: 20px 16px;
       margin-bottom: 30px;
+      text-align: justify;
+      border: 2px solid #eaeaea;
     }
-    .download-file{
-      text-align: right;
+
+    .download-file {
       font-size: 22px;
       line-height: 30px;
+      text-align: right;
       color: $link-color;
     }
   }
