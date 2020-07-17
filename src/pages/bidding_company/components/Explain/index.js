@@ -4,7 +4,7 @@
  * @path: 引入路径
  * @Date: 2020-07-16 13:17:12
  * @LastEditors: liuYang
- * @LastEditTime: 2020-07-16 17:45:11
+ * @LastEditTime: 2020-07-17 09:04:05
  * @mustParam: 必传参数
  * @optionalParam: 选传参数
  * @emitFunction: 函数
@@ -29,10 +29,12 @@ export default class Explain extends Component {
     e.stopPropagation()
     this.props.onClose()
   }
+
   handleSubmit(e) { 
     e.stopPropagation()
     this.props.onSubmit()
   }
+  
   stop(e) { 
     e.stopPropagation()
   }
