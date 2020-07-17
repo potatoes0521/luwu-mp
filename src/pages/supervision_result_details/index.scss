@@ -1,2 +1,39 @@
 @import '../../assets/css/theme.scss';
 
+.page-wrapper {
+  .title-wrapper{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    padding: 0 22px;
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: space-between;
+    border: 2px solid $background-color;
+
+    .title-left {
+      display: flex;
+      font-size: 30px;
+      font-weight: 700;
+      align-items: center;
+
+      .line{
+        width: 10px;
+        height: 28px;
+        margin-right: 16px;
+        background-color: #FBC224;
+      }
+    }
+
+    .right-wrapper{
+      height: 50px;
+      display: flex;
+      align-items: center;
+      .text {
+        font-size: 24px;
+        margin-left: 16px;
+        color: $tips-color;
+      }
+    }
+  }
+}

@@ -1,13 +1,11 @@
 @import '../../assets/css/theme.scss';
 
 .switch {
-  display: inline-block;
   width: 72rpx;
   height: 36rpx;
   border-radius: 22rpx;
-  vertical-align: middle;
-  border: 2rpx solid #e5e5e5;
-  background-color: #f5f5f5;
+  border: 2rpx solid #BFBFBF;
+  background-color: #BFBFBF;
   position: relative;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
